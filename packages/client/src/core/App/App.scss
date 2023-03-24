@@ -1,0 +1,9 @@
+.app {
+  position: relative;
+
+  &__languageToggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
