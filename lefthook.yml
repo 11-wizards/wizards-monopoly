@@ -3,9 +3,9 @@ pre-commit:
   commands:
     client-lint:
       root: "/packages/client"
-      glob: '*.{ts,tsx}'
+      glob: '**/*.{ts,tsx}'
       run: yarn eslint {staged_files}
     server-lint:
         root: "/packages/server"
-        glob: '*.{ts,tsx}'
+        glob: '**/*.{ts,tsx}'
         run: yarn eslint {staged_files}
