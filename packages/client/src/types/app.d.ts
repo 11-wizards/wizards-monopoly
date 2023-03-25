@@ -1,6 +1,6 @@
-export {};
+export {}
 
 declare global {
-  type LocaleType = 'en' | 'ru';
-  type Nullable<T> = T | null;
+  type LocaleType = 'en' | 'ru'
+  type Nullable<T> = T | null
 }

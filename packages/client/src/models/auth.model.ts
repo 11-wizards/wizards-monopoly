@@ -1,3 +1,3 @@
 export type CurrentUser = {
-  id: string;
-};
+  id: string
+}

@@ -1,7 +1,6 @@
-import { FC } from 'react';
+import React from 'react'
+import type { FC } from 'react'
 
-import './Loader.scss';
+import './Loader.scss'
 
-export const Loader: FC = () => {
-  return <div>Loader</div>;
-};
+export const Loader: FC = () => <div>Loader</div>
