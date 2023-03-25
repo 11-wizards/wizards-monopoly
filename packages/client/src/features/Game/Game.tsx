@@ -1,5 +1,5 @@
-import type { FC } from 'react'
+import type { FC } from 'react';
 
-import './Game.scss'
+import './Game.scss';
 
-export const Game: FC = () => <div>Game</div>
+export const Game: FC = () => <div>Game</div>;
