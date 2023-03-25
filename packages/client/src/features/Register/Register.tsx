@@ -1,7 +1,5 @@
-import { FC } from 'react';
+import type { FC } from 'react'
 
-import './Register.scss';
+import './Register.scss'
 
-export const Register: FC = () => {
-  return <div>Register</div>;
-};
+export const Register: FC = () => <div>Register</div>

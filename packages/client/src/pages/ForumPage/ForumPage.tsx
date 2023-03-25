@@ -1,12 +1,10 @@
-import { FC } from 'react';
-import { Forum } from 'features/Forum';
+import type { FC } from 'react'
+import { Forum } from 'features/Forum'
 
-import './ForumPage.scss';
+import './ForumPage.scss'
 
-export const ForumPage: FC = () => {
-  return (
-    <div className="wrapper_forumPage">
-      <Forum />
-    </div>
-  );
-};
+export const ForumPage: FC = () => (
+  <div className="wrapper_forumPage">
+    <Forum />
+  </div>
+)

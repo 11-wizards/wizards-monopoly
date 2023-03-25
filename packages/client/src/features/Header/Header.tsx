@@ -1,7 +1,5 @@
-import { FC } from 'react';
+import type { FC } from 'react'
 
-import './Header.scss';
+import './Header.scss'
 
-export const Header: FC = () => {
-  return <div>Header</div>;
-};
+export const Header: FC = () => <div>Header</div>

@@ -1,5 +1,5 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { Default } from 'layouts';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { Default } from 'layouts'
 import {
   ErrorPage,
   ForumPage,
@@ -8,8 +8,8 @@ import {
   LoginPage,
   MainPage,
   RegisterPage,
-} from 'pages';
-import { ROUTES } from './routes';
+} from 'pages'
+import { ROUTES } from './routes'
 
 export const Router = () => (
   <RouterProvider
@@ -47,4 +47,4 @@ export const Router = () => (
       },
     ])}
   />
-);
+)

@@ -1,0 +1,135 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:react-hooks/recommended",
+    "plugin:import/recommended",
+    "plugin:jest/recommended",
+    "eslint-config-prettier",
+    "plugin:css-import-order/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "jest",
+    "css-import-order",
+    "prettier"
+  ],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "max-len": [
+      "error",
+      {
+        "code": 110,
+        "ignoreComments": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "no-param-reassign": [
+      2,
+      {
+        "props": false
+      }
+    ],
+    "@typescript-eslint/unbound-method": [
+      "error",
+      {
+        "ignoreStatic": true
+      }
+    ],
+    "react/require-default-props": 0,
+    "import/prefer-default-export": 0,
+    "@typescript-eslint/consistent-type-imports": "error",
+    "prettier/prettier": "error"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "packages/*/tsconfig.json"
+      },
+      "alias": {
+        "map": [
+          [
+            "api",
+            "./src/api"
+          ],
+          [
+            "app",
+            "./src/app"
+          ],
+          [
+            "components",
+            "./src/components"
+          ],
+          [
+            "constants",
+            "./src/constants"
+          ],
+          [
+            "core",
+            "./src/core"
+          ],
+          [
+            "features",
+            "./src/features"
+          ],
+          [
+            "game",
+            "./src/game"
+          ],
+          [
+            "layouts",
+            "./src/layouts"
+          ],
+          [
+            "models",
+            "./src/models"
+          ],
+          [
+            "pages",
+            "./src/pages"
+          ],
+          [
+            "translations",
+            "./src/translations"
+          ],
+          [
+            "types",
+            "./src/types"
+          ]
+        ],
+        "extensions": [
+          ".ts",
+          ".tsx"
+        ]
+      }
+    }
+  }
+}

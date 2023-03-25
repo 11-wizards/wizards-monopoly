@@ -1,12 +1,10 @@
-import { FC } from 'react';
-import { Login } from 'features/Login';
+import type { FC } from 'react'
+import { Login } from 'features/Login'
 
-import './LoginPage.scss';
+import './LoginPage.scss'
 
-export const LoginPage: FC = () => {
-  return (
-    <div className="wrapper_loginPage">
-      <Login />
-    </div>
-  );
-};
+export const LoginPage: FC = () => (
+  <div className="wrapper_loginPage">
+    <Login />
+  </div>
+)

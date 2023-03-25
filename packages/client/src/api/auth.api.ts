@@ -1,1 +1,1 @@
-export const authApi = {};
+export const authApi = {}

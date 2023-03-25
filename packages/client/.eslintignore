@@ -1,0 +1,6 @@
+node_modules
+public
+vite.config.ts
+jest.config.js
+*.d.ts
+#*.test.*
