@@ -1,11 +1,11 @@
 pre-commit:
   parallel: true
   commands:
-    client-lint:
-      root: "packages/client/"
+    frontend-linter:
+      root: "/packages/client/"
       glob: '*.{ts,tsx}'
       run: yarn eslint {staged_files}
-    server-lint:
-        root: "packages/server/"
+    backend-linter:
+        root: "/packages/server/"
         glob: '*.{ts,tsx}'
         run: yarn eslint {staged_files}
