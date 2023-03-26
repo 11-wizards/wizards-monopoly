@@ -1,5 +1,5 @@
-import type { FC } from 'react'
+import type { FC } from 'react';
 
-import './ErrorPage.scss'
+import './ErrorPage.scss';
 
-export const ErrorPage: FC = () => <div>ErrorPage</div>
+export const ErrorPage: FC = () => <div>ErrorPage</div>;

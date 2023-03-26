@@ -1,5 +1,5 @@
-import type { FC } from 'react'
+import type { FC } from 'react';
 
-import './Leaderboard.scss'
+import './Leaderboard.scss';
 
-export const Leaderboard: FC = () => <div>Leaderboard</div>
+export const Leaderboard: FC = () => <div>Leaderboard</div>;

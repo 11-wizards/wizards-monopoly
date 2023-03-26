@@ -1,4 +1,4 @@
-import en from './locales/en.json'
-import ru from './locales/ru.json'
+import en from './locales/en.json';
+import ru from './locales/ru.json';
 
-export { en, ru }
+export { en, ru };

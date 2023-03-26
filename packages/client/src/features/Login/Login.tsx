@@ -1,5 +1,5 @@
-import type { FC } from 'react'
+import type { FC } from 'react';
 
-import './Login.scss'
+import './Login.scss';
 
-export const Login: FC = () => <div>Login</div>
+export const Login: FC = () => <div>Login</div>;

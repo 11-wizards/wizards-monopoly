@@ -1,20 +1,18 @@
-import type { FC } from 'react'
-import { useState } from 'react'
-import { IntlProvider } from 'react-intl'
-import { GlobalOutlined } from '@ant-design/icons'
-import { Router } from 'core/Router'
-import { en, ru } from 'translations'
+import type { FC } from 'react';
+import { useState } from 'react';
+import { IntlProvider } from 'react-intl';
+import { GlobalOutlined } from '@ant-design/icons';
+import { Router } from 'core/Router';
+import { en, ru } from 'translations';
 
-import './App.scss'
+import './App.scss';
 
 export const App: FC = () => {
-  const [locale, setLocale] = useState<LocaleType>(
-    (navigator.language.slice(0, 2) || 'en') as LocaleType,
-  )
+  const [locale, setLocale] = useState(navigator.language.slice(0, 2) || 'en');
 
   const toggleLocale = () => {
-    setLocale((prevState) => (prevState === 'en' ? 'ru' : 'en'))
-  }
+    setLocale((prevState) => (prevState === 'en' ? 'ru' : 'en'));
+  };
 
   return (
     <div className="app">
@@ -24,5 +22,5 @@ export const App: FC = () => {
         <Router />
       </IntlProvider>
     </div>
-  )
-}
+  );
+};
