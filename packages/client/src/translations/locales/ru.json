@@ -1,3 +1,23 @@
 {
-  "main-page.title": "Главная"
+  "project.name": "Монополия",
+  "auth.button.login": "Войти",
+  "auth.button.register": "Зарегистрироваться",
+  "auth.placeholder.email": "Email",
+  "auth.placeholder.first-name": "Имя",
+  "auth.placeholder.login": "Логин",
+  "auth.placeholder.password": "Пароль",
+  "auth.placeholder.phone": "Телефон",
+  "auth.placeholder.second-name": "Фамилия",
+  "auth.text.already-have-account": "Уже есть аккаунт?",
+  "auth.text.no-account": "Нет аккаунта?",
+  "auth.title.login": "Вход",
+  "auth.title.register": "Регистрация",
+
+  "main-page.title": "Главная",
+
+  "validation.max-length.login": "Логин не должен содержать более 20 символов",
+  "validation.max-length.password": "Пароль не должен содержать более 40 символов",
+  "validation.min-length.login": "Логин должен содержать как минимум 4 символа",
+  "validation.min-length.password": "Пароль должен содержать как минимум 4 символа",
+  "validation.required-field": "Обязательное поле"
 }

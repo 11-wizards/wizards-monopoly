@@ -1,3 +1,23 @@
 {
-  "main-page.title": "Main"
+  "project.name": "Monopoly",
+  "auth.button.login": "Log in",
+  "auth.button.register": "Register",
+  "auth.placeholder.email": "Email",
+  "auth.placeholder.first-name": "First name",
+  "auth.placeholder.login": "Login",
+  "auth.placeholder.password": "Password",
+  "auth.placeholder.phone": "Phone",
+  "auth.placeholder.second-name": "Second name",
+  "auth.text.already-have-account": "Already have account?",
+  "auth.text.no-account": "No account?",
+  "auth.title.login": "Login",
+  "auth.title.register": "Register",
+
+  "main-page.title": "Main",
+
+  "validation.max-length.login": "Login cannot be longer than 20 characters",
+  "validation.max-length.password": "Password cannot be longer than 40 characters",
+  "validation.min-length.login": "Login must be at least 4 characters",
+  "validation.min-length.password": "Password must be at least 4 characters",
+  "validation.required-field": "This field is required"
 }
