@@ -28,16 +28,6 @@
   "plugins": ["@typescript-eslint", "import", "jest", "css-import-order", "prettier"],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "max-len": [
-      "error",
-      {
-        "code": 100,
-        "ignoreComments": true,
-        "ignoreStrings": true,
-        "ignoreTemplateLiterals": true,
-        "ignoreRegExpLiterals": true
-      }
-    ],
     "react/function-component-definition": [
       "error",
       {
@@ -45,12 +35,7 @@
         "unnamedComponents": "arrow-function"
       }
     ],
-    "no-param-reassign": [
-      2,
-      {
-        "props": false
-      }
-    ],
+    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
     "@typescript-eslint/unbound-method": [
       "error",
       {
