@@ -27,7 +27,28 @@
   },
   "plugins": ["@typescript-eslint", "import", "jest", "css-import-order", "prettier"],
   "rules": {
-    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/lines-between-class-members": [
+      "error",
+      "always",
+      { "exceptAfterSingleLine": true }
+    ],
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/unbound-method": "off",
+    "import/no-cycle": "off",
+    "import/prefer-default-export": 0,
+    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
+    "max-len": [
+      "error",
+      {
+        "code": 110,
+        "ignoreComments": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    "prettier/prettier": "error",
     "react/function-component-definition": [
       "error",
       {
@@ -35,17 +56,9 @@
         "unnamedComponents": "arrow-function"
       }
     ],
-    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
-    "@typescript-eslint/unbound-method": [
-      "error",
-      {
-        "ignoreStatic": true
-      }
-    ],
-    "react/require-default-props": 0,
-    "import/prefer-default-export": 0,
-    "@typescript-eslint/consistent-type-imports": "error",
-    "prettier/prettier": "error"
+    "react/jsx-props-no-spreading": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": 0
   },
   "settings": {
     "import/resolver": {
