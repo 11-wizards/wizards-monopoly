@@ -25,19 +25,13 @@
       "jsx": true
     }
   },
-  "plugins": [
-    "@typescript-eslint",
-    "import",
-    "jest",
-    "css-import-order",
-    "prettier"
-  ],
+  "plugins": ["@typescript-eslint", "import", "jest", "css-import-order", "prettier"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "max-len": [
       "error",
       {
-        "code": 110,
+        "code": 100,
         "ignoreComments": true,
         "ignoreStrings": true,
         "ignoreTemplateLiterals": true,
@@ -76,59 +70,20 @@
       },
       "alias": {
         "map": [
-          [
-            "api",
-            "./src/api"
-          ],
-          [
-            "app",
-            "./src/app"
-          ],
-          [
-            "components",
-            "./src/components"
-          ],
-          [
-            "constants",
-            "./src/constants"
-          ],
-          [
-            "core",
-            "./src/core"
-          ],
-          [
-            "features",
-            "./src/features"
-          ],
-          [
-            "game",
-            "./src/game"
-          ],
-          [
-            "layouts",
-            "./src/layouts"
-          ],
-          [
-            "models",
-            "./src/models"
-          ],
-          [
-            "pages",
-            "./src/pages"
-          ],
-          [
-            "translations",
-            "./src/translations"
-          ],
-          [
-            "types",
-            "./src/types"
-          ]
+          ["api", "./src/api"],
+          ["app", "./src/app"],
+          ["components", "./src/components"],
+          ["constants", "./src/constants"],
+          ["core", "./src/core"],
+          ["features", "./src/features"],
+          ["game", "./src/game"],
+          ["layouts", "./src/layouts"],
+          ["models", "./src/models"],
+          ["pages", "./src/pages"],
+          ["translations", "./src/translations"],
+          ["types", "./src/types"]
         ],
-        "extensions": [
-          ".ts",
-          ".tsx"
-        ]
+        "extensions": [".ts", ".tsx"]
       }
     }
   }
