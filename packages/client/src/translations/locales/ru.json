@@ -15,9 +15,19 @@
 
   "main-page.title": "Главная",
 
+  "validation.invalid-format.email": "Email должен быть следующего формата: 'email@example.com'",
+  "validation.invalid-format.phone": "Телефон должен содержать только 10-15 цифр и начинаться с +",
+  "validation.max-length.email": "Email не должен содержать более 30 символов",
+  "validation.max-length.first-name": "Имя не должно содержать более 30 символов",
   "validation.max-length.login": "Логин не должен содержать более 20 символов",
   "validation.max-length.password": "Пароль не должен содержать более 40 символов",
+  "validation.max-length.phone": "Телефон не должен содержать более 15 символов",
+  "validation.max-length.second-name": "Фамилия не должна содержать более 30 символов",
+  "validation.min-length.email": "Email должен содержать как минимум 5 символов",
+  "validation.min-length.first-name": "Имя должно содержать как минимум 1 символ",
   "validation.min-length.login": "Логин должен содержать как минимум 4 символа",
   "validation.min-length.password": "Пароль должен содержать как минимум 4 символа",
+  "validation.min-length.phone": "Телефон должен содержать как минимум 10 символов",
+  "validation.min-length.second-name": "Фамилия должна содержать как минимум 1 символ",
   "validation.required-field": "Обязательное поле"
 }

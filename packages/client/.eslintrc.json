@@ -38,6 +38,7 @@
     "import/no-cycle": "off",
     "import/prefer-default-export": 0,
     "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
+    "max-classes-per-file": "off",
     "max-len": [
       "error",
       {
