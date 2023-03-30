@@ -17,11 +17,14 @@
   "landing.subtitle": "Gather Your Friends and Family to Play",
   "landing.subtitle.description": "Looking for a fun and engaging way to spend time with your friends and family?\nLook no further than the classic Monopoly game!\nGather everyone around the computer and enjoy hours of fun, strategy, and competition",
   "landing.play.button": "PLAY NOW",
+  "landing.rules.button": "GAME RULES",
   "landing.feature1": "Up to 6 players can play on a single computer, making it a great option for family game nights or get-togethers with friends",
   "landing.feature2": "Adjust the game settings to your liking, including the length of the game, the starting money amount, and the number of players",
   "landing.feature3": "Experience the classic Monopoly game in digital form, complete with buying and selling properties, collecting rent, and more",
   "landing.feature4": "The game is user-friendly and easy to navigate, with simple controls that anyone can understand",
   "landing.feature5": "Monopoly is a game that has been enjoyed by people of all ages for decades, making it a perfect choice for family gatherings and social events",
+
+  "rules.title": "Game Rules",
 
   "validation.max-length.email": "Email cannot be longer than 30 characters",
   "validation.max-length.first-name": "First name cannot be longer than 30 characters",

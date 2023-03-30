@@ -83,6 +83,10 @@ export const messages = defineMessages({
     id: 'landing.play.button',
     defaultMessage: 'PLAY NOW',
   },
+  landingRulesButton: {
+    id: 'landing.rules.button',
+    defaultMessage: 'GAME RULES',
+  },
   landingFeature1: {
     id: 'landing.feature1',
     defaultMessage:
@@ -107,5 +111,9 @@ export const messages = defineMessages({
     id: 'landing.feature5',
     defaultMessage:
       'Monopoly is a game that has been enjoyed by people of all ages for decades, making it a perfect choice for family gatherings and social events',
+  },
+  gameRulesTitle: {
+    id: 'rules.title',
+    defaultMessage: 'Game rules',
   },
 });
