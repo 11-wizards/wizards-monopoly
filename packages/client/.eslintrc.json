@@ -56,6 +56,7 @@
         "unnamedComponents": "arrow-function"
       }
     ],
+    "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
     "react/require-default-props": 0
@@ -79,7 +80,8 @@
           ["models", "./src/models"],
           ["pages", "./src/pages"],
           ["translations", "./src/translations"],
-          ["types", "./src/types"]
+          ["types", "./src/types"],
+          ["styles", "./src/styles"]
         ],
         "extensions": [".ts", ".tsx"]
       }

@@ -1,0 +1,94 @@
+@use 'sass:list';
+$directions: top, left, bottom, right;
+$gameColors: $gameColor1, $gameColor2, $gameColor3, $gameColor4, $gameColor5, $gameColor6,
+  $gameColor7, $gameColor8;
+
+.property-card {
+  display: grid;
+
+  &_direction_top,
+  &_direction_bottom {
+    width: 50px;
+    height: 100px;
+  }
+
+  &_direction_left,
+  &_direction_right {
+    width: 100px;
+    height: 50px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    @for $i from 1 through 8 {
+      &_zone_#{$i} {
+        background-color: list.nth($gameColors, $i);
+      }
+    }
+  }
+
+  // FIXME: Исправить отображение картинки
+  &__image {
+    background-image: url('../../images/coca_cola.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  &__cost {
+    margin: 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: $whiteColor;
+  }
+
+  &_direction_top {
+    grid-template-rows: auto 1fr;
+
+    .property-card__image {
+      grid-row: 2;
+    }
+  }
+
+  &_direction_right {
+    grid-template-columns: 1fr 20px;
+
+    .property-card__header {
+      grid-column: 2;
+    }
+
+    .property-card__cost {
+      writing-mode: vertical-lr;
+    }
+
+    .property-card__image {
+      grid-row: 1;
+      grid-column: 1;
+    }
+  }
+
+  &_direction_bottom {
+    grid-template-rows: 1fr auto;
+
+    .property-card__header {
+      grid-row: 2;
+    }
+
+    .property-card__image {
+      grid-row: 1;
+    }
+  }
+
+  &_direction_left {
+    grid-template-columns: 20px 1fr;
+
+    .property-card__cost {
+      writing-mode: vertical-lr;
+      transform: rotateZ(180deg);
+    }
+  }
+}

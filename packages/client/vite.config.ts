@@ -23,9 +23,17 @@ export default defineConfig({
       pages: path.join(__dirname, './src/pages'),
       translations: path.join(__dirname, './src/translations'),
       types: path.join(__dirname, './src/types'),
+      styles: path.join(__dirname, './src/styles'),
     },
   },
   server: {
     port: Number(process.env.CLIENT_PORT) || 3000,
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import 'styles/vars';`,
+      },
+    },
   },
 });

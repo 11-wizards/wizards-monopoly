@@ -1,0 +1,32 @@
+$angleBlocks: 'start', 'prison', 'jackpot', 'police';
+
+.game-board {
+  display: grid;
+  grid-template-areas:
+    'start zone-1 zone-2 prison'
+    'zone-8 . . zone-3 '
+    'zone-7 . . zone-4 '
+    'police zone-6 zone-5 jackpot';
+  min-width: 700px;
+
+  &__zone {
+    display: flex;
+    gap: 5px;
+
+    @for $i from 1 through 8 {
+      &_index_#{$i} {
+        grid-area: zone-#{$i};
+      }
+    }
+
+    @each $block in $angleBlocks {
+      &_type_#{$block} {
+        grid-area: #{$block};
+      }
+    }
+
+    &_type_vertical {
+      flex-direction: column;
+    }
+  }
+}
