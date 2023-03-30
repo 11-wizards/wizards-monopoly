@@ -1,6 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import type { CurrentUser } from 'models/auth.model';
+import type { RootState } from '../store';
 
 type UserState = {
   currentUser: Nullable<CurrentUser>;
@@ -23,6 +24,11 @@ export const userSlice = createSlice({
     },
   },
 });
+
+export const selectIsLoggedIn = createSelector(
+  (state: RootState) => state.user.currentUser,
+  (currentUser: Nullable<CurrentUser>) => currentUser !== null,
+);
 
 export const { setCurrentUser } = userSlice.actions;
 
