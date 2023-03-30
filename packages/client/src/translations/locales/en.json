@@ -25,6 +25,7 @@
   "landing.feature5": "Monopoly is a game that has been enjoyed by people of all ages for decades, making it a perfect choice for family gatherings and social events",
 
   "rules.title": "Game Rules",
+  "rules.close.button": "Close",
 
   "validation.max-length.email": "Email cannot be longer than 30 characters",
   "validation.max-length.first-name": "First name cannot be longer than 30 characters",

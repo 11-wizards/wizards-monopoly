@@ -116,4 +116,8 @@ export const messages = defineMessages({
     id: 'rules.title',
     defaultMessage: 'Game rules',
   },
+  gameRulesCloseButton: {
+    id: 'rules.close.button',
+    defaultMessage: 'Close',
+  },
 });

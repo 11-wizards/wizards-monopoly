@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Modal, Typography } from 'antd';
+import { Button, Modal, Typography } from 'antd';
 import { useIntl } from 'react-intl';
 import { selectIsGameRulesShown, showGameRules } from '../../app/slices/gameSettingsSlice';
 import { useAppDispatch, useAppSelector } from '../../app/store';
@@ -17,7 +17,15 @@ export const GameRulesModal: FC = () => {
   };
 
   return (
-    <Modal title={fm(messages.gameRulesTitle)} open={isGameRulesShown} onOk={onOkClick}>
+    <Modal
+      title={fm(messages.gameRulesTitle)}
+      open={isGameRulesShown}
+      footer={[
+        <Button key="submit" type="primary" onClick={onOkClick}>
+          {fm(messages.gameRulesCloseButton)}
+        </Button>,
+      ]}
+    >
       <div className="modal-rules-layout">
         <section>
           <Typography.Title>Цель игры</Typography.Title>

@@ -25,6 +25,7 @@
   "landing.feature5": "В Монополию уже много лет играют люди всех возрастов, что делает ее идеальным выбором для семейных и дружеских посиделок",
 
   "rules.title": "Правила игры",
+  "rules.close.button": "Закрыть",
 
   "validation.invalid-format.email": "Email должен быть следующего формата: 'email@example.com'",
   "validation.invalid-format.phone": "Телефон должен содержать только 10-15 цифр и начинаться с +",
