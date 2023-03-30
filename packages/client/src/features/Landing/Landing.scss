@@ -1,4 +1,4 @@
-.layout {
+.landing-layout {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7,7 +7,7 @@
   background-image: url('../../assets/images/landing-bg.webp');
 }
 
-.content {
+.landing-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,7 +20,7 @@
   background-color: transparent;
 }
 
-.title {
+.landing-title {
   font-size: 6em;
   font-weight: 500;
   color: white;
@@ -34,7 +34,7 @@
   }
 }
 
-.title-header {
+.landing-title-header {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,7 +47,7 @@
   box-shadow: 0 0 5px black;
 }
 
-.title-layout {
+.landing-title-layout {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,7 +55,7 @@
   background-color: transparent;
 }
 
-.subtitle-layout {
+.landing-subtitle-layout {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,33 +65,35 @@
   border-radius: 8px;
 }
 
-.subtitle {
+.landing-subtitle {
   font-size: 2.5em;
   font-weight: 400;
   text-align: center;
 }
 
-.call-to-action {
+.landing-buttons-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: transparent;
 }
 
-.play-button {
+.landing-play-button {
   width: 250px;
   height: 80px;
+  margin-bottom: 10px;
   font-size: 2.5em;
   font-weight: 600;
 }
 
-.rules-link {
+.landing-rules-button {
   width: 150px;
   height: 40px;
-  font-size: 1.3em;
+  font-size: 1.2em;
+  font-weight: 400;
 }
 
-.features {
+.landing-features {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -100,7 +102,7 @@
   background-color: transparent;
 }
 
-.feature-item {
+.landing-feature-item {
   display: flex;
   align-items: start;
   justify-content: center;
@@ -111,7 +113,7 @@
   border-radius: 12px;
 }
 
-.feature-text {
+.landing-feature-text {
   font-size: 1em;
   font-weight: 300;
   text-align: center;
