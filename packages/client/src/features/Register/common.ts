@@ -66,4 +66,20 @@ export const messages = defineMessages({
     id: 'validation.required-field',
     defaultMessage: 'This field is required',
   },
+  endGameTitle: {
+    id: 'end-game.title',
+    defaultMessage: 'GAME OVER',
+  },
+  endGameWinner: {
+    id: 'end-game.winner',
+    defaultMessage: 'Winner',
+  },
+  endGameFinish: {
+    id: 'end-game.finish-game',
+    defaultMessage: 'Finish the Game',
+  },
+  endGamePlayAgain: {
+    id: 'end-game.play-again',
+    defaultMessage: 'Play again',
+  },
 });

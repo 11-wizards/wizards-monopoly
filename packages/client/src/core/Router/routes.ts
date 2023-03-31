@@ -14,6 +14,9 @@ export const ROUTES = {
   GAME_PAGE: {
     path: '/game',
   },
+  END_GAME_PAGE: {
+    path: '/end-game',
+  },
   LEADERBOARD_PAGE: {
     path: '/leaderboard',
   },

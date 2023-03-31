@@ -15,6 +15,11 @@
 
   "main-page.title": "Main",
 
+  "end-game.title": "GAME OVER",
+  "end-game.winner": "Winner",
+  "end-game.finish-game": "Finish the Game",
+  "end-game.play-again": "Play again",
+
   "validation.max-length.email": "Email cannot be longer than 30 characters",
   "validation.max-length.first-name": "First name cannot be longer than 30 characters",
   "validation.max-length.login": "Login cannot be longer than 20 characters",
