@@ -4,7 +4,9 @@ import { IntlProvider } from 'react-intl';
 import { GlobalOutlined } from '@ant-design/icons';
 import { Router } from 'core/Router';
 import { en, ru } from 'translations';
+import { StartGamePage } from '../../pages/StartGamePage';
 
+import '../../styles/main.scss';
 import './App.scss';
 
 export const App: FC = () => {
@@ -19,7 +21,8 @@ export const App: FC = () => {
       {/* временное решение до внедрения навбара */}
       <GlobalOutlined className="app__languageToggle" onClick={toggleLocale} />
       <IntlProvider locale={locale} messages={locale === 'en' ? en : ru}>
-        <Router />
+        {/* <Router /> */}
+        <StartGamePage />
       </IntlProvider>
     </div>
   );

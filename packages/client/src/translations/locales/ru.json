@@ -15,6 +15,12 @@
 
   "main-page.title": "Главная",
 
+  "start.title.welcome": "Добро пожаловать в Монополию!",
+  "start.text.choose": "Выберите количество игроков",
+  "start.button.start": "Начать игру",
+  "start.player.name": "Введите имя игрока",
+  "start.text.note": "Примечание: Обновление этой страницы или переход с нее на другую может привести к завершению игры без предупреждения.",
+
   "validation.invalid-format.email": "Email должен быть следующего формата: 'email@example.com'",
   "validation.invalid-format.phone": "Телефон должен содержать только 10-15 цифр и начинаться с +",
   "validation.max-length.email": "Email не должен содержать более 30 символов",

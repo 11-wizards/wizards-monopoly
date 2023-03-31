@@ -15,6 +15,12 @@
 
   "main-page.title": "Main",
 
+  "start.title.welcome": "Welcome to Monopoly!",
+  "start.text.choose": "Choose the number of players",
+  "start.button.start": "Start game",
+  "start.player.name": "Choose player name",
+  "start.text.note": "Note: Refreshing this page or navigating away from it may end your game without warning.",
+
   "validation.max-length.email": "Email cannot be longer than 30 characters",
   "validation.max-length.first-name": "First name cannot be longer than 30 characters",
   "validation.max-length.login": "Login cannot be longer than 20 characters",

@@ -53,6 +53,7 @@ export const Login: FC = () => {
   async function onSubmit(values: LoginInput) {
     const response = await authApi.login(values);
 
+    // eslint-disable-next-line no-console
     console.log({ response });
   }
 
