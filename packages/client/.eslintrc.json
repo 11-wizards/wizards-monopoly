@@ -80,7 +80,8 @@
           ["models", "./src/models"],
           ["pages", "./src/pages"],
           ["translations", "./src/translations"],
-          ["types", "./src/types"]
+          ["types", "./src/types"],
+          ["styles", "./src/styles"]
         ],
         "extensions": [".ts", ".tsx"]
       }
