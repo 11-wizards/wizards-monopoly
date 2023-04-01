@@ -3,6 +3,5 @@ import { Spin } from 'antd';
 
 import './Loader.scss';
 
-const Loader: FC = () => <Spin className="wrapper-loader" size="large" />;
+export const Loader: FC = () => <Spin className="wrapper-loader" size="large" />;
 
-export { Loader };

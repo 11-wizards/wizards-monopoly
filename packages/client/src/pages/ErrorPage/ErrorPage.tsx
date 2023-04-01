@@ -9,8 +9,8 @@ type ErrorPageProps = {
   subTitle?: string;
 };
 
-const ErrorPage: FC<ErrorPageProps> = ({
-  statusCode = '404',
+export const ErrorPage: FC<ErrorPageProps> = ({
+  statusCode = 404,
   title = '404',
   subTitle = 'Извините, страница, которую вы посетили, не существует.',
 }) => (
@@ -21,5 +21,3 @@ const ErrorPage: FC<ErrorPageProps> = ({
     extra={<Link to="/">На главную</Link>}
   />
 );
-
-export { ErrorPage };

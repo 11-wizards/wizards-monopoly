@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { ErrorPage } from '../../pages/ErrorPage';
 
 type State = {
-  error: Error | null;
+  error: Nullable<Error>;
 };
 
-type Props = {
+type ErrorBoundaryProps = {
   children: React.ReactNode;
 };
 
-class ErrorBoundary extends Component<Props, State> {
-  constructor(props: Props) {
+export class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
+  constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { error: null };
   }
@@ -30,5 +30,3 @@ class ErrorBoundary extends Component<Props, State> {
     return children;
   }
 }
-
-export { ErrorBoundary };
