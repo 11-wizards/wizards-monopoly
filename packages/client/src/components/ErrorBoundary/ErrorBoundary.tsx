@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ErrorPage } from '../../pages/ErrorPage';
+import { ClientErrorPage } from 'pages';
 
 type State = {
   error: Nullable<Error>;
@@ -24,7 +24,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
     const { children } = this.props;
 
     if (error) {
-      return <ErrorPage />;
+      return <ClientErrorPage />;
     }
 
     return children;

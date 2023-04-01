@@ -29,5 +29,10 @@
   "validation.min-length.password": "Пароль должен содержать как минимум 4 символа",
   "validation.min-length.phone": "Телефон должен содержать как минимум 10 символов",
   "validation.min-length.second-name": "Фамилия должна содержать как минимум 1 символ",
-  "validation.required-field": "Обязательное поле"
+  "validation.required-field": "Обязательное поле",
+
+  "client.error.message": "Извините, страница, которую вы посетили, не существует.",
+  "client.error.message.button-text": "На главную",
+  "server.error.message": "Извините, что-то пошло не так",
+  "server.error.message.button-text": "На главную"
 }
