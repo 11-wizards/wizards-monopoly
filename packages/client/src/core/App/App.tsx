@@ -4,7 +4,7 @@ import { IntlProvider } from 'react-intl';
 import { GlobalOutlined } from '@ant-design/icons';
 import { Router } from 'core/Router';
 import { en, ru } from 'translations';
-import { GameRulesModal } from '../../features/GameRulesModal';
+import { GameRulesModal } from 'features/GameRulesModal';
 
 import './App.scss';
 

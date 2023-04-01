@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 import { Button, Modal, Typography } from 'antd';
 import { useIntl } from 'react-intl';
-import { selectIsGameRulesShown, showGameRules } from '../../app/slices/gameSettingsSlice';
-import { useAppDispatch, useAppSelector } from '../../app/store';
-import { messages } from '../Register/common';
+import { selectIsGameRulesShown, showGameRules } from 'app/slices/gameSettingsSlice';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { messages } from './i18n';
 
 import './GameRulesModal.scss';
 
