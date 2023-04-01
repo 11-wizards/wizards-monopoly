@@ -1,4 +1,3 @@
-import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
@@ -14,8 +13,8 @@ const gameSettingsSlice = createSlice({
   name: 'gameSettings',
   initialState,
   reducers: {
-    showGameRules: (state: GameSettingsState, action: PayloadAction<boolean>) => {
-      state.isGameRulesShown = action.payload;
+    showGameRules: (state: GameSettingsState) => {
+      state.isGameRulesShown = !state.isGameRulesShown;
     },
   },
 });

@@ -27,7 +27,7 @@ export const Landing: FC = () => {
   };
 
   const onRulesButtonClick = () => {
-    dispatch(showGameRules(true));
+    dispatch(showGameRules());
   };
 
   return (

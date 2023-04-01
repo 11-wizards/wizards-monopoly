@@ -13,11 +13,12 @@ export const GameRulesModal: FC = () => {
   const isGameRulesShown = useAppSelector(selectIsGameRulesShown);
 
   const onOkClick = () => {
-    dispatch(showGameRules(false));
+    dispatch(showGameRules());
   };
 
   return (
     <Modal
+      closable={false}
       title={fm(messages.gameRulesTitle)}
       open={isGameRulesShown}
       footer={[
