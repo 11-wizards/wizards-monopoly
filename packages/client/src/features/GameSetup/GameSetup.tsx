@@ -77,19 +77,15 @@ export const GameSetup: FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submitHandler, submitHandler)}>
-      <Row wrap={false}>
-        <Col>
-          <Form.Item wrapperCol={{ span: 16 }} label={fm(messages.textChoose)}>
-            <InputNumber
-              defaultValue={playersCount.length}
-              min={MIN_NUMBER_OF_PLAYERS}
-              max={MAX_NUMBER_OF_PLAYERS}
-              onChange={handlePlayersChange}
-            />
-          </Form.Item>
-        </Col>
-      </Row>
+    <Form layout="vertical" onSubmitCapture={handleSubmit(submitHandler, submitHandler)}>
+      <Form.Item wrapperCol={{ span: 16 }} label={fm(messages.textChoose)}>
+        <InputNumber
+          defaultValue={playersCount.length}
+          min={MIN_NUMBER_OF_PLAYERS}
+          max={MAX_NUMBER_OF_PLAYERS}
+          onChange={handlePlayersChange}
+        />
+      </Form.Item>
       {playersCount.map(({ id }, i) => (
         <Row key={`${id}-row`} gutter={16} wrap={false}>
           <Col span={12}>
@@ -110,6 +106,6 @@ export const GameSetup: FC = () => {
           {fm(messages.buttonStart)}
         </Button>
       </Form.Item>
-    </form>
+    </Form>
   );
 };
