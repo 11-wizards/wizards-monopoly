@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ClientErrorPage } from 'pages';
+import { Result } from 'antd';
 
 type State = {
   error: Nullable<Error>;
@@ -24,7 +24,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
     const { children } = this.props;
 
     if (error) {
-      return <ClientErrorPage />;
+      return <Result status='error' title='Упс, случилась непредвиденная ошибка'/>;
     }
 
     return children;
