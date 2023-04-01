@@ -24,7 +24,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
     const { children } = this.props;
 
     if (error) {
-      return <Result status='error' title='Упс, случилась непредвиденная ошибка'/>;
+      return <Result status="error" title="Упс, случилась непредвиденная ошибка" />;
     }
 
     return children;
