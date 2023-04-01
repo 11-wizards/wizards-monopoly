@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { EndGame } from '../../features/EndGame';
+import { EndGame } from 'features/EndGame';
 
 import './EndGamePage.scss';
 
