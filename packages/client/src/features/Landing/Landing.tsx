@@ -2,11 +2,11 @@ import type { FC } from 'react';
 import { Button, Layout, Typography } from 'antd';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../core/Router';
-import { useAppDispatch, useAppSelector } from '../../app/store';
-import { selectIsLoggedIn } from '../../app/slices/userSlice';
-import { messages } from '../Register/common';
-import { showGameRules } from '../../app/slices/gameSettingsSlice';
+import { ROUTES } from 'core/Router';
+import { showGameRules } from 'app/slices/gameSettingsSlice';
+import { selectIsAuth } from 'app/slices/userSlice';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { messages } from './i18n';
 
 import './Landing.scss';
 
@@ -16,10 +16,10 @@ export const Landing: FC = () => {
   const dispatch = useAppDispatch();
   const { formatMessage: fm } = useIntl();
   const navigate = useNavigate();
-  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const isAuth = useAppSelector(selectIsAuth);
 
   const onPlayButtonClick = () => {
-    if (isLoggedIn) {
+    if (isAuth) {
       navigate(ROUTES.START_GAME_PAGE.path);
     } else {
       navigate(ROUTES.LOGIN_PAGE.path);

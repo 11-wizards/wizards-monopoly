@@ -25,9 +25,9 @@ export const userSlice = createSlice({
   },
 });
 
-export const selectIsLoggedIn = createSelector(
-  (state: RootState) => state.user.currentUser,
-  (currentUser: Nullable<CurrentUser>) => currentUser !== null,
+export const selectIsAuth = createSelector(
+  (state: RootState) => state.user.isAuth,
+  (isAuth: boolean) => isAuth,
 );
 
 export const { setCurrentUser } = userSlice.actions;
