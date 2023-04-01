@@ -1,26 +1,31 @@
 import type { FC } from 'react';
-import { Button, Input, InputNumber, Form, Typography } from 'antd';
-import { useIntl } from 'react-intl';
 import { useState } from 'react';
+import { Button, Col, Form, InputNumber, Row, Typography } from 'antd';
+import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setNumberOfPlayers, setPlayerName } from 'app/slices/gameSlice';
-import { Controller, useForm } from 'react-hook-form';
-import { MIN_NUMBER_OF_PLAYERS, MAX_NUMBER_OF_PLAYERS } from 'constants/main';
+import { setNumberOfPlayers, setPlayers } from 'app/slices/gameSlice';
+import { useForm } from 'react-hook-form';
+import { MAX_NUMBER_OF_PLAYERS, MIN_NUMBER_OF_PLAYERS } from 'constants/main';
 import { messages } from './i18n';
 import { ROUTES } from '../../core/Router';
-
-type FormValues = {
-  [name: string]: string;
-};
+import { InputPlayerName } from './InputPlayerName';
+import { InputPlayerColor } from './InputPlayerColor';
+import type { GameSetupFormData } from './types';
 
 const createPlayersArray = (length: Nullable<number>) =>
   Array.from({ length: length || 0 }).map((_, i) => ({
     id: `${i}-player`,
   }));
 
-const GameSetup: FC = () => {
-  const [players, setPlayers] = useState(createPlayersArray(2));
+const isUniquenessColors = (colors: string[]) => {
+  const colorsSet = new Set(colors);
+
+  return colorsSet.size === colors.length;
+};
+
+export const GameSetup: FC = () => {
+  const [playersCount, setPlayersCount] = useState(createPlayersArray(2));
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { formatMessage: fm } = useIntl();
@@ -29,60 +34,77 @@ const GameSetup: FC = () => {
     formState: { errors },
     reset,
     control,
-  } = useForm<FormValues>({
+    getValues,
+    setError,
+    clearErrors,
+  } = useForm<GameSetupFormData>({
     mode: 'onBlur',
   });
+
   const handlePlayersChange = (number: Nullable<number>) => {
     if (!number) {
       return;
     }
 
-    setPlayers(createPlayersArray(number));
+    setPlayersCount(createPlayersArray(number));
   };
 
-  const handleFormSubmit = (data: FormValues) => {
-    dispatch(setNumberOfPlayers(players.length));
-    dispatch(setPlayerName(data));
-    reset();
+  const checkUniquenessColors = (data: GameSetupFormData) => {
+    const colors = Object.entries(data)
+      .filter(([key]) => key.includes('color'))
+      .map(([_, value]) => value);
 
+    const isUniqueness = isUniquenessColors(colors);
+
+    isUniqueness
+      ? clearErrors('form')
+      : setError('form', { message: fm(messages.errorColorsUnique) });
+
+    return isUniqueness;
+  };
+
+  const submitHandler = () => {
+    const formData = getValues();
+
+    if (!checkUniquenessColors(formData)) {
+      return;
+    }
+
+    dispatch(setNumberOfPlayers(playersCount.length));
+    dispatch(setPlayers(formData));
+    reset();
     navigate(ROUTES.GAME_PAGE.path);
   };
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <Form.Item label={fm(messages.textChoose)}>
-        <InputNumber
-          defaultValue={players.length}
-          min={MIN_NUMBER_OF_PLAYERS}
-          max={MAX_NUMBER_OF_PLAYERS}
-          onChange={handlePlayersChange}
-        />
-      </Form.Item>
-      {players.map(({ id }, i) => {
-        const inputName = `player_name_${i + 1}`;
-        return (
-          <Form.Item
-            key={id}
-            label={fm(messages.playerName, { num: i + 1 })}
-            wrapperCol={{ span: 18 }}
-          >
-            <Controller
-              name={inputName}
-              control={control}
-              rules={{
-                required: fm(messages.errorRequired),
-                minLength: { value: 3, message: fm(messages.errorMinLength, { min: 3 }) },
-                maxLength: { value: 15, message: fm(messages.errorMaxLength, { max: 15 }) },
-                pattern: { value: /^[a-zA-Z0-9]+$/, message: fm(messages.errorPattern) },
-              }}
-              render={({ field }) => <Input status={errors?.[inputName] && 'error'} {...field} />}
+    <form onSubmit={handleSubmit(submitHandler, submitHandler)}>
+      <Row wrap={false}>
+        <Col>
+          <Form.Item wrapperCol={{ span: 16 }} label={fm(messages.textChoose)}>
+            <InputNumber
+              defaultValue={playersCount.length}
+              min={MIN_NUMBER_OF_PLAYERS}
+              max={MAX_NUMBER_OF_PLAYERS}
+              onChange={handlePlayersChange}
             />
-            {errors?.[inputName] && (
-              <Typography.Text type="danger">{errors?.[inputName]?.message}</Typography.Text>
-            )}
           </Form.Item>
-        );
-      })}
+        </Col>
+      </Row>
+      {playersCount.map(({ id }, i) => (
+        <Row key={`${id}-row`} gutter={16} wrap={false}>
+          <Col span={12}>
+            <InputPlayerName formErrors={errors} control={control} index={i + 1} />
+          </Col>
+          <Col span={12}>
+            <InputPlayerColor formErrors={errors} control={control} index={i + 1} />
+          </Col>
+        </Row>
+      ))}
+      {errors?.form && (
+        <Typography.Paragraph type="danger">
+          {errors?.form?.message?.toString()}
+        </Typography.Paragraph>
+      )}
       <Form.Item>
         <Button htmlType="submit" type="primary">
           {fm(messages.buttonStart)}
@@ -91,5 +113,3 @@ const GameSetup: FC = () => {
     </form>
   );
 };
-
-export default GameSetup;

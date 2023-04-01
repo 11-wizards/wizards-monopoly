@@ -5,8 +5,10 @@ export const messages = defineMessages({
 
   textChoose: { id: 'start.text.choose' },
   playerName: { id: 'start.player.name' },
+  playerColor: { id: 'start.player.color' },
   errorRequired: { id: 'validation.required-field' },
   errorMinLength: { id: 'validation.min-length.player_name' },
   errorMaxLength: { id: 'validation.max-length.player_name' },
   errorPattern: { id: 'validation.pattern.player_name' },
+  errorColorsUnique: { id: 'validation.unique.color' },
 });

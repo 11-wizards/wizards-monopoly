@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useIntl } from 'react-intl';
 import { Layout, Row, Col, Typography, Space } from 'antd';
-import GameSetup from 'features/GameSetup/GameSetup';
+import { GameSetup } from 'features/GameSetup/GameSetup';
 
 import { messages } from './i18n';
 
@@ -13,15 +13,11 @@ export const StartGamePage: FC = () => {
   return (
     <Layout className="welcome-page">
       <Row justify="center">
-        <Col span={12}>
+        <Col offset={4} span={14}>
           <Space direction="vertical">
-            <Row>
-              <Col span={16}>
-                <Typography.Title>{fm(messages.titleWelcome)}</Typography.Title>
-                <GameSetup />
-                <Typography.Text type="secondary">{fm(messages.textNote)}</Typography.Text>
-              </Col>
-            </Row>
+            <Typography.Title>{fm(messages.titleWelcome)}</Typography.Title>
+            <GameSetup />
+            <Typography.Text type="warning">{fm(messages.textNote)}</Typography.Text>
           </Space>
         </Col>
       </Row>

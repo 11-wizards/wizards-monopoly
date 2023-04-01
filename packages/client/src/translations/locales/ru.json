@@ -19,7 +19,8 @@
   "start.text.choose": "Выберите количество игроков",
   "start.button.start": "Начать игру",
   "start.player.name": "Введите имя {num, number}-го игрока",
-  "start.text.note": "Примечание: Обновление этой страницы или переход с нее на другую может привести к завершению игры без предупреждения.",
+  "start.player.color": "Выберите цвет для {num, number}-го игрока",
+  "start.text.note": "Внимание: Во время игры не обновляйте страницу, иначе игра будет прервана",
 
   "validation.invalid-format.email": "Email должен быть следующего формата: 'email@example.com'",
   "validation.invalid-format.phone": "Телефон должен содержать только 10-15 цифр и начинаться с +",
@@ -38,5 +39,6 @@
   "validation.min-length.player_name": "Имя игрока должно содержать как минимум {min, number} символа",
   "validation.max-length.player_name": "Имя игрока не должно содержать более {max, number} символов",
   "validation.pattern.player_name": "Имя игрока должно содержать только буквы и цифры",
-  "validation.required-field": "Обязательное поле"
+  "validation.required-field": "Обязательное поле",
+  "validation.unique.color": "Цвета игроков должны быть уникальными"
 }
