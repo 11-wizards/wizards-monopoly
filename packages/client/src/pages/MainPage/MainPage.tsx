@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Landing } from '../../features/Landing';
+import { Landing } from 'features/Landing';
 
 import './MainPage.scss';
 
