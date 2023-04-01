@@ -11,9 +11,9 @@ export const StartGamePage: FC = () => {
   const { formatMessage: fm } = useIntl();
 
   return (
-    <Layout className="welcome-page">
+    <Layout className="start-game-page">
       <Row justify="center">
-        <Col offset={4} span={14}>
+        <Col span={8}>
           <Space direction="vertical">
             <Typography.Title>{fm(messages.titleWelcome)}</Typography.Title>
             <GameSetup />

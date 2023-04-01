@@ -39,5 +39,4 @@
   "validation.pattern.player_name": "Player name can only contain letters and numbers",
   "validation.required-field": "This field is required",
   "validation.unique.color": "Colors must be unique"
-
 }

@@ -3,6 +3,7 @@ import { Form, Input, Typography } from 'antd';
 import type { Control, FieldErrors } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { useIntl } from 'react-intl';
+import { useEffect } from 'react';
 import { messages } from '../i18n';
 
 type OwnProps = {
@@ -16,8 +17,16 @@ type Props = OwnProps;
 
 export const InputPlayerName: FC<Props> = (props) => {
   const { formErrors, control, index } = props;
+  const { unregister } = control;
   const { formatMessage: fm } = useIntl();
   const inputName = `player_name_${index}`;
+
+  useEffect(
+    () => () => {
+      unregister(inputName);
+    },
+    [unregister, inputName],
+  );
 
   return (
     <Form.Item label={fm(messages.playerName, { num: index })} wrapperCol={{ span: 24 }}>

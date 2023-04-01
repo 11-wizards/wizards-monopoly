@@ -18,7 +18,7 @@ const createPlayersArray = (length: Nullable<number>) =>
     id: `${i}-player`,
   }));
 
-const isUniquenessColors = (colors: string[]) => {
+const isUniqueColors = (colors: string[]) => {
   const colorsSet = new Set(colors);
 
   return colorsSet.size === colors.length;
@@ -54,7 +54,7 @@ export const GameSetup: FC = () => {
       .filter(([key]) => key.includes('color'))
       .map(([_, value]) => value);
 
-    const isUniqueness = isUniquenessColors(colors);
+    const isUniqueness = isUniqueColors(colors);
 
     isUniqueness
       ? clearErrors('form')
@@ -65,8 +65,9 @@ export const GameSetup: FC = () => {
 
   const submitHandler = () => {
     const formData = getValues();
+    const formHasErrors = !checkUniquenessColors(formData);
 
-    if (!checkUniquenessColors(formData)) {
+    if (formHasErrors) {
       return;
     }
 
