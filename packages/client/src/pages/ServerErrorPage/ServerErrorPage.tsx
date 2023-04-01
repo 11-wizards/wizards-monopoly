@@ -10,7 +10,7 @@ export const ServerErrorPage: FC = () => {
   return (
     <Result
       status={500}
-      title='500'
+      title="500"
       subTitle={fm(serverErrorPageText.textErrorMessage)}
       extra={<Link to="/">{fm(serverErrorPageText.buttonText)}</Link>}
     />

@@ -10,7 +10,7 @@ export const ClientErrorPage: FC = () => {
   return (
     <Result
       status={404}
-      title='404'
+      title="404"
       subTitle={fm(ClientErrorPageText.textErrorMessage)}
       extra={<Link to="/">{fm(ClientErrorPageText.buttonText)}</Link>}
     />
