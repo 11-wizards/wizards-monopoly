@@ -15,6 +15,13 @@
 
   "main-page.title": "Main",
 
+  "result-board.title": "Game Score",
+  "result-board.place": "Place",
+  "result-board.name": "Name",
+  "result-board.profit": "Profit",
+  "result-board.property": "Property",
+  "result-board.time": "Time in the Game",
+
   "end-game.title": "GAME OVER",
   "end-game.winner": "Winner",
   "end-game.finish-game": "Finish the Game",

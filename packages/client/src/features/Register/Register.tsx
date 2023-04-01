@@ -22,6 +22,7 @@ export const Register: FC = () => {
   async function onSubmit(values: RegisterInput) {
     const response = await mockAwait<RegisterInput>(values);
 
+    // eslint-disable-next-line no-console
     console.log({ response });
   }
 

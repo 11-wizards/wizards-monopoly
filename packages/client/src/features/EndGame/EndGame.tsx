@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'core/Router';
 import { messages } from './i18n';
+import { ResultBoard } from '../Resultboard';
 
 import './EndGame.scss';
 
@@ -26,10 +27,11 @@ export const EndGame: FC = () => {
       <div className="end-game-layout">
         <section className="end-game-title">
           <Typography.Title>{fm(messages.endGameTitle)}</Typography.Title>
-          <Typography.Paragraph className="end-game-winner">
-            {fm(messages.endGameWinner)} Player_1
-          </Typography.Paragraph>
+          <Typography.Text className="end-game-winner">
+            {fm(messages.endGameWinner)} Татьяна!
+          </Typography.Text>
         </section>
+        <ResultBoard />
         <section className="end-game-buttons">
           <Button onClick={onFinishGameButtonClick} className="end-game-button" danger>
             {fm(messages.endGameFinish)}

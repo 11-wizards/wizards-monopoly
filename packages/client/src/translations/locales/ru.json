@@ -15,6 +15,13 @@
 
   "main-page.title": "Главная",
 
+  "result-board.title": "Счёт игры",
+  "result-board.place": "Место",
+  "result-board.name": "Имя",
+  "result-board.profit": "Доход",
+  "result-board.property": "Собственность",
+  "result-board.time": "Время в игре",
+
   "end-game.title": "ИГРА ОКОНЧЕНА",
   "end-game.winner": "Победитель",
   "end-game.finish-game": "Завершить игру",

@@ -1,0 +1,1 @@
+export { ResultBoard } from './ResultBoard';
