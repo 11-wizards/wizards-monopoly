@@ -1,1 +1,8 @@
-// delete this comment after adding styles, a stub for stylelint
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding-bottom: 8px;
+}

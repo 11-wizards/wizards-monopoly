@@ -1,28 +1,25 @@
 import type { FC } from 'react';
 import { Button, Modal, Typography } from 'antd';
 import { useIntl } from 'react-intl';
-import { selectIsGameRulesShown, showGameRules } from 'app/slices/gameSettingsSlice';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { messages } from './i18n';
+import { messages } from './common';
 
 import './GameRulesModal.scss';
 
-export const GameRulesModal: FC = () => {
-  const { formatMessage: fm } = useIntl();
-  const dispatch = useAppDispatch();
-  const isGameRulesShown = useAppSelector(selectIsGameRulesShown);
+type GameRulesModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+};
 
-  const onOkClick = () => {
-    dispatch(showGameRules());
-  };
+export const GameRulesModal: FC<GameRulesModalProps> = ({ isOpen, onClose }) => {
+  const { formatMessage: fm } = useIntl();
 
   return (
     <Modal
       closable={false}
       title={fm(messages.gameRulesTitle)}
-      open={isGameRulesShown}
+      open={isOpen}
       footer={[
-        <Button key="submit" type="primary" onClick={onOkClick}>
+        <Button key="submit" type="primary" onClick={onClose}>
           {fm(messages.gameRulesCloseButton)}
         </Button>,
       ]}

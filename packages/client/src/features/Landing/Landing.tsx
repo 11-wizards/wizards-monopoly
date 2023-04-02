@@ -3,17 +3,15 @@ import { Button, Layout, Typography } from 'antd';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'core/Router';
-import { showGameRules } from 'app/slices/gameSettingsSlice';
 import { selectIsAuth } from 'app/slices/userSlice';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { messages } from './i18n';
+import { useAppSelector } from 'app/hooks';
+import { messages } from './common';
 
 import './Landing.scss';
 
 const { Content } = Layout;
 
 export const Landing: FC = () => {
-  const dispatch = useAppDispatch();
   const { formatMessage: fm } = useIntl();
   const navigate = useNavigate();
   const isAuth = useAppSelector(selectIsAuth);
@@ -24,10 +22,6 @@ export const Landing: FC = () => {
     } else {
       navigate(ROUTES.LOGIN_PAGE.path);
     }
-  };
-
-  const onRulesButtonClick = () => {
-    dispatch(showGameRules());
   };
 
   return (
@@ -45,9 +39,6 @@ export const Landing: FC = () => {
         <div className="landing-buttons-container">
           <Button onClick={onPlayButtonClick} className="landing-play-button" type="primary">
             {fm(messages.landingPlayButton)}
-          </Button>
-          <Button onClick={onRulesButtonClick} className="landing-rules-button" type="dashed">
-            {fm(messages.landingRulesButton)}
           </Button>
         </div>
         <div className="landing-features">

@@ -4,7 +4,6 @@ import { IntlProvider } from 'react-intl';
 import { GlobalOutlined } from '@ant-design/icons';
 import { Router } from 'core/Router';
 import { en, ru } from 'translations';
-import { GameRulesModal } from 'features/GameRulesModal';
 
 import './App.scss';
 
@@ -21,7 +20,6 @@ export const App: FC = () => {
       <GlobalOutlined className="app__languageToggle" onClick={toggleLocale} />
       <IntlProvider locale={locale} messages={locale === 'en' ? en : ru}>
         <Router />
-        <GameRulesModal />
       </IntlProvider>
     </div>
   );
