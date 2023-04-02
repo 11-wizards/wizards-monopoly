@@ -44,6 +44,7 @@ export const GameSetup: FC = () => {
 
     if (formHasErrors) {
       setError('form', { message: fm(messages.errorColorsUnique) });
+
       return;
     }
 

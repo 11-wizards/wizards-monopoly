@@ -49,6 +49,7 @@
         "ignoreRegExpLiterals": true
       }
     ],
+    "newline-before-return": "error",
     "react/function-component-definition": [
       "error",
       {
