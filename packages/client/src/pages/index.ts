@@ -1,3 +1,4 @@
+export { EndGamePage } from './EndGamePage';
 export { ForumPage } from './ForumPage';
 export { GamePage } from './GamePage';
 export { LeaderboardPage } from './LeaderboardPage';
