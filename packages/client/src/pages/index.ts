@@ -4,8 +4,6 @@ export { GamePage } from './GamePage';
 export { LeaderboardPage } from './LeaderboardPage';
 export { LoginPage } from './LoginPage';
 export { MainPage } from './MainPage';
-export { ProfilePage } from './ProfilePage';
-export { ProfileChangePasswordPage } from './ProfileChangePasswordPage';
 export { RegisterPage } from './RegisterPage';
 export { ClientErrorPage } from './ClientErrorPage';
 export { ServerErrorPage } from './ServerErrorPage';

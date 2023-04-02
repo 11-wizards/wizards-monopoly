@@ -1,1 +1,0 @@
-export { ProfileChangeAvatar } from './ProfileChangeAvatar';

@@ -22,20 +22,6 @@
 
   "main-page.title": "Главная",
 
-  "profile.button.change-password": "Изменить пароль",
-  "profile.button.change-profile-info": "Изменить информацию профиля",
-  "profile.change-password.placeholder.old-password": "Старый пароль",
-  "profile.change-password.placeholder.new-password": "Новый пароль",
-  "profile.change-password.title": "Изменить пароль",
-  "profile.placeholder.display-name": "Никнейм",
-  "profile.placeholder.email": "Email",
-  "profile.placeholder.first-name": "Имя",
-  "profile.placeholder.login": "Логин",
-  "profile.placeholder.password": "Пароль",
-  "profile.placeholder.phone": "Телефон",
-  "profile.placeholder.second-name": "Фамилия",
-  "profile.title": "Профиль",
-
   "result-board.title": "Счёт игры",
   "result-board.place": "Место",
   "result-board.name": "Имя",
@@ -43,8 +29,6 @@
   "result-board.property": "Собственность",
   "result-board.time": "Время в игре",
 
-  "validation.avatar.invalid-extension": "Вы можете загружать только файлы с расширением JPG/PNG",
-  "validation.avatar.size-limit": "Изображение должно быть менее  2MB",
   "validation.invalid-format.email": "Email должен быть следующего формата: 'email@example.com'",
   "validation.invalid-format.phone": "Телефон должен содержать только 10-15 цифр и начинаться с +",
   "validation.max-length.email": "Email не должен содержать более 30 символов",

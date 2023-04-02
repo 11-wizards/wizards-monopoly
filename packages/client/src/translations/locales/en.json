@@ -22,20 +22,6 @@
 
   "main-page.title": "Main",
 
-  "profile.button.change-password": "Change password",
-  "profile.button.change-profile-info": "Change profile info",
-  "profile.change-password.placeholder.old-password": "Old password",
-  "profile.change-password.placeholder.new-password": "New password",
-  "profile.change-password.title": "Change password",
-  "profile.placeholder.display-name": "Display name",
-  "profile.placeholder.email": "Email",
-  "profile.placeholder.first-name": "First name",
-  "profile.placeholder.login": "Login",
-  "profile.placeholder.password": "Password",
-  "profile.placeholder.phone": "Phone",
-  "profile.placeholder.second-name": "Second name",
-  "profile.title": "Profile",
-
   "result-board.title": "Game Score",
   "result-board.place": "Place",
   "result-board.name": "Name",
@@ -45,7 +31,6 @@
 
   "validation.avatar.invalid-extension": "You can only upload JPG/PNG file",
   "validation.avatar.size-limit": "Image must smaller than 2MB",
-
   "validation.max-length.email": "Email cannot be longer than 30 characters",
   "validation.max-length.first-name": "First name cannot be longer than 30 characters",
   "validation.max-length.login": "Login cannot be longer than 20 characters",

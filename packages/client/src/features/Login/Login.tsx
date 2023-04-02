@@ -4,9 +4,7 @@ import { defineMessages, useIntl } from 'react-intl';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, Input, Typography } from 'antd';
 import { authApi } from 'api/auth.api';
-import { LOCAL_STORAGE_IS_AUTH_KEY } from 'constants/localStorage';
 import { ROUTES } from 'core/Router';
-import { handleServerError } from 'helpers/handleServerError';
 import type { LoginInput } from 'models/auth.model';
 
 import './Login.scss';
@@ -53,17 +51,10 @@ export const Login: FC = () => {
   } = useForm<LoginInput>();
 
   async function onSubmit(values: LoginInput) {
-    try {
-      const response = await authApi.logIn(values);
-      // eslint-disable-next-line no-console
-      console.log({ response });
+    const response = await authApi.login(values);
 
-      if (response.status === 200) {
-        localStorage.setItem(LOCAL_STORAGE_IS_AUTH_KEY, 'true');
-      }
-    } catch (err) {
-      await handleServerError(err);
-    }
+    // eslint-disable-next-line no-console
+    console.log({ response });
   }
 
   return (
