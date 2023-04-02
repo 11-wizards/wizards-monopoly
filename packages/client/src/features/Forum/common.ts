@@ -7,5 +7,5 @@ export const messages = defineMessages({
   changeTheme: { id: 'forum.themes.change' },
   themeLabel: { id: 'forum.themes.theme' },
   authorLabel: { id: 'forum.themes.author' },
-  responsePost: { id: 'forum.posts.response' }
+  responsePost: { id: 'forum.posts.response' },
 });

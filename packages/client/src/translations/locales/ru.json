@@ -43,12 +43,11 @@
   "validation.min-length.second-name": "Фамилия должна содержать как минимум 1 символ",
   "validation.required-field": "Обязательное поле",
 
-  "forum.title":"Форум пользователей игры 'Монополия'",
-  "forum.btn.create-theme":"Создать новую тему",
-  "forum.btn.response":"Ответить в теме",
-  "forum.themes.change":"Выберете тему",
-  "forum.themes.theme":"Тема:",
-  "forum.themes.author":"Автор:",
-  "forum.posts.response":"ответ пользователя"
-  
+  "forum.title": "Форум пользователей игры 'Монополия'",
+  "forum.btn.create-theme": "Создать новую тему",
+  "forum.btn.response": "Ответить в теме",
+  "forum.themes.change": "Выберете тему",
+  "forum.themes.theme": "Тема:",
+  "forum.themes.author": "Автор:",
+  "forum.posts.response": "ответ пользователя"
 }

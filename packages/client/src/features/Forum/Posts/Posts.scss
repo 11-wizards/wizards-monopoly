@@ -1,30 +1,35 @@
-@import "core/vars";
+@import 'core/vars';
 
 .theme-posts {
-    .ant-pagination-options {
-        display: none;
+  .ant-pagination-options {
+    display: none;
+  }
+
+  display: grid;
+  grid-gap: 15px;
+  max-height: 100%;
+  padding-left: 0;
+  margin: 15px 0 0 100px;
+  margin-left: 100px;
+  overflow-y: auto;
+  list-style-type: none;
+
+  .theme-posts-paginaton {
+    margin-left: auto;
+  }
+
+  .post {
+    padding: 12px;
+    background-color: $whiteColor;
+    border-radius: 12px;
+    box-shadow: 4px 4px 8px 0 rgb(34 60 80 / 20%);
+
+    .post-title {
+      margin: 0;
     }
-    margin: 15px 0 0 100px;
-    margin-left: 100px;
-    list-style-type: none;
-    padding-left: 0;
-    display: grid;
-    grid-gap: 15px;
-    max-height: 100%;
-    overflow-y: auto;
-    .theme-posts-paginaton {
-        margin-left: auto;
+
+    .post-body {
+      padding-left: 20px;
     }
-    .post {
-        padding: 12px;
-        background-color: $whiteColor;
-        border-radius: 12px;
-        box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-        .post-title {
-            margin: 0;
-        }
-        .post-body {
-            padding-left: 20px;
-        }
-    }
+  }
 }
