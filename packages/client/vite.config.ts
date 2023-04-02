@@ -18,6 +18,7 @@ export default defineConfig({
       core: path.join(__dirname, './src/core'),
       features: path.join(__dirname, './src/features'),
       game: path.join(__dirname, './src/game'),
+      hooks: path.join(__dirname, './src/game'),
       layouts: path.join(__dirname, './src/layouts'),
       models: path.join(__dirname, './src/models'),
       pages: path.join(__dirname, './src/pages'),
