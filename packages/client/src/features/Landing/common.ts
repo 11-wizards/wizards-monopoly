@@ -18,10 +18,6 @@ export const messages = defineMessages({
     id: 'landing.play.button',
     defaultMessage: 'PLAY NOW',
   },
-  landingRulesButton: {
-    id: 'landing.rules.button',
-    defaultMessage: 'GAME RULES',
-  },
   landingFeature1: {
     id: 'landing.feature1',
     defaultMessage:
