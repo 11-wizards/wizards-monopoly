@@ -13,7 +13,28 @@
   "auth.title.login": "Вход",
   "auth.title.register": "Регистрация",
 
+  "end-game.title": "ИГРА ОКОНЧЕНА",
+  "end-game.winner": "Победитель",
+  "end-game.finish-game": "Завершить игру",
+  "end-game.play-again": "Играть снова",
+
+  "error-boundary-text": "Упс, случилась непредвиденная ошибка",
+
   "main-page.title": "Главная",
+
+  "profile.button.change-password": "Изменить пароль",
+  "profile.button.change-profile-info": "Изменить информацию профиля",
+  "profile.change-password.placeholder.old-password": "Старый пароль",
+  "profile.change-password.placeholder.new-password": "Новый пароль",
+  "profile.change-password.title": "Изменить пароль",
+  "profile.placeholder.display-name": "Никнейм",
+  "profile.placeholder.email": "Email",
+  "profile.placeholder.first-name": "Имя",
+  "profile.placeholder.login": "Логин",
+  "profile.placeholder.password": "Пароль",
+  "profile.placeholder.phone": "Телефон",
+  "profile.placeholder.second-name": "Фамилия",
+  "profile.title": "Профиль",
 
   "result-board.title": "Счёт игры",
   "result-board.place": "Место",
@@ -22,13 +43,8 @@
   "result-board.property": "Собственность",
   "result-board.time": "Время в игре",
 
-  "end-game.title": "ИГРА ОКОНЧЕНА",
-  "end-game.winner": "Победитель",
-  "end-game.finish-game": "Завершить игру",
-  "end-game.play-again": "Играть снова",
-
-  "error-boundary-text": "Упс, случилась непредвиденная ошибка",
-
+  "validation.avatar.invalid-extension": "Вы можете загружать только файлы с расширением JPG/PNG",
+  "validation.avatar.size-limit": "Изображение должно быть менее  2MB",
   "validation.invalid-format.email": "Email должен быть следующего формата: 'email@example.com'",
   "validation.invalid-format.phone": "Телефон должен содержать только 10-15 цифр и начинаться с +",
   "validation.max-length.email": "Email не должен содержать более 30 символов",
@@ -48,5 +64,10 @@
   "client.error.message": "Извините, страница, которую вы посетили, не существует.",
   "client.error.message.button-text": "На главную",
   "server.error.message": "Извините, что-то пошло не так",
-  "server.error.message.button-text": "На главную"
+  "server.error.message.button-text": "На главную",
+
+  "universal.cancel": "Отменить",
+  "universal.save": "Сохранить",
+  "universal.signout": "Выйти",
+  "universal.upload": "Загрузить"
 }

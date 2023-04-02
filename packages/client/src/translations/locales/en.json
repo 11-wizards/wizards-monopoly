@@ -13,7 +13,28 @@
   "auth.title.login": "Login",
   "auth.title.register": "Register",
 
+  "end-game.title": "GAME OVER",
+  "end-game.winner": "Winner",
+  "end-game.finish-game": "Finish the Game",
+  "end-game.play-again": "Play again",
+
+  "error-boundary-text": "Oops, an unexpected error has occurred.",
+
   "main-page.title": "Main",
+
+  "profile.button.change-password": "Change password",
+  "profile.button.change-profile-info": "Change profile info",
+  "profile.change-password.placeholder.old-password": "Old password",
+  "profile.change-password.placeholder.new-password": "New password",
+  "profile.change-password.title": "Change password",
+  "profile.placeholder.display-name": "Display name",
+  "profile.placeholder.email": "Email",
+  "profile.placeholder.first-name": "First name",
+  "profile.placeholder.login": "Login",
+  "profile.placeholder.password": "Password",
+  "profile.placeholder.phone": "Phone",
+  "profile.placeholder.second-name": "Second name",
+  "profile.title": "Profile",
 
   "result-board.title": "Game Score",
   "result-board.place": "Place",
@@ -22,12 +43,8 @@
   "result-board.property": "Property",
   "result-board.time": "Time in the Game",
 
-  "end-game.title": "GAME OVER",
-  "end-game.winner": "Winner",
-  "end-game.finish-game": "Finish the Game",
-  "end-game.play-again": "Play again",
-
-  "error-boundary-text": "Oops, an unexpected error has occurred.",
+  "validation.avatar.invalid-extension": "You can only upload JPG/PNG file",
+  "validation.avatar.size-limit": "Image must smaller than 2MB",
 
   "validation.max-length.email": "Email cannot be longer than 30 characters",
   "validation.max-length.first-name": "First name cannot be longer than 30 characters",
@@ -46,5 +63,10 @@
   "client.error.message": "Sorry, the page you visited does not exist.",
   "client.error.message.button-text": "Back home",
   "server.error.message": "Sorry, something went wrong.",
-  "server.error.message.button-text": "Back home"
+  "server.error.message.button-text": "Back home",
+
+  "universal.cancel": "Cancel",
+  "universal.save": "Save",
+  "universal.signout": "Sign out",
+  "universal.upload": "Upload"
 }

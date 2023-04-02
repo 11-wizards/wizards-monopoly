@@ -1,16 +1,18 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Default } from 'layouts';
 import {
+  EndGamePage,
   ForumPage,
   GamePage,
   LeaderboardPage,
   LoginPage,
   MainPage,
+  ProfileChangePasswordPage,
+  ProfilePage,
   RegisterPage,
   ClientErrorPage,
 } from 'pages';
 import { ROUTES } from './routes';
-import { EndGamePage } from '../../pages/EndGamePage';
 
 export const Router = () => (
   <RouterProvider
@@ -47,6 +49,14 @@ export const Router = () => (
           {
             path: ROUTES.LEADERBOARD_PAGE.path,
             element: <LeaderboardPage />,
+          },
+          {
+            path: ROUTES.PROFILE_PAGE.path,
+            element: <ProfilePage />,
+          },
+          {
+            path: ROUTES.PROFILE_CHANGE_PASSWORD_PAGE.path,
+            element: <ProfileChangePasswordPage />,
           },
         ],
       },
