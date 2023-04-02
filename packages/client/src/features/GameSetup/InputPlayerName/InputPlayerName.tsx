@@ -38,7 +38,13 @@ export const InputPlayerName: FC<Props> = ({ formErrors, control, index }) => {
           maxLength: { value: 15, message: fm(messages.errorMaxLength, { max: 15 }) },
           pattern: { value: /^[a-zA-Z0-9]+$/, message: fm(messages.errorPattern) },
         }}
-        render={({ field }) => <Input status={formErrors?.[inputName] && 'error'} {...field} />}
+        render={({ field }) => (
+          <Input
+            placeholder={`Player${index}`}
+            status={formErrors?.[inputName] && 'error'}
+            {...field}
+          />
+        )}
       />
       {formErrors?.[inputName] && (
         <Typography.Text type="danger">
