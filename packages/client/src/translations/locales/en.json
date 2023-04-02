@@ -13,26 +13,7 @@
   "auth.title.login": "Login",
   "auth.title.register": "Register",
 
-  "end-game.title": "GAME OVER",
-  "end-game.winner": "Winner",
-  "end-game.finish-game": "Finish the Game",
-  "end-game.play-again": "Play again",
-
   "main-page.title": "Main",
-
-  "profile.button.change-password": "Change password",
-  "profile.button.change-profile-info": "Change profile info",
-  "profile.change-password.placeholder.old-password": "Old password",
-  "profile.change-password.placeholder.new-password": "New password",
-  "profile.change-password.title": "Change password",
-  "profile.placeholder.display-name": "Display name",
-  "profile.placeholder.email": "Email",
-  "profile.placeholder.first-name": "First name",
-  "profile.placeholder.login": "Login",
-  "profile.placeholder.password": "Password",
-  "profile.placeholder.phone": "Phone",
-  "profile.placeholder.second-name": "Second name",
-  "profile.title": "Profile",
 
   "result-board.title": "Game Score",
   "result-board.place": "Place",
@@ -41,8 +22,11 @@
   "result-board.property": "Property",
   "result-board.time": "Time in the Game",
 
-  "validation.avatar.invalid-extension": "You can only upload JPG/PNG file",
-  "validation.avatar.size-limit": "Image must smaller than 2MB",
+  "end-game.title": "GAME OVER",
+  "end-game.winner": "Winner",
+  "end-game.finish-game": "Finish the Game",
+  "end-game.play-again": "Play again",
+
   "validation.max-length.email": "Email cannot be longer than 30 characters",
   "validation.max-length.first-name": "First name cannot be longer than 30 characters",
   "validation.max-length.login": "Login cannot be longer than 20 characters",
@@ -55,10 +39,5 @@
   "validation.min-length.password": "Password must be at least 4 characters",
   "validation.min-length.phone": "Phone must be at least 10 characters",
   "validation.min-length.second-name": "Second name must be at least 1 character",
-  "validation.required-field": "This field is required",
-
-  "universal.cancel": "Cancel",
-  "universal.save": "Save",
-  "universal.signout": "Sign out",
-  "universal.upload": "Upload"
+  "validation.required-field": "This field is required"
 }
