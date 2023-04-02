@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const serverErrorPageText = defineMessages({
+export const messages = defineMessages({
   textErrorMessage: {
     id: 'server.error.message',
   },

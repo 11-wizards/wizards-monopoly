@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Result } from 'antd';
+import { FormattedMessage } from 'react-intl';
+import { messages } from './common';
 
 type State = {
   error: Nullable<Error>;
@@ -24,7 +26,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
     const { children } = this.props;
 
     if (error) {
-      return <Result status="error" title="Упс, случилась непредвиденная ошибка" />;
+      return <Result status="error" title={FormattedMessage(messages.errorBoundaryText)} />;
     }
 
     return children;

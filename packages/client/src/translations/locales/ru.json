@@ -27,6 +27,8 @@
   "end-game.finish-game": "Завершить игру",
   "end-game.play-again": "Играть снова",
 
+  "error-boundary-text": "Упс, случилась непредвиденная ошибка",
+
   "validation.invalid-format.email": "Email должен быть следующего формата: 'email@example.com'",
   "validation.invalid-format.phone": "Телефон должен содержать только 10-15 цифр и начинаться с +",
   "validation.max-length.email": "Email не должен содержать более 30 символов",

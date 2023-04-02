@@ -27,6 +27,8 @@
   "end-game.finish-game": "Finish the Game",
   "end-game.play-again": "Play again",
 
+  "error-boundary-text": "Oops, an unexpected error has occurred.",
+
   "validation.max-length.email": "Email cannot be longer than 30 characters",
   "validation.max-length.first-name": "First name cannot be longer than 30 characters",
   "validation.max-length.login": "Login cannot be longer than 20 characters",

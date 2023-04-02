@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Result } from 'antd';
 import { Link } from 'react-router-dom';
 import { useIntl } from 'react-intl';
-import { serverErrorPageText } from './common';
+import { messages } from './common';
 
 export const ServerErrorPage: FC = () => {
   const { formatMessage: fm } = useIntl();
@@ -11,8 +11,8 @@ export const ServerErrorPage: FC = () => {
     <Result
       status={500}
       title="500"
-      subTitle={fm(serverErrorPageText.textErrorMessage)}
-      extra={<Link to="/">{fm(serverErrorPageText.buttonText)}</Link>}
+      subTitle={fm(messages.textErrorMessage)}
+      extra={<Link to="/">{fm(messages.buttonText)}</Link>}
     />
   );
 };
