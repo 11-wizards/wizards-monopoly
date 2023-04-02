@@ -7,16 +7,14 @@ import { useEffect } from 'react';
 import { messages } from 'features/GameSetup/common';
 import { selectOptions } from './utils';
 
-type OwnProps = {
+type InputPlayerColorProps = {
   className?: string;
   control: Control;
   formErrors: FieldErrors;
   index: number;
 };
 
-type Props = OwnProps;
-
-export const InputPlayerColor: FC<Props> = ({ formErrors, control, index }) => {
+export const InputPlayerColor: FC<InputPlayerColorProps> = ({ formErrors, control, index }) => {
   const { unregister } = control;
   const { formatMessage: fm } = useIntl();
   const inputName = `player_color_${index}`;

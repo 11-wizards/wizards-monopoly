@@ -6,16 +6,14 @@ import { useIntl } from 'react-intl';
 import { useEffect } from 'react';
 import { messages } from 'features/GameSetup/common';
 
-type OwnProps = {
+type InputPlayerNameProps = {
   className?: string;
   control: Control;
   formErrors: FieldErrors;
   index: number;
 };
 
-type Props = OwnProps;
-
-export const InputPlayerName: FC<Props> = ({ formErrors, control, index }) => {
+export const InputPlayerName: FC<InputPlayerNameProps> = ({ formErrors, control, index }) => {
   const { unregister } = control;
   const { formatMessage: fm } = useIntl();
   const inputName = `player_name_${index}`;
