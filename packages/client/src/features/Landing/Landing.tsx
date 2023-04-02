@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'core/Router';
 import { selectIsAuth } from 'app/slices/userSlice';
-import { useAppSelector } from 'app/hooks';
+import { useAppSelector } from 'hooks/redux';
 import { messages } from './common';
 
 import './Landing.scss';
