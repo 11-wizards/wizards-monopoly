@@ -29,5 +29,9 @@
   "validation.min-length.password": "Пароль должен содержать как минимум 4 символа",
   "validation.min-length.phone": "Телефон должен содержать как минимум 10 символов",
   "validation.min-length.second-name": "Фамилия должна содержать как минимум 1 символ",
-  "validation.required-field": "Обязательное поле"
+  "validation.required-field": "Обязательное поле",
+
+  "leaderboard.title": "Доска лидеров",
+  "leaderboard.profit": "$ дохода",
+  "leaderboard.days-in-game": "дней в игре"
 }
