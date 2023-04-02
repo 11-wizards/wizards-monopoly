@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React, { useState } from 'react';
 import { Button } from 'antd';
 import { useIntl } from 'react-intl';
-import { GameRulesModal } from '../GameRulesModal';
+import { GameRulesModal } from 'features/GameRulesModal';
 import { messages } from './common';
 
 import './Header.scss';
@@ -11,16 +11,16 @@ export const Header: FC = () => {
   const { formatMessage: fm } = useIntl();
   const [isGameRulesShown, setGameRuleShown] = useState(false);
 
-  const onShowRulesButtonClick = () => {
-    setGameRuleShown(true);
+  const onShowRules = () => {
+    setGameRuleShown((prevState) => !prevState);
   };
 
   return (
     <div className="header">
-      <Button onClick={onShowRulesButtonClick} type="dashed">
+      <Button onClick={onShowRules} type="dashed">
         {fm(messages.headerRulesButton)}
       </Button>
-      <GameRulesModal isOpen={isGameRulesShown} onClose={() => setGameRuleShown(false)} />
+      <GameRulesModal isOpen={isGameRulesShown} onClose={onShowRules} />
     </div>
   );
 };
