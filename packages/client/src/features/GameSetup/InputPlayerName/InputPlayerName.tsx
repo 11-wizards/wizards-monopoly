@@ -4,12 +4,12 @@ import type { Control, FieldErrors } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 import { useEffect } from 'react';
-import { messages } from '../i18n';
+import { messages } from 'features/GameSetup/common';
 
 type OwnProps = {
   className?: string;
-  formErrors: FieldErrors;
   control: Control;
+  formErrors: FieldErrors;
   index: number;
 };
 

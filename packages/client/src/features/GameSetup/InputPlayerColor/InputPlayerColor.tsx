@@ -4,13 +4,13 @@ import type { Control, FieldErrors } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 import { useEffect } from 'react';
+import { messages } from 'features/GameSetup/common';
 import { selectOptions } from './utils';
-import { messages } from '../i18n';
 
 type OwnProps = {
   className?: string;
-  formErrors: FieldErrors;
   control: Control;
+  formErrors: FieldErrors;
   index: number;
 };
 
@@ -37,11 +37,7 @@ export const InputPlayerColor: FC<Props> = ({ formErrors, control, index }) => {
           required: fm(messages.errorRequired),
         }}
         render={({ field }) => (
-          <Select
-            {...field}
-            status={formErrors?.[inputName] ? 'error' : ''}
-            options={selectOptions}
-          />
+          <Select {...field} status={formErrors?.[inputName] && 'error'} options={selectOptions} />
         )}
       />
       {formErrors?.[inputName] && (

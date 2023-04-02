@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { useIntl } from 'react-intl';
 import { Layout, Row, Col, Typography, Space } from 'antd';
 
-import { messages } from './i18n';
+import { messages } from 'pages/StartGamePage/common';
 
 import './StartGamePage.scss';
 

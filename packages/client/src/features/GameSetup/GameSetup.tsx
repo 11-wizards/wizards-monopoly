@@ -8,11 +8,10 @@ import { setNumberOfPlayers, setPlayers } from 'app/slices/gameSlice';
 import { useForm } from 'react-hook-form';
 import { MAX_NUMBER_OF_PLAYERS, MIN_NUMBER_OF_PLAYERS } from 'constants/main';
 import { ROUTES } from 'core/Router';
-import { messages } from './i18n';
+import { checkUniquenessColors, createPlayersArray, messages } from 'features/GameSetup/common';
 import { InputPlayerName } from './InputPlayerName';
 import { InputPlayerColor } from './InputPlayerColor';
 import type { GameSetupFormData } from './types';
-import { checkUniquenessColors, createPlayersArray } from './utils';
 
 export const GameSetup: FC = () => {
   const [playersCount, setPlayersCount] = useState(createPlayersArray(2));

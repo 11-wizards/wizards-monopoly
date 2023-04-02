@@ -8,8 +8,8 @@ type GameState = {
 };
 
 type Player = {
-  name: string;
   color: string;
+  name: string;
 };
 
 type Players = Record<string, Player>;
@@ -33,12 +33,12 @@ export const gameSlice = createSlice({
       prepare: (players: GameSetupFormData) => ({
         payload: Object.keys(players).reduce((result: Players, key): Players => {
           const [keyName, playerNum] = key.split('_').slice(1);
-
-          const player = result[`player_${playerNum}`] || {};
+          const playerKey = `player_${playerNum}`;
+          const player = result[playerKey] || {};
 
           return {
             ...result,
-            [`player_${playerNum}`]: {
+            [playerKey]: {
               ...player,
               [keyName]: players[key],
             },

@@ -14,12 +14,12 @@ export class LoginInputDto {
 }
 
 export type RegisterInput = {
-  firstName: string;
-  secondName: string;
-  login: string;
   email: string;
+  firstName: string;
+  login: string;
   password: string;
   phone: string;
+  secondName: string;
 };
 
 export class RegisterInputDto {
