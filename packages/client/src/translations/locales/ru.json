@@ -22,6 +22,18 @@
   "start.player.color": "Выберите цвет для {num, number}-го игрока:",
   "start.text.note": "Внимание: Во время игры не обновляйте страницу, иначе игра будет прервана",
 
+  "result-board.title": "Счёт игры",
+  "result-board.place": "Место",
+  "result-board.name": "Имя",
+  "result-board.profit": "Доход",
+  "result-board.property": "Собственность",
+  "result-board.time": "Время в игре",
+
+  "end-game.title": "ИГРА ОКОНЧЕНА",
+  "end-game.winner": "Победитель",
+  "end-game.finish-game": "Завершить игру",
+  "end-game.play-again": "Играть снова",
+
   "validation.invalid-format.email": "Email должен быть следующего формата: 'email@example.com'",
   "validation.invalid-format.phone": "Телефон должен содержать только 10-15 цифр и начинаться с +",
   "validation.max-length.email": "Email не должен содержать более 30 символов",

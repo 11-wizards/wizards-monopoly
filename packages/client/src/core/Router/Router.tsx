@@ -11,6 +11,7 @@ import {
   StartGamePage,
 } from 'pages';
 import { ROUTES } from './routes';
+import { EndGamePage } from '../../pages/EndGamePage';
 
 export const Router = () => (
   <RouterProvider
@@ -39,6 +40,10 @@ export const Router = () => (
           {
             path: ROUTES.GAME_PAGE.path,
             element: <GamePage />,
+          },
+          {
+            path: ROUTES.END_GAME_PAGE.path,
+            element: <EndGamePage />,
           },
           {
             path: ROUTES.LEADERBOARD_PAGE.path,
