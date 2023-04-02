@@ -41,5 +41,14 @@
   "validation.min-length.password": "Пароль должен содержать как минимум 4 символа",
   "validation.min-length.phone": "Телефон должен содержать как минимум 10 символов",
   "validation.min-length.second-name": "Фамилия должна содержать как минимум 1 символ",
-  "validation.required-field": "Обязательное поле"
+  "validation.required-field": "Обязательное поле",
+
+  "forum.title":"Форум пользователей игры 'Монополия'",
+  "forum.btn.create-theme":"Создать новую тему",
+  "forum.btn.response":"Ответить в теме",
+  "forum.themes.change":"Выберете тему",
+  "forum.themes.theme":"Тема:",
+  "forum.themes.author":"Автор:",
+  "forum.posts.response":"ответ пользователя"
+  
 }

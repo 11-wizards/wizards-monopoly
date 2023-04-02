@@ -1,1 +1,64 @@
 // delete this comment after adding styles, a stub for stylelint
+@import "core/vars";
+
+.wrapper-forum-page {
+    .forum-content {
+        max-width: 1140px;
+        padding: 25px 70px 40px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 2fr 4fr;
+        gap: 20px;
+        height: 100%;
+        .theme-list {
+            width: 100%;
+            position: sticky;
+            top: 0px;
+            .ant-table-cell {
+                padding: 10px;
+            }
+            .ant-table-pagination {
+                justify-content: center;
+            }
+            .ant-pagination-options {
+                display: none;
+            }
+            .new-theme-controls {
+                display: grid;
+                grid-template-columns: 3fr 1fr;
+                gap: 10px;
+                margin-bottom: 10px;
+            }
+            .theme-list-table .ant-table {
+                box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+            }
+        }
+        .current-theme {
+            .theme-body {
+                margin: 10px 0;
+                padding-left: 20px;
+            }
+            .theme-header {
+                background: $whiteColor;
+                position: sticky;
+                box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+                top: 0px;
+                padding: 12px;
+                background-color: $whiteColor;
+                border-radius: 2px;
+                .theme-title,
+                .theme-author {
+                    margin: 0;
+                    margin-bottom: 15px;
+                }
+            }
+        }
+        .new-post-controls {
+            margin: 15px 0 0 100px;
+            textarea {
+                height: 100px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
