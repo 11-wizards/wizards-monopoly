@@ -60,6 +60,13 @@
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
     "react/require-default-props": 0,
+    "react/destructuring-assignment": [
+      "error",
+      "always",
+      {
+        "destructureInSignature": "always"
+      }
+    ],
     "@typescript-eslint/no-unused-expressions": [
       "error",
       {
@@ -91,9 +98,9 @@
           ["layouts", "./src/layouts"],
           ["models", "./src/models"],
           ["pages", "./src/pages"],
+          ["styles", "./src/styles"],
           ["translations", "./src/translations"],
-          ["types", "./src/types"],
-          ["styles", "./src/styles"]
+          ["types", "./src/types"]
         ],
         "extensions": [".ts", ".tsx"]
       }

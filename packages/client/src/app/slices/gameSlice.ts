@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { GameSetupFormData } from '../../features/GameSetup/types';
+import type { GameSetupFormData } from 'features/GameSetup/types';
 
 type GameState = {
   numberOfPlayers: number;

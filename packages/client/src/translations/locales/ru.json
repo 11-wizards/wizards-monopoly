@@ -16,10 +16,10 @@
   "main-page.title": "Главная",
 
   "start.title.welcome": "Добро пожаловать в Монополию!",
-  "start.text.choose": "Выберите количество игроков",
+  "start.text.choose": "Выберите количество игроков:",
   "start.button.start": "Начать игру",
-  "start.player.name": "Введите имя {num, number}-го игрока",
-  "start.player.color": "Выберите цвет для {num, number}-го игрока",
+  "start.player.name": "Введите имя {num, number}-го игрока:",
+  "start.player.color": "Выберите цвет для {num, number}-го игрока:",
   "start.text.note": "Внимание: Во время игры не обновляйте страницу, иначе игра будет прервана",
 
   "validation.invalid-format.email": "Email должен быть следующего формата: 'email@example.com'",

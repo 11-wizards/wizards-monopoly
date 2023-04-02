@@ -7,22 +7,12 @@ import { useDispatch } from 'react-redux';
 import { setNumberOfPlayers, setPlayers } from 'app/slices/gameSlice';
 import { useForm } from 'react-hook-form';
 import { MAX_NUMBER_OF_PLAYERS, MIN_NUMBER_OF_PLAYERS } from 'constants/main';
+import { ROUTES } from 'core/Router';
 import { messages } from './i18n';
-import { ROUTES } from '../../core/Router';
 import { InputPlayerName } from './InputPlayerName';
 import { InputPlayerColor } from './InputPlayerColor';
 import type { GameSetupFormData } from './types';
-
-const createPlayersArray = (length: Nullable<number>) =>
-  Array.from({ length: length || 0 }).map((_, i) => ({
-    id: `${i}-player`,
-  }));
-
-const isUniqueColors = (colors: string[]) => {
-  const colorsSet = new Set(colors);
-
-  return colorsSet.size === colors.length;
-};
+import { checkUniquenessColors, createPlayersArray } from './utils';
 
 export const GameSetup: FC = () => {
   const [playersCount, setPlayersCount] = useState(createPlayersArray(2));
@@ -49,27 +39,16 @@ export const GameSetup: FC = () => {
     setPlayersCount(createPlayersArray(number));
   };
 
-  const checkUniquenessColors = (data: GameSetupFormData) => {
-    const colors = Object.entries(data)
-      .filter(([key]) => key.includes('color'))
-      .map(([_, value]) => value);
-
-    const isUniqueness = isUniqueColors(colors);
-
-    isUniqueness
-      ? clearErrors('form')
-      : setError('form', { message: fm(messages.errorColorsUnique) });
-
-    return isUniqueness;
-  };
-
   const submitHandler = () => {
     const formData = getValues();
     const formHasErrors = !checkUniquenessColors(formData);
 
     if (formHasErrors) {
+      setError('form', { message: fm(messages.errorColorsUnique) });
       return;
     }
+
+    clearErrors('form');
 
     dispatch(setNumberOfPlayers(playersCount.length));
     dispatch(setPlayers(formData));

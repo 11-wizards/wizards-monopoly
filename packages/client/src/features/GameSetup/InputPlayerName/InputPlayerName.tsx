@@ -15,8 +15,7 @@ type OwnProps = {
 
 type Props = OwnProps;
 
-export const InputPlayerName: FC<Props> = (props) => {
-  const { formErrors, control, index } = props;
+export const InputPlayerName: FC<Props> = ({ formErrors, control, index }) => {
   const { unregister } = control;
   const { formatMessage: fm } = useIntl();
   const inputName = `player_name_${index}`;
