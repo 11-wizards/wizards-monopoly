@@ -13,7 +13,6 @@
   "auth.title.login": "Login",
   "auth.title.register": "Register",
 
-  
   "leaderboard.days-in-game": "days in the game",
   "leaderboard.profit": "$ profit",
   "leaderboard.title": "Monopoly Game Leaderboard",
@@ -33,5 +32,4 @@
   "validation.min-length.phone": "Phone must be at least 10 characters",
   "validation.min-length.second-name": "Second name must be at least 1 character",
   "validation.required-field": "This field is required"
-
 }

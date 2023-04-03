@@ -34,5 +34,4 @@
   "validation.min-length.phone": "Телефон должен содержать как минимум 10 символов",
   "validation.min-length.second-name": "Фамилия должна содержать как минимум 1 символ",
   "validation.required-field": "Обязательное поле"
-
 }

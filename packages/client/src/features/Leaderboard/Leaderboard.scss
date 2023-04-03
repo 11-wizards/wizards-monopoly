@@ -10,6 +10,7 @@
     grid-template-columns: repeat(8, 1fr);
     grid-gap: 20px;
     padding: 40px 0;
+
     .player {
       grid-column: span 2;
       text-align: center;
@@ -23,8 +24,8 @@
         border-radius: 5px;
         box-shadow: -5px -5px 5px -5px rgb(34 60 80 / 60%) inset;
 
-        h2,
-        h3 {
+        .place-title,
+        .nick-title {
           margin: 0;
           color: $primaryColor;
         }
