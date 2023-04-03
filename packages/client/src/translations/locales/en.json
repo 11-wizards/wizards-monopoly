@@ -51,6 +51,18 @@
   "rules.purchase.disc2": "When a player stops at a free Property, he can buy it. In this case, the player pays the banker the amount indicated on the field. In this case, the player receives the Owner's card, which he must put face up in front of him. If the player refuses to buy the Property, it is put up for auction",
   "rules.purchase.disc3": "If a player owns a Property, he receives rent from other players who stay on it. When a player collects all the Property of the same color, i.e. becomes a monopolist, he can build Houses and Hotels on plots of this color and collect increased rent!",
 
+  "result-board.title": "Game Score",
+  "result-board.place": "Place",
+  "result-board.name": "Name",
+  "result-board.profit": "Profit",
+  "result-board.property": "Property",
+  "result-board.time": "Time in the Game",
+
+  "end-game.title": "GAME OVER",
+  "end-game.winner": "Winner",
+  "end-game.finish-game": "Finish the Game",
+  "end-game.play-again": "Play again",
+
   "validation.max-length.email": "Email cannot be longer than 30 characters",
   "validation.max-length.first-name": "First name cannot be longer than 30 characters",
   "validation.max-length.login": "Login cannot be longer than 20 characters",
