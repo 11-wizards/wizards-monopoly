@@ -21,11 +21,11 @@ export const Leaderboard: FC = () => {
   const leaderboardList: Array<LeaderboardPayer> | [] = data ?? [];
 
   return (
-    <div>
-      <Title level={2} className="liderboard-title">
+    <div className='leaderboard'>
+      <Title level={2} className="leaderboard_title">
         {fm(messages.title)}
       </Title>
-      <div className="grid-players">
+      <div className="leaderboard_players">
         {leaderboardList &&
           leaderboardList.map((item) => (
             <div className="player" key={item.place}>

@@ -13,6 +13,11 @@
   "auth.title.login": "Login",
   "auth.title.register": "Register",
 
+  
+  "leaderboard.days-in-game": "days in the game",
+  "leaderboard.profit": "$ profit",
+  "leaderboard.title": "Monopoly Game Leaderboard",
+
   "main-page.title": "Main",
 
   "validation.max-length.email": "Email cannot be longer than 30 characters",
@@ -27,9 +32,6 @@
   "validation.min-length.password": "Password must be at least 4 characters",
   "validation.min-length.phone": "Phone must be at least 10 characters",
   "validation.min-length.second-name": "Second name must be at least 1 character",
-  "validation.required-field": "This field is required",
+  "validation.required-field": "This field is required"
 
-  "leaderboard.title": "Monopoly Game User Forum",
-  "leaderboard.profit": "$ profit",
-  "leaderboard.days-in-game": "days in the game"
 }
