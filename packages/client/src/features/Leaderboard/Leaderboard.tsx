@@ -30,10 +30,14 @@ export const Leaderboard: FC = () => {
             <div className="player" key={item.nick}>
               <div className="player-content">
                 <div className="place">
-                  <Title level={2} className="place-title">{item.place === 1 ? <CrownTwoTone /> : item.place}</Title>
+                  <Title level={2} className="place-title">
+                    {item.place === 1 ? <CrownTwoTone /> : item.place}
+                  </Title>
                 </div>
                 <div className="nick">
-                  <Title level={3} className="nick-title">{item.nick}</Title>
+                  <Title level={3} className="nick-title">
+                    {item.nick}
+                  </Title>
                 </div>
                 <div className="profit">
                   {item.profit} {fm(messages.profit)}
