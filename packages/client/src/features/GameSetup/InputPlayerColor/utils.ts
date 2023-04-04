@@ -1,4 +1,4 @@
-import { PlayerColors } from 'constants/main';
+import { PlayerColors } from 'types/enums/main';
 
 export const selectOptions = [
   { label: 'Red', value: PlayerColors.Red },

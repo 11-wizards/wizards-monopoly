@@ -1,6 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { GameSetupFormData } from 'features/GameSetup/types';
+import type { PlayerColors } from 'types/enums/main';
 
 type GameState = {
   numberOfPlayers: number;
@@ -8,7 +9,7 @@ type GameState = {
 };
 
 type Player = {
-  color: string;
+  color: PlayerColors;
   name: string;
 };
 
@@ -23,10 +24,7 @@ export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    setNumberOfPlayers: (state, action: PayloadAction<number>) => {
-      state.numberOfPlayers = action.payload;
-    },
-    setPlayers: {
+    definePlayers: {
       reducer: (state, action: PayloadAction<Players>) => {
         state.players = action.payload;
       },
@@ -49,6 +47,6 @@ export const gameSlice = createSlice({
   },
 });
 
-export const { setNumberOfPlayers, setPlayers } = gameSlice.actions;
+export const { definePlayers } = gameSlice.actions;
 
 export default gameSlice.reducer;
