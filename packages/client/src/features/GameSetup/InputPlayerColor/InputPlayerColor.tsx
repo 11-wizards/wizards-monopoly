@@ -1,6 +1,7 @@
+import type { GameSetupFormData } from 'features/GameSetup/types';
 import type { FC } from 'react';
 import { Form, Select, Typography } from 'antd';
-import type { Control, FieldErrors } from 'react-hook-form';
+import type { Control, FieldErrors, UseFormClearErrors, UseFormGetValues } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 import { messages } from 'features/GameSetup/common';
@@ -11,7 +12,8 @@ type InputPlayerColorProps = {
   control: Control;
   formErrors: FieldErrors;
   index: number;
-  getFormValues: () => Record<string, string>;
+  getFormValues: UseFormGetValues<GameSetupFormData>;
+  clearErrors: UseFormClearErrors<GameSetupFormData>;
 };
 
 export const InputPlayerColor: FC<InputPlayerColorProps> = ({
@@ -19,6 +21,7 @@ export const InputPlayerColor: FC<InputPlayerColorProps> = ({
   control,
   index,
   getFormValues,
+  clearErrors,
 }) => {
   const { formatMessage: fm } = useIntl();
   const inputName = `player_color_${index}`;
@@ -35,7 +38,15 @@ export const InputPlayerColor: FC<InputPlayerColorProps> = ({
             const formValues = getFormValues();
             const isUniqueColor = Object.values(formValues).filter((v) => v === value).length === 1;
 
-            return isUniqueColor ? true : fm(messages.errorColorsUnique);
+            if (isUniqueColor) {
+              const colorErrors = Object.keys(formErrors).filter((e) => e.includes('color'));
+
+              clearErrors(colorErrors);
+
+              return true;
+            }
+
+            return fm(messages.errorColorsUnique);
           },
         }}
         render={({ field }) => (

@@ -24,6 +24,7 @@ export const GameSetup: FC = () => {
     reset,
     control,
     getValues,
+    clearErrors,
   } = useForm<GameSetupFormData>({
     mode: 'onBlur',
   });
@@ -60,6 +61,7 @@ export const GameSetup: FC = () => {
           <Col span={12}>
             <InputPlayerColor
               getFormValues={getValues}
+              clearErrors={clearErrors}
               formErrors={errors}
               control={control}
               index={i + 1}
