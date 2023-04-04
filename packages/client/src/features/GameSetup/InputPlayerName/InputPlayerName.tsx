@@ -3,7 +3,6 @@ import { Form, Input, Typography } from 'antd';
 import type { Control, FieldErrors } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { useIntl } from 'react-intl';
-import { useEffect } from 'react';
 import { messages } from 'features/GameSetup/common';
 
 type InputPlayerNameProps = {
@@ -14,22 +13,15 @@ type InputPlayerNameProps = {
 };
 
 export const InputPlayerName: FC<InputPlayerNameProps> = ({ formErrors, control, index }) => {
-  const { unregister } = control;
   const { formatMessage: fm } = useIntl();
   const inputName = `player_name_${index}`;
-
-  useEffect(
-    () => () => {
-      unregister(inputName);
-    },
-    [unregister, inputName],
-  );
 
   return (
     <Form.Item label={fm(messages.playerName, { num: index })} wrapperCol={{ span: 24 }}>
       <Controller
         name={inputName}
         control={control}
+        shouldUnregister
         rules={{
           required: fm(messages.errorRequired),
           minLength: { value: 3, message: fm(messages.errorMinLength, { min: 3 }) },
