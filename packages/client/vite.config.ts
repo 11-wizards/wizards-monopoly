@@ -22,11 +22,19 @@ export default defineConfig({
       layouts: path.join(__dirname, './src/layouts'),
       models: path.join(__dirname, './src/models'),
       pages: path.join(__dirname, './src/pages'),
+      styles: path.join(__dirname, './src/styles'),
       translations: path.join(__dirname, './src/translations'),
       types: path.join(__dirname, './src/types'),
     },
   },
   server: {
     port: Number(process.env.CLIENT_PORT) || 3000,
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import 'styles/vars';`,
+      },
+    },
   },
 });

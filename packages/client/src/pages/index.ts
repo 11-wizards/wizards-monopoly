@@ -7,3 +7,4 @@ export { MainPage } from './MainPage';
 export { RegisterPage } from './RegisterPage';
 export { ClientErrorPage } from './ClientErrorPage';
 export { ServerErrorPage } from './ServerErrorPage';
+export { StartGamePage } from './StartGamePage';

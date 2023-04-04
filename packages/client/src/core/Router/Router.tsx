@@ -9,6 +9,7 @@ import {
   MainPage,
   RegisterPage,
   ClientErrorPage,
+  StartGamePage,
 } from 'pages';
 import { ROUTES } from './routes';
 
@@ -47,6 +48,10 @@ export const Router = () => (
           {
             path: ROUTES.LEADERBOARD_PAGE.path,
             element: <LeaderboardPage />,
+          },
+          {
+            path: ROUTES.START_GAME_PAGE.path,
+            element: <StartGamePage />,
           },
         ],
       },
