@@ -11,9 +11,15 @@ type InputPlayerColorProps = {
   control: Control;
   formErrors: FieldErrors;
   index: number;
+  getFormValues: () => Record<string, string>;
 };
 
-export const InputPlayerColor: FC<InputPlayerColorProps> = ({ formErrors, control, index }) => {
+export const InputPlayerColor: FC<InputPlayerColorProps> = ({
+  formErrors,
+  control,
+  index,
+  getFormValues,
+}) => {
   const { formatMessage: fm } = useIntl();
   const inputName = `player_color_${index}`;
 
@@ -25,6 +31,12 @@ export const InputPlayerColor: FC<InputPlayerColorProps> = ({ formErrors, contro
         shouldUnregister
         rules={{
           required: fm(messages.errorRequired),
+          validate: (value) => {
+            const formValues = getFormValues();
+            const isUniqueColor = Object.values(formValues).filter((v) => v === value).length === 1;
+
+            return isUniqueColor ? true : fm(messages.errorColorsUnique);
+          },
         }}
         render={({ field }) => (
           <Select status={formErrors?.[inputName] && 'error'} options={selectOptions} {...field} />

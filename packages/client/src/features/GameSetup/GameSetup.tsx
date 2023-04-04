@@ -8,7 +8,7 @@ import { definePlayers } from 'app/slices/gameSlice';
 import { useForm } from 'react-hook-form';
 import { MAX_NUMBER_OF_PLAYERS, MIN_NUMBER_OF_PLAYERS } from 'constants/main';
 import { ROUTES } from 'core/Router';
-import { checkUniquenessColors, createPlayersArray, messages } from 'features/GameSetup/common';
+import { createPlayersArray, messages } from 'features/GameSetup/common';
 import { InputPlayerName } from './InputPlayerName';
 import { InputPlayerColor } from './InputPlayerColor';
 import type { GameSetupFormData } from './types';
@@ -24,10 +24,8 @@ export const GameSetup: FC = () => {
     reset,
     control,
     getValues,
-    setError,
-    clearErrors,
   } = useForm<GameSetupFormData>({
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
   const handlePlayersChange = (number: Nullable<number>) => {
@@ -38,18 +36,7 @@ export const GameSetup: FC = () => {
     setPlayers(createPlayersArray(number));
   };
 
-  const submitHandler = () => {
-    const formData = getValues();
-    const formHasErrors = !checkUniquenessColors(formData);
-
-    if (formHasErrors) {
-      setError('form', { message: fm(messages.errorColorsUnique) });
-
-      return;
-    }
-
-    clearErrors('form');
-
+  const submitHandler = (formData: GameSetupFormData) => {
     dispatch(definePlayers(formData));
     reset();
     navigate(ROUTES.GAME_PAGE.path);
@@ -71,7 +58,12 @@ export const GameSetup: FC = () => {
             <InputPlayerName formErrors={errors} control={control} index={i + 1} />
           </Col>
           <Col span={12}>
-            <InputPlayerColor formErrors={errors} control={control} index={i + 1} />
+            <InputPlayerColor
+              getFormValues={getValues}
+              formErrors={errors}
+              control={control}
+              index={i + 1}
+            />
           </Col>
         </Row>
       ))}
