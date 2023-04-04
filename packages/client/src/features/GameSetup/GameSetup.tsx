@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useState } from 'react';
-import { Button, Col, Form, InputNumber, Row, Typography } from 'antd';
+import { Button, Col, Form, InputNumber, Row } from 'antd';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -25,7 +25,7 @@ export const GameSetup: FC = () => {
     control,
     getValues,
   } = useForm<GameSetupFormData>({
-    mode: 'onChange',
+    mode: 'onBlur',
   });
 
   const handlePlayersChange = (number: Nullable<number>) => {
@@ -67,11 +67,6 @@ export const GameSetup: FC = () => {
           </Col>
         </Row>
       ))}
-      {errors?.form && (
-        <Typography.Paragraph type="danger">
-          {errors?.form?.message?.toString()}
-        </Typography.Paragraph>
-      )}
       <Form.Item>
         <Button htmlType="submit" type="primary">
           {fm(messages.buttonStart)}

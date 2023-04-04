@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Form, Select } from 'antd';
+import { Form, Select, Typography } from 'antd';
 import type { Control, FieldErrors } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { useIntl } from 'react-intl';
@@ -42,6 +42,11 @@ export const InputPlayerColor: FC<InputPlayerColorProps> = ({
           <Select status={formErrors?.[inputName] && 'error'} options={selectOptions} {...field} />
         )}
       />
+      {formErrors?.[inputName] && (
+        <Typography.Text type="danger">
+          {formErrors?.[inputName]?.message?.toString()}
+        </Typography.Text>
+      )}
     </Form.Item>
   );
 };
