@@ -13,6 +13,14 @@
   "auth.title.login": "Login",
   "auth.title.register": "Register",
 
+  "end-game.title": "GAME OVER",
+  "end-game.winner": "Winner",
+  "end-game.finish-game": "Finish the Game",
+  "end-game.play-again": "Play again",
+
+  "error-boundary-text": "Oops, an unexpected error has occurred.",
+
+  "main-page.title": "Main",
   "header.rules.button": "GAME RULES",
 
   "landing.title": "MONOPOLY",
@@ -65,11 +73,8 @@
   "result-board.property": "Property",
   "result-board.time": "Time in the Game",
 
-  "end-game.title": "GAME OVER",
-  "end-game.winner": "Winner",
-  "end-game.finish-game": "Finish the Game",
-  "end-game.play-again": "Play again",
-
+  "validation.avatar.invalid-extension": "You can only upload JPG/PNG file",
+  "validation.avatar.size-limit": "Image must smaller than 2MB",
   "validation.max-length.email": "Email cannot be longer than 30 characters",
   "validation.max-length.first-name": "First name cannot be longer than 30 characters",
   "validation.max-length.login": "Login cannot be longer than 20 characters",
@@ -86,5 +91,15 @@
   "validation.max-length.player_name": "Player name cannot be longer than {max, number} characters",
   "validation.pattern.player_name": "Player name can only contain letters and numbers",
   "validation.required-field": "This field is required",
-  "validation.unique.color": "Colors must be unique"
+  "validation.unique.color": "Colors must be unique",
+
+  "client.error.message": "Sorry, the page you visited does not exist.",
+  "client.error.message.button-text": "Back home",
+  "server.error.message": "Sorry, something went wrong.",
+  "server.error.message.button-text": "Back home",
+
+  "universal.cancel": "Cancel",
+  "universal.save": "Save",
+  "universal.signout": "Sign out",
+  "universal.upload": "Upload"
 }

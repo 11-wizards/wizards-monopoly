@@ -1,17 +1,17 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Default } from 'layouts';
 import {
-  ErrorPage,
+  EndGamePage,
   ForumPage,
   GamePage,
   LeaderboardPage,
   LoginPage,
   MainPage,
   RegisterPage,
+  ClientErrorPage,
   StartGamePage,
 } from 'pages';
 import { ROUTES } from './routes';
-import { EndGamePage } from '../../pages/EndGamePage';
 
 export const Router = () => (
   <RouterProvider
@@ -19,7 +19,7 @@ export const Router = () => (
       {
         path: ROUTES.ROOT.path,
         element: <Default />,
-        errorElement: <ErrorPage />,
+        errorElement: <ClientErrorPage />,
         children: [
           {
             index: true,

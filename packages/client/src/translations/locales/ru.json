@@ -13,6 +13,14 @@
   "auth.title.login": "Вход",
   "auth.title.register": "Регистрация",
 
+  "end-game.title": "ИГРА ОКОНЧЕНА",
+  "end-game.winner": "Победитель",
+  "end-game.finish-game": "Завершить игру",
+  "end-game.play-again": "Играть снова",
+
+  "error-boundary-text": "Упс, случилась непредвиденная ошибка",
+
+  "main-page.title": "Главная",
   "header.rules.button": "ПРАВИЛА ИГРЫ",
 
   "landing.title": "МОНОПОЛИЯ",
@@ -65,11 +73,6 @@
   "result-board.property": "Собственность",
   "result-board.time": "Время в игре",
 
-  "end-game.title": "ИГРА ОКОНЧЕНА",
-  "end-game.winner": "Победитель",
-  "end-game.finish-game": "Завершить игру",
-  "end-game.play-again": "Играть снова",
-
   "validation.invalid-format.email": "Email должен быть следующего формата: 'email@example.com'",
   "validation.invalid-format.phone": "Телефон должен содержать только 10-15 цифр и начинаться с +",
   "validation.max-length.email": "Email не должен содержать более 30 символов",
@@ -88,5 +91,15 @@
   "validation.max-length.player_name": "Имя игрока не должно содержать более {max, number} символов",
   "validation.pattern.player_name": "Имя игрока должно содержать только буквы и цифры",
   "validation.required-field": "Обязательное поле",
-  "validation.unique.color": "Цвета игроков должны быть уникальными"
+  "validation.unique.color": "Цвета игроков должны быть уникальными",
+
+  "client.error.message": "Извините, страница, которую вы посетили, не существует.",
+  "client.error.message.button-text": "На главную",
+  "server.error.message": "Извините, что-то пошло не так",
+  "server.error.message.button-text": "На главную",
+
+  "universal.cancel": "Отменить",
+  "universal.save": "Сохранить",
+  "universal.signout": "Выйти",
+  "universal.upload": "Загрузить"
 }
