@@ -51,6 +51,13 @@
   "rules.purchase.disc2": "When a player stops at a free Property, he can buy it. In this case, the player pays the banker the amount indicated on the field. In this case, the player receives the Owner's card, which he must put face up in front of him. If the player refuses to buy the Property, it is put up for auction",
   "rules.purchase.disc3": "If a player owns a Property, he receives rent from other players who stay on it. When a player collects all the Property of the same color, i.e. becomes a monopolist, he can build Houses and Hotels on plots of this color and collect increased rent!",
 
+  "start.title.welcome": "Welcome to Monopoly!",
+  "start.text.choose": "Choose the number of players:",
+  "start.button.start": "Start game",
+  "start.player.name": "Choose the name of the {num, number}nd player:",
+  "start.player.color": "Choose the color of the {num, number}nd player:",
+  "start.text.note": "Warning: Do not refresh the page during the game, otherwise the game will be interrupted",
+
   "result-board.title": "Game Score",
   "result-board.place": "Place",
   "result-board.name": "Name",
@@ -75,5 +82,9 @@
   "validation.min-length.password": "Password must be at least 4 characters",
   "validation.min-length.phone": "Phone must be at least 10 characters",
   "validation.min-length.second-name": "Second name must be at least 1 character",
-  "validation.required-field": "This field is required"
+  "validation.min-length.player_name": "Player name must be at least {min, number} character",
+  "validation.max-length.player_name": "Player name cannot be longer than {max, number} characters",
+  "validation.pattern.player_name": "Player name can only contain letters and numbers",
+  "validation.required-field": "This field is required",
+  "validation.unique.color": "Colors must be unique"
 }

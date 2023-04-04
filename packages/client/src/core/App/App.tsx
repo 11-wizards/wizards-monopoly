@@ -5,6 +5,7 @@ import { GlobalOutlined } from '@ant-design/icons';
 import { Router } from 'core/Router';
 import { en, ru } from 'translations';
 
+import 'styles/main.scss';
 import './App.scss';
 
 export const App: FC = () => {
