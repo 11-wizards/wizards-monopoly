@@ -9,10 +9,12 @@
   height: 100%;
   padding: 25px 70px 40px;
   margin: 0 auto;
+
   .forum-title {
     grid-column: 1/3;
     text-align: center;
   }
+
   .theme-change {
     position: sticky;
     top: 0;
@@ -20,13 +22,14 @@
 
     .ant-table-cell {
       padding: 10px;
+
       .theme-name {
-        cursor: pointer;
         color: $primaryColor;
-        outline: none;
-        border: none;
-        background: transparent;
         text-align: left;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        outline: none;
       }
     }
 
