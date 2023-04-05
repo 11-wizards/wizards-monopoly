@@ -1,6 +1,6 @@
 import { Input, Typography } from 'antd';
-import { FC } from 'react';
-import { Controller, Control, ValidationRule } from 'react-hook-form';
+import type { FC } from 'react';
+import { Controller, type Control, type ValidationRule } from 'react-hook-form';
 
 type InputTextProps = {
   name: string;
@@ -20,21 +20,21 @@ export const InputText: FC<InputTextProps> = ({
   label,
   placeholder,
   errorMessage,
-}) => {
-  return (
-    <div className={className}>
-      {label && <label>{label}</label>}
-      <Controller
-        name={name}
-        control={control}
-        rules={rules}
-        render={({ field }) => (
-          <Input placeholder={placeholder} status={errorMessage && 'error'} {...field} />
-        )}
-      />
-      {errorMessage && (
-        <Typography.Text className={`${className}Error`}>{errorMessage}</Typography.Text>
+}) => (
+  <div className={className}>
+    {label && <label htmlFor={name}>{label}</label>}
+    <Controller
+      name={name}
+      control={control}
+      rules={rules}
+      render={({ field }) => (
+        <Input placeholder={placeholder} status={errorMessage && 'error'} {...field} />
       )}
-    </div>
-  );
-};
+    />
+    {errorMessage && (
+      <Typography.Text className={className ? `${className}Error` : ''}>
+        {errorMessage}
+      </Typography.Text>
+    )}
+  </div>
+);
