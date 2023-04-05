@@ -47,7 +47,7 @@
     "consistent-return": "off",
     "import/no-cycle": "off",
     "import/prefer-default-export": 0,
-    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
+    "jest/no-export": "off",
     "max-classes-per-file": "off",
     "max-len": [
       "error",
@@ -60,6 +60,7 @@
       }
     ],
     "newline-before-return": "error",
+    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
     "prettier/prettier": "error",
     "react/function-component-definition": [
       "error",
