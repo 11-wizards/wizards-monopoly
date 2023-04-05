@@ -13,6 +13,14 @@
   "auth.title.login": "Login",
   "auth.title.register": "Register",
 
+  "forum.btn.create-theme": "Create a new theme",
+  "forum.btn.response": "Reply in the theme",
+  "forum.themes.author": "Author:",
+  "forum.themes.change": "Choose a theme",
+  "forum.themes.theme": "Theme:",
+  "forum.posts.response": "user response",
+  "forum.title": "Monopoly Game User Forum",
+
   "main-page.title": "Main",
 
   "result-board.title": "Game Score",
@@ -39,13 +47,5 @@
   "validation.min-length.password": "Password must be at least 4 characters",
   "validation.min-length.phone": "Phone must be at least 10 characters",
   "validation.min-length.second-name": "Second name must be at least 1 character",
-  "validation.required-field": "This field is required",
-
-  "forum.title": "Monopoly Game User Forum",
-  "forum.btn.create-theme": "Create a new theme",
-  "forum.btn.response": "Reply in the theme",
-  "forum.themes.change": "Choose a theme",
-  "forum.themes.theme": "Theme:",
-  "forum.themes.author": "Author:",
-  "forum.posts.response": "user response"
+  "validation.required-field": "This field is required"
 }

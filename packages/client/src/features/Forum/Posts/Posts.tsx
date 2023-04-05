@@ -7,16 +7,16 @@ import { messages } from './common';
 
 import './Posts.scss';
 
-const itemsPerPage = 30;
+const ITEMS_PER_PAGE = 30;
 
 export const Posts: React.FC<{ posts: Array<Post> }> = ({ posts }) => {
   const { formatMessage: fm } = useIntl();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const maxPages = Math.ceil(posts.length / itemsPerPage);
+  const maxPages = Math.ceil(posts.length / ITEMS_PER_PAGE);
 
-  const start = (currentPage - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
+  const start = (currentPage - 1) * ITEMS_PER_PAGE;
+  const end = start + ITEMS_PER_PAGE;
   const currentData = posts.slice(start, end);
 
   const handleChangePage = (page: number) => {
@@ -28,29 +28,31 @@ export const Posts: React.FC<{ posts: Array<Post> }> = ({ posts }) => {
   }, [posts]);
 
   return (
-    <ul className="theme-posts">
+    <div className="theme-posts">
       <Pagination
         className="theme-posts-paginaton"
         current={currentPage}
-        pageSize={itemsPerPage}
+        pageSize={ITEMS_PER_PAGE}
         total={posts.length}
         onChange={handleChangePage}
       />
-      {currentData.map(({ email, body, id }, key) => (
-        <li key={id} className="post">
-          <Title level={4} className="post-title">
-            {fm(messages.postResponse)} {email}:
-          </Title>
-          <p className="post-body">{body}</p>
-        </li>
-      ))}
+      <ul className="theme-posts">
+        {currentData.map(({ email, body, id }) => (
+          <li key={id} className="post">
+            <Title level={4} className="post-title">
+              {fm(messages.postResponse)} {email}:
+            </Title>
+            <p className="post-body">{body}</p>
+          </li>
+        ))}
+      </ul>
       <Pagination
         className="theme-posts-paginaton"
         current={currentPage}
-        pageSize={itemsPerPage}
+        pageSize={ITEMS_PER_PAGE}
         total={posts.length}
         onChange={handleChangePage}
       />
-    </ul>
+    </div>
   );
 };
