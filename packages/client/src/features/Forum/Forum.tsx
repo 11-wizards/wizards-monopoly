@@ -7,7 +7,7 @@ import { Button, Input, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Title from 'antd/es/typography/Title';
 import TextArea from 'antd/es/input/TextArea';
-import { useFetchPosts, useFetchThemes, useFetchUsers } from '../../hooks';
+import { useFetchPosts, useFetchThemes, useFetchUsers } from 'hooks';
 import { Posts } from './Posts';
 import { messages } from './common';
 

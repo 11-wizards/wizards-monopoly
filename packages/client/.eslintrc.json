@@ -76,6 +76,8 @@
           ["core", "./src/core"],
           ["features", "./src/features"],
           ["game", "./src/game"],
+          ["helpers", "./src/helpers"],
+          ["hooks", "./src/hooks"],
           ["layouts", "./src/layouts"],
           ["models", "./src/models"],
           ["pages", "./src/pages"],

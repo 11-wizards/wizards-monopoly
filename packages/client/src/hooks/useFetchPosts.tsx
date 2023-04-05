@@ -2,7 +2,7 @@ import type { Post, Theme } from 'models/forum.model';
 import type React from 'react';
 import { useEffect, useState } from 'react';
 import { forumApi } from 'api/forum.api';
-import { isArray } from '../helpers/isArray';
+import { isArray } from 'helpers';
 
 type HookProps = {
   dependencies?: [] | Array<Theme | null>;

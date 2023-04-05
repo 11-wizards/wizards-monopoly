@@ -2,7 +2,7 @@ import type { Author } from 'models/forum.model';
 import type React from 'react';
 import { useEffect, useState } from 'react';
 import { forumApi } from 'api/forum.api';
-import { isArray } from '../helpers/isArray';
+import { isArray } from 'helpers';
 
 export const useFetchUsers = (): [
   Array<Author>,
