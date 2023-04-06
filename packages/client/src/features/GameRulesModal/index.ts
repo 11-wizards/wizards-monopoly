@@ -1,0 +1,1 @@
+export { GameRulesModal } from './GameRulesModal';

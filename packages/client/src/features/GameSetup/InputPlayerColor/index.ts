@@ -1,0 +1,1 @@
+export { InputPlayerColor } from './InputPlayerColor';
