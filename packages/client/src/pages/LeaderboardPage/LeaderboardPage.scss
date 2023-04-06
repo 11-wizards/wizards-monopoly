@@ -3,7 +3,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     height: 100vh;
+    background: url('../../assets/images/leaderboard-bg.jpg') center;
+    background-size: cover;
   }
 }

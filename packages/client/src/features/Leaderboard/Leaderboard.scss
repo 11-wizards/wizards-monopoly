@@ -1,1 +1,78 @@
-// delete this comment after adding styles, a stub for stylelint
+@import 'core/vars';
+
+.leaderboard {
+  &_title {
+    text-align: center;
+  }
+
+  &_players {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 20px;
+    padding: 40px 0;
+
+    .player {
+      grid-column: span 2;
+      text-align: center;
+
+      .player-content {
+        width: 200px;
+        padding: 20px;
+        margin: auto;
+        white-space: nowrap;
+        background-color: $whiteColor;
+        border-radius: 5px;
+        box-shadow: -5px -5px 5px -5px rgb(34 60 80 / 60%) inset;
+
+        .place-title,
+        .nick-title {
+          margin: 0;
+          color: $primaryColor;
+        }
+      }
+
+      &:first-child {
+        grid-column: 1/9;
+      }
+
+      &:nth-child(2) {
+        grid-column: 1/5;
+        justify-self: end;
+      }
+
+      &:nth-child(3) {
+        grid-column: 5/9;
+        justify-self: start;
+      }
+
+      &:nth-child(4) {
+        grid-column: 1/4;
+        justify-self: end;
+      }
+
+      &:nth-child(5) {
+        grid-column: 4/6;
+      }
+
+      &:nth-child(6) {
+        grid-column: 6/9;
+        justify-self: start;
+      }
+
+      &:nth-child(n + 7) {
+        .player-content {
+          display: grid;
+          grid-template-columns: 1fr 2fr;
+          justify-items: start;
+          padding: 10px;
+
+          .place {
+            grid-row: 1/4;
+            align-self: center;
+            justify-self: center;
+          }
+        }
+      }
+    }
+  }
+}
