@@ -29,7 +29,7 @@ export const fetchCurrentUser = createAsyncThunk('user/fetchCurrentUser', async 
       return { ...response.data };
     }
   } catch (err) {
-    await handleServerError(err);
+    await handleServerError(err as ServerError);
   }
 });
 
@@ -46,7 +46,7 @@ export const changeProfileAvatar = createAsyncThunk(
         return { ...response.data } as CurrentUserDto;
       }
     } catch (err) {
-      await handleServerError(err);
+      await handleServerError(err as ServerError);
     }
   },
 );
@@ -61,7 +61,7 @@ export const changeProfileInfo = createAsyncThunk(
         return { ...response.data };
       }
     } catch (err) {
-      await handleServerError(err);
+      await handleServerError(err as ServerError);
     }
   },
 );
@@ -74,7 +74,7 @@ export const signOut = createAsyncThunk('user/signOut', async () => {
       localStorage.removeItem(LOCAL_STORAGE_IS_AUTH_KEY);
     }
   } catch (err) {
-    await handleServerError(err);
+    await handleServerError(err as ServerError);
   }
 });
 
