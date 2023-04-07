@@ -34,7 +34,17 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error",
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/lines-between-class-members": [
+      "error",
+      "always",
+      { "exceptAfterSingleLine": true }
+    ],
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-unused-expressions": ["error", { "allowTernary": true }],
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/unbound-method": "off",
+    "consistent-return": "off",
     "import/no-cycle": "off",
     "import/prefer-default-export": 0,
     "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
@@ -50,6 +60,7 @@
       }
     ],
     "newline-before-return": "error",
+    "prettier/prettier": "error",
     "react/function-component-definition": [
       "error",
       {
@@ -65,28 +76,6 @@
       "always",
       {
         "destructureInSignature": "always"
-      }
-    ],
-    "@typescript-eslint/consistent-type-imports": "error",
-    "@typescript-eslint/lines-between-class-members": [
-      "error",
-      "always",
-      {
-        "exceptAfterSingleLine": true
-      }
-    ],
-    "@typescript-eslint/no-misused-promises": "off",
-    "@typescript-eslint/unbound-method": "off",
-    "@typescript-eslint/no-unused-expressions": [
-      "error",
-      {
-        "allowTernary": true
-      }
-    ],
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        "argsIgnorePattern": "^_"
       }
     ]
   },
@@ -105,6 +94,7 @@
           ["core", "./src/core"],
           ["features", "./src/features"],
           ["game", "./src/game"],
+          ["helpers", "./src/helpers"],
           ["hooks", "./src/hooks"],
           ["layouts", "./src/layouts"],
           ["models", "./src/models"],
