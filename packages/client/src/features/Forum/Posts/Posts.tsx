@@ -1,30 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Pagination } from 'antd';
 import Title from 'antd/es/typography/Title';
 import type { Post } from 'models/forum.model';
 import { useIntl } from 'react-intl';
 import { messages } from './common';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import {
+  ITEMS_PER_PAGE,
+  selectCurrentPage,
+  selectCurrentPageData,
+  selectMaxPages,
+  setCurrentPage,
+} from '../../../app/slices/forumSlice';
 
 import './Posts.scss';
-
-const ITEMS_PER_PAGE = 30;
 
 export const Posts: React.FC<{ posts: Array<Post> }> = ({ posts }) => {
   const { formatMessage: fm } = useIntl();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const maxPages = Math.ceil(posts.length / ITEMS_PER_PAGE);
+  const dispatch = useAppDispatch();
 
-  const start = (currentPage - 1) * ITEMS_PER_PAGE;
-  const end = start + ITEMS_PER_PAGE;
-  const currentData = posts.slice(start, end);
+  const currentPage = useAppSelector(selectCurrentPage);
+  const maxPages = useAppSelector(selectMaxPages);
+  const currentData = useAppSelector(selectCurrentPageData);
 
   const handleChangePage = (page: number) => {
-    setCurrentPage(page);
+    dispatch(setCurrentPage(page));
   };
 
   useEffect(() => {
-    setCurrentPage(maxPages);
+    dispatch(setCurrentPage(maxPages));
   }, [posts]);
 
   return (

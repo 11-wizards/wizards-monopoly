@@ -1,19 +1,19 @@
-import type { Theme } from 'models/forum.model';
+import type { Topic } from 'models/forum.model';
 import type React from 'react';
 import { useEffect, useState } from 'react';
 import { forumApi } from 'api/forum.api';
 import { isArray } from 'helpers';
 
-export const useFetchThemes = (): [
-  Array<Theme>,
-  React.Dispatch<React.SetStateAction<Array<Theme>>>,
+export const useFetchTopics = (): [
+  Array<Topic>,
+  React.Dispatch<React.SetStateAction<Array<Topic>>>,
 ] => {
-  const [state, setState] = useState<Array<Theme>>([]);
+  const [state, setState] = useState<Array<Topic>>([]);
 
   useEffect(() => {
     forumApi
-      .getThemes()
-      .then(({ data = [] }: { data: [] | Array<Theme> }) => {
+      .getTopics()
+      .then(({ data = [] }: { data: [] | Array<Topic> }) => {
         if (isArray(data)) {
           setState(data);
         }

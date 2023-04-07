@@ -4,7 +4,7 @@ export type Author = {
   email: string;
 };
 
-export type Theme = {
+export type Topic = {
   userId: number;
   id: number;
   title: string;
@@ -19,7 +19,7 @@ export type Post = {
   body: string;
 };
 
-export class ForumNewTheme {
+export class ForumNewTopic {
   userId: number;
   id: number;
   title: string;

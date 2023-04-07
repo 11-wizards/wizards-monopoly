@@ -1,71 +1,79 @@
 import type { FC, FormEvent } from 'react';
-import { useState } from 'react';
-import type { Author, Theme } from 'models/forum.model';
-import { ForumNewPost, ForumNewTheme } from 'models/forum.model';
+import { useEffect, useState } from 'react';
+import type { Author, Topic } from 'models/forum.model';
 import { useIntl } from 'react-intl';
 import { Button, Input, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Title from 'antd/es/typography/Title';
 import TextArea from 'antd/es/input/TextArea';
-import { useFetchPosts, useFetchThemes, useFetchUsers } from 'hooks';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import { Posts } from './Posts';
 import { messages } from './common';
+import {
+  addNewPost,
+  addNewTopic,
+  fetchPosts,
+  fetchTopics,
+  selectAuthors,
+  selectCurrentTopic,
+  selectPosts,
+  selectTopics,
+  setCurrentTopic,
+} from '../../app/slices/forumSlice';
 
 import './Forum.scss';
 
 export const Forum: FC = () => {
   const { formatMessage: fm } = useIntl();
 
-  const [currentTheme, setCurrentTheme] = useState<Theme | null>(null);
-  const [newTheme, setNewTheme] = useState<string>('');
-  const [newPost, setNewPost] = useState<string>('');
+  const dispatch = useAppDispatch();
 
-  const [themes, setThemes] = useFetchThemes();
-  const [users] = useFetchUsers();
+  const currentTopic = useAppSelector(selectCurrentTopic);
+  const topics = useAppSelector(selectTopics);
+  const authors = useAppSelector(selectAuthors);
+  const posts = useAppSelector(selectPosts);
 
-  const [posts, setPosts] = useFetchPosts({
-    dependencies: [currentTheme],
-  });
+  const [newTopicName, setNewTopicName] = useState<string>('');
+  const [newPostName, setNewPostName] = useState<string>('');
 
-  const handleChangeCurrentTheme = (theme: Theme) => {
-    setCurrentTheme(theme);
+  useEffect(() => {
+    dispatch(fetchTopics());
+    dispatch(fetchPosts());
+  }, []);
+
+  const handleChangeCurrentTopic = (topic: Topic) => {
+    dispatch(setCurrentTopic(topic));
   };
 
-  const addNewTheme = () => {
-    if (!newTheme) return;
-
-    const firstThemeId: number = typeof themes[0]?.id === 'number' ? themes[0]?.id : 0;
-    const newThemeId: number = firstThemeId + 1;
-
-    const theme = new ForumNewTheme(newTheme, 1, newThemeId);
-    setThemes((prev: Array<Theme>) => [theme, ...prev]);
-    setNewTheme('');
+  const handleAddNewTopic = () => {
+    if (!newTopicName) return;
+    dispatch(addNewTopic(newTopicName));
+    setNewTopicName('');
   };
 
-  const addNewPost = () => {
-    if (!currentTheme || !newPost) return;
-    const post = new ForumNewPost(1, newPost, currentTheme.id);
-    setPosts((prev: Array<ForumNewPost>) => [...prev, post]);
-    setNewPost('');
+  const handleAddNewPost = () => {
+    if (!newPostName) return;
+    dispatch(addNewPost(newPostName));
+    setNewPostName('');
   };
 
-  const newThemeOnInput = (e: FormEvent<HTMLInputElement>) => {
+  const handleNewTopicNameInput = (e: FormEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
-    setNewTheme(value);
+    setNewTopicName(value);
   };
 
-  const newPostOnInput = (e: FormEvent<HTMLTextAreaElement>) => {
+  const handleNewPostNameInput = (e: FormEvent<HTMLTextAreaElement>) => {
     const { value } = e.target as HTMLTextAreaElement;
-    setNewPost(value);
+    setNewPostName(value);
   };
 
-  const columns: ColumnsType<Theme> = [
+  const columns: ColumnsType<Topic> = [
     {
       title: fm(messages.themeLabel),
       dataIndex: 'title',
       key: 'title',
-      render: (text: string, obj: Theme) => (
-        <button type="button" className="theme-name" onClick={() => handleChangeCurrentTheme(obj)}>
+      render: (text: string, obj: Topic) => (
+        <button type="button" className="theme-name" onClick={() => handleChangeCurrentTopic(obj)}>
           {text}
         </button>
       ),
@@ -75,7 +83,7 @@ export const Forum: FC = () => {
       dataIndex: 'userId',
       key: 'userId',
       render: (value: number) =>
-        users?.map((item: Author) =>
+        authors?.map((item: Author) =>
           item.id === value ? <span key={item.id}>{item.name}</span> : null,
         ) || null,
     },
@@ -91,45 +99,49 @@ export const Forum: FC = () => {
       <div className="left-side">
         <div className="theme-change">
           <div className="new-theme-controls">
-            <Input onInput={newThemeOnInput} value={newTheme} />
-            <Button onClick={addNewTheme} htmlType="submit" type="primary">
+            <Input onInput={handleNewTopicNameInput} value={newTopicName} />
+            <Button onClick={handleAddNewTopic} htmlType="submit" type="primary">
               {fm(messages.createThemeBtn)}
             </Button>
           </div>
           <Table
             className="theme-change-table"
             columns={columns}
-            dataSource={themes}
+            dataSource={topics}
             pagination={{ pageSize: 6, pageSizeOptions: [], showLessItems: true }}
           />
         </div>
       </div>
       <div className="right-side">
         <div className="current-theme">
-          {currentTheme ? (
+          {currentTopic ? (
             <>
               <div className="theme-header">
                 <Title level={3} className="theme-title">
                   {fm(messages.themeLabel)}
-                  {currentTheme.title}
+                  {currentTopic.title}
                 </Title>
                 <Title level={4} className="theme-author">
                   {fm(messages.authorLabel)}
-                  {users &&
-                    users.map((item) => {
-                      if (item?.id === currentTheme?.userId) {
+                  {authors.length > 0 &&
+                    authors.map((item) => {
+                      if (item?.id === currentTopic?.userId) {
                         return <span key={item?.id}>{item?.name} </span>;
                       }
                       return false;
                     })}
                 </Title>
-                <p className="theme-body">{currentTheme.body}</p>
+                <p className="theme-body">{currentTopic.body}</p>
               </div>
               {posts && <Posts posts={posts} />}
 
               <div className="new-post-controls">
-                <TextArea onInput={newPostOnInput} value={newPost} className="new-post-body" />
-                <Button onClick={addNewPost} htmlType="submit" type="primary">
+                <TextArea
+                  onInput={handleNewPostNameInput}
+                  value={newPostName}
+                  className="new-post-body"
+                />
+                <Button onClick={handleAddNewPost} htmlType="submit" type="primary">
                   {fm(messages.responseBtn)}
                 </Button>
               </div>
