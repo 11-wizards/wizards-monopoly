@@ -9,6 +9,7 @@
     "airbnb-typescript",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:typescript-sort-keys/recommended",
     "plugin:react-hooks/recommended",
     "plugin:import/recommended",
     "plugin:jest/recommended",

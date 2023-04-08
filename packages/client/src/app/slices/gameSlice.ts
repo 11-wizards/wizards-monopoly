@@ -1,22 +1,13 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, nanoid } from '@reduxjs/toolkit';
 import type { GameSetupFormData } from 'features/GameSetup/types';
-import type { PlayerColors } from 'types/enums/main';
+import type { Players, MoneyTransfer, BankTransaction } from 'types/game';
 
 type GameState = {
-  numberOfPlayers: number;
   players: Players;
 };
 
-type Player = {
-  color: PlayerColors;
-  name: string;
-};
-
-type Players = Record<string, Player>;
-
 const initialState: GameState = {
-  numberOfPlayers: 0,
   players: {},
 };
 
@@ -25,9 +16,6 @@ export const gameSlice = createSlice({
   initialState,
   reducers: {
     definePlayers: {
-      reducer: (state, action: PayloadAction<Players>) => {
-        state.players = action.payload;
-      },
       prepare: (players: GameSetupFormData) => ({
         payload: Object.keys(players).reduce((result: Players, key): Players => {
           const [keyName, playerNum] = key.split('_').slice(1);
@@ -38,15 +26,49 @@ export const gameSlice = createSlice({
             ...result,
             [playerKey]: {
               ...player,
+              id: nanoid(4),
               [keyName]: players[key],
             },
           };
         }, {}),
       }),
+      reducer: (state, action: PayloadAction<Players>) => {
+        state.players = action.payload;
+      },
+    },
+
+    // TODO: Добавить логику
+    // buyProperty: (state, action: PayloadAction<PropertyId>) => {},
+
+    // TODO: Добавить логику
+    // sellProperty: (state, action: PayloadAction<PropertyId>) => {},
+
+    addMoneyForPlayer: (state, action: PayloadAction<BankTransaction>) => {
+      const { amount, playerId } = action.payload;
+
+      state.players[playerId].balance += amount;
+    },
+
+    deductMoneyFromPlayer: (state, action: PayloadAction<BankTransaction>) => {
+      const { amount, playerId } = action.payload;
+
+      state.players[playerId].balance -= amount;
+    },
+
+    transferMoneyBetweenPlayers: (state, action: PayloadAction<MoneyTransfer>) => {
+      const { senderId, recipientId, amount } = action.payload;
+
+      state.players[senderId].balance -= amount;
+      state.players[recipientId].balance += amount;
     },
   },
 });
 
-export const { definePlayers } = gameSlice.actions;
+export const {
+  definePlayers,
+  transferMoneyBetweenPlayers,
+  addMoneyForPlayer,
+  deductMoneyFromPlayer,
+} = gameSlice.actions;
 
 export default gameSlice.reducer;
