@@ -9,18 +9,26 @@ import type { ComponentType, FC } from 'react';
 import type { MoneyTransfer, BankTransaction } from 'types/game';
 
 type WithBankProps = {
+  buyProperty: () => void;
   claimCircleBonus: (transaction: BankTransaction) => void;
-  transferTo: (transfer: MoneyTransfer) => void;
+  getReward: (transfer: MoneyTransfer) => void;
+  payPenalty: (transaction: BankTransaction) => void;
+  payRent: (transfer: MoneyTransfer) => void;
+  sellProperty: () => void;
 };
 
 export const withBank =
-  <T extends object>(WrappedComponent: ComponentType<T & WithBankProps>): FC<T & WithBankProps> =>
-  ({ ...props }) => {
+  <T extends object>(WrappedComponent: ComponentType<T>): FC<T & WithBankProps> =>
+  (props: T & WithBankProps) => {
     const dispatch = useAppDispatch();
 
-    // const buyProperty = () => {};
+    const buyProperty = () => {
+      /* TODO document why this arrow function is empty */
+    };
 
-    // const sellProperty = () => {};
+    const sellProperty = () => {
+      /* TODO document why this arrow function is empty */
+    };
 
     const payRent = ({ senderId, recipientId, amount }: MoneyTransfer) => {
       dispatch(transferMoneyBetweenPlayers({ senderId, recipientId, amount }));
@@ -43,6 +51,8 @@ export const withBank =
       claimCircleBonus,
       getReward,
       payPenalty,
+      buyProperty,
+      sellProperty,
     };
 
     return <WrappedComponent {...props} {...bankOperations} />;
