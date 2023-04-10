@@ -12,7 +12,10 @@
   "auth.text.no-account": "No account?",
   "auth.title.login": "Login",
   "auth.title.register": "Register",
-  
+
+  "client.error.message": "Sorry, the page you visited does not exist.",
+  "client.error.message.button-text": "Back home",
+
   "end-game.title": "GAME OVER",
   "end-game.winner": "Winner",
   "end-game.finish-game": "Finish the Game",
@@ -32,7 +35,7 @@
   "landing.feature3": "Experience the classic Monopoly game in digital form, complete with buying and selling properties, collecting rent, and more",
   "landing.feature4": "The game is user-friendly and easy to navigate, with simple controls that anyone can understand",
   "landing.feature5": "Monopoly is a game that has been enjoyed by people of all ages for decades, making it a perfect choice for family gatherings and social events",
-  
+
   "leaderboard.days-in-game": "days in the game",
   "leaderboard.profit": "$ profit",
   "leaderboard.title": "Monopoly Game Leaderboard",
@@ -70,6 +73,20 @@
   "start.player.color": "Choose the color of the {num, number}nd player:",
   "start.text.note": "Warning: Do not refresh the page during the game, otherwise the game will be interrupted",
 
+  "profile.button.change-password": "Change password",
+  "profile.button.change-profile-info": "Change profile info",
+  "profile.change-password.placeholder.old-password": "Old password",
+  "profile.change-password.placeholder.new-password": "New password",
+  "profile.change-password.title": "Change password",
+  "profile.placeholder.display-name": "Display name",
+  "profile.placeholder.email": "Email",
+  "profile.placeholder.first-name": "First name",
+  "profile.placeholder.login": "Login",
+  "profile.placeholder.password": "Password",
+  "profile.placeholder.phone": "Phone",
+  "profile.placeholder.second-name": "Second name",
+  "profile.title": "Profile",
+
   "result-board.title": "Game Score",
   "result-board.place": "Place",
   "result-board.name": "Name",
@@ -77,8 +94,13 @@
   "result-board.property": "Property",
   "result-board.time": "Time in the Game",
 
+  "server.error.message": "Sorry, something went wrong.",
+  "server.error.message.button-text": "Back home",
+
   "validation.avatar.invalid-extension": "You can only upload JPG/PNG file",
   "validation.avatar.size-limit": "Image must smaller than 2MB",
+  "validation.invalid-format.email": "Email must be of 'email@example.com' format",
+  "validation.invalid-format.phone": "Phone can only contain 10-15 digits, can start with +",
   "validation.max-length.email": "Email cannot be longer than 30 characters",
   "validation.max-length.first-name": "First name cannot be longer than 30 characters",
   "validation.max-length.login": "Login cannot be longer than 20 characters",
@@ -96,11 +118,6 @@
   "validation.pattern.player_name": "Player name can only contain letters and numbers",
   "validation.required-field": "This field is required",
   "validation.unique.color": "Colors must be unique",
-
-  "client.error.message": "Sorry, the page you visited does not exist.",
-  "client.error.message.button-text": "Back home",
-  "server.error.message": "Sorry, something went wrong.",
-  "server.error.message.button-text": "Back home",
 
   "universal.cancel": "Cancel",
   "universal.save": "Save",
