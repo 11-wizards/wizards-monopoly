@@ -15,7 +15,7 @@
     text-align: center;
   }
 
-  .theme-change {
+  .topic-change {
     position: sticky;
     top: 0;
     width: 100%;
@@ -23,7 +23,7 @@
     .ant-table-cell {
       padding: 10px;
 
-      .theme-name {
+      .topic-name {
         color: $primaryColor;
         text-align: left;
         cursor: pointer;
@@ -41,25 +41,25 @@
       display: none;
     }
 
-    .new-theme-controls {
+    .new-topic-controls {
       display: grid;
       grid-template-columns: 3fr 1fr;
       gap: 10px;
       margin-bottom: 10px;
     }
 
-    .theme-list-table .ant-table {
+    .topic-list-table .ant-table {
       box-shadow: 4px 4px 8px 0 rgb(34 60 80 / 20%);
     }
   }
 
-  .current-theme {
-    .theme-body {
+  .current-topic {
+    .topic-body {
       padding-left: 20px;
       margin: 10px 0;
     }
 
-    .theme-header {
+    .topic-header {
       position: sticky;
       top: 0;
       padding: 12px;
@@ -68,8 +68,8 @@
       border-radius: 2px;
       box-shadow: 4px 4px 8px 0 rgb(34 60 80 / 20%);
 
-      .theme-title,
-      .theme-author {
+      .topic-title,
+      .topic-author {
         margin: 0;
         margin-bottom: 15px;
       }

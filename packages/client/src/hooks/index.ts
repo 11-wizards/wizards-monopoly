@@ -1,3 +1,4 @@
 export { useFetchPosts } from './useFetchPosts';
-export { useFetchThemes } from './useFetchThemes';
+export { useFetchTopics } from './useFetchTopics';
 export { useFetchUsers } from './useFetchUsers';
+export { useAppDispatch, useAppSelector } from './redux';

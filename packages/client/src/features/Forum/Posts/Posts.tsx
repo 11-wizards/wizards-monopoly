@@ -1,42 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Pagination } from 'antd';
 import Title from 'antd/es/typography/Title';
 import type { Post } from 'models/forum.model';
 import { useIntl } from 'react-intl';
 import { messages } from './common';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import {
+  ITEMS_PER_PAGE,
+  selectCurrentPage,
+  selectCurrentPageData,
+  selectMaxPages,
+  setCurrentPage,
+} from '../../../app/slices/forumSlice';
 
 import './Posts.scss';
-
-const ITEMS_PER_PAGE = 30;
 
 export const Posts: React.FC<{ posts: Array<Post> }> = ({ posts }) => {
   const { formatMessage: fm } = useIntl();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const maxPages = Math.ceil(posts.length / ITEMS_PER_PAGE);
+  const dispatch = useAppDispatch();
 
-  const start = (currentPage - 1) * ITEMS_PER_PAGE;
-  const end = start + ITEMS_PER_PAGE;
-  const currentPosts = posts.slice(start, end);
+  const currentPage = useAppSelector(selectCurrentPage);
+  const maxPages = useAppSelector(selectMaxPages);
+  const currentPosts = useAppSelector(selectCurrentPageData);
 
   const handleChangePage = (page: number) => {
-    setCurrentPage(page);
+    dispatch(setCurrentPage(page));
   };
 
   useEffect(() => {
-    setCurrentPage(maxPages);
+    dispatch(setCurrentPage(maxPages));
   }, [posts]);
 
   return (
-    <div className="theme-posts">
+    <div className="topic-posts">
       <Pagination
-        className="theme-posts-paginaton"
+        className="topic-posts-paginaton"
         current={currentPage}
         pageSize={ITEMS_PER_PAGE}
         total={posts.length}
         onChange={handleChangePage}
       />
-      <ul className="theme-posts">
+      <ul className="topic-posts">
         {currentPosts.map(({ email, body, id }) => (
           <li key={id} className="post">
             <Title level={4} className="post-title">
@@ -47,7 +52,7 @@ export const Posts: React.FC<{ posts: Array<Post> }> = ({ posts }) => {
         ))}
       </ul>
       <Pagination
-        className="theme-posts-paginaton"
+        className="topic-posts-paginaton"
         current={currentPage}
         pageSize={ITEMS_PER_PAGE}
         total={posts.length}

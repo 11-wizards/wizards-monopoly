@@ -35,6 +35,7 @@
     ],
     "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/unbound-method": "off",
+    "@typescript-eslint/no-floating-promises": "off",
     "import/no-cycle": "off",
     "import/prefer-default-export": 0,
     "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
@@ -59,7 +60,8 @@
     ],
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
-    "react/require-default-props": 0
+    "react/require-default-props": 0,
+    "react-hooks/exhaustive-deps": "off"
   },
   "settings": {
     "import/resolver": {
