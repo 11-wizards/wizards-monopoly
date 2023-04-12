@@ -1,4 +1,4 @@
-import { GameSetup } from 'features/GameSetup';
+import { GameSetup } from 'features/GameSetup/GameSetup';
 import type { FC } from 'react';
 import { useIntl } from 'react-intl';
 import { Layout, Row, Col, Typography, Space } from 'antd';

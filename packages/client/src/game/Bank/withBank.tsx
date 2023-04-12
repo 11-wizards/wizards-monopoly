@@ -4,7 +4,7 @@ import {
   transferMoneyBetweenPlayers,
 } from 'app/slices/gameSlice';
 import { useAppDispatch } from 'hooks/redux';
-import type { ComponentType, FC } from 'react';
+import type { ComponentType } from 'react';
 
 import type { MoneyTransfer, BankTransaction } from 'types/game';
 
@@ -18,8 +18,8 @@ type WithBankProps = {
 };
 
 export const withBank =
-  <T extends object>(WrappedComponent: ComponentType<T>): FC<T & WithBankProps> =>
-  (props: T & WithBankProps) => {
+  <T extends WithBankProps>(WrappedComponent: ComponentType<T>) =>
+  (props: Omit<T, keyof WithBankProps>) => {
     const dispatch = useAppDispatch();
 
     const buyProperty = () => {
@@ -55,5 +55,5 @@ export const withBank =
       sellProperty,
     };
 
-    return <WrappedComponent {...props} {...bankOperations} />;
+    return <WrappedComponent {...(props as T)} {...bankOperations} />;
   };
