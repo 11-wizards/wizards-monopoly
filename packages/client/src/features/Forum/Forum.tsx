@@ -13,10 +13,12 @@ import { messages } from './common';
 
 import './Forum.scss';
 
+
+
 export const Forum: FC = () => {
   const { formatMessage: fm } = useIntl();
 
-  const [currentTheme, setCurrentTheme] = useState<Theme | null>(null);
+  const [currentTheme, setCurrentTheme] = useState<Nullable<Theme>>(null);
   const [newTheme, setNewTheme] = useState<string>('');
   const [newPost, setNewPost] = useState<string>('');
 
@@ -49,7 +51,7 @@ export const Forum: FC = () => {
     setNewPost('');
   };
 
-  const newThemeOnInput = (e: FormEvent<HTMLInputElement>) => {
+  const addThemeOnInput = (e: FormEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
     setNewTheme(value);
   };
@@ -91,7 +93,7 @@ export const Forum: FC = () => {
       <div className="left-side">
         <div className="theme-change">
           <div className="new-theme-controls">
-            <Input onInput={newThemeOnInput} value={newTheme} />
+            <Input onInput={addThemeOnInput} value={newTheme} />
             <Button onClick={addNewTheme} htmlType="submit" type="primary">
               {fm(messages.createThemeBtn)}
             </Button>

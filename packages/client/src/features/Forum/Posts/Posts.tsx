@@ -17,7 +17,7 @@ export const Posts: React.FC<{ posts: Array<Post> }> = ({ posts }) => {
 
   const start = (currentPage - 1) * ITEMS_PER_PAGE;
   const end = start + ITEMS_PER_PAGE;
-  const currentData = posts.slice(start, end);
+  const currentPosts = posts.slice(start, end);
 
   const handleChangePage = (page: number) => {
     setCurrentPage(page);
@@ -37,7 +37,7 @@ export const Posts: React.FC<{ posts: Array<Post> }> = ({ posts }) => {
         onChange={handleChangePage}
       />
       <ul className="theme-posts">
-        {currentData.map(({ email, body, id }) => (
+        {currentPosts.map(({ email, body, id }) => (
           <li key={id} className="post">
             <Title level={4} className="post-title">
               {fm(messages.postResponse)} {email}:
