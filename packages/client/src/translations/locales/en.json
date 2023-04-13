@@ -12,7 +12,7 @@
   "auth.text.no-account": "No account?",
   "auth.title.login": "Login",
   "auth.title.register": "Register",
-  
+
   "end-game.title": "GAME OVER",
   "end-game.winner": "Winner",
   "end-game.finish-game": "Finish the Game",
@@ -32,7 +32,7 @@
   "landing.feature3": "Experience the classic Monopoly game in digital form, complete with buying and selling properties, collecting rent, and more",
   "landing.feature4": "The game is user-friendly and easy to navigate, with simple controls that anyone can understand",
   "landing.feature5": "Monopoly is a game that has been enjoyed by people of all ages for decades, making it a perfect choice for family gatherings and social events",
-  
+
   "leaderboard.days-in-game": "days in the game",
   "leaderboard.profit": "$ profit",
   "leaderboard.title": "Monopoly Game Leaderboard",
