@@ -1,12 +1,14 @@
 import type { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, Input, Typography } from 'antd';
 import { authApi } from 'api/auth.api';
+import { fetchCurrentUser } from 'app/slices/userSlice';
 import { LOCAL_STORAGE_IS_AUTH_KEY } from 'constants/localStorage';
 import { ROUTES } from 'core/Router';
 import { handleServerError } from 'helpers/handleServerError';
+import { useAppDispatch } from 'hooks/redux';
 import type { LoginInput } from 'models/auth.model';
 import { messages } from './common';
 
@@ -14,6 +16,9 @@ import './Login.scss';
 
 export const Login: FC = () => {
   const { formatMessage: fm } = useIntl();
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const {
     control,
@@ -27,6 +32,8 @@ export const Login: FC = () => {
 
       if (response.status === 200) {
         localStorage.setItem(LOCAL_STORAGE_IS_AUTH_KEY, 'true');
+        await dispatch(fetchCurrentUser());
+        navigate(ROUTES.ROOT.path);
       }
     } catch (err) {
       await handleServerError(err as ServerError);
