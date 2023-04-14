@@ -2,6 +2,7 @@
   "project.name": "Монополия",
   "auth.button.login": "Войти",
   "auth.button.register": "Зарегистрироваться",
+  "auth.notification.register-success": "Вы были успешно зарегистрированы",
   "auth.placeholder.email": "Email",
   "auth.placeholder.first-name": "Имя",
   "auth.placeholder.login": "Логин",
