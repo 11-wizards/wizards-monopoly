@@ -58,6 +58,7 @@
         "unnamedComponents": "arrow-function"
       }
     ],
+    "react-hooks/exhaustive-deps": "off",
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
     "react/require-default-props": 0,

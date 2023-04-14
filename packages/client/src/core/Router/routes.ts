@@ -29,7 +29,4 @@ export const ROUTES = {
   PROFILE_CHANGE_PASSWORD_PAGE: {
     path: '/profile/change-password',
   },
-  START_GAME_PAGE: {
-    path: '/start-game',
-  },
 };

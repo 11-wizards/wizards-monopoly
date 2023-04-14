@@ -1,20 +1,17 @@
+import type { PlayerColor } from 'types/enums/main';
 import type { Property } from './Property';
 
 export class Player {
   private readonly id: string;
   private readonly name: string;
-  private readonly color: string;
-  private x: number;
-  private y: number;
+  private readonly color: PlayerColor;
   private amount: number;
   private property: Property[];
 
-  constructor(id: string, name: string, color: string) {
+  constructor(id: string, name: string, color: PlayerColor) {
     this.id = id;
     this.name = name;
     this.color = color;
-    this.x = 0;
-    this.y = 0;
     this.amount = 15_000_000;
     this.property = [];
   }
@@ -27,24 +24,8 @@ export class Player {
     return this.name;
   }
 
-  public getColor(): string {
+  public getColor(): PlayerColor {
     return this.color;
-  }
-
-  public getX(): number {
-    return this.x;
-  }
-
-  public setX(x: number) {
-    this.x = x;
-  }
-
-  public getY(): number {
-    return this.y;
-  }
-
-  public setY(y: number) {
-    this.y = y;
   }
 
   public getAmount(): number {
