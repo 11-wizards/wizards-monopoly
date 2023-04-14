@@ -1,6 +1,8 @@
+/* eslint @typescript-eslint/default-param-last: 0 */
 import type { Dispatch, SetStateAction } from 'react';
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
 import type { GoPlayer, Players } from 'pages/GamePage/GamePage';
+import { cardsImage } from 'models/cards.model';
 import { readyPositionCards, playerAnimationSteps } from './helpers';
 
 import './Game.scss';
@@ -45,7 +47,12 @@ export const Game = ({ players, goPlayer, setGoPlayer }: Props): JSX.Element => 
     const context = canvas.getContext('2d');
     if (context === null) return;
     context.clearRect(0, 0, 350, 350);
-    cards.forEach((item = [0, 0, 0, 0]) => context.strokeRect(item[0], item[1], item[2], item[3]));
+    cards.forEach((item = [0, 0, 0, 0], index) => {
+      context.strokeRect(item[0], item[1], item[2], item[3]);
+      const cardImage = new Image();
+      cardImage.src = cardsImage[index];
+      context.drawImage(cardImage, item[0], item[1], item[2], item[3]);
+    });
     if (goPlayer !== null) {
       const { id, target } = goPlayer;
       const targetPosition = cards[target];
