@@ -9,6 +9,16 @@ import seventhCell from '../assets/map/7.svg';
 import eighthCell from '../assets/map/8.svg';
 import ninthCell from '../assets/map/9.svg';
 import prisonCell from '../assets/map/prison.svg';
+import tenth from '../assets/map/10.svg';
+import eleventhCell from '../assets/map/11.svg';
+import tvelfthCell from '../assets/map/12.svg';
+import thirteenthCell from '../assets/map/13.svg';
+import fourteenthCell from '../assets/map/14.svg';
+import fifteenthCell from '../assets/map/15.svg';
+import sixteenthCell from '../assets/map/16.svg';
+import seventeenthCell from '../assets/map/17.svg';
+import eighteenthCell from '../assets/map/18.svg';
+import parkingCell from '../assets/map/parking.svg';
 
 export const cardsImage = [
   start,
@@ -22,4 +32,14 @@ export const cardsImage = [
   eighthCell,
   ninthCell,
   prisonCell,
+  tenth,
+  eleventhCell,
+  tvelfthCell,
+  thirteenthCell,
+  fourteenthCell,
+  fifteenthCell,
+  sixteenthCell,
+  seventeenthCell,
+  eighteenthCell,
+  parkingCell
 ];
