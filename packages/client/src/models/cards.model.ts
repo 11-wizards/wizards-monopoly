@@ -1,83 +1,182 @@
-import startCell from '../assets/map/start.svg';
-import firstCell from '../assets/map/1.svg';
-import secondCell from '../assets/map/2.svg';
-import thirdCell from '../assets/map/3.svg';
-import fourthCell from '../assets/map/4.svg';
-import fifthCell from '../assets/map/5.svg';
-import sixthCell from '../assets/map/6.svg';
-import seventhCell from '../assets/map/7.svg';
-import eighthCell from '../assets/map/8.svg';
-import ninthCell from '../assets/map/9.svg';
-import prisonCell from '../assets/map/prison.svg';
-import tenth from '../assets/map/10.svg';
-import eleventhCell from '../assets/map/11.svg';
-import tvelfthCell from '../assets/map/12.svg';
-import thirteenthCell from '../assets/map/13.svg';
-import fourteenthCell from '../assets/map/14.svg';
-import fifteenthCell from '../assets/map/15.svg';
-import sixteenthCell from '../assets/map/16.svg';
-import seventeenthCell from '../assets/map/17.svg';
-import eighteenthCell from '../assets/map/18.svg';
-import parkingCell from '../assets/map/parking.svg';
-import ninteenthCell from '../assets/map/19.svg';
-import twentiethCell from '../assets/map/20.svg';
-import twentyFirstCell from '../assets/map/21.svg';
-import twentySecondCell from '../assets/map/22.svg';
-import twentyThirdCell from '../assets/map/23.svg';
-import twentyFourthCell from '../assets/map/24.svg';
-import twentyFifthCell from '../assets/map/25.svg';
-import twentySixthCell from '../assets/map/26.svg';
-import twentySeventhCell from '../assets/map/27.svg';
-import wastedCell from '../assets/map/wasted.svg';
-import twentyEighthCell from '../assets/map/28.svg';
-import twentyNinthCell from '../assets/map/29.svg';
-import thirtiethCell from '../assets/map/30.svg';
-import thirtyFirstCell from '../assets/map/31.svg';
-import thirtySecondCell from '../assets/map/32.svg';
-import thirtyThirdCell from '../assets/map/33.svg';
-import thirtyFourthCell from '../assets/map/34.svg';
-import thirtyFifthCell from '../assets/map/35.svg';
-import thirtySixthCell from '../assets/map/36.svg';
+import start from '../assets/game/mapCard/start.svg';
+import greyArrow from '../assets/game/mapCard/greyArrow.svg';
+import redArrow from '../assets/game/mapCard/redArrow.svg';
+import treasury from '../assets/game/mapCard/treasury.svg';
+import money from '../assets/game/mapCard/money.svg';
+import railway from '../assets/game/mapCard/railway.svg';
+import dice from '../assets/game/mapCard/dice.svg';
+import prison from '../assets/game/mapCard/prison.svg';
+import yellowArrow from '../assets/game/mapCard/yellowArrow.svg';
+import powerLines from '../assets/game/mapCard/powerLines.svg';
+import waterPipes from '../assets/game/mapCard/waterPipes.svg';
+import greenArrow from '../assets/game/mapCard/greenArrow.svg';
+import parking from '../assets/game/mapCard/parking.svg';
+import arrest from '../assets/game/mapCard/arrest.svg';
 
-export const cardsImage = [
-  startCell,
-  firstCell,
-  secondCell,
-  thirdCell,
-  fourthCell,
-  fifthCell,
-  sixthCell,
-  seventhCell,
-  eighthCell,
-  ninthCell,
-  prisonCell,
-  tenth,
-  eleventhCell,
-  tvelfthCell,
-  thirteenthCell,
-  fourteenthCell,
-  fifteenthCell,
-  sixteenthCell,
-  seventeenthCell,
-  eighteenthCell,
-  parkingCell,
-  ninteenthCell,
-  twentiethCell,
-  twentyFirstCell,
-  twentySecondCell,
-  twentyThirdCell,
-  twentyFourthCell,
-  twentyFifthCell,
-  twentySixthCell,
-  twentySeventhCell,
-  wastedCell,
-  twentyEighthCell,
-  twentyNinthCell,
-  thirtiethCell,
-  thirtyFirstCell,
-  thirtySecondCell,
-  thirtyThirdCell,
-  thirtyFourthCell,
-  thirtyFifthCell,
-  thirtySixthCell,
+type CardsData = {
+  title: string;
+  imgSrc: string;
+};
+
+export const cardsData: CardsData[] = [
+  {
+    title: 'Старт',
+    imgSrc: start,
+  },
+  {
+    title: 'Житная улица',
+    imgSrc: greyArrow,
+  },
+  {
+    title: 'Казна',
+    imgSrc: treasury,
+  },
+  {
+    title: 'Нагатинская улица',
+    imgSrc: greyArrow,
+  },
+  {
+    title: 'Налог с дохода',
+    imgSrc: money,
+  },
+  {
+    title: 'Рижская железная дорога',
+    imgSrc: railway,
+  },
+  {
+    title: 'Варшавское шоссе',
+    imgSrc: redArrow,
+  },
+  {
+    title: 'Шанc',
+    imgSrc: dice,
+  },
+  {
+    title: 'Улица Огарева',
+    imgSrc: redArrow,
+  },
+  {
+    title: 'Первая Парковая улица',
+    imgSrc: redArrow,
+  },
+  {
+    title: 'Тюрьма',
+    imgSrc: prison,
+  },
+  {
+    title: 'Улица Полянка',
+    imgSrc: yellowArrow,
+  },
+  {
+    title: 'Электростанция',
+    imgSrc: powerLines,
+  },
+  {
+    title: 'Улица Сретенка',
+    imgSrc: yellowArrow,
+  },
+  {
+    title: 'Ростовская набережная',
+    imgSrc: yellowArrow,
+  },
+  {
+    title: 'Курская железная дорога',
+    imgSrc: railway,
+  },
+  {
+    title: 'Рязанский проспект',
+    imgSrc: greenArrow,
+  },
+  {
+    title: 'Казна',
+    imgSrc: treasury,
+  },
+  {
+    title: 'Улица Вавилова',
+    imgSrc: greenArrow,
+  },
+  {
+    title: 'Рублевское шоссе',
+    imgSrc: greenArrow,
+  },
+  {
+    title: 'Парковка',
+    imgSrc: parking,
+  },
+  {
+    title: 'Улица Тверская',
+    imgSrc: greenArrow,
+  },
+  {
+    title: 'Шанс',
+    imgSrc: dice,
+  },
+  {
+    title: 'Пушкинская улица',
+    imgSrc: greenArrow,
+  },
+  {
+    title: 'Площадь Маяковского',
+    imgSrc: greenArrow,
+  },
+  {
+    title: 'Казанская железная дорога',
+    imgSrc: railway,
+  },
+  {
+    title: 'Улица Грузинский Вал',
+    imgSrc: yellowArrow,
+  },
+  {
+    title: 'Новинский бульвар',
+    imgSrc: yellowArrow,
+  },
+  {
+    title: 'Водопровод',
+    imgSrc: waterPipes,
+  },
+  {
+    title: 'Смоленская площадь',
+    imgSrc: yellowArrow,
+  },
+  {
+    title: 'Вы арестованы',
+    imgSrc: arrest,
+  },
+  {
+    title: 'Улица Щусева',
+    imgSrc: yellowArrow,
+  },
+  {
+    title: 'Гоголевский бульвар',
+    imgSrc: yellowArrow,
+  },
+  {
+    title: 'Казна',
+    imgSrc: treasury,
+  },
+  {
+    title: 'Кутузовский проспект',
+    imgSrc: yellowArrow,
+  },
+  {
+    title: 'Ленинградская железная дорога',
+    imgSrc: railway,
+  },
+  {
+    title: 'Шанс',
+    imgSrc: dice,
+  },
+  {
+    title: 'Уплатите сверхналог',
+    imgSrc: money,
+  },
+  {
+    title: 'Улица Арбат',
+    imgSrc: redArrow,
+  },
+  {
+    title: 'Улица Арбат',
+    imgSrc: redArrow,
+  },
 ];

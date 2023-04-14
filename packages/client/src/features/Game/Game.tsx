@@ -2,7 +2,7 @@
 import type { Dispatch, SetStateAction } from 'react';
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
 import type { GoPlayer, Players } from 'pages/GamePage/GamePage';
-import { cardsImage } from 'models/cards.model';
+import { cardsData } from 'models/cards.model';
 import { readyPositionCards, playerAnimationSteps } from './helpers';
 
 import './Game.scss';
@@ -50,8 +50,10 @@ export const Game = ({ players, goPlayer, setGoPlayer }: Props): JSX.Element => 
     cards.forEach((item = [0, 0, 0, 0], index) => {
       context.strokeRect(item[0], item[1], item[2], item[3]);
       const cardImage = new Image();
-      cardImage.src = cardsImage[index];
+      const { imgSrc, title } = cardsData[index];
+      cardImage.src = imgSrc;
       context.drawImage(cardImage, item[0], item[1], item[2], item[3]);
+      context.fillText(title, item[0] + 10, item[1] + 10);
     });
     if (goPlayer !== null) {
       const { id, target } = goPlayer;
