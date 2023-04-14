@@ -16,6 +16,7 @@ import arrest from '../assets/game/mapCard/arrest.svg';
 type CardsData = {
   title: string;
   imgSrc: string;
+
 };
 
 export const cardsData: CardsData[] = [
@@ -24,7 +25,7 @@ export const cardsData: CardsData[] = [
     imgSrc: start,
   },
   {
-    title: 'Житная улица',
+    title: 'Житная',
     imgSrc: greyArrow,
   },
   {
@@ -32,19 +33,19 @@ export const cardsData: CardsData[] = [
     imgSrc: treasury,
   },
   {
-    title: 'Нагатинская улица',
+    title: 'Нагатинская',
     imgSrc: greyArrow,
   },
   {
-    title: 'Налог с дохода',
+    title: 'Налог',
     imgSrc: money,
   },
   {
-    title: 'Рижская железная дорога',
+    title: 'Рижская ж/д',
     imgSrc: railway,
   },
   {
-    title: 'Варшавское шоссе',
+    title: 'Варшавка',
     imgSrc: redArrow,
   },
   {
@@ -52,11 +53,11 @@ export const cardsData: CardsData[] = [
     imgSrc: dice,
   },
   {
-    title: 'Улица Огарева',
+    title: 'Ул. Огарева',
     imgSrc: redArrow,
   },
   {
-    title: 'Первая Парковая улица',
+    title: 'Парковая ул.',
     imgSrc: redArrow,
   },
   {
@@ -80,7 +81,7 @@ export const cardsData: CardsData[] = [
     imgSrc: yellowArrow,
   },
   {
-    title: 'Курская железная дорога',
+    title: 'Курская ж/д',
     imgSrc: railway,
   },
   {
@@ -112,23 +113,23 @@ export const cardsData: CardsData[] = [
     imgSrc: dice,
   },
   {
-    title: 'Пушкинская улица',
+    title: 'Пушкинская',
     imgSrc: greenArrow,
   },
   {
-    title: 'Площадь Маяковского',
+    title: 'Маяковка',
     imgSrc: greenArrow,
   },
   {
-    title: 'Казанская железная дорога',
+    title: 'Казанская ж/д',
     imgSrc: railway,
   },
   {
-    title: 'Улица Грузинский Вал',
+    title: 'Улица Вал',
     imgSrc: yellowArrow,
   },
   {
-    title: 'Новинский бульвар',
+    title: 'Бульвар Нова',
     imgSrc: yellowArrow,
   },
   {
@@ -136,7 +137,7 @@ export const cardsData: CardsData[] = [
     imgSrc: waterPipes,
   },
   {
-    title: 'Смоленская площадь',
+    title: 'Смоленка',
     imgSrc: yellowArrow,
   },
   {
@@ -148,7 +149,7 @@ export const cardsData: CardsData[] = [
     imgSrc: yellowArrow,
   },
   {
-    title: 'Гоголевский бульвар',
+    title: 'Бульвар',
     imgSrc: yellowArrow,
   },
   {
@@ -156,11 +157,11 @@ export const cardsData: CardsData[] = [
     imgSrc: treasury,
   },
   {
-    title: 'Кутузовский проспект',
+    title: 'Кутузовка',
     imgSrc: yellowArrow,
   },
   {
-    title: 'Ленинградская железная дорога',
+    title: 'Ленинградская ж/д',
     imgSrc: railway,
   },
   {

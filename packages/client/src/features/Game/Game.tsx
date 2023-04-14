@@ -54,6 +54,7 @@ export const Game = ({ players, goPlayer, setGoPlayer }: Props): JSX.Element => 
       cardImage.src = imgSrc;
       context.drawImage(cardImage, item[0], item[1], item[2], item[3]);
       context.fillText(title, item[0] + 10, item[1] + 10);
+      context.fillStyle = "red";
     });
     if (goPlayer !== null) {
       const { id, target } = goPlayer;
