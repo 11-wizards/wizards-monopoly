@@ -29,6 +29,15 @@ import twentyFifthCell from '../assets/map/25.svg';
 import twentySixthCell from '../assets/map/26.svg';
 import twentySeventhCell from '../assets/map/27.svg';
 import wastedCell from '../assets/map/wasted.svg';
+import twentyEighthCell from '../assets/map/28.svg';
+import twentyNinthCell from '../assets/map/29.svg';
+import thirtiethCell from '../assets/map/30.svg';
+import thirtyFirstCell from '../assets/map/31.svg';
+import thirtySecondCell from '../assets/map/32.svg';
+import thirtyThirdCell from '../assets/map/33.svg';
+import thirtyFourthCell from '../assets/map/34.svg';
+import thirtyFifthCell from '../assets/map/35.svg';
+import thirtySixthCell from '../assets/map/36.svg';
 
 export const cardsImage = [
   startCell,
@@ -62,4 +71,13 @@ export const cardsImage = [
   twentySixthCell,
   twentySeventhCell,
   wastedCell,
+  twentyEighthCell,
+  twentyNinthCell,
+  thirtiethCell,
+  thirtyFirstCell,
+  thirtySecondCell,
+  thirtyThirdCell,
+  thirtyFourthCell,
+  thirtyFifthCell,
+  thirtySixthCell,
 ];
