@@ -1,41 +1,43 @@
-import type { Dispatch, SetStateAction } from 'react';
-import { useLayoutEffect, useEffect, useRef, useState } from 'react';
-import type { GoPlayer, Players } from 'pages/GamePage/GamePage';
-import { readyPositionCards, playerAnimationSteps } from './helpers';
+import type { Dispatch, FC, SetStateAction } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import type { PlayerPosition, PlayerTarget } from 'models/game.model';
+import { selectPlayers } from 'app/slices/gameSlice';
+import type { CardRect } from 'game/model';
+import { useAppSelector } from 'hooks/redux';
+import { initCardsPositions, initStartPlayersPositions, playerAnimationSteps } from './helpers';
 
 import './Game.scss';
 
 const MAP_SIZE = 900;
-const NUBER_CARDS = 40;
+const CARDS_NUMBER = 40;
 const SIZE_CORNER_CARDS = 13; // процент размера угловых карточек относительно поля
 
 const SPEED_ANIMATION = 5;
 
 const cardHeight: number = Math.round((MAP_SIZE / 100) * SIZE_CORNER_CARDS);
 const cardWidth: number = Math.round(
-  (MAP_SIZE / 100) * ((100 - SIZE_CORNER_CARDS * 2) / ((NUBER_CARDS - 4) / 4)),
+  (MAP_SIZE / 100) * ((100 - SIZE_CORNER_CARDS * 2) / ((CARDS_NUMBER - 4) / 4)),
 );
 
 interface Props {
-  players: Players;
-  goPlayer: GoPlayer | null;
-  setGoPlayer: Dispatch<SetStateAction<GoPlayer | null>>;
+  playerMovingTarget: Nullable<PlayerTarget>;
+  handlePlayerMovingTarget: Dispatch<SetStateAction<Nullable<PlayerTarget>>>;
 }
 
-export const Game = ({ players, goPlayer, setGoPlayer }: Props): JSX.Element => {
+export const Game: FC<Props> = ({ playerMovingTarget, handlePlayerMovingTarget }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  const players = useAppSelector(selectPlayers);
+  const [playersPositions, setPlayersPositions] = useState<PlayerPosition[]>(
+    initStartPlayersPositions(players),
+  );
   const [shouldStop, setShouldStop] = useState<boolean>(true);
-
-  const [playersPosition, setPlayersPosition] = useState(players);
-
   const [counter, setCounter] = useState<number>(0);
-
-  const cards: number[][] = readyPositionCards(NUBER_CARDS, cardWidth, cardHeight);
+  const [cards] = useState<CardRect[]>(initCardsPositions(CARDS_NUMBER, cardWidth, cardHeight));
 
   useEffect(() => {
-    setShouldStop(false);
-  }, [goPlayer]);
+    setShouldStop(playerMovingTarget === null);
+  }, [playerMovingTarget]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -45,36 +47,37 @@ export const Game = ({ players, goPlayer, setGoPlayer }: Props): JSX.Element => 
     const context = canvas.getContext('2d');
     if (context === null) return;
     context.clearRect(0, 0, 350, 350);
-    cards.forEach((item = [0, 0, 0, 0]) => context.strokeRect(item[0], item[1], item[2], item[3]));
-    if (goPlayer !== null) {
-      const { id, target } = goPlayer;
-      const targetPosition = cards[target];
+    cards.forEach((card) =>
+      context.strokeRect(card.getX(), card.getY(), card.getWidth(), card.getHeight()),
+    );
+    if (playerMovingTarget !== null) {
+      const { id, target } = playerMovingTarget;
+      const targetPosition: CardRect = cards[target];
 
-      playersPosition.forEach((player, key: number) => {
-        if (player.id === id) {
-          const newPlayerPostion = playerAnimationSteps(
-            player,
-            targetPosition,
-            SPEED_ANIMATION,
-            MAP_SIZE,
-          );
-          if (!newPlayerPostion) {
+      playersPositions.forEach((position) => {
+        if (position.id === id) {
+          const newPlayerPosition = playerAnimationSteps(position, targetPosition, SPEED_ANIMATION);
+          if (!newPlayerPosition) {
             setShouldStop(true);
-            setGoPlayer(null);
+            handlePlayerMovingTarget(null);
           } else {
-            setPlayersPosition((prev) => {
-              const wwsd = [...prev];
-              wwsd[key] = { ...wwsd[key], ...newPlayerPostion };
+            setPlayersPositions((prevState) => {
+              const found = prevState.find((p) => p.id === id);
+              if (found !== undefined) {
+                return [newPlayerPosition, ...prevState.filter((pos) => pos.id !== found.id)];
+              }
 
-              return wwsd;
+              return prevState;
             });
           }
         }
       });
     }
 
-    playersPosition.forEach(({ color, x, y }) => {
-      context.fillStyle = String(color);
+    playersPositions.forEach((position) => {
+      const foundPlayer = players.find((player) => player.getId() === position.id);
+      context.fillStyle = String(foundPlayer?.getColor());
+      const { x, y } = position;
       context.fillRect(Number(x), Number(y), 18, 18);
     });
   }, [counter]);

@@ -1,6 +1,8 @@
 // Fixed code
-export type PlayerPosition = { x: number; y: number; direction?: string };
-export type PlayerPositionTarget = [number, number];
+import type { Player } from 'game/model';
+import { CardRect } from 'game/model';
+import { PlayerDirection } from 'types/enums/main';
+import type { PlayerPosition } from 'models/game.model';
 
 function determineSizeOfSide(
   i: number,
@@ -13,18 +15,34 @@ function determineSizeOfSide(
   return { width: baseHeight, height: baseHeight };
 }
 
-export const readyPositionCards = (
+export const initStartPlayersPositions = (players: Player[]) => {
+  const startPositions: PlayerPosition[] = [];
+  players.forEach((player, index) => {
+    const y = index * 20;
+    const position: PlayerPosition = {
+      id: player.getId(),
+      x: 0,
+      y,
+      direction: PlayerDirection.RIGHT,
+    };
+    startPositions.push(position);
+  });
+
+  return startPositions;
+};
+
+export const initCardsPositions = (
   count: number,
   cardWidth: number,
   cardHeight: number,
-): number[][] => {
-  const cards = [];
+): CardRect[] => {
+  const cards: CardRect[] = [];
   let stepX = 0;
   let stepY = 0;
 
   for (let i = 0; i < count; i += 1) {
     const { width, height } = determineSizeOfSide(i, cardWidth, cardHeight);
-    const card = [stepX, stepY, width, height];
+    const card: CardRect = new CardRect(stepX, stepY, width, height);
     if (i === 0) {
       stepX = width;
     } else if (i === 10) {
@@ -33,7 +51,7 @@ export const readyPositionCards = (
       stepX -= cardWidth;
     } else if (i === 30) {
       stepX = 0;
-      card[0] = stepX;
+      card.setX(stepX);
       stepY -= cardWidth;
     } else if (i > 0 && i < 10) {
       stepX += width;
@@ -51,78 +69,81 @@ export const readyPositionCards = (
 };
 
 const playerTargetApproach = (
+  id: string,
   x: number,
   y: number,
   targetX: number,
   targetY: number,
 ): PlayerPosition => {
   if (x < targetX) {
-    return { x: x + 1, y };
+    return { id, x: x + 1, y };
   }
   if (y < targetY) {
-    return { x, y: y + 1 };
+    return { id, x, y: y + 1 };
   }
   if (x > targetX) {
-    return { x: x - 1, y };
+    return { id, x: x - 1, y };
   }
   if (y > targetY) {
-    return { x, y: y - 1 };
+    return { id, x, y: y - 1 };
   }
 
-  return { x, y };
+  return { id, x, y };
 };
 
 const playerSquareDirection = (
+  id: string,
   x: number,
   y: number,
   speed: number,
-  direction = '',
-): PlayerPosition | false => {
+  direction?: PlayerDirection,
+): Nullable<PlayerPosition> => {
   const squareSize = 18;
   if (direction === 'right') {
     if (x + squareSize >= 900) {
-      return { x, y, direction: 'down' };
+      return { id, x, y, direction: PlayerDirection.DOWN };
     }
 
-    return { x: x + speed, y, direction };
+    return { id, x: x + speed, y, direction };
   }
   if (direction === 'down') {
     if (y + squareSize >= 900) {
-      return { x, y, direction: 'left' };
+      return { id, x, y, direction: PlayerDirection.LEFT };
     }
 
-    return { x, y: y + speed, direction };
+    return { id, x, y: y + speed, direction };
   }
   if (direction === 'left') {
     if (x <= 0) {
-      return { x, y, direction: 'up' };
+      return { id, x, y, direction: PlayerDirection.UP };
     }
 
-    return { x: x - speed, y, direction };
+    return { id, x: x - speed, y, direction };
   }
   if (direction === 'up') {
     if (y <= 0) {
-      return { x, y, direction: 'right' };
+      return { id, x, y, direction: PlayerDirection.RIGHT };
     }
 
-    return { x, y: y - speed, direction };
+    return { id, x, y: y - speed, direction };
   }
 
-  return false;
+  return null;
 };
 
 export const playerAnimationSteps = (
   playerPosition: PlayerPosition,
-  tagetPosition: PlayerPositionTarget,
+  targetPosition: CardRect,
   speed: number,
-): PlayerPosition | false => {
+): Nullable<PlayerPosition> => {
   const { x, y, direction } = playerPosition;
-  const [targetX, targetY] = tagetPosition;
+  const targetX = targetPosition.getX();
+  const targetY = targetPosition.getY();
 
-  if (x === targetX && y === targetY) return false;
+  if (x === targetX && y === targetY) return null;
   if (x - targetX < 150 && x - targetX > -150 && y - targetY < 150 && y - targetY > -150) {
-    return playerTargetApproach(x, y, targetX, targetY);
+    return playerTargetApproach(playerPosition.id, x, y, targetX, targetY);
   }
 
-  return playerSquareDirection(x, y, speed, direction);
+  return playerSquareDirection(playerPosition.id, x, y, speed, direction);
 };
