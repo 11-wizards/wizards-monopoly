@@ -16,7 +16,6 @@ import arrest from '../assets/game/mapCard/arrest.svg';
 type CardsData = {
   title: string;
   imgSrc: string;
-
 };
 
 export const cardsData: CardsData[] = [
