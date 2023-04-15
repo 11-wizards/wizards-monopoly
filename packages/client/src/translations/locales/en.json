@@ -14,6 +14,7 @@
   "auth.title.login": "Login",
   "auth.title.register": "Register",
 
+
   "client.error.message": "Sorry, the page you visited does not exist.",
   "client.error.message.button-text": "Back home",
 
@@ -23,6 +24,14 @@
   "end-game.play-again": "Play again",
 
   "error-boundary-text": "Oops, an unexpected error has occurred.",
+
+  "forum.btn.create-theme": "Create a new theme",
+  "forum.btn.response": "Reply in the theme",
+  "forum.topics.author": "Author:",
+  "forum.topics.change": "Choose a theme",
+  "forum.topics.topic": "Theme:",
+  "forum.posts.response": "user response",
+  "forum.title": "Monopoly Game User Forum",
 
   "main-page.title": "Main",
   "header.rules.button": "GAME RULES",

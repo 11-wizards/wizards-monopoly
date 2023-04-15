@@ -14,6 +14,7 @@
   "auth.title.login": "Вход",
   "auth.title.register": "Регистрация",
 
+
   "client.error.message": "Извините, страница, которую вы посетили, не существует.",
   "client.error.message.button-text": "На главную",
 
@@ -23,6 +24,14 @@
   "end-game.play-again": "Играть снова",
 
   "error-boundary-text": "Упс, случилась непредвиденная ошибка",
+
+  "forum.btn.create-theme": "Создать новую тему",
+  "forum.btn.response": "Ответить в теме",
+  "forum.topics.author": "Автор:",
+  "forum.topics.change": "Выберете тему",
+  "forum.topics.topic": "Тема:",
+  "forum.posts.response": "ответ пользователя",
+  "forum.title": "Форум пользователей игры Монополия",
 
   "main-page.title": "Главная",
   "header.rules.button": "ПРАВИЛА ИГРЫ",
