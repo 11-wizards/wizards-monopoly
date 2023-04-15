@@ -75,8 +75,8 @@ export const Game: FC<Props> = ({ playerMovingTarget, handlePlayerMovingTarget }
     }
 
     playersPositions.forEach((position) => {
-      const foundPlayer = players.find((player) => player.getId() === position.id);
-      context.fillStyle = String(foundPlayer?.getColor());
+      const foundPlayer = players.find((player) => player.id === position.id);
+      context.fillStyle = String(foundPlayer?.color);
       const { x, y } = position;
       context.fillRect(Number(x), Number(y), 18, 18);
     });

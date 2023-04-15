@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { Game } from 'features/Game';
 import { Button } from 'antd';
 import type { PlayerTarget } from 'models/game.model';
-import { useAppSelector } from '../../hooks/redux';
-import { selectPlayers } from '../../app/slices/gameSlice';
+import { useAppSelector } from 'hooks/redux';
+import { selectPlayers } from 'app/slices/gameSlice';
 
 import './GamePage.scss';
 
@@ -29,8 +29,8 @@ export const GamePage: FC = () => {
 
   const renderButtons = () =>
     players.map((player) => (
-      <Button key={player.getId()} onClick={() => handlePlayerMoveTest(player.getId())}>
-        GO-{player.getName().toUpperCase()}
+      <Button key={player.id} onClick={() => handlePlayerMoveTest(player.id)}>
+        GO-{player.name.toUpperCase()}
       </Button>
     ));
 

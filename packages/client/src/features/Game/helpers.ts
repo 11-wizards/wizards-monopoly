@@ -1,8 +1,8 @@
 // Fixed code
-import type { Player } from 'game/model';
 import { CardRect } from 'game/model';
 import { PlayerDirection } from 'types/enums/main';
 import type { PlayerPosition } from 'models/game.model';
+import type { Player } from 'types/game';
 
 function determineSizeOfSide(
   i: number,
@@ -20,7 +20,7 @@ export const initStartPlayersPositions = (players: Player[]) => {
   players.forEach((player, index) => {
     const y = index * 20;
     const position: PlayerPosition = {
-      id: player.getId(),
+      id: player.id,
       x: 0,
       y,
       direction: PlayerDirection.RIGHT,
