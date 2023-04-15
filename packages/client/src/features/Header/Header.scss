@@ -1,1 +1,12 @@
-// delete this comment after adding styles, a stub for stylelint
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: $headerHeight;
+  padding-bottom: 8px;
+}

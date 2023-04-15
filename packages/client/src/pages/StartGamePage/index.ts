@@ -1,0 +1,1 @@
+export { StartGamePage } from './StartGamePage';
