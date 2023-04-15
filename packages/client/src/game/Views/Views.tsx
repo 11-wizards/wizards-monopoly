@@ -1,6 +1,5 @@
-import { Button } from 'antd';
-import type { MapData, Players } from 'GameRoot/GameRoot';
 import { useEffect, useState } from 'react';
+import type { MapData, Players } from 'game/Game';
 import { Dice } from './DIce/Dice';
 import { Map } from './Map';
 
@@ -18,9 +17,8 @@ type Props = {
   mapData: MapData;
   players: Players;
   newTargetPlayer: Record<string, number> | null;
-  renderEnd: any;
+  renderEnd: () => React.Dispatch<React.SetStateAction<boolean>>;
 };
-
 
 export const Views = ({
   mapData,
@@ -31,17 +29,13 @@ export const Views = ({
   const playersToMaps: PlayersToMap = [];
 
   players.forEach((item, key) => {
-    playersToMaps[key] = { ...item, x: 0, y: 0 + 20 * key, direction: 'right' }; // написать функцию стартовой позициии
+    playersToMaps[key] = { ...item, x: 0, y: 0 + 20 * key, direction: 'right' };
   });
 
+  const [animateOneDices, setAnimateOneDices] = useState<boolean>(false);
+  const [animateTwoDices, setAnimateTwoDices] = useState<boolean>(false);
 
-  const [animateOneDices, setAnimateOneDices] = useState(false);
-  const [animateTwoDices, setAnimateTwoDices] = useState(false);
-  // написать триггер запуска/остановки анимации канвас
-
-
-  const [goPlayer, setGoPlayer] = useState(null);
-
+  const [goPlayer, setGoPlayer] = useState<null | GoPlayer>(null);
 
   const [diceOne, setDiceOne] = useState({
     offset: 150,
@@ -58,48 +52,35 @@ export const Views = ({
     speed: 3,
   });
 
-  const stopAnimateOneDices = () => setAnimateOneDices(false);
-  const stopAnimateTwoDices = () => setAnimateTwoDices(false);
+  const stopAnimateOneDices = (): void => setAnimateOneDices(false);
+  const stopAnimateTwoDices = (): void => setAnimateTwoDices(false);
 
-
-  const startAnimateDices = (dicesNumber: Array<number> | []) => {
+  const startAnimateDices = (dicesNumber: Array<number> | []): void => {
     if (!dicesNumber.length) return;
     setAnimateOneDices(true);
     setAnimateTwoDices(true);
-    setDiceOne(prev => {
-      return { ...prev, number: dicesNumber[0], resetKey: Math.random() + 1 }
-    });
-    setDiceTwo(prev => {
-      return { ...prev, number: dicesNumber[1], resetKey: Math.random() + 1 }
-    });
-  }
+    setDiceOne((prev) => ({ ...prev, number: dicesNumber[0], resetKey: Math.random() + 1 }));
+    setDiceTwo((prev) => ({ ...prev, number: dicesNumber[1], resetKey: Math.random() + 1 }));
+  };
 
   useEffect(() => {
     const dicesNumber = newTargetPlayer?.dicesNumber;
     if (!Array.isArray(dicesNumber)) return;
     startAnimateDices(dicesNumber);
-
   }, [newTargetPlayer]);
-
 
   useEffect(() => {
     if (animateOneDices || animateTwoDices) return;
     if (!newTargetPlayer) return;
     const { id, target } = newTargetPlayer;
     setGoPlayer({ id, target });
-
   }, [animateOneDices, animateTwoDices]);
 
   return (
     <div className="game-views">
       <Dice {...diceOne} stopAnimate={stopAnimateOneDices} />
       <Dice {...diceTwo} stopAnimate={stopAnimateTwoDices} />
-      <Map
-        mapData={mapData}
-        players={playersToMaps}
-        goPlayer={goPlayer}
-        setGoPlayer={renderEnd}
-      />
+      <Map mapData={mapData} players={playersToMaps} goPlayer={goPlayer} setGoPlayer={renderEnd} />
     </div>
   );
 };

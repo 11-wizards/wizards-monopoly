@@ -1,6 +1,5 @@
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
-import type { GoPlayer } from 'pages/GamePage/GamePage';
-import type { MapData } from 'GameRoot/GameRoot';
+import type { MapData } from 'game/Game';
 import { readyPositionCards, playerAnimationSteps } from '../../helpers/helpers';
 import type { PlayersToMap } from '../Views';
 
@@ -8,8 +7,8 @@ import './Map.scss';
 
 type Props = {
   players: PlayersToMap;
-  goPlayer: GoPlayer | null;
-  setGoPlayer: any;
+  goPlayer: Record<string, number> | null;
+  setGoPlayer: () => React.Dispatch<React.SetStateAction<boolean>>;
   mapData: MapData;
 };
 
@@ -43,9 +42,9 @@ export const Map = ({ mapData, players, goPlayer, setGoPlayer }: Props): JSX.Ele
     const context = canvas.getContext('2d');
     if (context === null) return;
     context.clearRect(0, 0, 350, 350);
-    cards.forEach((item = [0, 0, 0, 0], key) => {
+    cards.forEach((item, key) => {
       context.fillText(String(key), item[0] + 10, item[1] + 10);
-      context.strokeRect(item[0], item[1], item[2], item[3])
+      context.strokeRect(item[0], item[1], item[2], item[3]);
     });
     if (goPlayer !== null) {
       const { id, target } = goPlayer;
@@ -53,12 +52,7 @@ export const Map = ({ mapData, players, goPlayer, setGoPlayer }: Props): JSX.Ele
 
       playersPosition.forEach((player, key: number) => {
         if (player.id === id) {
-          const newPlayerPostion = playerAnimationSteps(
-            player,
-            targetPosition,
-            SPEED_ANIMATION,
-            MAP_SIZE,
-          );
+          const newPlayerPostion = playerAnimationSteps(player, targetPosition, SPEED_ANIMATION);
           if (!newPlayerPostion) {
             setShouldStop(true);
             setGoPlayer();

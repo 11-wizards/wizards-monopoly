@@ -1,6 +1,6 @@
 // Fixed code
 export type PlayerPosition = { x: number; y: number; direction?: string };
-export type PlayerPositionTarget = [number, number];
+export type PlayerPositionTarget = Array<number>;
 
 function determineSizeOfSide(
   i: number,
@@ -58,7 +58,6 @@ const playerTargetApproach = (
   speedX: number,
   speedY: number,
 ): PlayerPosition => {
-
   if (x < targetX) {
     return { x: x + speedX, y };
   }
@@ -127,13 +126,28 @@ export const playerAnimationSteps = (
   const distanceToTargetX = x - targetX;
   const distanceToTargetY = y - targetY;
 
-  if (distanceToTargetX < 150 && distanceToTargetX > -150 && distanceToTargetY < 150 && distanceToTargetY > -150) {
-    if ((distanceToTargetX < 10 && distanceToTargetX > -10) || (distanceToTargetY < 10 && distanceToTargetY > -10)) {
-      if ((distanceToTargetX < 10 && distanceToTargetX > -10) && (distanceToTargetY < 10 && distanceToTargetY > -10)) return playerTargetApproach(x, y, targetX, targetY, 1, 1);
-      if (distanceToTargetX < 10 && distanceToTargetX > -10) return playerTargetApproach(x, y, targetX, targetY, 1, speed);
-      if (distanceToTargetY < 10 && distanceToTargetY > -10) return playerTargetApproach(x, y, targetX, targetY, speed, 1);
-    }
-    else return playerTargetApproach(x, y, targetX, targetY, speed, speed);
+  if (
+    distanceToTargetX < 150 &&
+    distanceToTargetX > -150 &&
+    distanceToTargetY < 150 &&
+    distanceToTargetY > -150
+  ) {
+    if (
+      (distanceToTargetX < 10 && distanceToTargetX > -10) ||
+      (distanceToTargetY < 10 && distanceToTargetY > -10)
+    ) {
+      if (
+        distanceToTargetX < 10 &&
+        distanceToTargetX > -10 &&
+        distanceToTargetY < 10 &&
+        distanceToTargetY > -10
+      )
+        return playerTargetApproach(x, y, targetX, targetY, 1, 1);
+      if (distanceToTargetX < 10 && distanceToTargetX > -10)
+        return playerTargetApproach(x, y, targetX, targetY, 1, speed);
+      if (distanceToTargetY < 10 && distanceToTargetY > -10)
+        return playerTargetApproach(x, y, targetX, targetY, speed, 1);
+    } else return playerTargetApproach(x, y, targetX, targetY, speed, speed);
   }
 
   return playerSquareDirection(x, y, speed, direction);
