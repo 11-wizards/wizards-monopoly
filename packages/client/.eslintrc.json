@@ -72,9 +72,6 @@
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
     "react/require-default-props": 0,
-<<<<<<< HEAD
-    "react-hooks/exhaustive-deps": "off"
-=======
     "react/destructuring-assignment": [
       "error",
       "always",
@@ -82,7 +79,6 @@
         "destructureInSignature": "always"
       }
     ]
->>>>>>> dev
   },
   "settings": {
     "import/resolver": {
