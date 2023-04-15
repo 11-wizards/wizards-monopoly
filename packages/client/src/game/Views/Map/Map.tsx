@@ -1,28 +1,26 @@
-import type { Dispatch, SetStateAction } from 'react';
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
-import type { GoPlayer, Players } from 'pages/GamePage/GamePage';
-import { readyPositionCards, playerAnimationSteps } from './helpers';
+import type { GoPlayer } from 'pages/GamePage/GamePage';
+import type { MapData } from 'GameRoot/GameRoot';
+import { readyPositionCards, playerAnimationSteps } from '../../helpers/helpers';
+import type { PlayersToMap } from '../Views';
 
-import './Game.scss';
+import './Map.scss';
 
-const MAP_SIZE = 900;
-const NUBER_CARDS = 40;
-const SIZE_CORNER_CARDS = 13; // процент размера угловых карточек относительно поля
-
-const SPEED_ANIMATION = 5;
-
-const cardHeight: number = Math.round((MAP_SIZE / 100) * SIZE_CORNER_CARDS);
-const cardWidth: number = Math.round(
-  (MAP_SIZE / 100) * ((100 - SIZE_CORNER_CARDS * 2) / ((NUBER_CARDS - 4) / 4)),
-);
-
-interface Props {
-  players: Players;
+type Props = {
+  players: PlayersToMap;
   goPlayer: GoPlayer | null;
-  setGoPlayer: Dispatch<SetStateAction<GoPlayer | null>>;
-}
+  setGoPlayer: any;
+  mapData: MapData;
+};
 
-export const Game = ({ players, goPlayer, setGoPlayer }: Props): JSX.Element => {
+export const Map = ({ mapData, players, goPlayer, setGoPlayer }: Props): JSX.Element => {
+  const { MAP_SIZE, NUMBER_CARDS, SIZE_CORNER_CARDS, SPEED_ANIMATION } = mapData;
+
+  const cardHeight: number = Math.round((MAP_SIZE / 100) * SIZE_CORNER_CARDS);
+  const cardWidth: number = Math.round(
+    (MAP_SIZE / 100) * ((100 - SIZE_CORNER_CARDS * 2) / ((NUMBER_CARDS - 4) / 4)),
+  );
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [shouldStop, setShouldStop] = useState<boolean>(true);
@@ -31,7 +29,7 @@ export const Game = ({ players, goPlayer, setGoPlayer }: Props): JSX.Element => 
 
   const [counter, setCounter] = useState<number>(0);
 
-  const cards: number[][] = readyPositionCards(NUBER_CARDS, cardWidth, cardHeight);
+  const cards: number[][] = readyPositionCards(NUMBER_CARDS, cardWidth, cardHeight);
 
   useEffect(() => {
     setShouldStop(false);
@@ -45,7 +43,10 @@ export const Game = ({ players, goPlayer, setGoPlayer }: Props): JSX.Element => 
     const context = canvas.getContext('2d');
     if (context === null) return;
     context.clearRect(0, 0, 350, 350);
-    cards.forEach((item = [0, 0, 0, 0]) => context.strokeRect(item[0], item[1], item[2], item[3]));
+    cards.forEach((item = [0, 0, 0, 0], key) => {
+      context.fillText(String(key), item[0] + 10, item[1] + 10);
+      context.strokeRect(item[0], item[1], item[2], item[3])
+    });
     if (goPlayer !== null) {
       const { id, target } = goPlayer;
       const targetPosition = cards[target];
@@ -60,7 +61,7 @@ export const Game = ({ players, goPlayer, setGoPlayer }: Props): JSX.Element => 
           );
           if (!newPlayerPostion) {
             setShouldStop(true);
-            setGoPlayer(null);
+            setGoPlayer();
           } else {
             setPlayersPosition((prev) => {
               const wwsd = [...prev];

@@ -55,18 +55,21 @@ const playerTargetApproach = (
   y: number,
   targetX: number,
   targetY: number,
+  speedX: number,
+  speedY: number,
 ): PlayerPosition => {
+
   if (x < targetX) {
-    return { x: x + 1, y };
+    return { x: x + speedX, y };
   }
   if (y < targetY) {
-    return { x, y: y + 1 };
+    return { x, y: y + speedY };
   }
   if (x > targetX) {
-    return { x: x - 1, y };
+    return { x: x - speedX, y };
   }
   if (y > targetY) {
-    return { x, y: y - 1 };
+    return { x, y: y - speedY };
   }
 
   return { x, y };
@@ -120,9 +123,23 @@ export const playerAnimationSteps = (
   const [targetX, targetY] = tagetPosition;
 
   if (x === targetX && y === targetY) return false;
-  if (x - targetX < 150 && x - targetX > -150 && y - targetY < 150 && y - targetY > -150) {
-    return playerTargetApproach(x, y, targetX, targetY);
+
+  const distanceToTargetX = x - targetX;
+  const distanceToTargetY = y - targetY;
+
+  if (distanceToTargetX < 150 && distanceToTargetX > -150 && distanceToTargetY < 150 && distanceToTargetY > -150) {
+    if ((distanceToTargetX < 10 && distanceToTargetX > -10) || (distanceToTargetY < 10 && distanceToTargetY > -10)) {
+      if ((distanceToTargetX < 10 && distanceToTargetX > -10) && (distanceToTargetY < 10 && distanceToTargetY > -10)) return playerTargetApproach(x, y, targetX, targetY, 1, 1);
+      if (distanceToTargetX < 10 && distanceToTargetX > -10) return playerTargetApproach(x, y, targetX, targetY, 1, speed);
+      if (distanceToTargetY < 10 && distanceToTargetY > -10) return playerTargetApproach(x, y, targetX, targetY, speed, 1);
+    }
+    else return playerTargetApproach(x, y, targetX, targetY, speed, speed);
   }
 
   return playerSquareDirection(x, y, speed, direction);
 };
+
+export const roolDices = (): Array<number> => [
+  Math.floor(Math.random() * 6) + 1,
+  Math.floor(Math.random() * 6) + 1,
+];
