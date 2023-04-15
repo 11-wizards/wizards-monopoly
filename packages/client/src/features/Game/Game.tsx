@@ -52,7 +52,7 @@ export const Game = ({ players, goPlayer, setGoPlayer }: Props): JSX.Element => 
       const cardImage = new Image();
       const { imgSrc, title, priceView } = cardsData[index];
       cardImage.src = imgSrc;
-      context.drawImage(cardImage, item[0], item[1], item[2], item[3]);
+      context.drawImage(cardImage, item[0] + 10, item[1] + 10, item[2] - 20, item[3] - 20);
       context.fillText(title, item[0] + 10, item[1] + 10);
       context.fillText(priceView, item[0] + 20, item[1] + 20);
       context.fillStyle = 'red';
