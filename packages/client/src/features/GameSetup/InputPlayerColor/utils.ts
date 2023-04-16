@@ -1,10 +1,10 @@
-import { PlayerColors } from 'types/enums/main';
+import { PlayerColor } from 'types/enums/main';
 
 export const selectOptions = [
-  { label: 'Red', value: PlayerColors.Red },
-  { label: 'Blue', value: PlayerColors.Blue },
-  { label: 'Green', value: PlayerColors.Green },
-  { label: 'Yellow', value: PlayerColors.Yellow },
-  { label: 'Cyan', value: PlayerColors.Cyan },
-  { label: 'Purple', value: PlayerColors.Purple },
+  { label: 'Red', value: PlayerColor.RED },
+  { label: 'Blue', value: PlayerColor.BLUE },
+  { label: 'Green', value: PlayerColor.GREEN },
+  { label: 'Yellow', value: PlayerColor.YELLOW },
+  { label: 'Cyan', value: PlayerColor.CYAN },
+  { label: 'Purple', value: PlayerColor.PURPLE },
 ];

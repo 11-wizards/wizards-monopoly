@@ -6,28 +6,32 @@ import {
 import { useAppDispatch } from 'hooks/redux';
 import type { ComponentType } from 'react';
 
-import type { MoneyTransfer, BankTransaction } from 'types/game';
+import type {
+  MoneyTransfer,
+  BankTransaction,
+  BuyPropertyCardPayload,
+  PropertyCardId,
+} from 'types/game';
 
 type WithBankProps = {
-  buyProperty: () => void;
+  buyPropertyCard: (contract: BuyPropertyCardPayload) => void;
   claimCircleBonus: (transaction: BankTransaction) => void;
   getReward: (transfer: MoneyTransfer) => void;
   payPenalty: (transaction: BankTransaction) => void;
   payRent: (transfer: MoneyTransfer) => void;
-  sellProperty: () => void;
+  sellPropertyCard: (propertyCardId: PropertyCardId) => void;
 };
 
 export const withBank =
   <T extends WithBankProps>(WrappedComponent: ComponentType<T>) =>
   (props: Omit<T, keyof WithBankProps>) => {
     const dispatch = useAppDispatch();
-
-    const buyProperty = () => {
-      /* TODO document why this arrow function is empty */
+    const buyPropertyCard = () => {
+      /* TODO логика покупки */
     };
 
-    const sellProperty = () => {
-      /* TODO document why this arrow function is empty */
+    const sellPropertyCard = () => {
+      /* TODO логика продажи */
     };
 
     const payRent = ({ senderId, recipientId, amount }: MoneyTransfer) => {
@@ -51,8 +55,8 @@ export const withBank =
       claimCircleBonus,
       getReward,
       payPenalty,
-      buyProperty,
-      sellProperty,
+      buyPropertyCard,
+      sellPropertyCard,
     };
 
     return <WrappedComponent {...(props as T)} {...bankOperations} />;
