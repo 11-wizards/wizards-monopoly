@@ -1,38 +1,48 @@
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
-import type { MapData } from 'game/Game';
-import { readyPositionCards, playerAnimationSteps } from '../../helpers/helpers';
-import type { PlayersToMap } from '../Views';
+import { CornersCardsID, MapDirectons } from 'types/enums/main';
+import type { MapData, PlayerTarget, PlayersPositions, Players } from 'types/game';
+import { calcPlayerParkingSpotCard, initCardsPositions, playerMove } from '../../helpers/helpers';
 
 import './Map.scss';
 
+const { RIGHT: startDirection } = MapDirectons;
+const { CARD_TOP_LEFT: startCardId } = CornersCardsID;
+
 type Props = {
-  players: PlayersToMap;
-  goPlayer: Record<string, number> | null;
-  setGoPlayer: () => React.Dispatch<React.SetStateAction<boolean>>;
+  players: Players;
+  playerTarget: PlayerTarget;
+  setAnimationEnd: () => React.Dispatch<React.SetStateAction<boolean>>;
   mapData: MapData;
 };
 
-export const Map = ({ mapData, players, goPlayer, setGoPlayer }: Props): JSX.Element => {
-  const { MAP_SIZE, NUMBER_CARDS, SIZE_CORNER_CARDS, SPEED_ANIMATION } = mapData;
+export const Map = ({ mapData, players, playerTarget, setAnimationEnd }: Props): JSX.Element => {
+  const { MAP_SIZE, NUMBER_CARDS, SIZE_CORNER_CARDS, ANIMATION_SPEED, PLAYER_SIZE } = mapData;
 
   const cardHeight: number = Math.round((MAP_SIZE / 100) * SIZE_CORNER_CARDS);
   const cardWidth: number = Math.round(
     (MAP_SIZE / 100) * ((100 - SIZE_CORNER_CARDS * 2) / ((NUMBER_CARDS - 4) / 4)),
   );
 
+  const cards: number[][] = initCardsPositions(NUMBER_CARDS, cardWidth, cardHeight);
+
+  const startPlayersPosition: PlayersPositions | [] = [];
+  players?.forEach((item, key) => {
+    const { id, color } = item;
+    const [x, y] = calcPlayerParkingSpotCard(id, cards[startCardId], PLAYER_SIZE);
+    startPlayersPosition[key] = { id, color, x, y, direction: startDirection };
+  });
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const [shouldStop, setShouldStop] = useState<boolean>(true);
+  const [animationStop, setAnimationStop] = useState<boolean>(true);
 
-  const [playersPosition, setPlayersPosition] = useState(players);
+  const [animationCounter, setAnimationCounter] = useState<number>(0);
 
-  const [counter, setCounter] = useState<number>(0);
-
-  const cards: number[][] = readyPositionCards(NUMBER_CARDS, cardWidth, cardHeight);
+  const [playersPositions, setPlayersPositions] = useState(startPlayersPosition);
 
   useEffect(() => {
-    setShouldStop(false);
-  }, [goPlayer]);
+    setAnimationStop(false);
+  }, [playerTarget]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -41,44 +51,45 @@ export const Map = ({ mapData, players, goPlayer, setGoPlayer }: Props): JSX.Ele
     canvas.height = MAP_SIZE;
     const context = canvas.getContext('2d');
     if (context === null) return;
-    context.clearRect(0, 0, 350, 350);
+    context.clearRect(0, 0, MAP_SIZE, MAP_SIZE);
     cards.forEach((item, key) => {
       context.fillText(String(key), item[0] + 10, item[1] + 10);
-      context.strokeRect(item[0], item[1], item[2], item[3]);
+      const [y, x, w, h] = item;
+      context.strokeRect(y, x, w, h);
     });
-    if (goPlayer !== null) {
-      const { id, target } = goPlayer;
-      const targetPosition = cards[target];
+    if (playerTarget !== null) {
+      const { id, target } = playerTarget;
+      const targetPosition = calcPlayerParkingSpotCard(id, cards[target], PLAYER_SIZE);
 
-      playersPosition.forEach((player, key: number) => {
+      playersPositions.forEach((player, key: number) => {
         if (player.id === id) {
-          const newPlayerPostion = playerAnimationSteps(player, targetPosition, SPEED_ANIMATION);
+          const newPlayerPostion = playerMove(player, targetPosition, ANIMATION_SPEED);
           if (!newPlayerPostion) {
-            setShouldStop(true);
-            setGoPlayer();
+            setAnimationStop(true);
+            setAnimationEnd();
           } else {
-            setPlayersPosition((prev) => {
-              const wwsd = [...prev];
-              wwsd[key] = { ...wwsd[key], ...newPlayerPostion };
+            setPlayersPositions((prev) => {
+              const playerPosition = [...prev];
+              playerPosition[key] = { ...playerPosition[key], ...newPlayerPostion };
 
-              return wwsd;
+              return playerPosition;
             });
           }
         }
       });
     }
 
-    playersPosition.forEach(({ color, x, y }) => {
+    playersPositions.forEach(({ color, x, y }) => {
       context.fillStyle = String(color);
-      context.fillRect(Number(x), Number(y), 18, 18);
+      context.fillRect(Number(x), Number(y), PLAYER_SIZE, PLAYER_SIZE);
     });
-  }, [counter]);
+  }, [animationCounter]);
 
   useLayoutEffect((): void | (() => void) => {
-    if (!shouldStop) {
+    if (!animationStop) {
       let timerId = 0;
       const animate = () => {
-        setCounter((c) => c + 1);
+        setAnimationCounter((c) => c + 1);
         timerId = requestAnimationFrame(animate);
       };
       timerId = requestAnimationFrame(animate);
@@ -87,7 +98,7 @@ export const Map = ({ mapData, players, goPlayer, setGoPlayer }: Props): JSX.Ele
     }
 
     return undefined;
-  }, [shouldStop]);
+  }, [animationStop]);
 
   return <canvas ref={canvasRef} />;
 };

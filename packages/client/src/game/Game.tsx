@@ -1,24 +1,15 @@
 import { useState } from 'react';
+import type { NewTargetPlayer } from 'types/game';
 import { MAP_DATA, players } from './common';
 import { roolDices } from './helpers/helpers';
 import { Views } from './Views';
 
-export type Players = {
-  id: number;
-  color: string;
-  name: string;
-}[];
-
-export type MapData = Record<string, number>;
-
 export const Game = () => {
   const [currentPlayerStep, setCurrentPlayerStep] = useState<number>(0);
+
   const [viewsRenderEnd, setViewsRenderEnd] = useState<boolean>(true);
-  const [newTargetPlayer, setNewTargetPlayer] = useState<{
-    id: number;
-    target: number;
-    dicesNumber: number[];
-  } | null>(null);
+
+  const [newTargetPlayer, setNewTargetPlayer] = useState<NewTargetPlayer>(null);
 
   const [playersCurrentPosition, setPlayersCurrentPosition] = useState<Record<number, number>>(
     players.reduce((prev, { id }) => ({ ...prev, [id]: 0 }), {}),
@@ -34,7 +25,8 @@ export const Game = () => {
     return target;
   };
 
-  const goPlayerNewStep = (dicesNumber: number[]) => {
+  const clickPlayerMove = () => {
+    const dicesNumber = roolDices();
     if (!viewsRenderEnd) return;
     const steps = dicesNumber[0] + dicesNumber[1];
     const id = currentPlayerStep;
@@ -49,18 +41,13 @@ export const Game = () => {
     setNewTargetPlayer({ id, target, dicesNumber });
   };
 
-  const handleRoolDice = () => {
-    const steps = roolDices();
-    goPlayerNewStep(steps);
-  };
-
   const currentStepPlayer = players[currentPlayerStep]?.name;
 
   return (
     <>
       {/* Button убрать в VIEW */}
       <div>Игрок: {currentStepPlayer}</div>
-      <button type="button" onClick={handleRoolDice}>
+      <button type="button" onClick={clickPlayerMove}>
         Ходить
       </button>
 

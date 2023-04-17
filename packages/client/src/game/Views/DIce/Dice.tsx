@@ -6,30 +6,23 @@ type Props = {
   speed: number;
   number: number;
   offset: number;
-  diceId: number;
   resetKey: number;
   stopAnimate: () => void;
 };
 
 export const Dice = ({
-  speed = 2,
-  number = 6,
+  speed,
+  number,
   offset,
-  diceId = 0,
-  resetKey = 0,
+  resetKey,
   stopAnimate,
 }: Props): JSX.Element | null => {
   const [view, setView] = useState(false);
 
-  /* eslint-disable */
-  const endDiceAnimation = (e: any) => {
-    const elem = e?.target as HTMLElement;
-    if (Number(elem?.dataset?.diceId) === diceId) {
-      setView(false);
-      stopAnimate();
-    }
+  const endDiceAnimation = (): void => {
+    setView(false);
+    stopAnimate();
   };
-  /* eslint-enable */
 
   const offsetStyle = {
     left: `calc(50% + ${offset}px)`,
@@ -37,11 +30,6 @@ export const Dice = ({
   const animationStyle = {
     animation: `rotate${number} ${speed}s`,
   };
-
-  // useEffect(() => {
-  //   addEventListener('animationend', endDiceAnimation);
-  //   return () => removeEventListener('animationend', endDiceAnimation);
-  // }, []);
 
   useEffect(() => {
     if (!resetKey) return;
@@ -53,7 +41,6 @@ export const Dice = ({
     <div
       className={`dice ${view ? 'view rotate' : ''} number-${number} `}
       style={view ? { ...animationStyle, ...offsetStyle } : { ...offsetStyle }}
-      data-dice-id={diceId}
       onAnimationEnd={endDiceAnimation}
     >
       <div className="one side">
