@@ -1,3 +1,4 @@
+import type { CardsData } from 'types/cards';
 import start from '../assets/game/mapCard/start.svg';
 import greyArrow from '../assets/game/mapCard/greyArrow.svg';
 import redArrow from '../assets/game/mapCard/redArrow.svg';
@@ -12,13 +13,6 @@ import waterPipes from '../assets/game/mapCard/waterPipes.svg';
 import greenArrow from '../assets/game/mapCard/greenArrow.svg';
 import parking from '../assets/game/mapCard/parking.svg';
 import arrest from '../assets/game/mapCard/arrest.svg';
-
-type CardsData = {
-  title: string;
-  imgSrc: string;
-  priceView: string;
-  price?: number;
-};
 
 export const cardsData: CardsData[] = [
   {

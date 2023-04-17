@@ -2,7 +2,7 @@
 import type { Dispatch, SetStateAction } from 'react';
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
 import type { GoPlayer, Players } from 'pages/GamePage/GamePage';
-import { cardsData } from 'models/cards.model';
+import { cardsData } from 'data/cards';
 import { readyPositionCards, playerAnimationSteps } from './helpers';
 
 import './Game.scss';
