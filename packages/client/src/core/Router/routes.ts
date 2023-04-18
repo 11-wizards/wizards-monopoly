@@ -11,9 +11,6 @@ export const ROUTES = {
   FORUM_PAGE: {
     path: '/forum',
   },
-  START_GAME_PAGE: {
-    path: '/start-game',
-  },
   GAME_PAGE: {
     path: '/game',
   },

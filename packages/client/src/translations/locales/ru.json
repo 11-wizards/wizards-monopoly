@@ -2,6 +2,7 @@
   "project.name": "Монополия",
   "auth.button.login": "Войти",
   "auth.button.register": "Зарегистрироваться",
+  "auth.notification.register-success": "Вы были успешно зарегистрированы",
   "auth.placeholder.email": "Email",
   "auth.placeholder.first-name": "Имя",
   "auth.placeholder.login": "Логин",
@@ -13,12 +14,24 @@
   "auth.title.login": "Вход",
   "auth.title.register": "Регистрация",
 
+
+  "client.error.message": "Извините, страница, которую вы посетили, не существует.",
+  "client.error.message.button-text": "На главную",
+
   "end-game.title": "ИГРА ОКОНЧЕНА",
   "end-game.winner": "Победитель",
   "end-game.finish-game": "Завершить игру",
   "end-game.play-again": "Играть снова",
 
   "error-boundary-text": "Упс, случилась непредвиденная ошибка",
+
+  "forum.btn.create-theme": "Создать новую тему",
+  "forum.btn.response": "Ответить в теме",
+  "forum.topics.author": "Автор:",
+  "forum.topics.change": "Выберете тему",
+  "forum.topics.topic": "Тема:",
+  "forum.posts.response": "ответ пользователя",
+  "forum.title": "Форум пользователей игры Монополия",
 
   "main-page.title": "Главная",
   "header.rules.button": "ПРАВИЛА ИГРЫ",
@@ -70,6 +83,20 @@
   "start.player.color": "Выберите цвет для {num, number}-го игрока:",
   "start.text.note": "Внимание: Во время игры не обновляйте страницу, иначе игра будет прервана",
 
+  "profile.button.change-password": "Изменить пароль",
+  "profile.button.change-profile-info": "Изменить информацию профиля",
+  "profile.change-password.placeholder.old-password": "Старый пароль",
+  "profile.change-password.placeholder.new-password": "Новый пароль",
+  "profile.change-password.title": "Изменить пароль",
+  "profile.placeholder.display-name": "Никнейм",
+  "profile.placeholder.email": "Email",
+  "profile.placeholder.first-name": "Имя",
+  "profile.placeholder.login": "Логин",
+  "profile.placeholder.password": "Пароль",
+  "profile.placeholder.phone": "Телефон",
+  "profile.placeholder.second-name": "Фамилия",
+  "profile.title": "Профиль",
+
   "result-board.title": "Счёт игры",
   "result-board.place": "Место",
   "result-board.name": "Имя",
@@ -77,6 +104,11 @@
   "result-board.property": "Собственность",
   "result-board.time": "Время в игре",
 
+  "server.error.message": "Извините, что-то пошло не так",
+  "server.error.message.button-text": "На главную",
+
+  "validation.avatar.invalid-extension": "Вы можете загружать только файлы с расширением JPG/PNG",
+  "validation.avatar.size-limit": "Изображение должно быть менее  2MB",
   "validation.invalid-format.email": "Email должен быть следующего формата: 'email@example.com'",
   "validation.invalid-format.phone": "Телефон должен содержать только 10-15 цифр и начинаться с +",
   "validation.max-length.email": "Email не должен содержать более 30 символов",
@@ -96,11 +128,6 @@
   "validation.pattern.player_name": "Имя игрока должно содержать только буквы и цифры",
   "validation.required-field": "Обязательное поле",
   "validation.unique.color": "Цвета игроков должны быть уникальными",
-
-  "client.error.message": "Извините, страница, которую вы посетили, не существует.",
-  "client.error.message.button-text": "На главную",
-  "server.error.message": "Извините, что-то пошло не так",
-  "server.error.message.button-text": "На главную",
 
   "universal.cancel": "Отменить",
   "universal.save": "Сохранить",

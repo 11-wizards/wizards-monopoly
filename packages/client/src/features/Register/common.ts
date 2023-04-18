@@ -3,6 +3,10 @@ import { defineMessages } from 'react-intl';
 export const messages = defineMessages({
   buttonLogin: { id: 'auth.button.login', defaultMessage: 'Sign in' },
   buttonRegister: { id: 'auth.button.register', defaultMessage: 'Sign up' },
+  notificationSuccess: {
+    id: 'auth.notification.register-success',
+    defaultMessage: 'You have been registered successfully',
+  },
   placeholderEmail: { id: 'auth.placeholder.email', defaultMessage: 'Email' },
   placeholderFirstName: { id: 'auth.placeholder.first-name', defaultMessage: 'First name' },
   placeholderLogin: { id: 'auth.placeholder.login', defaultMessage: 'Login ' },

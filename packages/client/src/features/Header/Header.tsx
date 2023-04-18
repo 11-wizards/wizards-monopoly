@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from 'antd';
 import { useIntl } from 'react-intl';
 import { GameRulesModal } from 'features/GameRulesModal';
@@ -16,11 +16,13 @@ export const Header: FC = () => {
   };
 
   return (
-    <div className="header">
-      <Button onClick={onShowRules} type="dashed">
-        {fm(messages.headerRulesButton)}
-      </Button>
+    <>
+      <div className="header">
+        <Button onClick={onShowRules} type="dashed">
+          {fm(messages.headerRulesButton)}
+        </Button>
+      </div>
       <GameRulesModal isOpen={isGameRulesShown} onClose={onShowRules} />
-    </div>
+    </>
   );
 };
