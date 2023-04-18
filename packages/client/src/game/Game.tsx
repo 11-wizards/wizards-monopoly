@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { NewTargetPlayer } from 'types/game';
 import { MAP_DATA, players } from './common';
-import { roolDices } from './helpers/helpers';
+import { rollDices } from './helpers/helpers';
 import { Views } from './Views';
 
 export const Game = () => {
@@ -25,8 +25,8 @@ export const Game = () => {
     return target;
   };
 
-  const clickPlayerMove = () => {
-    const dicesNumber = roolDices();
+  const clickStartPlayerTurn = () => {
+    const dicesNumber = rollDices();
     if (!viewsRenderEnd) return;
     const steps = dicesNumber[0] + dicesNumber[1];
     const id = currentPlayerStep;
@@ -47,7 +47,7 @@ export const Game = () => {
     <>
       {/* Button убрать в VIEW */}
       <div>Игрок: {currentStepPlayer}</div>
-      <button type="button" onClick={clickPlayerMove}>
+      <button type="button" onClick={clickStartPlayerTurn}>
         Ходить
       </button>
 
