@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Game } from 'features/Game';
+import { Game } from 'game/Game';
 
 import './GamePage.scss';
 
