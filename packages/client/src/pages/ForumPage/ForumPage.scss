@@ -1,9 +1,11 @@
-.wrapper {
-  &_forumPage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
+// stylelint-disable-next-line
+.wrapper_forumPage {
+  // stylelint-enable-next-line
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  background: url('../../assets/images/forum-bg.png');
+  background-size: contain;
 }

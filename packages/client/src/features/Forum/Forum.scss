@@ -1,1 +1,86 @@
 // delete this comment after adding styles, a stub for stylelint
+
+.forum-content {
+  display: grid;
+  grid-template-columns: 2fr 4fr;
+  gap: 20px;
+  max-width: 1140px;
+  height: 100%;
+  padding: 25px 70px 40px;
+  margin: 0 auto;
+
+  .forum-title {
+    grid-column: 1/3;
+    text-align: center;
+  }
+
+  .topic-change {
+    position: sticky;
+    top: 0;
+    width: 100%;
+
+    .ant-table-cell {
+      padding: 10px;
+
+      .topic-name {
+        color: $primaryColor;
+        text-align: left;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        outline: none;
+      }
+    }
+
+    .ant-table-pagination {
+      justify-content: center;
+    }
+
+    .ant-pagination-options {
+      display: none;
+    }
+
+    .new-topic-controls {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .topic-list-table .ant-table {
+      box-shadow: 4px 4px 8px 0 rgb(34 60 80 / 20%);
+    }
+  }
+
+  .current-topic {
+    .topic-body {
+      padding-left: 20px;
+      margin: 10px 0;
+    }
+
+    .topic-header {
+      position: sticky;
+      top: 0;
+      padding: 12px;
+      background: $whiteColor;
+      background-color: $whiteColor;
+      border-radius: 2px;
+      box-shadow: 4px 4px 8px 0 rgb(34 60 80 / 20%);
+
+      .topic-title,
+      .topic-author {
+        margin: 0;
+        margin-bottom: 15px;
+      }
+    }
+  }
+
+  .new-post-controls {
+    margin: 15px 0 0 100px;
+
+    .new-post-body {
+      height: 100px;
+      margin-bottom: 10px;
+    }
+  }
+}

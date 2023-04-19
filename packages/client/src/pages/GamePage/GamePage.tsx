@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useState } from 'react';
-import { Game } from 'features/Game';
 import { Button } from 'antd';
+import { Game } from 'game/Game';
 
 import './GamePage.scss';
 

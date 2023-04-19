@@ -3,8 +3,8 @@ import { Button, Layout, Typography } from 'antd';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'core/Router';
-import { messages } from './i18n';
-import { ResultBoard } from '../Resultboard';
+import { ResultBoard } from 'features/Resultboard';
+import { messages } from './common';
 
 import './EndGame.scss';
 

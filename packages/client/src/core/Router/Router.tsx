@@ -7,6 +7,8 @@ import {
   LeaderboardPage,
   LoginPage,
   MainPage,
+  ProfileChangePasswordPage,
+  ProfilePage,
   RegisterPage,
   ClientErrorPage,
   StartGamePage,
@@ -48,6 +50,14 @@ export const Router = () => (
           {
             path: ROUTES.LEADERBOARD_PAGE.path,
             element: <LeaderboardPage />,
+          },
+          {
+            path: ROUTES.PROFILE_PAGE.path,
+            element: <ProfilePage />,
+          },
+          {
+            path: ROUTES.PROFILE_CHANGE_PASSWORD_PAGE.path,
+            element: <ProfileChangePasswordPage />,
           },
           {
             path: ROUTES.START_GAME_PAGE.path,
