@@ -7,3 +7,12 @@
     height: 100vh;
   }
 }
+.game-views {
+  width: max-content;
+  height: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $whiteColor;
+  position: relative;
+}

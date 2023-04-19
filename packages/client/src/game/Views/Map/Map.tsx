@@ -41,7 +41,9 @@ export const Map = ({ mapData, players, playerTarget, setAnimationEnd }: Props):
   const [playersPositions, setPlayersPositions] = useState(startPlayersPosition);
 
   useEffect(() => {
-    setAnimationStop(false);
+    if (playerTarget) {
+      setAnimationStop(false);
+    }
   }, [playerTarget]);
 
   useEffect(() => {
@@ -83,7 +85,7 @@ export const Map = ({ mapData, players, playerTarget, setAnimationEnd }: Props):
       context.fillStyle = String(color);
       context.fillRect(Number(x), Number(y), PLAYER_SIZE, PLAYER_SIZE);
     });
-  }, [animationCounter]);
+  }, [animationCounter, mapData]);
 
   useLayoutEffect((): void | (() => void) => {
     if (!animationStop) {

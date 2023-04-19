@@ -1,8 +1,11 @@
+import { Button } from 'antd';
 import { resetDices } from 'game/helpers/helpers';
-import { useEffect, useState } from 'react';
+import { useFullScreenApi, useGameViewsCalc } from 'hooks';
+import { useEffect, useRef, useState } from 'react';
 import type { MapData, NewTargetPlayer, Players, PlayerTarget } from 'types/game';
 import { Dice } from './DIce/Dice';
 import { Map } from './Map';
+import { PlayerInterface } from './PlayerInterface';
 
 type Props = {
   mapData: MapData;
@@ -17,6 +20,10 @@ export const Views = ({
   newTargetPlayer = null,
   renderEnd,
 }: Props): JSX.Element => {
+  const gameViewsBlock = useRef(null);
+
+  const fullScreenToggle = useFullScreenApi(gameViewsBlock);
+
   const [animateOneDice, setAnimateOneDice] = useState<boolean>(false);
   const [animateTwoDice, setAnimateTwoDice] = useState<boolean>(false);
 
@@ -46,6 +53,10 @@ export const Views = ({
     setDiceTwo((prev) => ({ ...prev, number: dicesNumber[1], resetKey: resetDices() }));
   };
 
+  const { mapSize, playerSize, cards } = useGameViewsCalc();
+
+
+
   useEffect(() => {
     const dicesNumber = newTargetPlayer?.dicesNumber;
     if (!Array.isArray(dicesNumber)) return;
@@ -60,15 +71,20 @@ export const Views = ({
   }, [animateOneDice, animateTwoDice]);
 
   return (
-    <div className="game-views">
+    <div
+      className="game-views"
+      ref={gameViewsBlock}
+      style={{ height: mapData.MAP_SIZE, width: mapData.MAP_SIZE }}
+    >
       <Dice {...diceOne} stopAnimate={stopAnimateOneDice} />
       <Dice {...diceTwo} stopAnimate={stopAnimateTwoDice} />
       <Map
-        mapData={mapData}
+        mapData={{ ...mapData, MAP_SIZE: mapSize, PLAYER_SIZE: playerSize, cards }}
         players={players}
         playerTarget={playerTarget}
         setAnimationEnd={renderEnd}
       />
+      <PlayerInterface fullScreenToggle={fullScreenToggle} />
     </div>
   );
 };

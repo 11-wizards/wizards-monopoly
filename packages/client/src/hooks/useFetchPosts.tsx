@@ -23,5 +23,6 @@ export const useFetchPosts = ({
       })
       .catch(() => {});
   }, dependencies);
+
   return [state, setState];
 };

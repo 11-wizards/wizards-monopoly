@@ -20,5 +20,6 @@ export const useFetchTopics = (): [
       })
       .catch(() => {});
   }, []);
+
   return [state, setState];
 };

@@ -10,6 +10,15 @@ export const MAP_DATA = {
   ANIMATION_SPEED: 5,
 };
 
+export const MAP_SIZES_PRECENT = {
+  MAP_SIZE: 90,
+  PLAYER_SIZE: 2,
+  NUMBER_CARDS: 40,
+  SIZE_CORNER_CARDS: 13,
+  ANIMATION_SPEED: 5,
+};
+
+
 export const players = [
   { id: 0, name: 'Red', color: Red },
   { id: 1, name: 'Green', color: Green },
