@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-floating-promises: 0 */
 import type { FC, FormEvent } from 'react';
 import { useEffect, useState } from 'react';
 import type { Author, Topic } from 'models/forum.model';

@@ -1,6 +1,7 @@
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
 import { CornersCardsID, MapDirectons } from 'types/enums/main';
 import type { MapData, PlayerTarget, PlayersPositions, Players } from 'types/game';
+import { cardsData } from 'data/cards';
 import { calcPlayerParkingSpotCard, initCardsPositions, playerMove } from '../../helpers/helpers';
 
 import './Map.scss';
@@ -32,6 +33,8 @@ export const Map = ({ mapData, players, playerTarget, setAnimationEnd }: Props):
     startPlayersPosition[key] = { id, color, x, y, direction: startDirection };
   });
 
+  const [cardDataImg, setCardDataImg] = useState([]);
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [animationStop, setAnimationStop] = useState<boolean>(true);
@@ -55,7 +58,31 @@ export const Map = ({ mapData, players, playerTarget, setAnimationEnd }: Props):
     if (context === null) return;
     context.clearRect(0, 0, MAP_SIZE, MAP_SIZE);
     cards.forEach((item, key) => {
-      context.fillText(String(key), item[0] + 10, item[1] + 10);
+      const { imgSrc, title, priceView } = cardsData[key];
+      if (!cardDataImg[key]) {
+        const cardImage = new Image();
+        cardImage.src = imgSrc;
+        cardImage.onload = () => {
+          setCardDataImg((prev) => {
+            const data = [...prev];
+            data[key] = cardImage;
+
+            return data;
+          });
+          context.drawImage(cardImage, item[0] + 10, item[1] + 10, item[2] - 20, item[3] - 20);
+          if (key === 0) {
+            playersPositions.forEach(({ color, x, y }) => {
+              context.fillStyle = String(color);
+              context.fillRect(Number(x), Number(y), PLAYER_SIZE, PLAYER_SIZE);
+            });
+          }
+        };
+      } else {
+        context.drawImage(cardDataImg[key], item[0] + 10, item[1] + 10, item[2] - 20, item[3] - 20);
+      }
+      context.fillText(title, item[0] + 10, item[1] + 10);
+      context.fillText(priceView, item[0] + 20, item[1] + 20);
+      context.fillStyle = 'red';
       const [y, x, w, h] = item;
       context.strokeRect(y, x, w, h);
     });
