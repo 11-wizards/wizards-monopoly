@@ -55,8 +55,6 @@ export const Views = ({
 
   const { mapSize, playerSize, cards } = useGameViewsCalc();
 
-
-
   useEffect(() => {
     const dicesNumber = newTargetPlayer?.dicesNumber;
     if (!Array.isArray(dicesNumber)) return;

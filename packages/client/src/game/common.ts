@@ -18,7 +18,6 @@ export const MAP_SIZES_PRECENT = {
   ANIMATION_SPEED: 5,
 };
 
-
 export const players = [
   { id: 0, name: 'Red', color: Red },
   { id: 1, name: 'Green', color: Green },
