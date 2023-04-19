@@ -28,6 +28,7 @@ export const fetchTopics = createAsyncThunk('forum/fetchTopics', async () => {
   if (response.status === 200) {
     return response.data as Topic[];
   }
+
   return null;
 });
 
@@ -36,6 +37,7 @@ export const fetchPosts = createAsyncThunk('forum/fetchPosts', async () => {
   if (response.status === 200) {
     return response.data as Post[];
   }
+
   return null;
 });
 
@@ -117,6 +119,7 @@ export const selectCurrentPageData = createSelector(
   (posts, currentPage) => {
     const start = (currentPage - 1) * ITEMS_PER_PAGE;
     const end = start + ITEMS_PER_PAGE;
+
     return posts.slice(start, end);
   },
 );

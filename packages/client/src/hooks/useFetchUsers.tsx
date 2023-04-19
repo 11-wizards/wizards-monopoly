@@ -20,5 +20,6 @@ export const useFetchUsers = (): [
       })
       .catch(() => {});
   }, []);
+
   return [state, setState];
 };

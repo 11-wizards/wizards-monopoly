@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-floating-promises: 0 */
 import type { FC, FormEvent } from 'react';
 import { useEffect, useState } from 'react';
 import type { Author, Topic } from 'models/forum.model';
@@ -22,8 +23,6 @@ import {
 } from '../../app/slices/forumSlice';
 
 import './Forum.scss';
-
-
 
 export const Forum: FC = () => {
   const { formatMessage: fm } = useIntl();
@@ -102,60 +101,61 @@ export const Forum: FC = () => {
         <div className="topic-change">
           <div className="new-topic-controls">
             <Input onInput={handleNewTopicNameInput} value={newTopicName} />
-      <Button onClick={handleAddNewTopic} htmlType="submit" type="primary">
-        {fm(messages.createTopicBtn)}
-      </Button>
-    </div>
-    <Table
-      className="topic-change-table"
-      columns={columns}
-      dataSource={topics}
-      pagination={{ pageSize: 6, pageSizeOptions: [], showLessItems: true }}
-    />
-        </div >
-      </div >
-  <div className="right-side">
-    <div className="current-topic">
-      {currentTopic ? (
-        <>
-          <div className="topic-header">
-            <Title level={3} className="topic-title">
-              {fm(messages.topicLabel)}
-              {currentTopic.title}
-            </Title>
-            <Title level={4} className="topic-author">
-              {fm(messages.authorLabel)}
-              {authors.length > 0 &&
-                authors.map((item) => {
-                  if (item?.id === currentTopic?.userId) {
-                    return <span key={item?.id}>{item?.name} </span>;
-                  }
-                  return false;
-                })}
-            </Title>
-            <p className="topic-body">{currentTopic.body}</p>
-          </div>
-          {posts && <Posts posts={posts} />}
-
-          <div className="new-post-controls">
-            <TextArea
-              onInput={handleNewPostNameInput}
-              value={newPostName}
-              className="new-post-body"
-            />
-            <Button onClick={handleAddNewPost} htmlType="submit" type="primary">
-              {fm(messages.responseBtn)}
+            <Button onClick={handleAddNewTopic} htmlType="submit" type="primary">
+              {fm(messages.createTopicBtn)}
             </Button>
           </div>
-        </>
-      ) : (
-        <Title level={4} className="topic-title">
-          {' '}
-          {fm(messages.changeTopic)}
-        </Title>
-      )}
+          <Table
+            className="topic-change-table"
+            columns={columns}
+            dataSource={topics}
+            pagination={{ pageSize: 6, pageSizeOptions: [], showLessItems: true }}
+          />
+        </div>
+      </div>
+      <div className="right-side">
+        <div className="current-topic">
+          {currentTopic ? (
+            <>
+              <div className="topic-header">
+                <Title level={3} className="topic-title">
+                  {fm(messages.topicLabel)}
+                  {currentTopic.title}
+                </Title>
+                <Title level={4} className="topic-author">
+                  {fm(messages.authorLabel)}
+                  {authors.length > 0 &&
+                    authors.map((item) => {
+                      if (item?.id === currentTopic?.userId) {
+                        return <span key={item?.id}>{item?.name} </span>;
+                      }
+
+                      return false;
+                    })}
+                </Title>
+                <p className="topic-body">{currentTopic.body}</p>
+              </div>
+              {posts && <Posts posts={posts} />}
+
+              <div className="new-post-controls">
+                <TextArea
+                  onInput={handleNewPostNameInput}
+                  value={newPostName}
+                  className="new-post-body"
+                />
+                <Button onClick={handleAddNewPost} htmlType="submit" type="primary">
+                  {fm(messages.responseBtn)}
+                </Button>
+              </div>
+            </>
+          ) : (
+            <Title level={4} className="topic-title">
+              {' '}
+              {fm(messages.changeTopic)}
+            </Title>
+          )}
+        </div>
+      </div>
     </div>
-  </div>
-    </div >
   );
 };

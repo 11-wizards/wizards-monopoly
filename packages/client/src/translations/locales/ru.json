@@ -14,7 +14,6 @@
   "auth.title.login": "Вход",
   "auth.title.register": "Регистрация",
 
-
   "client.error.message": "Извините, страница, которую вы посетили, не существует.",
   "client.error.message.button-text": "На главную",
 
