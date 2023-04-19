@@ -33,6 +33,8 @@ export const Map = ({ mapData, players, playerTarget, setAnimationEnd }: Props):
     startPlayersPosition[key] = { id, color, x, y, direction: startDirection };
   });
 
+  const [cardDataImg, setCardDataImg] = useState([]);
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [animationStop, setAnimationStop] = useState<boolean>(true);
@@ -42,7 +44,9 @@ export const Map = ({ mapData, players, playerTarget, setAnimationEnd }: Props):
   const [playersPositions, setPlayersPositions] = useState(startPlayersPosition);
 
   useEffect(() => {
-    setAnimationStop(false);
+    if (playerTarget) {
+      setAnimationStop(false);
+    }
   }, [playerTarget]);
 
   useEffect(() => {
@@ -54,10 +58,28 @@ export const Map = ({ mapData, players, playerTarget, setAnimationEnd }: Props):
     if (context === null) return;
     context.clearRect(0, 0, MAP_SIZE, MAP_SIZE);
     cards.forEach((item, key) => {
-      const cardImage = new Image();
       const { imgSrc, title, priceView } = cardsData[key];
-      cardImage.src = imgSrc;
-      context.drawImage(cardImage, item[0] + 10, item[1] + 10, item[2] - 20, item[3] - 20);
+      if (!cardDataImg[key]) {
+        const cardImage = new Image();
+        cardImage.src = imgSrc;
+        cardImage.onload = () => {
+          setCardDataImg((prev) => {
+            const data = [...prev];
+            data[key] = cardImage;
+
+            return data;
+          });
+          context.drawImage(cardImage, item[0] + 10, item[1] + 10, item[2] - 20, item[3] - 20);
+          if (key === 0) {
+            playersPositions.forEach(({ color, x, y }) => {
+              context.fillStyle = String(color);
+              context.fillRect(Number(x), Number(y), PLAYER_SIZE, PLAYER_SIZE);
+            });
+          }
+        };
+      } else {
+        context.drawImage(cardDataImg[key], item[0] + 10, item[1] + 10, item[2] - 20, item[3] - 20);
+      }
       context.fillText(title, item[0] + 10, item[1] + 10);
       context.fillText(priceView, item[0] + 20, item[1] + 20);
       context.fillStyle = 'red';
