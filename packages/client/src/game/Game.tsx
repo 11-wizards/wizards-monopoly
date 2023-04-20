@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 import type { NewTargetPlayer } from 'types/game';
 import { MAP_DATA, players } from './common';
@@ -42,7 +43,8 @@ export const Game = () => {
     setNewTargetPlayer({ id, target, dicesNumber });
   };
 
-  const clickRenderEnd = () => setViewsRenderEnd(true);
+  const clickRenderEnd = () =>
+    setViewsRenderEnd(true) as unknown as Dispatch<SetStateAction<boolean>>;
 
   // const currentStepPlayer = players[currentPlayerStep]?.name;
 
@@ -55,7 +57,6 @@ export const Game = () => {
       </button>
  */}
       <Views
-        mapData={MAP_DATA}
         players={players}
         newTargetPlayer={newTargetPlayer}
         renderEnd={clickRenderEnd}

@@ -16,7 +16,7 @@ export const MAP_SIZES_PRECENT = {
   NUMBER_CARDS: 40,
   SIZE_CORNER_CARDS: 13,
   ANIMATION_SPEED: 5,
-};
+} as const;
 
 export const players = [
   { id: 0, name: 'Red', color: Red },

@@ -40,7 +40,7 @@ export const Forum: FC = () => {
   useEffect(() => {
     dispatch(fetchTopics());
     dispatch(fetchPosts());
-  }, []);
+  }, [dispatch]);
 
   const handleChangeCurrentTopic = (topic: Topic) => {
     dispatch(setCurrentTopic(topic));
