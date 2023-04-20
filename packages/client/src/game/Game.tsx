@@ -27,7 +27,9 @@ export const Game = () => {
 
   const clickStartPlayerTurn = () => {
     const dicesNumber = rollDices();
+    console.log(viewsRenderEnd);
     if (!viewsRenderEnd) return;
+    setViewsRenderEnd(false);
     const steps = dicesNumber[0] + dicesNumber[1];
     const id = currentPlayerStep;
     console.log(`Выпало:  ${dicesNumber.join(', ')} у игрока ${id}`);
@@ -37,25 +39,27 @@ export const Game = () => {
       ...prevState,
       [id]: target,
     }));
-    setViewsRenderEnd(false);
     setNewTargetPlayer({ id, target, dicesNumber });
   };
 
-  const currentStepPlayer = players[currentPlayerStep]?.name;
+  const clickRenderEnd = () => setViewsRenderEnd(true);
+
+  // const currentStepPlayer = players[currentPlayerStep]?.name;
 
   return (
     <>
-      {/* Button убрать в VIEW */}
+      {/* Button убрать в VIEW
       <div>Игрок: {currentStepPlayer}</div>
       <button type="button" onClick={clickStartPlayerTurn}>
         Ходить
       </button>
-
+ */}
       <Views
         mapData={MAP_DATA}
         players={players}
         newTargetPlayer={newTargetPlayer}
-        renderEnd={() => setViewsRenderEnd(true)}
+        renderEnd={clickRenderEnd}
+        clickStartPlayerTurn={clickStartPlayerTurn}
       />
     </>
   );

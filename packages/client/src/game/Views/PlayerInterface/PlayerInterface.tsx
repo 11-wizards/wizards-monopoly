@@ -1,15 +1,20 @@
-import { MAP_DATA } from 'game/common';
+import { Button } from 'antd';
 
 import './PlayerInterface.scss';
 
-const { MAP_SIZE, SIZE_CORNER_CARDS } = MAP_DATA;
-
-export const PlayerInterface = ({ fullScreenToggle }): JSX.Element => {
-  const size = MAP_SIZE - (MAP_SIZE / 100) * SIZE_CORNER_CARDS * 2 - 20;
-
-  return (
-    <div className="player-interface" style={{ width: size, height: size }}>
-      {fullScreenToggle}
-    </div>
-  );
+type Props = {
+  fullScreenToggle: JSX.Element;
+  size: number;
+  clickStartPlayerTurn: () => void;
 };
+
+export const PlayerInterface = ({
+  fullScreenToggle,
+  size,
+  clickStartPlayerTurn,
+}: Props): JSX.Element => (
+  <div className="player-interface" style={{ width: size, height: size }}>
+    <Button onClick={clickStartPlayerTurn}>Новый ход</Button>
+    {fullScreenToggle}
+  </div>
+);

@@ -2,30 +2,30 @@ import { FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useEffect, useState } from 'react';
 
-export const useFullScreenApi = (ref) => {
+export const useFullScreenApi = (element: HTMLDivElement | null) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  const onFullscreenChange = (): Promise<void> => {
-    console.log(document.documentElement.clientHeight);
+  const onFullscreenChange = (): Promise<void> | undefined => {
+    if (document.fullscreenElement) {
+      setIsFullscreen(false);
 
-    if (isFullscreen) {
       return document?.exitFullscreen();
     }
-    const element = ref.current as unknown as HTMLElement;
-    setIsFullscreen((prev) => !prev);
+
+    setIsFullscreen(true);
 
     return element?.requestFullscreen();
   };
 
   useEffect(() => {
-    function test() {
+    function onResize() {
       if (!document.fullscreenElement) {
         setIsFullscreen(false);
       }
     }
-    window.addEventListener('resize', test);
+    window.addEventListener('resize', onResize);
 
-    return () => window.removeEventListener('resize', test);
+    return () => window.removeEventListener('resize', onResize);
   }, []);
 
   return (
