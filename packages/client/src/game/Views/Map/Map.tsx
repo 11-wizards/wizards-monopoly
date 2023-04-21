@@ -51,16 +51,15 @@ export const Map = ({ mapData, players, playerTarget, setAnimationEnd }: Props):
     }
   }, [playerTarget]);
 
-
-
   useEffect(() => {
     const canvas = canvasRef.current;
     if (canvas === null) return;
-    canvas.width = mapSize;
-    canvas.height = mapSize;
+    canvas.width = mapSize + 2;
+    canvas.height = mapSize + 2;
     const context = canvas.getContext('2d');
     if (context === null) return;
-    context.clearRect(0, 0, mapSize, mapSize);
+    context.clearRect(0, 0, mapSize + 2, mapSize + 2);
+
     cards.forEach((item, key: number) => {
       const [x, y, w, h] = item;
       const { imgSrc, title, priceView } = cardsData[key];
@@ -94,12 +93,20 @@ export const Map = ({ mapData, players, playerTarget, setAnimationEnd }: Props):
       } else {
         context.drawImage(cardDataImg[key], imgSizes[0], imgSizes[1], imgSizes[2], imgSizes[3]);
       }
-      context.fillText(title, item[0] + 10, item[1] + 10);
-      context.fillText(priceView, item[0] + 10, item[1] + 20);
+      context.font = `${(mapSize / 100) * 1.2}px Georgia`;
+      const maxWidthText = w - 20;
+      const titleTextWidth =
+        context.measureText(title).width > maxWidthText
+          ? maxWidthText
+          : context.measureText(title).width;
+      const priceViewTextWidth = context.measureText(priceView).width;
+
+      context.fillText(title, x + (w / 2 - titleTextWidth / 2), y + 20, maxWidthText);
+      context.fillText(priceView, x + (w / 2 - priceViewTextWidth / 2), y + h - 10, maxWidthText);
       context.fillStyle = 'red';
       context.strokeRect(x, y, w, h);
-
     });
+
     if (playerTarget !== null) {
       const { id, target } = playerTarget;
 
@@ -127,7 +134,6 @@ export const Map = ({ mapData, players, playerTarget, setAnimationEnd }: Props):
       context.fillStyle = String(color);
       context.fillRect(Number(x), Number(y), playerSize, playerSize);
     });
-
   }, [animationCounter, mapSize]);
 
   useLayoutEffect((): void | (() => void) => {
