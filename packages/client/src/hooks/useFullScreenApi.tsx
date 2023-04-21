@@ -1,35 +1,50 @@
 import { FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
-import { useEffect, useState } from 'react';
+import type { RefObject } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
-export const useFullScreenApi = (element: HTMLDivElement | null) => {
-  const [isFullscreen, setIsFullscreen] = useState(false);
+export const useFullScreenApi = (element: RefObject<HTMLDivElement> | null): JSX.Element => {
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(document.fullscreenElement != null);
 
-  const onFullscreenChange = (): Promise<void> | undefined => {
+  const setFullscreen = (): void => {
+    if (element === null) return;
+    if (element.current == null) return;
     if (document.fullscreenElement) {
-      setIsFullscreen(false);
-
-      return document?.exitFullscreen();
+      document
+        .exitFullscreen()
+        .then(() => {
+          setIsFullscreen(document.fullscreenElement != null);
+        })
+        .catch(() => {
+          setIsFullscreen(false);
+        });
     }
-
-    setIsFullscreen(true);
-
-    return element?.requestFullscreen();
+    element.current
+      .requestFullscreen()
+      .then(() => {
+        setIsFullscreen(document.fullscreenElement != null);
+      })
+      .catch(() => {
+        setIsFullscreen(false);
+      });
   };
 
-  useEffect(() => {
-    function onResize() {
-      if (!document.fullscreenElement) {
-        setIsFullscreen(false);
-      }
-    }
-    window.addEventListener('resize', onResize);
+  useLayoutEffect(() => {
+    if (element === null) return;
+    if (element.current == null) return;
+    const el = element.current as HTMLElement;
 
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
+    const onSetIsFullScreen = (): void => setIsFullscreen(document.fullscreenElement != null);
+
+    el.onfullscreenchange = onSetIsFullScreen;
+
+    return () => {
+      el.onfullscreenchange = null;
+    };
+  });
 
   return (
-    <Button onClick={onFullscreenChange}>
+    <Button onClick={setFullscreen}>
       {isFullscreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
     </Button>
   );

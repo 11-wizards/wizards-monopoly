@@ -31,7 +31,7 @@ export const Views = ({
 }: Props): JSX.Element => {
   const gameViewsBlock = useRef<HTMLDivElement>(null);
 
-  const fullScreenToggle = useFullScreenApi(gameViewsBlock.current);
+  const fullScreenToggle = useFullScreenApi(gameViewsBlock);
 
   const [animateOneDice, setAnimateOneDice] = useState<boolean>(true);
   const [animateTwoDice, setAnimateTwoDice] = useState<boolean>(true);
