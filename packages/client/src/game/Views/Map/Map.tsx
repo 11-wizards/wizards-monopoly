@@ -51,6 +51,8 @@ export const Map = ({ mapData, players, playerTarget, setAnimationEnd }: Props):
     }
   }, [playerTarget]);
 
+
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (canvas === null) return;
@@ -96,6 +98,7 @@ export const Map = ({ mapData, players, playerTarget, setAnimationEnd }: Props):
       context.fillText(priceView, item[0] + 10, item[1] + 20);
       context.fillStyle = 'red';
       context.strokeRect(x, y, w, h);
+
     });
     if (playerTarget !== null) {
       const { id, target } = playerTarget;
@@ -124,7 +127,9 @@ export const Map = ({ mapData, players, playerTarget, setAnimationEnd }: Props):
       context.fillStyle = String(color);
       context.fillRect(Number(x), Number(y), playerSize, playerSize);
     });
-  }, [animationCounter, mapData]);
+
+  }, [animationCounter, mapSize]);
+
   useLayoutEffect((): void | (() => void) => {
     if (!animationStop) {
       let timerId = 0;

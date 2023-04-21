@@ -27,7 +27,6 @@ export const Game = () => {
 
   const clickStartPlayerTurn = () => {
     const dicesNumber = rollDices();
-    console.log(viewsRenderEnd);
     if (!viewsRenderEnd) return;
     setViewsRenderEnd(false);
     const steps = dicesNumber[0] + dicesNumber[1];
