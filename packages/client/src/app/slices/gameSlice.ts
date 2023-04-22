@@ -54,6 +54,7 @@ export const gameSlice = createSlice({
 
       state.players.find((player) => player.id === playerId)!.balance += amount;
     },
+
     deductMoneyFromPlayer: (state, action: PayloadAction<BankTransaction>) => {
       const { amount, playerId } = action.payload;
 

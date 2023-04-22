@@ -40,6 +40,35 @@ export class RegisterInputDto {
   }
 }
 
-export type CurrentUser = {
-  id: string;
+export type CurrentUserDto = {
+  avatar: string;
+  display_name?: string;
+  email: string;
+  first_name: string;
+  id: number;
+  login: string;
+  phone: string;
+  second_name: string;
 };
+
+export class CurrentUser {
+  id: number;
+  firstName: string;
+  secondName: string;
+  displayName?: string;
+  login: string;
+  email: string;
+  phone: string;
+  avatar: string;
+
+  constructor(dto: CurrentUserDto) {
+    this.id = dto.id;
+    this.firstName = dto.first_name;
+    this.secondName = dto.second_name;
+    this.displayName = dto.display_name;
+    this.login = dto.login;
+    this.email = dto.email;
+    this.phone = dto.phone;
+    this.avatar = dto.avatar;
+  }
+}

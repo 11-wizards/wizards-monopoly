@@ -35,10 +35,10 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error",
+    "consistent-return": "off",
     "import/no-cycle": "off",
     "import/prefer-default-export": 0,
-    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
+    "jest/no-export": "off",
     "max-classes-per-file": "off",
     "max-len": [
       "error",
@@ -51,6 +51,8 @@
       }
     ],
     "newline-before-return": "error",
+    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
+    "prettier/prettier": "error",
     "react/function-component-definition": [
       "error",
       {
@@ -117,13 +119,15 @@
           ["core", "./src/core"],
           ["features", "./src/features"],
           ["game", "./src/game"],
+          ["helpers", "./src/helpers"],
           ["hooks", "./src/hooks"],
           ["layouts", "./src/layouts"],
           ["models", "./src/models"],
           ["pages", "./src/pages"],
           ["translations", "./src/translations"],
           ["types", "./src/types"],
-          ["styles", "./src/styles"]
+          ["styles", "./src/styles"],
+          ["data", "./src/data"]
         ],
         "extensions": [".ts", ".tsx"]
       }

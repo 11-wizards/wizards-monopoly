@@ -1,48 +1,24 @@
 import type { FC } from 'react';
-import { Link } from 'react-router-dom';
-import { defineMessages, useIntl } from 'react-intl';
+import { Link, useNavigate } from 'react-router-dom';
+import { useIntl } from 'react-intl';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, Input, Typography } from 'antd';
 import { authApi } from 'api/auth.api';
+import { fetchCurrentUser } from 'app/slices/userSlice';
+import { LOCAL_STORAGE_IS_AUTH_KEY } from 'constants/localStorage';
 import { ROUTES } from 'core/Router';
+import { handleServerError } from 'helpers/handleServerError';
+import { useAppDispatch } from 'hooks/redux';
 import type { LoginInput } from 'models/auth.model';
+import { messages } from './common';
 
 import './Login.scss';
 
-const messages = defineMessages({
-  buttonLogin: { id: 'auth.button.login', defaultMessage: 'Login' },
-  buttonRegister: { id: 'auth.button.register', defaultMessage: 'Register' },
-  placeholderLogin: { id: 'auth.placeholder.login', defaultMessage: 'Login' },
-  placeholderPassword: {
-    id: 'auth.placeholder.password',
-    defaultMessage: 'Password',
-  },
-  textNoAccount: { id: 'auth.text.no-account', defaultMessage: 'No account?' },
-  titleMain: { id: 'auth.title.login', defaultMessage: 'Login' },
-  validationLoginMaxLength: {
-    id: 'validation.max-length.login',
-    defaultMessage: 'Login cannot be longer than 20 characters',
-  },
-  validationLoginMinLength: {
-    id: 'validation.min-length.login',
-    defaultMessage: 'Login must be at least 4 characters',
-  },
-  validationPasswordMaxLength: {
-    id: 'validation.max-length.password',
-    defaultMessage: 'Password cannot be longer than 40 characters',
-  },
-  validationPasswordMinLength: {
-    id: 'validation.min-length.password',
-    defaultMessage: 'Password must be at least 4 characters',
-  },
-  validationRequiredField: {
-    id: 'validation.required-field',
-    defaultMessage: 'This field is required',
-  },
-});
-
 export const Login: FC = () => {
   const { formatMessage: fm } = useIntl();
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const {
     control,
@@ -51,10 +27,17 @@ export const Login: FC = () => {
   } = useForm<LoginInput>();
 
   async function onSubmit(values: LoginInput) {
-    const response = await authApi.login(values);
+    try {
+      const response = await authApi.logIn(values);
 
-    // eslint-disable-next-line no-console
-    console.log({ response });
+      if (response.status === 200) {
+        localStorage.setItem(LOCAL_STORAGE_IS_AUTH_KEY, 'true');
+        await dispatch(fetchCurrentUser());
+        navigate(ROUTES.ROOT.path);
+      }
+    } catch (err) {
+      await handleServerError(err as ServerError);
+    }
   }
 
   return (

@@ -1,18 +1,21 @@
 import type { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Controller, useForm } from 'react-hook-form';
-import { Button, Input, Typography } from 'antd';
+import { Button, Input, Typography, message } from 'antd';
+import { authApi } from 'api/auth.api';
 import { ROUTES } from 'core/Router';
+import { handleServerError } from 'helpers/handleServerError';
 import type { RegisterInput } from 'models/auth.model';
 import { messages } from './common';
 
 import './Register.scss';
 
-const mockAwait = <T,>(values: T): Promise<T> => Promise.resolve(values);
-
 export const Register: FC = () => {
   const { formatMessage: fm } = useIntl();
+
+  const navigate = useNavigate();
+
   const {
     control,
     handleSubmit,
@@ -20,10 +23,19 @@ export const Register: FC = () => {
   } = useForm<RegisterInput>();
 
   async function onSubmit(values: RegisterInput) {
-    const response = await mockAwait<RegisterInput>(values);
+    try {
+      const response = await authApi.register(values);
 
-    // eslint-disable-next-line no-console
-    console.log({ response });
+      if (response.status === 200) {
+        navigate(ROUTES.ROOT.path);
+        await message.open({
+          type: 'success',
+          content: fm(messages.notificationSuccess),
+        });
+      }
+    } catch (err) {
+      await handleServerError(err as ServerError);
+    }
   }
 
   return (
