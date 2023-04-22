@@ -11,7 +11,9 @@ export function useLocale() {
     let initialLocale =
       localStorage.getItem(LOCAL_STORAGE_IS_AUTH_KEY) || navigator.language.slice(0, 2);
 
-    if (!initialLocale || !['en', 'ru'].includes(initialLocale)) {
+    const isInitialLocaleSupported = ['en', 'ru'].includes(initialLocale);
+
+    if (!initialLocale || !isInitialLocaleSupported) {
       initialLocale = 'en';
     }
 
