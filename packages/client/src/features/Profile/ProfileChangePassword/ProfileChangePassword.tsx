@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, Input, Typography } from 'antd';
-import { LeftOutlined } from '@ant-design/icons';
 import { profileApi } from 'api/profile.api';
 import { ROUTES } from 'core/Router';
 import { handleServerError } from 'helpers/handleServerError';
@@ -123,13 +122,6 @@ export const ProfileChangePassword: FC = () => {
           </Button>
         </div>
       </form>
-
-      <Button
-        shape="circle"
-        icon={<LeftOutlined />}
-        onClick={handleCancelChangePassword}
-        className="form-change-password__goBackButton"
-      />
     </div>
   );
 };

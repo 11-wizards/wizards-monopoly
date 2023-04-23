@@ -1,8 +1,33 @@
 import { defineMessages } from 'react-intl';
+// import { ROUTES } from 'core/Router';
 
 export const messages = defineMessages({
-  headerRulesButton: {
-    id: 'header.rules.button',
-    defaultMessage: 'GAME RULES',
-  },
+  buttonRules: { id: 'header.navbar.rules', defaultMessage: 'Game rules' },
+  buttonSignOut: { id: 'universal.signout', defaultMessage: 'Sign out' },
+  buttonTitle: { id: 'project.name', defaultMessage: 'Monopoly' },
 });
+
+type HeaderLink = {
+  key: string;
+  link: string;
+};
+
+export const headerLinks: HeaderLink[] = [
+  {
+    key: 'forum',
+    link: '/forum',
+    // link: ROUTES.FORUM_PAGE.path,
+  },
+  {
+    key: 'leaderboard',
+    link: '/leaderboard',
+    // link: ROUTES.LEADERBOARD_PAGE.path,
+  },
+  {
+    key: 'profile',
+    link: '/profile',
+    // link: ROUTES.PROFILE_PAGE.path,
+  },
+];
+
+export const pathsWithRulesModal = ['/', '/start-game', '/game'];

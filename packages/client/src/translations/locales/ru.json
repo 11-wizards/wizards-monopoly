@@ -32,8 +32,12 @@
   "forum.posts.response": "ответ пользователя",
   "forum.title": "Форум пользователей игры Монополия",
 
+  "header.navbar.forum": "Форум",
+  "header.navbar.leaderboard": "Лидеры",
+  "header.navbar.profile": "Профиль",
+  "header.navbar.rules": "Правила игры",
+
   "main-page.title": "Главная",
-  "header.rules.button": "ПРАВИЛА ИГРЫ",
 
   "landing.title": "МОНОПОЛИЯ",
   "landing.subtitle": "Соберите своих друзей и семью, чтобы поиграть",

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Controller, useForm } from 'react-hook-form';
 import { Avatar, Button, Input, Modal, Typography } from 'antd';
-import { LeftOutlined, UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import { changeProfileInfo, signOut } from 'app/slices/userSlice';
 import { API_URL } from 'constants/main';
 import { ROUTES } from 'core/Router';
@@ -261,15 +261,6 @@ export const ProfileForm: FC = () => {
             {fm(messages.buttonSignout)}
           </Button>
         </div>
-
-        <Button
-          shape="circle"
-          icon={<LeftOutlined />}
-          onClick={() => {
-            navigate(-1);
-          }}
-          className="form-profile__goBackButton"
-        />
       </div>
       {isModalAvatarOpen && (
         <Modal open={isModalAvatarOpen} footer={null} onCancel={handleToggleChangeProfileAvatar}>
