@@ -1,6 +1,5 @@
 import type { PlayerColor } from 'types/enums/main';
 import type { Player } from 'types/game';
-import { nanoid } from '@reduxjs/toolkit';
 import { START_PLAYER_BALANCE, START_PLAYER_CARD_ID } from 'constants/main';
 import type { GameSetupFormData } from 'features/GameSetup/types';
 
@@ -26,7 +25,7 @@ export function convertFormPlayersToPlayersObject(formPlayers: GameSetupFormData
 
   for (let i = 1; i <= playersCount; i += 1) {
     const { name, color } = playersObject[i];
-    const id = nanoid();
+    const id = i;
     players.push({
       id,
       name,

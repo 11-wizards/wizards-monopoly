@@ -6,8 +6,10 @@ export const selectPropertyCards = (state: RootState) => state.game.propertyCard
 
 const selectPlayers = (state: RootState) => state.game.players;
 
-export const selectPlayerById = (id: PlayerId) =>
-  createSelector(selectPlayers, (players) => players.find((player) => player.id === id));
+export const selectPlayerById = createSelector(
+  [selectPlayers, (state, playerId: PlayerId) => playerId],
+  (players, playerId) => players.find((player) => player.id === playerId),
+);
 
 export const selectPropertyCardById = (id: PropertyCardId) =>
   createSelector(selectPropertyCards, (propertyCards) => propertyCards[id]);
