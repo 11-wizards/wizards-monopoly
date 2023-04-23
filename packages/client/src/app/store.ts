@@ -1,14 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './slices/userSlice';
 import forumReducer from './slices/forumSlice';
 import gameReducer from './slices/gameSlice';
+import localeReducer from './slices/localeSlice';
+import userReducer from './slices/userSlice';
 
 export const store = configureStore({
   reducer: {
-    // locale
-    user: userReducer,
     forum: forumReducer,
     game: gameReducer,
+    locale: localeReducer,
+    user: userReducer,
   },
 });
 
