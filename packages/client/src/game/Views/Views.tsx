@@ -20,7 +20,7 @@ type TypeUseGameViewsCalc = Nullable<{
 type ViewsProps = {
   clickStartPlayerTurn: () => void;
   mapData: unknown;
-  newTargetPlayer: NewTargetPlayer;
+  newTargetPlayer: Nullable<NewTargetPlayer>;
   players: Players;
   renderEnd: () => React.Dispatch<React.SetStateAction<boolean>> | void;
 };
@@ -31,14 +31,14 @@ export const Views: FC<ViewsProps> = ({
   renderEnd,
   clickStartPlayerTurn,
 }: ViewsProps) => {
-  const gameViewsBlock = useRef<HTMLDivElement>();
+  const gameViewsBlock = useRef<HTMLDivElement>(null!);
 
   const fullScreenToggle = useFullScreenApi(gameViewsBlock);
 
   const [animateOneDice, setAnimateOneDice] = useState<boolean>(true);
   const [animateTwoDice, setAnimateTwoDice] = useState<boolean>(true);
 
-  const [playerTarget, setTargetPlayer] = useState<PlayerTarget | null>(null);
+  const [playerTarget, setTargetPlayer] = useState<Nullable<PlayerTarget>>(null);
 
   const [diceOne, setDiceOne] = useState<{
     number: number;

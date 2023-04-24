@@ -43,7 +43,7 @@ export const Map: FC<MapProps> = ({
 
   const [cardDataImg, setCardDataImg] = useState<Array<CanvasImageSource>>([]);
 
-  const canvasRef = useRef<HTMLCanvasElement>();
+  const canvasRef = useRef<HTMLCanvasElement>(null!);
 
   const [animationStop, setAnimationStop] = useState<boolean>(true);
 
@@ -59,11 +59,14 @@ export const Map: FC<MapProps> = ({
 
   useEffect(() => {
     const canvas = canvasRef.current;
+
     if (canvas === null) return;
+
     canvas.width = mapSize + 2;
     canvas.height = mapSize + 2;
-    const context = canvas.getContext('2d');
-    if (context === null) return;
+
+    const context = canvas.getContext('2d')!;
+
     context.clearRect(0, 0, mapSize + 2, mapSize + 2);
 
     cards.forEach((item, key: number) => {
@@ -124,14 +127,16 @@ export const Map: FC<MapProps> = ({
           if (!newPlayerPostion) {
             setAnimationStop(true);
             setAnimationEnd();
-          } else {
-            setPlayersPositions((prev) => {
-              const playerPosition = [...prev];
-              playerPosition[key] = { ...playerPosition[key], ...newPlayerPostion };
 
-              return playerPosition;
-            });
+            return;
           }
+
+          setPlayersPositions((prev) => {
+            const playerPosition = [...prev];
+            playerPosition[key] = { ...playerPosition[key], ...newPlayerPostion };
+
+            return playerPosition;
+          });
         }
       });
     }

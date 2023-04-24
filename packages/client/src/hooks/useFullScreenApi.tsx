@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import type { RefObject } from 'react';
 import { useLayoutEffect, useState } from 'react';
 
-export const useFullScreenApi = (element: RefObject<HTMLDivElement> | null): JSX.Element => {
+export const useFullScreenApi = (element: RefObject<Nullable<HTMLDivElement>>): JSX.Element => {
   const [isFullscreen, setIsFullscreen] = useState<boolean>(document.fullscreenElement != null);
 
   const setFullscreen = (): void => {

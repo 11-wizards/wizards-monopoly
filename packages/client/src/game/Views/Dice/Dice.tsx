@@ -31,7 +31,7 @@ export const Dice: FC<DiceProps> = ({ speed, number, offset, resetKey, stopAnima
     setView(true);
   }, [resetKey]);
 
-  if (!number) return;
+  if (!number) return null;
 
   return (
     <div

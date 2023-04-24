@@ -9,7 +9,7 @@ export const Game = () => {
 
   const [viewsRenderEnd, setViewsRenderEnd] = useState<boolean>(true);
 
-  const [newTargetPlayer, setNewTargetPlayer] = useState<NewTargetPlayer>();
+  const [newTargetPlayer, setNewTargetPlayer] = useState<Nullable<NewTargetPlayer>>(null);
 
   const [playersCurrentPosition, setPlayersCurrentPosition] = useState<Record<number, number>>(
     players.reduce((prev, { id }) => ({ ...prev, [id]: 0 }), {}),
