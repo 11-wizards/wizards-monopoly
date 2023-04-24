@@ -1,5 +1,5 @@
 import { defineMessages } from 'react-intl';
-// import { ROUTES } from 'core/Router';
+import { ROUTES } from 'core/Router/routes';
 
 export const messages = defineMessages({
   buttonRules: { id: 'header.navbar.rules', defaultMessage: 'Game rules' },
@@ -15,18 +15,15 @@ type HeaderLink = {
 export const headerLinks: HeaderLink[] = [
   {
     key: 'forum',
-    link: '/forum',
-    // link: ROUTES.FORUM_PAGE.path,
+    link: ROUTES.FORUM_PAGE.path,
   },
   {
     key: 'leaderboard',
-    link: '/leaderboard',
-    // link: ROUTES.LEADERBOARD_PAGE.path,
+    link: ROUTES.LEADERBOARD_PAGE.path,
   },
   {
     key: 'profile',
-    link: '/profile',
-    // link: ROUTES.PROFILE_PAGE.path,
+    link: ROUTES.PROFILE_PAGE.path,
   },
 ];
 
