@@ -1,7 +1,16 @@
-.wrapper-loader {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
+.loader {
+  width: 100%;
+
+  &__spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+  }
+
+  &__childrenContainer {
+    width: 100%;
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }
