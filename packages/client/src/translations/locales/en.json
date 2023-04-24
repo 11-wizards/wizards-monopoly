@@ -32,8 +32,12 @@
   "forum.posts.response": "user response",
   "forum.title": "Monopoly Game User Forum",
 
+  "header.navbar.forum": "Forum",
+  "header.navbar.leaderboard": "Leaderboard",
+  "header.navbar.profile": "Profile",
+  "header.navbar.rules": "Game rules",
+
   "main-page.title": "Main",
-  "header.rules.button": "GAME RULES",
 
   "landing.title": "MONOPOLY",
   "landing.subtitle": "Gather Your Friends and Family to Play",

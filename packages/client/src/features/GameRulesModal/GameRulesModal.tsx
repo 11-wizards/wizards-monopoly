@@ -23,6 +23,7 @@ export const GameRulesModal: FC<GameRulesModalProps> = ({ isOpen, onClose }) => 
           {fm(messages.gameRulesCloseButton)}
         </Button>,
       ]}
+      width={900}
     >
       <div className="modal-rules-layout">
         <section className="modal-rules-section">

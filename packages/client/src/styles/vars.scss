@@ -10,3 +10,11 @@ $paddingM: 16px;
 $paddingL: 24px;
 
 $headerHeight: 50px;
+
+$fontSizeL: 24px;
+
+.go-back-button {
+  position: absolute;
+  top: 50%;
+  left: $paddingM;
+}
