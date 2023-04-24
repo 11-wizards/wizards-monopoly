@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
 import { CornersCardsID, MapDirectons } from 'types/enums/main';
 import type { PlayerTarget, PlayersPositions, Players } from 'types/game';
@@ -9,7 +10,7 @@ import './Map.scss';
 const { RIGHT: startDirection } = MapDirectons;
 const { CARD_TOP_LEFT: startCardId }: { CARD_TOP_LEFT: number } = CornersCardsID;
 
-type Props = {
+type MapProps = {
   mapData: {
     NUMBER_CARDS: number;
     SIZE_CORNER_CARDS: number;
@@ -24,7 +25,12 @@ type Props = {
   setAnimationEnd: () => React.Dispatch<React.SetStateAction<boolean>> | void;
 };
 
-export const Map = ({ mapData, players, playerTarget, setAnimationEnd }: Props): JSX.Element => {
+export const Map: FC<MapProps> = ({
+  mapData,
+  players,
+  playerTarget,
+  setAnimationEnd,
+}: MapProps) => {
   const { mapSize, speed, playerSize, cards } = mapData;
 
   const startPlayersPosition: PlayersPositions | [] = [];
@@ -37,7 +43,7 @@ export const Map = ({ mapData, players, playerTarget, setAnimationEnd }: Props):
 
   const [cardDataImg, setCardDataImg] = useState<Array<CanvasImageSource>>([]);
 
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>();
 
   const [animationStop, setAnimationStop] = useState<boolean>(true);
 

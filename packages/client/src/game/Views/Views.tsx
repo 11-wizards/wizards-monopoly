@@ -1,12 +1,13 @@
 import { resetDices } from 'game/helpers/helpers';
 import { useFullScreenApi, useGameViewsCalc } from 'hooks';
+import type { FC } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import type { NewTargetPlayer, Players, PlayerTarget } from 'types/game';
-import { Dice } from './DIce/Dice';
+import { Dice } from './Dice/Dice';
 import { Map } from './Map';
 import { PlayerInterface } from './PlayerInterface';
 
-type TypeUseGameViewsCalc = {
+type TypeUseGameViewsCalc = Nullable<{
   NUMBER_CARDS: number;
   SIZE_CORNER_CARDS: number;
   cards: number[][];
@@ -14,9 +15,9 @@ type TypeUseGameViewsCalc = {
   mapSize: number;
   playerSize: number;
   speed: number;
-} | null;
+}>;
 
-type Props = {
+type ViewsProps = {
   clickStartPlayerTurn: () => void;
   mapData: unknown;
   newTargetPlayer: NewTargetPlayer;
@@ -24,13 +25,13 @@ type Props = {
   renderEnd: () => React.Dispatch<React.SetStateAction<boolean>> | void;
 };
 
-export const Views = ({
+export const Views: FC<ViewsProps> = ({
   players,
   newTargetPlayer,
   renderEnd,
   clickStartPlayerTurn,
-}: Props): JSX.Element => {
-  const gameViewsBlock = useRef<HTMLDivElement>(null);
+}: ViewsProps) => {
+  const gameViewsBlock = useRef<HTMLDivElement>();
 
   const fullScreenToggle = useFullScreenApi(gameViewsBlock);
 

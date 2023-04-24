@@ -1,8 +1,9 @@
+import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 
 import './Dice.scss';
 
-type Props = {
+type DiceProps = {
   number: number;
   offset: number;
   resetKey: number;
@@ -10,13 +11,7 @@ type Props = {
   stopAnimate: () => void;
 };
 
-export const Dice = ({
-  speed,
-  number,
-  offset,
-  resetKey,
-  stopAnimate,
-}: Props): JSX.Element | null => {
+export const Dice: FC<DiceProps> = ({ speed, number, offset, resetKey, stopAnimate }) => {
   const [view, setView] = useState(false);
 
   const endDiceAnimation = (): void => {
@@ -35,7 +30,8 @@ export const Dice = ({
     if (!resetKey) return;
     setView(true);
   }, [resetKey]);
-  if (!number) return null;
+
+  if (!number) return;
 
   return (
     <div

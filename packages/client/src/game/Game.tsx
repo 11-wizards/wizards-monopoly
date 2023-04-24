@@ -9,7 +9,7 @@ export const Game = () => {
 
   const [viewsRenderEnd, setViewsRenderEnd] = useState<boolean>(true);
 
-  const [newTargetPlayer, setNewTargetPlayer] = useState<NewTargetPlayer>(null);
+  const [newTargetPlayer, setNewTargetPlayer] = useState<NewTargetPlayer>();
 
   const [playersCurrentPosition, setPlayersCurrentPosition] = useState<Record<number, number>>(
     players.reduce((prev, { id }) => ({ ...prev, [id]: 0 }), {}),
@@ -47,7 +47,7 @@ export const Game = () => {
 
   return (
     <>
-      {/* Button убрать в VIEW
+      {/* TODO: Button убрать в VIEW
       <div>Игрок: {currentStepPlayer}</div>
       <button type="button" onClick={clickStartPlayerTurn}>
         Ходить
