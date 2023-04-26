@@ -25,12 +25,7 @@ type MapProps = {
   setAnimationEnd: () => React.Dispatch<React.SetStateAction<boolean>> | void;
 };
 
-export const Map: FC<MapProps> = ({
-  mapData,
-  players,
-  playerTarget,
-  setAnimationEnd,
-}: MapProps) => {
+export const Map: FC<MapProps> = ({ mapData, players, playerTarget, setAnimationEnd }) => {
   const { mapSize, speed, playerSize, cards } = mapData;
 
   const startPlayersPosition: PlayersPositions | [] = [];

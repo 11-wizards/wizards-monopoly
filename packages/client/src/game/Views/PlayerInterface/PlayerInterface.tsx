@@ -13,7 +13,7 @@ export const PlayerInterface: FC<PlayerInterfaceProps> = ({
   fullScreenToggle,
   size,
   clickStartPlayerTurn,
-}: PlayerInterfaceProps) => (
+}) => (
   <div className="player-interface" style={{ width: size, height: size }}>
     <Button onClick={clickStartPlayerTurn}>Новый ход</Button>
     {fullScreenToggle}

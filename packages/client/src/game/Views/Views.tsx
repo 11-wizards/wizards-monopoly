@@ -30,7 +30,7 @@ export const Views: FC<ViewsProps> = ({
   newTargetPlayer,
   renderEnd,
   clickStartPlayerTurn,
-}: ViewsProps) => {
+}) => {
   const gameViewsBlock = useRef<HTMLDivElement>(null!);
 
   const fullScreenToggle = useFullScreenApi(gameViewsBlock);
