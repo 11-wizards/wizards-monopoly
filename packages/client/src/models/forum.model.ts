@@ -1,22 +1,22 @@
 export type Author = {
+  email: string;
   id: number;
   name: string;
-  email: string;
 };
 
 export type Topic = {
-  userId: number;
+  body: string;
   id: number;
   title: string;
-  body: string;
+  userId: number;
 };
 
 export type Post = {
-  postId: number;
-  name: string;
-  id: number;
-  email: string;
   body: string;
+  email: string;
+  id: number;
+  name: string;
+  postId: number;
 };
 
 export class ForumNewTopic {

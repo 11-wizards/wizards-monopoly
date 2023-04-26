@@ -9,7 +9,7 @@ export const Game = () => {
 
   const [viewsRenderEnd, setViewsRenderEnd] = useState<boolean>(true);
 
-  const [newTargetPlayer, setNewTargetPlayer] = useState<NewTargetPlayer>(null);
+  const [newTargetPlayer, setNewTargetPlayer] = useState<Nullable<NewTargetPlayer>>(null);
 
   const [playersCurrentPosition, setPlayersCurrentPosition] = useState<Record<number, number>>(
     players.reduce((prev, { id }) => ({ ...prev, [id]: 0 }), {}),
@@ -28,6 +28,7 @@ export const Game = () => {
   const clickStartPlayerTurn = () => {
     const dicesNumber = rollDices();
     if (!viewsRenderEnd) return;
+    setViewsRenderEnd(false);
     const steps = dicesNumber[0] + dicesNumber[1];
     const id = currentPlayerStep;
     console.log(`Выпало:  ${dicesNumber.join(', ')} у игрока ${id}`);
@@ -37,25 +38,27 @@ export const Game = () => {
       ...prevState,
       [id]: target,
     }));
-    setViewsRenderEnd(false);
     setNewTargetPlayer({ id, target, dicesNumber });
   };
 
-  const currentStepPlayer = players[currentPlayerStep]?.name;
+  const clickRenderEnd = () => setViewsRenderEnd(true);
+
+  // const currentStepPlayer = players[currentPlayerStep]?.name;
 
   return (
     <>
-      {/* Button убрать в VIEW */}
+      {/* TODO: Button убрать в VIEW
       <div>Игрок: {currentStepPlayer}</div>
       <button type="button" onClick={clickStartPlayerTurn}>
         Ходить
       </button>
-
+ */}
       <Views
         mapData={MAP_DATA}
         players={players}
         newTargetPlayer={newTargetPlayer}
-        renderEnd={() => setViewsRenderEnd(true)}
+        renderEnd={clickRenderEnd}
+        clickStartPlayerTurn={clickStartPlayerTurn}
       />
     </>
   );

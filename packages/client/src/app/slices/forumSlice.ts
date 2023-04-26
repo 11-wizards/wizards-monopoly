@@ -1,17 +1,17 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
-import type { Author, Topic, Post } from '../../models/forum.model';
-import { ForumNewPost, ForumNewTopic } from '../../models/forum.model';
+import type { Author, Topic, Post } from 'models/forum.model';
+import { ForumNewPost, ForumNewTopic } from 'models/forum.model';
+import { forumApi } from 'api/forum.api';
 import type { RootState } from '../store';
-import { forumApi } from '../../api/forum.api';
 
 type ForumState = {
-  currentTopic: Nullable<Topic>;
-  topics: Topic[];
   authors: Author[];
-  posts: Post[];
   currentPage: number;
+  currentTopic: Nullable<Topic>;
   isLoading: boolean;
+  posts: Post[];
+  topics: Topic[];
 };
 
 const initialState: ForumState = {

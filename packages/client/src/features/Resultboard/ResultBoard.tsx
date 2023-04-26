@@ -10,12 +10,12 @@ import './ResultBoard.scss';
 const { Title } = Typography;
 
 type ResultBoardItem = {
+  gameTime: string;
   key: number;
-  place: number;
   nick: string;
+  place: number;
   profit: number;
   property: number;
-  gameTime: string;
 };
 
 // Mock data - will be removed on further sprints

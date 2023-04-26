@@ -1,10 +1,10 @@
 export type ProfileInput = {
-  firstName: string;
-  secondName: string;
   displayName: string;
-  login: string;
   email: string;
+  firstName: string;
+  login: string;
   phone: string;
+  secondName: string;
 };
 
 export class ProfileInputDto {
@@ -26,8 +26,8 @@ export class ProfileInputDto {
 }
 
 export type ProfileChangePasswordInput = {
-  oldPassword: string;
   newPassword: string;
+  oldPassword: string;
 };
 
 export class ProfileChangePasswordInputDto {

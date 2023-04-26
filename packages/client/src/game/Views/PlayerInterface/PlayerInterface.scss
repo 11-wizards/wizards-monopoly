@@ -1,0 +1,9 @@
+.player-interface {
+  position: absolute;
+  inset: 0;
+  // background-color: wheat;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}

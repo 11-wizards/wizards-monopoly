@@ -8,8 +8,6 @@ import type { ColumnsType } from 'antd/es/table';
 import Title from 'antd/es/typography/Title';
 import TextArea from 'antd/es/input/TextArea';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { Posts } from './Posts';
-import { messages } from './common';
 import {
   addNewPost,
   addNewTopic,
@@ -20,7 +18,9 @@ import {
   selectPosts,
   selectTopics,
   setCurrentTopic,
-} from '../../app/slices/forumSlice';
+} from 'app/slices/forumSlice';
+import { Posts } from './Posts';
+import { messages } from './common';
 
 import './Forum.scss';
 

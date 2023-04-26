@@ -1,34 +1,62 @@
 import { resetDices } from 'game/helpers/helpers';
-import { useEffect, useState } from 'react';
-import type { MapData, NewTargetPlayer, Players, PlayerTarget } from 'types/game';
-import { Dice } from './DIce/Dice';
+import { useFullScreenApi, useGameViewsCalc } from 'hooks';
+import type { FC } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { NewTargetPlayer, Players, PlayerTarget } from 'types/game';
+import { Dice } from './Dice/Dice';
 import { Map } from './Map';
+import { PlayerInterface } from './PlayerInterface';
 
-type Props = {
-  mapData: MapData;
+type TypeUseGameViewsCalc = Nullable<{
+  NUMBER_CARDS: number;
+  SIZE_CORNER_CARDS: number;
+  cards: number[][];
+  interfaceSize: number;
+  mapSize: number;
+  playerSize: number;
+  speed: number;
+}>;
+
+type ViewsProps = {
+  clickStartPlayerTurn: () => void;
+  mapData: unknown;
+  newTargetPlayer: Nullable<NewTargetPlayer>;
   players: Players;
-  newTargetPlayer: NewTargetPlayer;
-  renderEnd: () => React.Dispatch<React.SetStateAction<boolean>>;
+  renderEnd: () => React.Dispatch<React.SetStateAction<boolean>> | void;
 };
 
-export const Views = ({
-  mapData,
-  players = [],
-  newTargetPlayer = null,
+export const Views: FC<ViewsProps> = ({
+  players,
+  newTargetPlayer,
   renderEnd,
-}: Props): JSX.Element => {
-  const [animateOneDice, setAnimateOneDice] = useState<boolean>(false);
-  const [animateTwoDice, setAnimateTwoDice] = useState<boolean>(false);
+  clickStartPlayerTurn,
+}) => {
+  const gameViewsBlock = useRef<HTMLDivElement>(null!);
 
-  const [playerTarget, setTargetPlayer] = useState<PlayerTarget>(null);
+  const fullScreenToggle = useFullScreenApi(gameViewsBlock);
 
-  const [diceOne, setDiceOne] = useState({
+  const [animateOneDice, setAnimateOneDice] = useState<boolean>(true);
+  const [animateTwoDice, setAnimateTwoDice] = useState<boolean>(true);
+
+  const [playerTarget, setTargetPlayer] = useState<Nullable<PlayerTarget>>(null);
+
+  const [diceOne, setDiceOne] = useState<{
+    number: number;
+    offset: number;
+    resetKey: number;
+    speed: number;
+  }>({
     offset: 150,
     number: 0,
     resetKey: 0,
     speed: 2,
   });
-  const [diceTwo, setDiceTwo] = useState({
+  const [diceTwo, setDiceTwo] = useState<{
+    number: number;
+    offset: number;
+    resetKey: number;
+    speed: number;
+  }>({
     offset: -130,
     number: 0,
     resetKey: 0,
@@ -38,7 +66,7 @@ export const Views = ({
   const stopAnimateOneDice = (): void => setAnimateOneDice(false);
   const stopAnimateTwoDice = (): void => setAnimateTwoDice(false);
 
-  const startAnimateDices = (dicesNumber: Array<number> | []): void => {
+  const startAnimateDices = (dicesNumber: Array<number>): void => {
     if (!dicesNumber.length) return;
     setAnimateOneDice(true);
     setAnimateTwoDice(true);
@@ -59,15 +87,34 @@ export const Views = ({
     setTargetPlayer({ id, target });
   }, [animateOneDice, animateTwoDice]);
 
+  const mapParams: TypeUseGameViewsCalc = useGameViewsCalc();
+
+  if (!mapParams) return <>ЗАГРУЗКА КАРТЫ!</>;
+  const { mapSize, playerSize, cards, interfaceSize, speed, SIZE_CORNER_CARDS, NUMBER_CARDS } =
+    mapParams;
+
   return (
-    <div className="game-views">
+    <div className="game-views" ref={gameViewsBlock} style={{ height: mapSize, width: mapSize }}>
       <Dice {...diceOne} stopAnimate={stopAnimateOneDice} />
       <Dice {...diceTwo} stopAnimate={stopAnimateTwoDice} />
       <Map
-        mapData={mapData}
+        mapData={{
+          mapSize,
+          playerSize,
+          cards,
+          interfaceSize,
+          speed,
+          SIZE_CORNER_CARDS,
+          NUMBER_CARDS,
+        }}
         players={players}
         playerTarget={playerTarget}
         setAnimationEnd={renderEnd}
+      />
+      <PlayerInterface
+        fullScreenToggle={fullScreenToggle}
+        size={interfaceSize}
+        clickStartPlayerTurn={clickStartPlayerTurn}
       />
     </div>
   );

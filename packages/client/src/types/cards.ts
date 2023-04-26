@@ -1,6 +1,6 @@
 export type CardsData = {
-  title: string;
   imgSrc: string;
-  priceView: string;
   price?: number;
+  priceView: string;
+  title: string;
 };

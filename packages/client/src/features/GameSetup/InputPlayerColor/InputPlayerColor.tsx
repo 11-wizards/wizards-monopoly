@@ -9,11 +9,11 @@ import { selectOptions } from './utils';
 
 type InputPlayerColorProps = {
   className?: string;
+  clearErrors: UseFormClearErrors<GameSetupFormData>;
   control: Control;
   formErrors: FieldErrors;
-  index: number;
   getFormValues: UseFormGetValues<GameSetupFormData>;
-  clearErrors: UseFormClearErrors<GameSetupFormData>;
+  index: number;
 };
 
 export const InputPlayerColor: FC<InputPlayerColorProps> = ({

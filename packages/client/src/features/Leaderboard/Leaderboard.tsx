@@ -9,10 +9,10 @@ import './Leaderboard.scss';
 const { Title } = Typography;
 
 type LeaderboardPayer = {
-  place: number;
-  nick: string;
-  profit: number;
   gameTime: string;
+  nick: string;
+  place: number;
+  profit: number;
 };
 
 export const Leaderboard: FC = () => {

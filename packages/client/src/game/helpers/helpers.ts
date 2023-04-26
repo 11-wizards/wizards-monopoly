@@ -1,8 +1,6 @@
 import { CornersCardsID, MapDirectons } from 'types/enums/main';
 import type { PlayerPosition, PlayerPositionTarget } from 'types/game';
-import { MAP_DATA } from 'game/common';
 
-const { MAP_SIZE, PLAYER_SIZE } = MAP_DATA;
 const { UP, DOWN, LEFT, RIGHT } = MapDirectons;
 const { CARD_TOP_LEFT, CARD_TOP_RIGHT, CARD_BOTTOM_LEFT, CARD_BOTTOM_RIGHT } = CornersCardsID;
 
@@ -12,7 +10,7 @@ function calcCardSize(
   id: number,
   baseWidth: number,
   baseHeight: number,
-): { width: number; height: number } {
+): { height: number; width: number } {
   if (
     (id > CARD_TOP_LEFT && id < CARD_TOP_RIGHT) ||
     (id > CARD_BOTTOM_LEFT && id < CARD_BOTTOM_RIGHT)
@@ -65,9 +63,12 @@ export const initCardsPositions = (
 
 // player move
 
+const arrayNumberRound = (array: Array<number>): Array<number> =>
+  array.map((item) => Math.round(item));
+
 export const calcPlayerParkingSpotCard = (
   id: number,
-  card: Array<number>,
+  card: number[],
   playerSize: number,
 ): Array<number> => {
   const [x, y, w, h] = card;
@@ -75,16 +76,22 @@ export const calcPlayerParkingSpotCard = (
   const baseX = Number(Math.round(x + w / 2 - playerSize * 1.5));
   if (w > h) {
     if (id % 2 === 0) {
-      return [baseX + (playerSize / 1.5) * id + 3, baseY];
+      return arrayNumberRound([baseX + (playerSize / 1.5) * id + 3, baseY]);
     }
 
-    return [baseX + (playerSize / 1.5) * id - playerSize / 2 + 3, baseY + playerSize + 5];
+    return arrayNumberRound([
+      baseX + (playerSize / 1.5) * id - playerSize / 2 + 3,
+      baseY + playerSize + 5,
+    ]);
   }
   if (id % 2 === 0) {
-    return [baseX, baseY + (playerSize / 1.5) * id + 3];
+    return arrayNumberRound([baseX, baseY + (playerSize / 1.5) * id + 3]);
   }
 
-  return [baseX + playerSize + 5, baseY + (playerSize / 1.5) * id - playerSize / 2 + 3];
+  return arrayNumberRound([
+    baseX + playerSize + 5,
+    baseY + (playerSize / 1.5) * id - playerSize / 2 + 3,
+  ]);
 };
 
 const playerMoveBegin = (
@@ -92,16 +99,18 @@ const playerMoveBegin = (
   y: number,
   speed: number,
   direction: MapDirectons,
+  mapSize: number,
+  playerSize: number,
 ): PlayerPosition | false => {
   if (direction === RIGHT) {
-    if (x + PLAYER_SIZE >= MAP_SIZE) {
+    if (x + playerSize >= mapSize) {
       return { x, y, direction: DOWN };
     }
 
     return { x: x + speed, y, direction };
   }
   if (direction === DOWN) {
-    if (y + PLAYER_SIZE >= MAP_SIZE) {
+    if (y + playerSize >= mapSize) {
       return { x, y, direction: LEFT };
     }
 
@@ -152,40 +161,45 @@ export const playerMove = (
   playerPosition: PlayerPosition,
   tagetPosition: PlayerPositionTarget,
   speed: number,
+  mapSize: number,
+  playerSize: number,
 ): PlayerPosition | false => {
   const { x, y, direction } = playerPosition;
   const [targetX, targetY] = tagetPosition;
 
   if (x === targetX && y === targetY) return false;
 
+  const longDistance = Math.round((mapSize / 100) * 17);
+  const shortDistance = Math.round(mapSize / 100);
+
   const distanceToTargetX = x - targetX;
   const distanceToTargetY = y - targetY;
 
   if (
-    distanceToTargetX < 150 &&
-    distanceToTargetX > -150 &&
-    distanceToTargetY < 150 &&
-    distanceToTargetY > -150
+    distanceToTargetX < longDistance &&
+    distanceToTargetX > -longDistance &&
+    distanceToTargetY < longDistance &&
+    distanceToTargetY > -longDistance
   ) {
     if (
-      (distanceToTargetX < 10 && distanceToTargetX > -10) ||
-      (distanceToTargetY < 10 && distanceToTargetY > -10)
+      (distanceToTargetX < shortDistance && distanceToTargetX > -shortDistance) ||
+      (distanceToTargetY < shortDistance && distanceToTargetY > -shortDistance)
     ) {
       if (
-        distanceToTargetX < 10 &&
-        distanceToTargetX > -10 &&
-        distanceToTargetY < 10 &&
-        distanceToTargetY > -10
+        distanceToTargetX < shortDistance &&
+        distanceToTargetX > -shortDistance &&
+        distanceToTargetY < shortDistance &&
+        distanceToTargetY > -shortDistance
       )
         return playerMoveEnd(x, y, targetX, targetY, 1, 1, direction);
-      if (distanceToTargetX < 10 && distanceToTargetX > -10)
+      if (distanceToTargetX < shortDistance && distanceToTargetX > -shortDistance)
         return playerMoveEnd(x, y, targetX, targetY, 1, speed, direction);
-      if (distanceToTargetY < 10 && distanceToTargetY > -10)
+      if (distanceToTargetY < shortDistance && distanceToTargetY > -shortDistance)
         return playerMoveEnd(x, y, targetX, targetY, speed, 1, direction);
     } else return playerMoveEnd(x, y, targetX, targetY, speed, speed, direction);
   }
 
-  return playerMoveBegin(x, y, speed, direction);
+  return playerMoveBegin(x, y, speed, direction, mapSize, playerSize);
 };
 
 // Dices

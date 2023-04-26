@@ -3,15 +3,15 @@ import { Pagination } from 'antd';
 import Title from 'antd/es/typography/Title';
 import type { Post } from 'models/forum.model';
 import { useIntl } from 'react-intl';
-import { messages } from './common';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import {
   ITEMS_PER_PAGE,
   selectCurrentPage,
   selectCurrentPageData,
   selectMaxPages,
   setCurrentPage,
-} from '../../../app/slices/forumSlice';
+} from 'app/slices/forumSlice';
+import { messages } from './common';
 
 import './Posts.scss';
 
