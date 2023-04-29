@@ -3,11 +3,8 @@ import react from '@vitejs/plugin-react';
 import dotenv from 'dotenv';
 dotenv.config();
 import path from 'path';
-// https://vitejs.dev/config/
+
 export default defineConfig({
-  define: {
-    __SERVER_PORT__: process.env.SERVER_PORT,
-  },
   plugins: [react()],
   resolve: {
     alias: {
@@ -29,9 +26,6 @@ export default defineConfig({
       data: path.join(__dirname, './src/data'),
     },
   },
-  server: {
-    port: Number(process.env.CLIENT_PORT) || 3000,
-  },
   css: {
     preprocessorOptions: {
       scss: {
@@ -40,12 +34,17 @@ export default defineConfig({
     },
   },
   build: {
+    lib: {
+      entry: path.resolve(__dirname, './src/ssr.tsx'),
+      name: 'Client',
+      formats: ['cjs'],
+    },
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, './index.html'),
       },
       output: {
-        dir: './dist',
+        dir: './dist-ssr',
       },
     },
   },
