@@ -19,8 +19,8 @@ async function startServer() {
 
   let vite: ViteDevServer | undefined;
 
-  const distPath = path.dirname(require.resolve('client/dist/index.html'));
-  const distSsrPath = require.resolve('client/dist-ssr/client.cjs');
+  const distPath = path.dirname(require.resolve('client/dist/index-ssr.html'));
+  const distSsrPath = require.resolve('client/dist-ssr/ssr.cjs');
   const srcPath = path.dirname(require.resolve('client'));
 
   if (isDev()) {
@@ -44,9 +44,9 @@ async function startServer() {
       let template: string;
 
       if (!isDev()) {
-        template = fs.readFileSync(path.resolve(distPath, 'index.html'), 'utf-8');
+        template = fs.readFileSync(path.resolve(distPath, 'index-ssr.html'), 'utf-8');
       } else {
-        template = fs.readFileSync(path.resolve(srcPath, 'index.html'), 'utf-8');
+        template = fs.readFileSync(path.resolve(srcPath, 'index-ssr.html'), 'utf-8');
 
         template = await vite!.transformIndexHtml(url, template);
       }
