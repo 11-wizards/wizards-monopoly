@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
 import { CornersCardsID, MapDirectons } from 'types/enums/main';
-import type { PlayerTarget, PlayersPositions, Players } from 'types/game';
-import { cardsData } from 'data/cards';
-import { calcPlayerParkingSpotCard, playerMove } from 'game/helpers/helpers';
+import type { PlayerTarget, PlayersPositions, Players, Card } from 'types/game';
+import { calcPlayerParkingSpotCard, drawCard, playerMove } from 'game/helpers/helpers';
+import type { CardData } from 'types/cards';
 
 import './Map.scss';
 
@@ -14,7 +14,8 @@ type MapProps = {
   mapData: {
     NUMBER_CARDS: number;
     SIZE_CORNER_CARDS: number;
-    cards: number[][];
+    cards: Array<Card>;
+    cardsData: Array<CardData>;
     interfaceSize: number;
     mapSize: number;
     playerSize: number;
@@ -26,7 +27,7 @@ type MapProps = {
 };
 
 export const Map: FC<MapProps> = ({ mapData, players, playerTarget, setAnimationEnd }) => {
-  const { mapSize, speed, playerSize, cards } = mapData;
+  const { mapSize, cardsData, speed, playerSize, cards } = mapData;
 
   const startPlayersPosition: PlayersPositions | [] = [];
 
@@ -35,8 +36,6 @@ export const Map: FC<MapProps> = ({ mapData, players, playerTarget, setAnimation
     const [x, y] = calcPlayerParkingSpotCard(id, cards[startCardId], playerSize);
     startPlayersPosition[key] = { id, color, x, y, direction: startDirection };
   });
-
-  const [cardDataImg, setCardDataImg] = useState<Array<CanvasImageSource>>([]);
 
   const canvasRef = useRef<HTMLCanvasElement>(null!);
 
@@ -57,61 +56,16 @@ export const Map: FC<MapProps> = ({ mapData, players, playerTarget, setAnimation
 
     if (canvas === null) return;
 
-    canvas.width = mapSize + 2;
-    canvas.height = mapSize + 2;
+    canvas.width = mapSize;
+    canvas.height = mapSize;
 
     const context = canvas.getContext('2d')!;
 
-    context.clearRect(0, 0, mapSize + 2, mapSize + 2);
+    context.clearRect(0, 0, mapSize, mapSize);
 
-    cards.forEach((item, key: number) => {
-      const [x, y, w, h] = item;
-      const { imgSrc, title, priceView } = cardsData[key];
-      let imgSizes = [x, y, w, h];
-      if (w === h) {
-        imgSizes = [x, y, w, h];
-      } else if (w > h) {
-        imgSizes = [x + w / 2 - h / 2 / 2, y + h / 2 - h / 2 / 2, h / 2, h / 2];
-      } else {
-        imgSizes = [x + w / 2 - w / 2 / 2, y + h / 2 - w / 2 / 2, w / 2, w / 2];
-      }
+    cards.forEach((item, key: number) => drawCard(context, mapSize, item, cardsData[key]));
 
-      if (!cardDataImg[key]) {
-        const cardImage = new Image();
-        cardImage.src = imgSrc;
-        cardImage.onload = () => {
-          setCardDataImg((prev) => {
-            const data: Array<CanvasImageSource> = [...prev];
-            data[key] = cardImage;
-
-            return data;
-          });
-          context.drawImage(cardImage, imgSizes[0], imgSizes[1], imgSizes[2], imgSizes[3]);
-          if (key === 0) {
-            playersPositions.forEach(({ color, x: pX, y: pY }) => {
-              context.fillStyle = String(color);
-              context.fillRect(Number(pX), Number(pY), playerSize, playerSize);
-            });
-          }
-        };
-      } else {
-        context.drawImage(cardDataImg[key], imgSizes[0], imgSizes[1], imgSizes[2], imgSizes[3]);
-      }
-      context.font = `${(mapSize / 100) * 1.2}px Georgia`;
-      const maxWidthText = w - 20;
-      const titleTextWidth =
-        context.measureText(title).width > maxWidthText
-          ? maxWidthText
-          : context.measureText(title).width;
-      const priceViewTextWidth = context.measureText(priceView).width;
-
-      context.fillText(title, x + (w / 2 - titleTextWidth / 2), y + 20, maxWidthText);
-      context.fillText(priceView, x + (w / 2 - priceViewTextWidth / 2), y + h - 10, maxWidthText);
-      context.fillStyle = 'red';
-      context.strokeRect(x, y, w, h);
-    });
-
-    if (playerTarget !== null) {
+    if (playerTarget) {
       const { id, target } = playerTarget;
 
       const targetPosition = calcPlayerParkingSpotCard(id, cards[target], playerSize);
@@ -121,7 +75,6 @@ export const Map: FC<MapProps> = ({ mapData, players, playerTarget, setAnimation
           const newPlayerPostion = playerMove(player, targetPosition, speed, mapSize, playerSize);
           if (!newPlayerPostion) {
             setAnimationStop(true);
-            setAnimationEnd();
 
             return;
           }
@@ -153,6 +106,7 @@ export const Map: FC<MapProps> = ({ mapData, players, playerTarget, setAnimation
 
       return () => cancelAnimationFrame(timerId);
     }
+    setAnimationEnd();
 
     return undefined;
   }, [animationStop]);

@@ -12,7 +12,7 @@ export const MAP_DATA = {
 };
 
 export const MAP_SIZES_PRECENT = {
-  MAP_SIZE: 90,
+  MAP_SIZE: 85,
   PLAYER_SIZE: 2,
   NUMBER_CARDS: 40,
   SIZE_CORNER_CARDS: 13,

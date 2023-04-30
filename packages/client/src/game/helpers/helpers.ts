@@ -1,5 +1,5 @@
 import { CornersCardsID, MapDirectons } from 'types/enums/main';
-import type { PlayerPosition, PlayerPositionTarget } from 'types/game';
+import type { Card, PlayerPosition, PlayerPositionTarget } from 'types/game';
 
 const { UP, DOWN, LEFT, RIGHT } = MapDirectons;
 const { CARD_TOP_LEFT, CARD_TOP_RIGHT, CARD_BOTTOM_LEFT, CARD_BOTTOM_RIGHT } = CornersCardsID;
@@ -28,14 +28,14 @@ export const initCardsPositions = (
   count: number,
   cardWidth: number,
   cardHeight: number,
-): number[][] => {
+): Array<Card> => {
   const cards = [];
   let stepX = 0;
   let stepY = 0;
 
   for (let i = 0; i < count; i += 1) {
     const { width, height } = calcCardSize(i, cardWidth, cardHeight);
-    const card = [stepX, stepY, width, height];
+    const card = { x: stepX, y: stepY, w: width, h: height, img: null };
     if (i === CARD_TOP_LEFT) {
       stepX = width;
     } else if (i === CARD_TOP_RIGHT) {
@@ -44,7 +44,7 @@ export const initCardsPositions = (
       stepX -= cardWidth;
     } else if (i === CARD_BOTTOM_RIGHT) {
       stepX = 0;
-      card[0] = stepX;
+      card.x = stepX;
       stepY -= cardWidth;
     } else if (i > 0 && i < CARD_TOP_RIGHT) {
       stepX += width;
@@ -61,6 +61,48 @@ export const initCardsPositions = (
   return cards;
 };
 
+export const drawCard = (
+  context: CanvasRenderingContext2D,
+  mapSize: number,
+  card: Card,
+  cardsData: {
+    img: CanvasImageSource | null;
+    priceView: string | undefined;
+    title: string | undefined;
+  },
+): void => {
+  const { x, y, w, h } = card;
+  const { img, priceView, title } = cardsData;
+  if (img) {
+    let imgSizes = [x, y, w, h];
+    if (w === h) {
+      imgSizes = [x, y, w, h];
+    } else if (w > h) {
+      imgSizes = [x + w / 2 - h / 2 / 2, y + h / 2 - h / 2 / 2, h / 2, h / 2];
+    } else {
+      imgSizes = [x + w / 2 - w / 2 / 2, y + h / 2 - w / 2 / 2, w / 2, w / 2];
+    }
+    context.drawImage(img, imgSizes[0], imgSizes[1], imgSizes[2], imgSizes[3]);
+  }
+  // eslint-disable-next-line no-param-reassign
+  context.font = `${(mapSize / 100) * 1.2}px Georgia`;
+  // eslint-disable-next-line no-param-reassign
+  context.fillStyle = 'red';
+  const maxWidthText = w - 20;
+  if (title) {
+    const titleTextWidth =
+      context.measureText(title).width > maxWidthText
+        ? maxWidthText
+        : context.measureText(title).width;
+    context.fillText(title, x + (w / 2 - titleTextWidth / 2), y + 10, maxWidthText);
+  }
+  if (priceView) {
+    const priceViewTextWidth = context.measureText(priceView).width;
+    context.fillText(priceView, x + (w / 2 - priceViewTextWidth / 2), y + h - 5, maxWidthText);
+  }
+  context.strokeRect(x, y, w, h);
+};
+
 // player move
 
 const arrayNumberRound = (array: Array<number>): Array<number> =>
@@ -68,10 +110,10 @@ const arrayNumberRound = (array: Array<number>): Array<number> =>
 
 export const calcPlayerParkingSpotCard = (
   id: number,
-  card: number[],
+  card: Card,
   playerSize: number,
 ): Array<number> => {
-  const [x, y, w, h] = card;
+  const { x, y, w, h } = card;
   const baseY = Number(Math.round(y + 10));
   const baseX = Number(Math.round(x + w / 2 - playerSize * 1.5));
   if (w > h) {

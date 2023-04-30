@@ -1,11 +1,12 @@
 import { MAP_SIZES_PRECENT } from 'game/common';
 import { initCardsPositions } from 'game/helpers/helpers';
 import { useEffect, useState } from 'react';
+import type { Card } from 'types/game';
 
 export type TypeUseGameViewsCalc = {
   NUMBER_CARDS: number;
   SIZE_CORNER_CARDS: number;
-  cards: number[][];
+  cards: Array<Card>;
   interfaceSize: number;
   mapSize: number;
   playerSize: number;
@@ -30,9 +31,11 @@ export const useGameViewsCalc = (): TypeUseGameViewsCalc => {
       (mapSize / 100) * ((100 - SIZE_CORNER_CARDS * 2) / ((NUMBER_CARDS - 4) / 4)),
     );
     const interfaceSize = Math.round(mapSize - (mapSize / 100) * SIZE_CORNER_CARDS * 2 - 20);
-    const cards: number[][] = initCardsPositions(NUMBER_CARDS, cardWidth, cardHeight);
+
+    const cards = initCardsPositions(NUMBER_CARDS, cardWidth, cardHeight);
+
     setMapData({
-      mapSize,
+      mapSize: mapSize + 3,
       playerSize,
       cards,
       interfaceSize,

@@ -65,3 +65,19 @@ export type PropertyCard = {
 export type PropertyCards = Record<string, PropertyCard>;
 
 export type PropertyCardId = keyof PropertyCards;
+
+export type Card = {
+  h: number;
+  w: number;
+  x: number;
+  y: number;
+};
+
+// export type CardImg = {
+//   imgElem: CanvasImageSource | null;
+//   imgH: number;
+//   imgSrc: string;
+//   imgW: number;
+//   imgX: number;
+//   imgY: number;
+// };

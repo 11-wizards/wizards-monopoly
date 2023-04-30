@@ -1,8 +1,8 @@
 import { resetDices } from 'game/helpers/helpers';
-import { useFullScreenApi, useGameViewsCalc } from 'hooks';
+import { useCardsDataLoad, useFullScreenApi, useGameViewsCalc } from 'hooks';
 import type { FC } from 'react';
 import { useEffect, useRef, useState } from 'react';
-import type { NewTargetPlayer, Players, PlayerTarget } from 'types/game';
+import type { Card, NewTargetPlayer, Players, PlayerTarget } from 'types/game';
 import { Dice } from './Dice/Dice';
 import { Map } from './Map';
 import { PlayerInterface } from './PlayerInterface';
@@ -10,7 +10,7 @@ import { PlayerInterface } from './PlayerInterface';
 type TypeUseGameViewsCalc = Nullable<{
   NUMBER_CARDS: number;
   SIZE_CORNER_CARDS: number;
-  cards: number[][];
+  cards: Array<Card>;
   interfaceSize: number;
   mapSize: number;
   playerSize: number;
@@ -63,6 +63,8 @@ export const Views: FC<ViewsProps> = ({
     speed: 3,
   });
 
+  const cardsData = useCardsDataLoad();
+
   const stopAnimateOneDice = (): void => setAnimateOneDice(false);
   const stopAnimateTwoDice = (): void => setAnimateTwoDice(false);
 
@@ -89,7 +91,7 @@ export const Views: FC<ViewsProps> = ({
 
   const mapParams: TypeUseGameViewsCalc = useGameViewsCalc();
 
-  if (!mapParams) return <>ЗАГРУЗКА КАРТЫ!</>;
+  if (!mapParams || !cardsData) return <>ЗАГРУЗКА КАРТЫ!</>;
   const { mapSize, playerSize, cards, interfaceSize, speed, SIZE_CORNER_CARDS, NUMBER_CARDS } =
     mapParams;
 
@@ -102,6 +104,7 @@ export const Views: FC<ViewsProps> = ({
           mapSize,
           playerSize,
           cards,
+          cardsData,
           interfaceSize,
           speed,
           SIZE_CORNER_CARDS,
