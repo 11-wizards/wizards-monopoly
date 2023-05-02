@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
@@ -5,17 +6,14 @@ import fs from 'fs';
 import path from 'path';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
 dotenv.config();
-// import { createClientAndConnect } from './db';
 
 const PORT = Number(process.env.SERVER_PORT) || 3001;
 
-const isDev = () => process.env.NODE_ENV === 'development';
+const IS_DEV = process.env.NODE_ENV === 'development';
 
 async function startServer() {
   const app = express();
   app.use(cors());
-
-  // createClientAndConnect();
 
   let vite: ViteDevServer | undefined;
 
@@ -23,7 +21,7 @@ async function startServer() {
   const distSsrPath = require.resolve('client/dist-ssr/ssr.cjs');
   const srcPath = path.dirname(require.resolve('client'));
 
-  if (isDev()) {
+  if (IS_DEV) {
     vite = await createViteServer({
       server: { middlewareMode: true },
       root: srcPath,
@@ -33,7 +31,7 @@ async function startServer() {
     app.use(vite.middlewares);
   }
 
-  if (!isDev()) {
+  if (!IS_DEV) {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')));
   }
 
@@ -43,7 +41,7 @@ async function startServer() {
     try {
       let template: string;
 
-      if (!isDev()) {
+      if (!IS_DEV) {
         template = fs.readFileSync(path.resolve(distPath, 'index-ssr.html'), 'utf-8');
       } else {
         template = fs.readFileSync(path.resolve(srcPath, 'index-ssr.html'), 'utf-8');
@@ -53,7 +51,7 @@ async function startServer() {
 
       let render: () => Promise<string>;
 
-      if (!isDev()) {
+      if (!IS_DEV) {
         render = (await import(distSsrPath)).render;
       } else {
         render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'src/ssr.tsx'))).render;
@@ -65,7 +63,7 @@ async function startServer() {
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
-      if (isDev()) {
+      if (IS_DEV) {
         vite!.ssrFixStacktrace(e as Error);
       }
       next(e);
