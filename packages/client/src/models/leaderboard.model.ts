@@ -1,5 +1,3 @@
-import { LEADERBOARD_LIMIT, RATING_FIELD_NAME } from 'constants/leaderboard';
-
 export type LeaderboardPayer = {
   data: {
     gameTime: string;
@@ -13,8 +11,8 @@ export class LeaderboardDto {
   cursor = 0;
   limit = 0;
 
-  constructor() {
-    this.ratingFieldName = RATING_FIELD_NAME;
-    this.limit = LEADERBOARD_LIMIT;
+  constructor(ratingFieldName: string, limit = 10) {
+    this.ratingFieldName = ratingFieldName;
+    this.limit = limit;
   }
 }

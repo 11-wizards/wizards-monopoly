@@ -1,9 +1,13 @@
+/* eslint @typescript-eslint/no-floating-promises: 0 */
 import type { FC } from 'react';
+import { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Typography } from 'antd';
 import { CrownTwoTone } from '@ant-design/icons';
 import type { LeaderboardPayer } from 'models/leaderboard.model';
-import { messages, dataExample } from './common';
+import { leaderboardApi } from 'api/leaderboard.api';
+import { LEADERBOARD_LIMIT, RATING_FIELD_NAME, TEAM_NAME } from 'constants/leaderboard';
+import { messages } from './common';
 
 import './Leaderboard.scss';
 
@@ -11,7 +15,16 @@ const { Title } = Typography;
 
 export const Leaderboard: FC = () => {
   const { formatMessage: fm } = useIntl();
-  const leaderboardList: Array<LeaderboardPayer> | [] = dataExample ?? [];
+  const [leaderboardList, setLeaderboardList] = useState<Array<LeaderboardPayer>>([]);
+  // const leaderboardList: Array<LeaderboardPayer> | [] = dataExample ?? [];
+
+  useEffect(() => {
+    leaderboardApi.getLeaderboard(TEAM_NAME, RATING_FIELD_NAME, LEADERBOARD_LIMIT).then((data) => {
+      if (data.data) {
+        setLeaderboardList(data.data);
+      }
+    });
+  }, []);
 
   return (
     <div className="leaderboard">
