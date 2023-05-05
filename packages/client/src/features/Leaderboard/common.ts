@@ -6,65 +6,75 @@ export const messages = defineMessages({
   daysInGame: { id: 'leaderboard.days-in-game', defaultMessage: 'days in the game' },
 });
 
-export const data = [
+export const dataExample = [
   {
-    nick: 'Илья',
-    place: 1,
-    profit: 500000,
-    gameTime: '150',
+    data: {
+      name: 'Илья',
+      profit: 500000,
+      gameTime: '150',
+    }
   },
   {
-    nick: 'Анна',
-    place: 2,
-    profit: 62000,
-    gameTime: '1 день',
+    data: {
+      name: 'Анна',
+      profit: 62000,
+      gameTime: '1 день',
+    }
   },
   {
-    nick: 'Евгений',
-    place: 3,
-    profit: 16000,
-    gameTime: '110',
+    data: {
+      name: 'Евгений',
+      profit: 16000,
+      gameTime: '110',
+    }
   },
   {
-    nick: 'Андрей',
-    place: 4,
-    profit: 15000,
-    gameTime: '100',
+    data: {
+      name: 'Андрей',
+      profit: 15000,
+      gameTime: '100',
+    }
   },
   {
-    nick: 'Антон',
-    place: 5,
-    profit: 14000,
-    gameTime: '10',
+    data: {
+      name: 'Антон',
+      profit: 14000,
+      gameTime: '10',
+    }
   },
   {
-    nick: 'Мария',
-    place: 6,
-    profit: 13400,
-    gameTime: '500',
+    data: {
+      name: 'Мария',
+      profit: 13400,
+      gameTime: '500',
+    }
   },
   {
-    nick: 'Елена',
-    place: 7,
-    profit: 12000,
-    gameTime: '100',
+    data: {
+      name: 'Елена',
+      profit: 12000,
+      gameTime: '100',
+    }
   },
   {
-    nick: 'Тимур',
-    place: 8,
-    profit: 12000,
-    gameTime: '123',
+    data: {
+      name: 'Тимур',
+      profit: 12000,
+      gameTime: '123',
+    }
   },
   {
-    nick: 'Константин',
-    place: 9,
-    profit: 10450,
-    gameTime: '67',
+    data: {
+      name: 'Константин',
+      profit: 10450,
+      gameTime: '67',
+    }
   },
   {
-    nick: 'Сергей',
-    place: 10,
-    profit: 10220,
-    gameTime: '58',
+    data: {
+      name: 'Сергей',
+      profit: 10220,
+      gameTime: '58',
+    }
   },
 ];
