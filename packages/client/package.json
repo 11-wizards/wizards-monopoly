@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build:client": "rimraf ./dist && tsc && vite build --config vite.config.ts",
+    "build:ssr": "rimraf ./dist-ssr && tsc && vite build --config vite.config.ts --ssr index-ssr.html",
+    "build": "yarn build:ssr && yarn build:client",
     "preview": "vite preview",
     "eslint": "eslint ./src --ext .ts,.tsx",
     "eslint:fix": "eslint ./src --fix --ext .ts,.tsx",
