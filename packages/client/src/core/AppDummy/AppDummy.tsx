@@ -1,22 +1,27 @@
-import { type FC, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { type FC } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'antd';
+import { decrement, increment } from 'app/slices/counterSlice';
 
 export const AppDummy: FC = () => {
-  const [count, setCount] = useState<number>(0);
+  const count = useSelector((state: any) => state.counter.value);
 
-  const incrementCount = () => {
-    setCount((prevState) => prevState + 1);
-  };
+  const data = useSelector((state: any) => state.counter.serverValue);
 
-  const decrementCount = () => {
-    setCount((prevState) => prevState - 1);
-  };
+  console.log(data)
+
+  const dispatch = useDispatch();
 
   return (
     <>
       <div>count: {count}</div>
-      <Button onClick={incrementCount}>increment</Button>
-      <Button onClick={decrementCount}>decrement</Button>
+      <Button onClick={() => dispatch(increment())}>increment</Button>
+      <Button onClick={() => dispatch(decrement())}>decrement</Button>
     </>
   );
 };
