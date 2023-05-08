@@ -13,7 +13,7 @@ export const AppDummy: FC = () => {
 
   const data = useSelector((state: any) => state.counter.serverValue);
 
-  console.log(data)
+  console.log(data);
 
   const dispatch = useDispatch();
 
