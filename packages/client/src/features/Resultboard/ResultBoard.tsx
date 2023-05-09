@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import type { FC } from 'react';
-
+import { useEffect } from 'react';
 import { Typography, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useIntl } from 'react-intl';
+import { fetchNewLeader } from 'app/slices/leaderboardSlice';
+import { useAppDispatch } from 'hooks';
 import { messages } from './i18n';
 
 import './ResultBoard.scss';
@@ -12,7 +15,7 @@ const { Title } = Typography;
 type ResultBoardItem = {
   gameTime: string;
   key: number;
-  nick: string;
+  name: string;
   place: number;
   profit: number;
   property: number;
@@ -22,7 +25,7 @@ type ResultBoardItem = {
 const data: ResultBoardItem[] = [
   {
     key: 1,
-    nick: 'Татьяна',
+    name: 'Татьяна',
     place: 1,
     profit: 21000,
     property: 25,
@@ -30,7 +33,7 @@ const data: ResultBoardItem[] = [
   },
   {
     key: 2,
-    nick: 'Иван',
+    name: 'Иван',
     place: 2,
     profit: 17000,
     property: 25,
@@ -38,7 +41,7 @@ const data: ResultBoardItem[] = [
   },
   {
     key: 3,
-    nick: 'Егор',
+    name: 'Егор',
     place: 3,
     profit: 15000,
     property: 20,
@@ -49,6 +52,8 @@ const data: ResultBoardItem[] = [
 export const ResultBoard: FC = () => {
   const { formatMessage: fm } = useIntl();
 
+  const dispatch = useAppDispatch();
+
   const columns: ColumnsType<ResultBoardItem> = [
     {
       title: fm(messages.resultBoardPlace),
@@ -57,8 +62,8 @@ export const ResultBoard: FC = () => {
     },
     {
       title: fm(messages.resultBoardName),
-      dataIndex: 'nick',
-      key: 'nick',
+      dataIndex: 'name',
+      key: 'name',
       render: (text) => <span>{text}</span>,
     },
     {
@@ -78,6 +83,12 @@ export const ResultBoard: FC = () => {
       key: 'gameTime',
     },
   ];
+
+  useEffect(() => {
+    if (!data.length) return;
+    const { gameTime, name, profit } = data[0];
+    dispatch(fetchNewLeader({ gameTime, name, profit }));
+  }, []);
 
   return (
     <div className="resultboard-game">
