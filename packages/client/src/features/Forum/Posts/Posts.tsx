@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Pagination } from 'antd';
-import Title from 'antd/es/typography/Title';
+import Title from 'antd/lib/typography/Title';
 import type { Post } from 'models/forum.model';
 import { useIntl } from 'react-intl';
 import { useAppDispatch, useAppSelector } from 'hooks';

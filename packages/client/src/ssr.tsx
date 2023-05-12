@@ -1,13 +1,15 @@
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
-// import { App } from 'core/App';
-import { AppDummy } from 'core/AppDummy';
+import { App } from 'core/App';
 import { serverStore } from 'app/serverStore';
+import { StaticRouter } from 'react-router-dom/server';
 
-export function render(): string {
+export function render(url: string): string {
   return renderToString(
-    <Provider store={serverStore()}>
-      <AppDummy />
-    </Provider>,
+    <StaticRouter location={url}>
+      <Provider store={serverStore()}>
+        <App />
+      </Provider>
+    </StaticRouter>,
   );
 }
