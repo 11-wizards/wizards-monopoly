@@ -13,13 +13,12 @@ export const AppDummy: FC = () => {
 
   const data = useSelector((state: any) => state.counter.serverValue);
 
-  console.log(data);
-
   const dispatch = useDispatch();
 
   return (
     <>
       <div>count: {count}</div>
+      <div>modified count: {data}</div>
       <Button onClick={() => dispatch(increment())}>increment</Button>
       <Button onClick={() => dispatch(decrement())}>decrement</Button>
     </>

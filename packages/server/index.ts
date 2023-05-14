@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { RootState } from 'client/src/app/store';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
-import { serverStore } from 'client/src/app/serverStore';
-import { incrementServer } from 'client/src/app/slices/counterSlice';
 dotenv.config();
 
 const PORT = Number(process.env.SERVER_PORT) || 3001;
@@ -43,8 +42,6 @@ async function startServer() {
     try {
       let template: string;
 
-      await serverStore().dispatch(incrementServer());
-
       if (!IS_DEV) {
         template = fs.readFileSync(path.resolve(distPath, 'index-ssr.html'), 'utf-8');
       } else {
@@ -53,7 +50,7 @@ async function startServer() {
         template = await vite!.transformIndexHtml(url, template);
       }
 
-      let render: (url: string) => Promise<string>;
+      let render: (url: string) => [RootState, string];
 
       if (!IS_DEV) {
         render = (await import(distSsrPath)).render;
@@ -61,15 +58,11 @@ async function startServer() {
         render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'src/ssr.tsx'))).render;
       }
 
-      const appHtml = await render(url);
-
-      const finalState = serverStore().getState();
-
-      console.log(finalState);
+      const [initialState, appHtml] = render(url);
 
       const html = template
         .replace(`<!--ssr-outlet-->`, appHtml)
-        .replace('<!--preloaded-state-->', JSON.stringify(finalState).replace(/</g, '\\u003c'));
+        .replace('<!--preloaded-state-->', JSON.stringify(initialState).replace(/</g, '\\u003c'));
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
