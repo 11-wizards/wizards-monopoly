@@ -1,7 +1,7 @@
 import { createStore } from 'app/store';
-import { App } from 'core/App';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
+import { App } from 'core/App';
 import { StaticRouter } from 'react-router-dom/server';
 
 export function render(url: string) {
