@@ -7,7 +7,10 @@
     <title>Игра "Монополия"</title>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="./src/main-client.tsx"></script>
+    <div id="root"><!--ssr-outlet--></div>
+    <script>
+      window.__PRELOADED_STATE__ = '<!--preloaded-state-->';
+    </script>
+    <script type="module" src="src/main.tsx"></script>
   </body>
 </html>
