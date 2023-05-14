@@ -2,7 +2,7 @@
 import type { FC } from 'react';
 import { useEffect } from 'react';
 import { Typography, Table } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
+import type { ColumnsType } from 'antd/lib/table';
 import { useIntl } from 'react-intl';
 import { fetchNewLeader } from 'app/slices/leaderboardSlice';
 import { useAppDispatch } from 'hooks';

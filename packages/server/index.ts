@@ -5,6 +5,8 @@ import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
+import { serverStore } from 'client/src/app/serverStore';
+import { incrementServer } from 'client/src/app/slices/counterSlice';
 dotenv.config();
 
 const PORT = Number(process.env.SERVER_PORT) || 3001;
@@ -18,7 +20,7 @@ async function startServer() {
   let vite: ViteDevServer | undefined;
 
   const distPath = path.dirname(require.resolve('client/dist/index-ssr.html'));
-  const distSsrPath = require.resolve('client/dist-ssr/ssr.cjs');
+  const distSsrPath = require.resolve('client/dist-ssr/ssr.js');
   const srcPath = path.dirname(require.resolve('client'));
 
   if (IS_DEV) {
@@ -41,6 +43,8 @@ async function startServer() {
     try {
       let template: string;
 
+      await serverStore().dispatch(incrementServer());
+
       if (!IS_DEV) {
         template = fs.readFileSync(path.resolve(distPath, 'index-ssr.html'), 'utf-8');
       } else {
@@ -49,7 +53,7 @@ async function startServer() {
         template = await vite!.transformIndexHtml(url, template);
       }
 
-      let render: () => Promise<string>;
+      let render: (url: string) => Promise<string>;
 
       if (!IS_DEV) {
         render = (await import(distSsrPath)).render;
@@ -57,9 +61,15 @@ async function startServer() {
         render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'src/ssr.tsx'))).render;
       }
 
-      const appHtml = await render();
+      const appHtml = await render(url);
 
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml);
+      const finalState = serverStore().getState();
+
+      console.log(finalState);
+
+      const html = template
+        .replace(`<!--ssr-outlet-->`, appHtml)
+        .replace('<!--preloaded-state-->', JSON.stringify(finalState).replace(/</g, '\\u003c'));
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
