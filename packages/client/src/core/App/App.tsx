@@ -15,7 +15,7 @@ export const App: FC = () => {
   const [locale] = useLocale();
 
   useEffect(() => {
-    if (localStorage.getItem(LOCAL_STORAGE_IS_AUTH_KEY)) {
+    if (localStorage.getItem(LOCAL_STORAGE_IS_AUTH_KEY) === 'true') {
       const fetchUser = async () => {
         await dispatch(fetchCurrentUser());
       };
