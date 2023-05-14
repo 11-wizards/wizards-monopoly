@@ -1,7 +1,7 @@
 /* eslint no-underscore-dangle: 0 */
 
-import { createDummyStore, type DummyState } from 'app/store';
-import { AppDummy } from 'core/AppDummy';
+import { createStore, type RootState } from 'app/store';
+import { App } from 'core/App';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -12,14 +12,13 @@ const initialStateString = window.__PRELOADED_STATE__;
 delete window.__PRELOADED_STATE__;
 
 if (initialStateString) {
-  const initialState = JSON.parse(initialStateString) as DummyState;
+  const initialState = JSON.parse(initialStateString) as RootState;
   ReactDOM.hydrateRoot(
     document.querySelector('#root') as HTMLElement,
     <React.StrictMode>
       <BrowserRouter>
-        <Provider store={createDummyStore(initialState)}>
-          {/* <App /> */}
-          <AppDummy />
+        <Provider store={createStore(initialState)}>
+          <App />
         </Provider>
       </BrowserRouter>
     </React.StrictMode>,
