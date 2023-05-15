@@ -61,7 +61,7 @@ async function startServer() {
       const [initialState, appHtml] = await render(url);
 
       const html = template
-        .replace(`<!--ssr-outlet-->`, appHtml)
+        .replace('<!--ssr-outlet-->', appHtml)
         .replace('<!--preloaded-state-->', JSON.stringify(initialState).replace(/</g, '\\u003c'));
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
