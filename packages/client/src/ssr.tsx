@@ -1,10 +1,10 @@
-import { createStore } from 'app/store';
+import { createStore, type RootState } from 'app/store';
 import { App } from 'core/App';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom/server';
 
-export function render(url: string) {
+export async function render(url: string): Promise<[RootState, string]> {
   const store = createStore();
   const initialState = store.getState();
   const appHtml = renderToString(
@@ -15,5 +15,5 @@ export function render(url: string) {
     </StaticRouter>,
   );
 
-  return [initialState, appHtml];
+  return Promise.resolve([initialState, appHtml]);
 }
