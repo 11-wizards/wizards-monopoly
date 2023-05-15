@@ -1,6 +1,7 @@
 {
   "name": "client",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build:client": "rimraf ./dist && tsc && vite build --config vite.config.ts",
