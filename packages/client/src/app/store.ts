@@ -1,4 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { baseApi } from 'api/base.api';
+import { oAuthApi } from 'api/oauth.api';
 import forumReducer from './slices/forumSlice';
 import leaderboardReducer from './slices/leaderboardSlice';
 import gameReducer from './slices/gameSlice';
@@ -12,7 +14,10 @@ export const store = configureStore({
     game: gameReducer,
     locale: localeReducer,
     user: userReducer,
+    [baseApi.reducerPath]: baseApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(baseApi.middleware, oAuthApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

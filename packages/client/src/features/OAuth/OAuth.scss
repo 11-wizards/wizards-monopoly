@@ -1,0 +1,36 @@
+.oauth {
+  &__button {
+    display: flex;
+    column-gap: 6px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: $paddingXS $paddingM;
+    font-size: 14px;
+    line-height: 22px;
+    color: $whiteColor;
+    cursor: pointer;
+    background-color: $blackColor;
+    border: 1px solid black;
+    border-radius: 6px;
+    transition: opacity, text-shadow .2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &:focus-visible {
+      outline: #91caff solid 3px;
+      outline-offset: 1px;
+    }
+
+    &:active {
+      text-shadow: 0 0 1px $whiteColor;
+      opacity: 0.95;
+    }
+
+    &:disabled {
+      opacity: .4;
+    }
+  }
+}
