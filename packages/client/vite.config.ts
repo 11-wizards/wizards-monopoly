@@ -59,7 +59,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
           },
           rollupOptions: {
             input: {
-              main: './index.html',
+              main: './index-ssr.html',
             },
             output: {
               dir: './dist-ssr',
@@ -72,7 +72,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         build: {
           rollupOptions: {
             input: {
-              main: './index.html',
+              main: './index-ssr.html',
             },
             output: {
               dir: './dist',
