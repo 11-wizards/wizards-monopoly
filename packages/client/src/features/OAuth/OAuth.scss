@@ -13,7 +13,7 @@
     background-color: $blackColor;
     border: 1px solid black;
     border-radius: 6px;
-    transition: opacity, text-shadow .2s ease;
+    transition: opacity, text-shadow 0.2s ease;
 
     &:hover {
       opacity: 0.85;
@@ -30,7 +30,7 @@
     }
 
     &:disabled {
-      opacity: .4;
+      opacity: 0.4;
     }
   }
 }
