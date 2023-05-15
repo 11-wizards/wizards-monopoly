@@ -16,7 +16,7 @@ export const OAuth: FC<OAuthProps> = ({ className }) => {
   const { data, isLoading } = useGetServiceIdQuery({ redirectUri: OAUTH_REDIRECT_URI });
 
   const handleOauthClick = () => {
-    document.location.href = getOauthRedirectUri(data?.serviceId);
+    document.location.href = getOauthRedirectUri(data!.serviceId);
   };
 
   return (
@@ -24,10 +24,10 @@ export const OAuth: FC<OAuthProps> = ({ className }) => {
       className={`oauth__button ${className ?? ''}`}
       type="button"
       onClick={handleOauthClick}
-      disabled={isLoading}
+      disabled={isLoading || !data?.serviceId}
     >
       <YandexLogo />
-      {fm(messages.buttonOauthLabel)}
+      {fm(messages.buttonOAuthLabel)}
     </button>
   );
 };

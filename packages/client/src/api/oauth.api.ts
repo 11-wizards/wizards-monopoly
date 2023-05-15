@@ -1,5 +1,4 @@
 import { baseApi } from 'api/base.api';
-import { OAUTH_REDIRECT_URI } from 'constants/main';
 import { convertStringToServerError } from 'helpers/convertStringToServerError';
 import type {
   OAuthServicePayload,
@@ -19,8 +18,8 @@ export const oAuthApi = baseApi.injectEndpoints({
       }),
       transformResponse: (response: OAuthServiceDto) => ({ serviceId: response.service_id }),
     }),
-    signInWithYandex: builder.mutation<void, OauthSignInPayload>({
-      query: ({ code, redirectUri = OAUTH_REDIRECT_URI }: OauthSignInPayload) => ({
+    signInWithYandex: builder.mutation<Response, OauthSignInPayload>({
+      query: ({ code, redirectUri }: OauthSignInPayload) => ({
         url: '/oauth/yandex',
         method: 'POST',
         body: {
