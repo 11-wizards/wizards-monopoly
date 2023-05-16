@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import type { Author, Topic } from 'models/forum.model';
 import { useIntl } from 'react-intl';
 import { Button, Input, Table } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
-import Title from 'antd/es/typography/Title';
-import TextArea from 'antd/es/input/TextArea';
+import type { ColumnsType } from 'antd/lib/table';
+import Title from 'antd/lib/typography/Title';
+import TextArea from 'antd/lib/input/TextArea';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import {
   addNewPost,

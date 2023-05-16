@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useIntl } from 'react-intl';
 import { Upload } from 'antd';
-import type { RcFile } from 'antd/es/upload';
+import type { RcFile } from 'antd/lib/upload';
 import { PlusOutlined } from '@ant-design/icons';
 import type { UploadRequestOption } from 'rc-upload/lib/interface';
 import { changeProfileAvatar } from 'app/slices/userSlice';

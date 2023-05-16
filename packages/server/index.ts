@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { RootState } from 'client/src/app/store';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
@@ -49,7 +50,7 @@ async function startServer() {
         template = await vite!.transformIndexHtml(url, template);
       }
 
-      let render: () => Promise<string>;
+      let render: (url: string) => Promise<[RootState, string]>;
 
       if (!IS_DEV) {
         render = (await import(distSsrPath)).render;
@@ -57,9 +58,11 @@ async function startServer() {
         render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'src/ssr.tsx'))).render;
       }
 
-      const appHtml = await render();
+      const [initialState, appHtml] = await render(url);
 
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml);
+      const html = template
+        .replace('<!--ssr-outlet-->', appHtml)
+        .replace('<!--preloaded-state-->', JSON.stringify(initialState).replace(/</g, '\\u003c'));
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
