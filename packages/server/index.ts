@@ -19,7 +19,7 @@ async function startServer() {
   let vite: ViteDevServer | undefined;
 
   const distPath = path.dirname(require.resolve('client/dist/index-ssr.html'));
-  const distSsrPath = require.resolve('client/dist-ssr/ssr.js');
+  const distSsrPath = require.resolve('client/dist-ssr/ssr.cjs');
   const srcPath = path.dirname(require.resolve('client'));
 
   if (IS_DEV) {
@@ -61,7 +61,7 @@ async function startServer() {
       const [initialState, appHtml] = await render(url);
 
       const html = template
-        .replace(`<!--ssr-outlet-->`, appHtml)
+        .replace("<!--ssr-outlet-->", appHtml)
         .replace('<!--preloaded-state-->', JSON.stringify(initialState).replace(/</g, '\\u003c'));
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);

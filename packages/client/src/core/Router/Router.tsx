@@ -3,7 +3,7 @@ import { ROUTES } from './routes';
 
 export const Router = () => (
   <Routes>
-    {Object.entries(ROUTES).map(([_, item]) => (
+    {Object.values(ROUTES).map((item) => (
       <Route key={item.path} {...item} />
     ))}
   </Routes>
