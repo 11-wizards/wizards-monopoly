@@ -24,8 +24,5 @@
       "*": ["types/*"]
     },
     "outDir": "dist"
-  },
-  "ts-node": {
-    "esm": true
   }
 }
