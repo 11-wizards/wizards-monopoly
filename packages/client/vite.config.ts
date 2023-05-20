@@ -70,7 +70,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
     } else {
       return {
         build: {
-          manifest:true,
+          manifest: true,
           rollupOptions: {
             input: {
               main: './index.html',

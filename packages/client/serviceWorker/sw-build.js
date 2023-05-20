@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
 console.log('work');
 
 function swBuild() {
-  const inputHtmlFilePath = path.join(__dirname, '/no-chache-no-network.html');
+  const inputHtmlFilePath = path.join(__dirname, '../no-chache-no-network.html');
   const outputHtmlFilePath = path.join(__dirname, '../dist', 'no-chache-no-network.html');
 
   const inputSwFilePath = path.join(__dirname, '/sw.js');
