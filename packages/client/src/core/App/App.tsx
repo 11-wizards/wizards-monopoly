@@ -6,6 +6,7 @@ import { Router } from 'core/Router';
 import { useAppDispatch } from 'hooks/redux';
 import { useLocale } from 'hooks/useLocale';
 import { en, ru } from 'translations';
+import { Default } from 'layouts';
 
 import 'styles/main.scss';
 import './App.scss';
@@ -28,6 +29,7 @@ export const App: FC = () => {
   return (
     <div className="app">
       <IntlProvider locale={locale} messages={locale === 'en' ? en : ru}>
+        <Default />
         <Router />
       </IntlProvider>
     </div>
