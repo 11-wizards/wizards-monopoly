@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { RootState } from 'client/src/app/store';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
@@ -50,7 +48,8 @@ async function startServer() {
         template = await vite!.transformIndexHtml(url, template);
       }
 
-      let render: (url: string) => Promise<[RootState, string]>;
+      // вот тут костыль типа, ибо не получается адекватно импортировать RootState
+      let render: (url: string) => Promise<[any, string]>;
 
       if (!IS_DEV) {
         render = (await import(distSsrPath)).render;
