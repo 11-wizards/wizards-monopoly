@@ -12,4 +12,5 @@ ReactDOM.createRoot(document.querySelector('#root') as HTMLElement).render(
     </Provider>
   </React.StrictMode>,
 );
+
 registerServiceWorker();

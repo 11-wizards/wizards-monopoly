@@ -8,8 +8,6 @@ const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
 
-console.log('work');
-
 function swBuild() {
   const inputHtmlFilePath = path.join(__dirname, '../no-chache-no-network.html');
   const outputHtmlFilePath = path.join(__dirname, '../dist', 'no-chache-no-network.html');
@@ -43,7 +41,7 @@ function swBuild() {
     });
   } catch (error) {
     console.log('Не удалось сгенерировать файл sw.js! Ошибка: ');
-    console.log(error);
+    console.error(error);
   }
 }
 

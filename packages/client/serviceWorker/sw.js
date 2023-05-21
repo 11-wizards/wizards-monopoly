@@ -10,11 +10,9 @@ if (typeof currentCachesVersion === 'number') {
   cacheCurrentName = 'monopolyChacheV-' + currentCachesVersion;
 }
 
-console.log(cacheCurrentName);
-console.log(filelist);
 
-self.addEventListener('install', (e) => {
-  e.waitUntil(
+self.addEventListener('install', (event) => {
+  event.waitUntil(
     caches.open(cacheCurrentName).then((cache) => {
       return cache.addAll(filelist);
     }),
@@ -26,14 +24,12 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(cacheFirst(event.request));
 });
 
-self.addEventListener('activate', function (event) {
-  console.log('activate');
+self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.filter((name) => name !== cacheCurrentName).map((name) => caches.delete(name)),
-      );
-    }),
+    caches.keys().then((cacheNames) => Promise.all(
+      cacheNames.filter((name) => name !== cacheCurrentName).map((name) => caches.delete(name)),
+    )
+    ),
   );
 });
 
@@ -43,7 +39,7 @@ async function cacheFirst(request) {
     const response = await fetch(request);
     await cache.put(request, response.clone());
     return response;
-  } catch (e) {
+  } catch (error) {
     const cached = await cache.match(request);
     if (cached) {
       return cached;
