@@ -1,19 +1,22 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { exec } from 'child_process';
 
 import manifest from '../dist/manifest.json' assert { type: 'json' };
 
-const __filename = fileURLToPath(import.meta.url);
+const __filename: string = fileURLToPath(import.meta.url);
 
-const __dirname = path.dirname(__filename);
+const __dirname: string = path.dirname(__filename);
 
-function swBuild() {
-  const inputHtmlFilePath = path.join(__dirname, '../no-chache-no-network.html');
-  const outputHtmlFilePath = path.join(__dirname, '../dist', 'no-chache-no-network.html');
+function swBuild(): void {
+  const inputHtmlFilePath: string = path.join(__dirname, '../no-chache-no-network.html');
+  const outputHtmlFilePath: string = path.join(__dirname, '../dist', 'no-chache-no-network.html');
 
-  const inputSwFilePath = path.join(__dirname, '/sw.js');
-  const outputSwFilePath = path.join(__dirname, '../dist', 'sw.js');
+  const inputSwFilePath: string = path.join(__dirname, '/sw.js');
+  const outputSwFilePath: string = path.join(__dirname, '../dist', 'sw.js');
+
+  const currentFile: string = path.join(__dirname, '/sw-build.js');
 
   try {
     fs.copyFileSync(inputHtmlFilePath, outputHtmlFilePath);
@@ -35,8 +38,12 @@ function swBuild() {
 
       if (fileList) {
         fileList = `const outputFilesList =[${fileList}];\n\n`;
-        const swFileNewContent = verNumber + fileList + swContetn;
+        const swFileNewContent = swContetn
+          .replace('let outputFilesList, currentCachesVersion;', verNumber + fileList)
+          .replace('export {};', '');
         fs.writeFileSync(outputSwFilePath, swFileNewContent);
+        fs.unlinkSync(inputSwFilePath);
+        fs.unlinkSync(currentFile);
       }
     });
   } catch (error) {
