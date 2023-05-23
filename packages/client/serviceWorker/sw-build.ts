@@ -3,20 +3,23 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { exec } from 'child_process';
 
+import config from '../sw.config.json' assert { type: 'json' };
 import manifest from '../dist/manifest.json' assert { type: 'json' };
+
+const { SW_BUILD_FILE, SW_FILE, SW_HTML_FILE } = config;
 
 const __filename: string = fileURLToPath(import.meta.url);
 
 const __dirname: string = path.dirname(__filename);
 
 function swBuild(): void {
-  const inputHtmlFilePath: string = path.join(__dirname, '../no-chache-no-network.html');
-  const outputHtmlFilePath: string = path.join(__dirname, '../dist', 'no-chache-no-network.html');
+  const inputHtmlFilePath: string = path.join(__dirname, '../', SW_HTML_FILE);
+  const outputHtmlFilePath: string = path.join(__dirname, '../dist', SW_HTML_FILE);
 
-  const inputSwFilePath: string = path.join(__dirname, '/sw.js');
-  const outputSwFilePath: string = path.join(__dirname, '../dist', 'sw.js');
+  const inputSwFilePath: string = path.join(__dirname, SW_FILE);
+  const outputSwFilePath: string = path.join(__dirname, '../dist', SW_FILE);
 
-  const currentFile: string = path.join(__dirname, '/sw-build.js');
+  const currentFile: string = path.join(__dirname, SW_BUILD_FILE);
 
   try {
     fs.copyFileSync(inputHtmlFilePath, outputHtmlFilePath);
@@ -47,8 +50,7 @@ function swBuild(): void {
       }
     });
   } catch (error) {
-    console.log('Не удалось сгенерировать файл sw.js! Ошибка: ');
-    console.error(error);
+    console.error('Не удалось сгенерировать файл sw.js! Ошибка: ', error);
   }
 }
 

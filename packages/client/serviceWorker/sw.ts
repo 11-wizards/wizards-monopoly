@@ -1,6 +1,6 @@
 let outputFilesList, currentCachesVersion;
 
-const filelist: string[] = ['/', '/index.html', '/no-chache-no-network.html'];
+const filelist: string[] = ['/', '/index.html', '/no-cache-no-network.html'];
 
 let cacheCurrentName: string = 'monopolyChacheV-';
 

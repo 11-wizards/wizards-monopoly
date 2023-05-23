@@ -1,0 +1,5 @@
+{
+  "SW_FILE": "sw.js",
+  "SW_HTML_FILE": "no-cache-no-network.html",
+  "SW_BUILD_FILE": "sw-build.js"
+}
