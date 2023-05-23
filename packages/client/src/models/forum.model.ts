@@ -4,9 +4,17 @@ export type Author = {
   name: string;
 };
 
-export type Topic = {
+export type Comment = {
   body: string;
   id: number;
+  userId: number;
+};
+
+export type Topic = {
+  body?: string;
+  comments?: Comment[];
+  id: number;
+  isFav?: boolean;
   title: string;
   userId: number;
 };

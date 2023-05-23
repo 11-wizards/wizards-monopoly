@@ -1,0 +1,41 @@
+//.topic-posts {
+//  .ant-pagination-options {
+//    display: none;
+//  }
+//
+//  display: grid;
+//  grid-gap: 15px;
+//  max-height: 100%;
+//  padding-left: 0;
+//  margin: 15px 0 0 100px;
+//  overflow-y: auto;
+//  list-style-type: none;
+//
+//  .topic-posts-paginaton {
+//    margin-left: auto;
+//  }
+//
+//  .post {
+//    padding: 12px;
+//    background-color: $whiteColor;
+//    border-radius: 12px;
+//    box-shadow: 4px 4px 8px 0 rgb(34 60 80 / 20%);
+//
+//    .post-title {
+//      margin: 0;
+//    }
+//
+//    .post-body {
+//      padding-left: 20px;
+//    }
+//  }
+//}
+
+.topics {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}

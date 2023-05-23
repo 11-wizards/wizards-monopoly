@@ -1,86 +1,85 @@
-// delete this comment after adding styles, a stub for stylelint
-
-.forum-content {
+.forum {
   display: grid;
-  grid-template-columns: 2fr 4fr;
-  gap: 20px;
+  grid-template-columns: 25% 1fr 25%;
   max-width: 1140px;
-  height: 100%;
-  padding: 25px 70px 40px;
   margin: 0 auto;
 
-  .forum-title {
-    grid-column: 1/3;
-    text-align: center;
+  &__main {
+    grid-column: 2;
+  }
+}
+
+.forum__title {
+  grid-column: 1/3;
+  text-align: center;
+}
+
+.forum__title,
+.topic-author {
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+.current-topic {
+  .topic-body {
+    padding-left: 20px;
+    margin: 10px 0;
   }
 
-  .topic-change {
+  .topic-header {
     position: sticky;
     top: 0;
-    width: 100%;
+    padding: 12px;
+    background: $whiteColor;
+    background-color: $whiteColor;
+    border-radius: 2px;
+    box-shadow: 4px 4px 8px 0 rgb(34 60 80 / 20%);
+  }
+}
 
-    .ant-table-cell {
-      padding: 10px;
+.forum__create-topic {
+  display: flex;
+  gap: 10px;
+  margin: $paddingM auto;
 
-      .topic-name {
-        color: $primaryColor;
-        text-align: left;
-        cursor: pointer;
-        background: transparent;
-        border: none;
-        outline: none;
-      }
-    }
+  .ant-table-cell {
+    padding: 10px;
 
-    .ant-table-pagination {
-      justify-content: center;
-    }
-
-    .ant-pagination-options {
-      display: none;
-    }
-
-    .new-topic-controls {
-      display: grid;
-      grid-template-columns: 3fr 1fr;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .topic-list-table .ant-table {
-      box-shadow: 4px 4px 8px 0 rgb(34 60 80 / 20%);
+    .topic-name {
+      color: $primaryColor;
+      text-align: left;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      outline: none;
     }
   }
 
-  .current-topic {
-    .topic-body {
-      padding-left: 20px;
-      margin: 10px 0;
-    }
-
-    .topic-header {
-      position: sticky;
-      top: 0;
-      padding: 12px;
-      background: $whiteColor;
-      background-color: $whiteColor;
-      border-radius: 2px;
-      box-shadow: 4px 4px 8px 0 rgb(34 60 80 / 20%);
-
-      .topic-title,
-      .topic-author {
-        margin: 0;
-        margin-bottom: 15px;
-      }
-    }
+  .ant-table-pagination {
+    justify-content: center;
   }
 
-  .new-post-controls {
-    margin: 15px 0 0 100px;
+  .ant-pagination-options {
+    display: none;
+  }
 
-    .new-post-body {
-      height: 100px;
-      margin-bottom: 10px;
-    }
+  .new-topic-controls {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .topic-list-table .ant-table {
+    box-shadow: 4px 4px 8px 0 rgb(34 60 80 / 20%);
+  }
+}
+
+.new-post-controls {
+  margin: 15px 0 0 100px;
+
+  .new-post-body {
+    height: 100px;
+    margin-bottom: 10px;
   }
 }
