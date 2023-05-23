@@ -16,9 +16,13 @@ async function startServer() {
 
   let vite: ViteDevServer | undefined;
 
-  const distPath = path.dirname(require.resolve('client/dist/index-ssr.html'));
-  const distSsrPath = require.resolve('client/dist-ssr/ssr.cjs');
-  const srcPath = path.dirname(require.resolve('client'));
+  const pathPrefix = IS_DEV ? '' : `${__dirname}/`;
+
+  const distPath = path.dirname(
+    require.resolve(path.join(pathPrefix, 'client/dist/index-ssr.html')),
+  );
+  const distSsrPath = require.resolve(path.join(pathPrefix, 'client/dist-ssr/ssr.cjs'));
+  const srcPath = path.dirname(IS_DEV ? require.resolve('client') : __dirname + '/client');
 
   if (IS_DEV) {
     vite = await createViteServer({
