@@ -76,11 +76,10 @@ async function startServer() {
       next(e);
     }
   });
-
+  await createClientAndConnect();
   app.listen(PORT, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${PORT}`);
   });
 }
 
 startServer();
-createClientAndConnect();
