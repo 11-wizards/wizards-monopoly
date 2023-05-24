@@ -1,4 +1,5 @@
 import cors from 'cors';
+import { createClientAndConnect } from './db';
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
@@ -82,3 +83,4 @@ async function startServer() {
 }
 
 startServer();
+createClientAndConnect();
