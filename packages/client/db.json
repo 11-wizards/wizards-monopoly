@@ -1,0 +1,23 @@
+{
+  "topics": [
+    {
+      "id": 1,
+      "user": {
+        "id": 1,
+        "name": "User 1"
+      },
+      "title": "Topic 1",
+      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam",
+      "commentsCount": 2
+    },
+    {
+      "commentsCount": 1,
+      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam",
+      "id": 2,
+      "title": "Topic 2",
+      "user": {
+        "id": 2,
+        "name": "User 2"
+      }
+    }
+  ]}

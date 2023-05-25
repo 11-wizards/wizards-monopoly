@@ -1,37 +1,12 @@
-import type { Topic } from 'models/forum.model';
 import type { FC, FormEvent } from 'react';
 import { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Button, Input } from 'antd';
 import Title from 'antd/lib/typography/Title';
-import { Topics } from './Topics';
+import { PreviewTopics } from './PreviewTopics';
 import { messages } from './common';
 
 import './Forum.scss';
-
-const mokeTopics: Topic[] = [
-  {
-    id: 1,
-    userId: 1,
-    title: 'Topic 1',
-    body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam',
-    comments: [
-      {
-        id: 1,
-        userId: 1,
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam',
-      },
-    ],
-    isFav: true,
-  },
-  {
-    id: 2,
-    userId: 2,
-    title: 'Topic 2',
-    body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam',
-    isFav: false,
-  },
-];
 
 export const Forum: FC = () => {
   const { formatMessage: fm } = useIntl();
@@ -55,7 +30,7 @@ export const Forum: FC = () => {
             {fm(messages.createTopicBtn)}
           </Button>
         </div>
-        <Topics className="forum__topics" topics={mokeTopics} />
+        <PreviewTopics className="forum__topics" />
       </div>
     </div>
   );

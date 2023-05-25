@@ -59,6 +59,7 @@
     "husky": "8.0.3",
     "jest": "28",
     "jest-environment-jsdom": "29.0.1",
+    "json-server": "0.17.3",
     "lefthook": "1.1.1",
     "prettier": "2.7.1",
     "stylelint": "15.3.0",
