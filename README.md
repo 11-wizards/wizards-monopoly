@@ -74,3 +74,27 @@
 
 Если вам понадобится только один сервис, просто уточните какой в команде
 `docker compose up {sevice_name}`, например `docker compose up server`
+
+## Development окружение в докере
+Перед первым запуском выполните команду `node init.js` из корневой директории проекта
+
+Для начала необходимо запустить докер контейнеры с PostgreSQL и PgAdmin. Для этого необходимо выполнить команду `docker compose up postgres pgadmin` из корневой директории
+
+Далее можно запускать сервер в режиме разработки, выполнив команду `yarn dev` из директории packages/server
+
+Если при запуске контейнеров с базой данных возникают проблемы, попробуйте остановить контейнеры, затем удалите директорию tmp, выполните команду `node init.js` и снова запустите контейнеры
+
+Для локального доступа к PgAdmin перейдите по адресу http://localhost:5050.
+Логин: admin@admin.com, Пароль: admin
+
+При добавлении сервера БД в PgAdmin, в поле Host name/address нужно указать IP адрес контейнера с БД, localhost не подойдёт.
+IP можно найти следующим образом:
+1. Находим container id, выполнив команду `docker ps`
+![Screenshot 2023-05-25 at 12.35.24.png](..%2F..%2FDesktop%2FScreenshot%202023-05-25%20at%2012.35.24.png)
+2. Находим IPAddress контейнера, выполнив команду `dockder inspect {container_id}` как на скришоте выше
+![Screenshot 2023-05-25 at 12.36.59.png](..%2F..%2FDesktop%2FScreenshot%202023-05-25%20at%2012.36.59.png)
+3. Вводим найденный IP в поле Host name/address в PgAdmin
+![Screenshot 2023-05-25 at 12.34.38.png](..%2F..%2FDesktop%2FScreenshot%202023-05-25%20at%2012.34.38.png)
+
+Имя базы данных, имя пользователя и пароль можно найти в файле .env.sample по соответствующим ключам POSTGRES_DB, POSTGRES_USER,
+POSTGRES_PASSWORD
