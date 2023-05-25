@@ -90,11 +90,10 @@
 При добавлении сервера БД в PgAdmin, в поле Host name/address нужно указать IP адрес контейнера с БД, localhost не подойдёт.
 IP можно найти следующим образом:
 1. Находим container id, выполнив команду `docker ps`
-![Screenshot 2023-05-25 at 12.35.24.png](..%2F..%2FDesktop%2FScreenshot%202023-05-25%20at%2012.35.24.png)
+![readme-1.webp](readme-1.webp)
 2. Находим IPAddress контейнера, выполнив команду `dockder inspect {container_id}` как на скришоте выше
-![Screenshot 2023-05-25 at 12.36.59.png](..%2F..%2FDesktop%2FScreenshot%202023-05-25%20at%2012.36.59.png)
+![readme-2.webp](readme-2.webp)
 3. Вводим найденный IP в поле Host name/address в PgAdmin
-![Screenshot 2023-05-25 at 12.34.38.png](..%2F..%2FDesktop%2FScreenshot%202023-05-25%20at%2012.34.38.png)
-
+![readme-3.webp](readme-3.webp)
 Имя базы данных, имя пользователя и пароль можно найти в файле .env.sample по соответствующим ключам POSTGRES_DB, POSTGRES_USER,
 POSTGRES_PASSWORD
