@@ -17,7 +17,7 @@ RUN yarn build
 
 
 FROM node:$NODE_VERSION-buster-slim as production
-RUN apt update && apt install -y nodejs && apt install -y npm && apt install -y netcat
+RUN apt update && apt install -y netcat
 WORKDIR /app
 
 COPY --from=builder /app/wait-for ./wait-for
@@ -28,6 +28,6 @@ COPY --from=builder /app/packages/server/package.json /app/package.json
 COPY --from=builder /app/packages/client/package.json /app/client/package.json
 
 RUN chmod +x ./wait-for
-RUN cd client && yarn install && cd .. && yarn install
+RUN yarn install && cd client && yarn install
 
 EXPOSE $SERVER_PORT
