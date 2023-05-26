@@ -2,11 +2,11 @@ version: "3.9"
 
 services:
   server:
-    container_name: prakticum-server
-    image: prakticum-server
+    container_name: praktikum-server
+    image: praktikum-server
     build:
       context: .
-      dockerfile: Dockerfile.server
+      dockerfile: Dockerfile
       args:
         SERVER_PORT: ${SERVER_PORT}
     restart: always
