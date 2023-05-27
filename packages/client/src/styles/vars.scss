@@ -2,6 +2,7 @@ $primaryColor: #4096ff;
 $redColor: #ff4d4f;
 $blackColor: #000;
 $whiteColor: #fff;
+$darkGrayColor: #808080;
 $lightGrayColor: #d9d9d9;
 
 $paddingXS: 4px;
@@ -12,9 +13,5 @@ $paddingL: 24px;
 $headerHeight: 50px;
 
 $fontSizeL: 24px;
-
-.go-back-button {
-  position: absolute;
-  top: 50%;
-  left: $paddingM;
-}
+$fontSizeM: 16px;
+$fontSizeS: 14px;

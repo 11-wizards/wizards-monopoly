@@ -1,23 +1,26 @@
 {
   "topics": [
     {
-      "id": 1,
-      "user": {
-        "id": 1,
-        "name": "User 1"
+      "topic_id": 1,
+      "author": {
+        "author_id": 1,
+        "author_name": "User 1"
       },
+      "date": "2019-01-01T00:00:00.000Z",
       "title": "Topic 1",
-      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam",
-      "commentsCount": 2
+      "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam",
+      "counts_comments": 2
     },
     {
-      "commentsCount": 1,
-      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam",
-      "id": 2,
+      "topic_id": 2,
+      "author": {
+        "author_id": 2,
+        "author_name": "User 2"
+      },
+      "date": "2019-01-01T00:00:00.000Z",
       "title": "Topic 2",
-      "user": {
-        "id": 2,
-        "name": "User 2"
-      }
+      "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam",
+      "counts_comments": 1
     }
-  ]}
+  ]
+}

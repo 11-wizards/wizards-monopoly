@@ -7,28 +7,34 @@ import type { FC } from 'react';
 import 'features/Forum/PreviewTopic/PreviewTopic.scss';
 
 type TopicProps = {
+  author: Author;
+  body: string;
   commentsCount?: number;
-  desc?: string;
+  date: string;
   id: number;
   title: string;
-  user: Author;
 };
 
-export const PreviewTopic: FC<TopicProps> = ({ id, title, desc, commentsCount, user }) => {
-  const { name: username } = user;
+export const PreviewTopic: FC<TopicProps> = ({ id, date, title, body, commentsCount, author }) => {
+  const { authorName } = author || {};
+  const resDate = new Date(date).toDateString() || '';
 
   return (
     <li key={id} className="topic">
-      <div className="topic__user">
-        <Typography.Text className="topic__user-name">{username}</Typography.Text>
+      <header className="topic__header">
+        <Typography.Paragraph className="topic__username">@{authorName}</Typography.Paragraph>
+        <Typography.Text className="topic__date">{resDate}</Typography.Text>
+      </header>
+      <div className="topic__content">
+        <Typography.Title level={3} className="topic__title">
+          {title}
+        </Typography.Title>
+        <Typography.Text>{`${body.substring(0, 100)}...`}</Typography.Text>
       </div>
-      <Typography.Title level={3} className="topic__title">
-        {title}
-      </Typography.Title>
       <footer className="topic__footer">
-        <Typography.Paragraph>{desc}</Typography.Paragraph>
         {commentsCount && (
-          <Button type="ghost" htmlType="button">
+          <Button className="topic__comments" type="ghost" htmlType="button">
+            {commentsCount}
             <CommentOutlined />
           </Button>
         )}
