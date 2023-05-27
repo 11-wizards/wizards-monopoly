@@ -1,5 +1,5 @@
 import cors from 'cors';
-import { createClientAndConnect } from './db';
+import { DBClient } from './db';
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
@@ -76,7 +76,7 @@ async function startServer() {
       next(e);
     }
   });
-  await createClientAndConnect();
+  await DBClient.connect();
   app.listen(PORT, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${PORT}`);
   });
