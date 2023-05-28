@@ -4,14 +4,16 @@ import { QueryTypes, Sequelize } from 'sequelize';
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, DATABASE_URL, NODE_ENV } =
   process.env;
 
+let connectionString = `postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_URL}:${POSTGRES_PORT}/${POSTGRES_DB}`;
+
+if (NODE_ENV === 'development') {
+  connectionString = `postgres://postgres:postgres@localhost:5432/postgres`;
+}
+
+export const client = new Sequelize(connectionString);
+
 export const createClientAndConnect = async (): Promise<Sequelize | null> => {
   try {
-    let connectionString = `postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_URL}:${POSTGRES_PORT}/${POSTGRES_DB}`;
-    if (NODE_ENV === 'development') {
-      connectionString = `postgres://postgres:postgres@localhost:5432/postgres`;
-    }
-    const client = new Sequelize(connectionString);
-
     await client.authenticate();
 
     const res: { now: string }[] = await client.query('SELECT NOW()', { type: QueryTypes.SELECT });
