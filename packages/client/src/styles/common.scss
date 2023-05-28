@@ -1,0 +1,4 @@
+.page {
+  min-height: calc(100vh - $headerHeight);
+  margin-top: $headerHeight;
+}

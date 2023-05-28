@@ -14,6 +14,9 @@
   "auth.title.login": "Login",
   "auth.title.register": "Register",
 
+  "forum.new-topic.name": "Theme",
+  "forum.new-topic.content": "Content",
+
   "client.error.message": "Sorry, the page you visited does not exist.",
   "client.error.message.button-text": "Back home",
 

@@ -9,6 +9,7 @@ import {
   ProfilePage,
   RegisterPage,
   StartGamePage,
+  NewTopic,
 } from 'pages';
 
 export const ROUTES = {
@@ -29,6 +30,10 @@ export const ROUTES = {
     path: '/forum',
     element: <ForumPage />,
   },
+  // FORUM_TOPIC_PAGE: {
+  // path: '/topic/:id',
+  // element: Topic,
+  // },
   START_GAME_PAGE: {
     path: '/start-game',
     element: <StartGamePage />,

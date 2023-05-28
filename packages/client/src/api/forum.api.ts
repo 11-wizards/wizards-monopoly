@@ -1,5 +1,13 @@
 import { baseApi } from 'api/baseApi';
-import type { Author, AuthorDTO, CommentDTO, Comment, Topic, TopicDTO } from 'models/forum.model';
+import type {
+  Author,
+  AuthorDTO,
+  CommentDTO,
+  Comment,
+  Topic,
+  TopicDTO,
+  CreateTopicDTO,
+} from 'models/forum.model';
 
 const authorNormalizr = (author: AuthorDTO): Author => ({
   authorId: author.author_id,
@@ -34,7 +42,18 @@ export const forumApi = baseApi.injectEndpoints({
       transformResponse: (response: TopicDTO[]) => response.map(topicNormalizr),
       // transformResponse: (response: WishlistDto) => mapWishlist(response),
     }),
+    createTopic: build.mutation<void, CreateTopicDTO>({
+      query: ({ title, author, body }: CreateTopicDTO) => ({
+        url: `/topics`,
+        method: 'POST',
+        body: {
+          author,
+          title,
+          body,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useGetTopicsQuery } = forumApi;
+export const { useGetTopicsQuery, useCreateTopicMutation } = forumApi;

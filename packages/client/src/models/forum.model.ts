@@ -44,6 +44,12 @@ export type Topic = {
   topicId: number;
 };
 
+export type CreateTopicDTO = {
+  author: Author;
+  body: string;
+  title: string;
+};
+
 export type PreviewTopic = {
   commentsCount?: number;
   desc: string;

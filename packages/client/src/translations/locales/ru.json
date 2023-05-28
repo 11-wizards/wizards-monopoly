@@ -17,6 +17,9 @@
   "client.error.message": "Извините, страница, которую вы посетили, не существует.",
   "client.error.message.button-text": "На главную",
 
+  "forum.new-topic.name": "Название темы",
+  "forum.new-topic.content": "Контент",
+
   "end-game.title": "ИГРА ОКОНЧЕНА",
   "end-game.winner": "Победитель",
   "end-game.finish-game": "Завершить игру",
