@@ -9,7 +9,6 @@ import {
   ProfilePage,
   RegisterPage,
   StartGamePage,
-  NewTopic,
 } from 'pages';
 
 export const ROUTES = {

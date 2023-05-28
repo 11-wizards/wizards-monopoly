@@ -12,6 +12,8 @@ import { messages } from './common';
 
 import 'features/Forum/CreateTopicModal/CreateTopicModal.scss';
 
+const DEFAULT_TEXTAREA_ROWS = 5;
+
 type TopicValues = {
   content?: string;
   title?: string;
@@ -56,34 +58,31 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({ isOpen, onModalClo
       title={fm(messages.newTopicName)}
       open={isOpen}
       onCancel={onModalClose}
+      centered
       footer={[
         <Button htmlType="button" onClick={handleSubmit(onSubmit)}>
           {fm(messages.createTopicBtn)}
         </Button>,
       ]}
     >
-      <Row justify="center">
-        <Col>
-          <Space className="create-topic__space" align="vertical">
-            <Form className="create-topic__form" layout="vertical">
-              <Form.Item label={fm(messages.newTopicName)}>
-                <Controller
-                  name="title"
-                  control={control}
-                  render={({ field }) => <Input {...field} />}
-                />
-              </Form.Item>
-              <Form.Item label={fm(messages.newTopicContent)}>
-                <Controller
-                  name="content"
-                  control={control}
-                  render={({ field }) => <TextArea {...field} />}
-                />
-              </Form.Item>
-            </Form>
-          </Space>
-        </Col>
-      </Row>
+      <Space className="create-topic__space">
+        <Form className="create-topic__form" layout="vertical">
+          <Form.Item label={fm(messages.newTopicName)}>
+            <Controller
+              name="title"
+              control={control}
+              render={({ field }) => <Input {...field} />}
+            />
+          </Form.Item>
+          <Form.Item label={fm(messages.newTopicContent)}>
+            <Controller
+              name="content"
+              control={control}
+              render={({ field }) => <TextArea rows={DEFAULT_TEXTAREA_ROWS} {...field} />}
+            />
+          </Form.Item>
+        </Form>
+      </Space>
     </Modal>
   );
 };
