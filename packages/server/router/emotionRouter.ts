@@ -5,5 +5,6 @@ const emotionRouter = express.Router();
 
 emotionRouter.route('/topics/:id/emotion').get(EmotionController.getEmotionByTopicId);
 emotionRouter.route('/topics/:id/emotion').post(EmotionController.writeEmotionByTopicId);
+emotionRouter.route('/topics/:id/emotion').delete(EmotionController.deleteEmotionByTopicId);
 
 export default emotionRouter;
