@@ -86,7 +86,7 @@ async function startServer() {
   await createClientAndConnect();
 
   await Emotion.belongsTo(Topic, {
-    foreignKey: 'topic_id'
+    foreignKey: 'topic_id',
   });
 
   await Topic.hasMany(Emotion, { foreignKey: 'topic_id' });
