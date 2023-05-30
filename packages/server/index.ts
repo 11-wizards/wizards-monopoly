@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import cors from 'cors';
-import { createClientAndConnect } from './db';
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
+import { router } from './routes';
+import { createClientAndConnect } from './db';
 import { ROUTER_API_PATH } from './constant';
 import { router } from './routers/api.router';
 
@@ -21,6 +23,8 @@ async function startServer() {
   const app = express();
   app.use(cors());
   app.use(express.json());
+
+  await createClientAndConnect();
 
   app.use('/api/forum', emotionRouter);
 
@@ -48,7 +52,11 @@ async function startServer() {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')));
   }
 
-  app.use(express.json());
+  app.use('/api', router);
+  // app.post('/api/theme/user-theme', (req) => {
+  //   console.log({ req: req.body });
+  // });
+
   app.use(ROUTER_API_PATH, router);
 
   app.use('*', async (req: Request, res: Response, next: NextFunction) => {
@@ -66,7 +74,7 @@ async function startServer() {
       }
 
       // вот тут костыль типа, ибо не получается адекватно импортировать RootState
-      let render: (url: string) => Promise<[any, string]>;
+      let render: (url: string) => Promise<[unknown, string]>;
 
       if (!IS_DEV) {
         render = (await import(distSsrPath)).render;
@@ -88,8 +96,6 @@ async function startServer() {
       next(e);
     }
   });
-
-  await createClientAndConnect();
 
   await Emotion.belongsTo(Topic, {
     foreignKey: 'topic_id',

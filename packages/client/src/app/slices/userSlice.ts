@@ -3,7 +3,9 @@ import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
 import type { UploadRequestOption } from 'rc-upload/lib/interface';
 import { authApi } from 'api/auth.api';
 import { profileApi } from 'api/profile.api';
+import { themeApi } from 'api/theme.api';
 import { LOCAL_STORAGE_IS_AUTH_KEY } from 'constants/localStorage';
+import { DEFAULT_THEME, SITE_THEMES } from 'constants/theme';
 import { handleServerError } from 'helpers/handleServerError';
 import type { CurrentUser, CurrentUserDto } from 'models/auth.model';
 import type { ProfileInput } from 'models/profile.model';
@@ -22,15 +24,35 @@ const initialState: UserState = {
 };
 
 export const fetchCurrentUser = createAsyncThunk('user/fetchCurrentUser', async () => {
-  try {
-    const response = await authApi.getCurrentUser();
+  const result: Partial<CurrentUser> = {};
 
-    if (response.status === 200) {
-      return { ...response.data };
+  try {
+    const currentUserResponse = await authApi.getCurrentUser();
+
+    if (currentUserResponse.status === 200) {
+      Object.entries(currentUserResponse.data).forEach(([key, value]) => {
+        // TODO: написать типизацию для result
+        // @ts-ignore
+        result[key] = value;
+      });
+    }
+
+    if (result.id) {
+      const currentUserThemeResponse = await themeApi.getCurrentUserTheme({
+        device: 'default',
+        userId: result.id,
+      });
+
+      // TODO: получать темы с бэка
+      result.theme = SITE_THEMES.includes(currentUserThemeResponse.data.theme)
+        ? currentUserThemeResponse.data
+        : DEFAULT_THEME;
     }
   } catch (err) {
     await handleServerError(err as ServerError);
   }
+
+  return result;
 });
 
 export const changeProfileAvatar = createAsyncThunk(
@@ -102,6 +124,7 @@ export const userSlice = createSlice({
           email,
           phone,
           avatar,
+          theme,
         } = action.payload as CurrentUserDto;
 
         state.isLoading = false;
@@ -115,6 +138,7 @@ export const userSlice = createSlice({
           email,
           phone,
           avatar,
+          theme,
         };
       })
       .addCase(fetchCurrentUser.rejected, (state) => {
