@@ -5,6 +5,9 @@ import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
+import { ROUTER_API_PATH } from './constant';
+import {router as apiRouter} from './routers/api.router';
+
 import emotionRouter from './router/emotionRouter';
 import { Topic } from './models/Topic';
 import { Emotion } from './models/Emotion';
@@ -44,6 +47,10 @@ async function startServer() {
   if (!IS_DEV) {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')));
   }
+
+  app.use(ROUTER_API_PATH, express.json());
+  // app.use(ROOT_API_FORUM_PATH, forumApiRoutes);
+  app.use(ROUTER_API_PATH, apiRouter);
 
   app.use('*', async (req: Request, res: Response, next: NextFunction) => {
     const url = req.originalUrl;

@@ -1,36 +1,38 @@
 import { DataTypes } from "sequelize";
 import { client } from '../db';
 import { Author, TypeAuthor } from "./Author";
+import { Topic } from "./Topic";
 
-export type CreateTopicData = {
+export type CreateCommentData = {
     author: TypeAuthor,
-    title: string,
     body: string,
 }
 
-export type TypeTopic = {
-    length: any;
+export type TypeComment = {
     topic_id: number,
-    title: string,
+    comment_id: number,
     date: Date,
     author: TypeAuthor,
     body: string,
-    count_comments: number,
+    count_replies: number,
 }
 
-
-const Topic = client.define('Topic', {
-    topic_id: {
+const Comment = client.define('Comment', {
+    comment_id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    author_id: {
+    topic_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    title: {
-        type: DataTypes.TEXT,
+    parent_comment_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+    },
+    author_id: {
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
     body: {
@@ -43,12 +45,14 @@ const Topic = client.define('Topic', {
     updatedAt: false,
 });
 
-Topic.belongsTo(Author, {
+Comment.belongsTo(Author, {
     foreignKey: 'author_id',
     as: 'author'
 });
 
+Comment.belongsTo(Topic, {
+    foreignKey: 'topic_id',
+    as: 'topic'
+});
 
-
-
-export { Topic };
+export { Comment };
