@@ -23,5 +23,8 @@
   "devDependencies": {
     "@evilmartians/lefthook": "^1.1.1",
     "lerna": "^5.4.3"
+  },
+  "dependencies": {
+    "yarn": "1.22.19"
   }
 }

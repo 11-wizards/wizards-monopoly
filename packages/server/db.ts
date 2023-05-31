@@ -11,10 +11,8 @@ if (NODE_ENV === 'development') {
 
 export const client = new Sequelize(connectionString);
 
-
 export const createClientAndConnect = async (): Promise<Sequelize | null> => {
   try {
-
     await client.authenticate();
 
     const res: { now: string }[] = await client.query('SELECT NOW()', { type: QueryTypes.SELECT });

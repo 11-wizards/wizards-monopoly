@@ -5,4 +5,3 @@ export { isNumbers } from './isNumbers';
 export { isArrays } from './isArrays';
 export { isObjects } from './isObjects';
 export { isStrings } from './isStrings';
-
