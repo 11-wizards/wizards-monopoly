@@ -5,6 +5,9 @@ import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
+import emotionRouter from './router/emotionRouter';
+import { Topic } from './models/Topic';
+import { Emotion } from './models/Emotion';
 dotenv.config();
 
 const PORT = Number(process.env.SERVER_PORT) || 3001;
@@ -14,6 +17,9 @@ const IS_DEV = process.env.NODE_ENV === 'development';
 async function startServer() {
   const app = express();
   app.use(cors());
+  app.use(express.json());
+
+  app.use('/api/forum', emotionRouter);
 
   let vite: ViteDevServer | undefined;
 
@@ -76,7 +82,17 @@ async function startServer() {
       next(e);
     }
   });
+
   await createClientAndConnect();
+
+  await Emotion.belongsTo(Topic, {
+    foreignKey: 'topic_id',
+  });
+
+  await Topic.hasMany(Emotion, { foreignKey: 'topic_id' });
+
+  await Emotion.sync();
+
   app.listen(PORT, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${PORT}`);
   });
