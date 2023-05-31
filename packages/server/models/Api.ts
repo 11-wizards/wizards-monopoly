@@ -1,19 +1,23 @@
 import { Request, Response, NextFunction } from 'express';
 
 export type ApiError = {
-    code: number,
-    msg?: string,
-}
+  code: number;
+  msg?: string;
+};
 
 export type ResponseApiSuccess<T> = {
-    status: true,
-    data: T,
-}
+  status: true;
+  data: T;
+};
 export type ResponseApiError = {
-    status: false,
-    error: ApiError,
-}
+  status: false;
+  error: ApiError;
+};
 
 export type ResponseApi<T> = ResponseApiSuccess<T> | ResponseApiError;
 
-export type RoutesFunction<T> = (req: Request, res: Response, next: NextFunction) => Promise<ResponseApi<T>>;
+export type RoutesFunction<T> = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => Promise<ResponseApi<T>>;

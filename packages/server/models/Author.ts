@@ -1,25 +1,28 @@
-import { DataTypes } from "sequelize";
+import { DataTypes } from 'sequelize';
 import { client } from '../db';
 
 export type TypeAuthor = {
-    author_id: number,
-    name: string
-}
+  author_id: number;
+  name: string;
+};
 
-const Author = client.define('Author', {
+const Author = client.define(
+  'Author',
+  {
     author_id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
     },
     name: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-
-}, {
-    timestamps:false,
+  },
+  {
+    timestamps: false,
     updatedAt: false,
-});
+  },
+);
 
 export { Author };

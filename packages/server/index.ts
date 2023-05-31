@@ -6,7 +6,7 @@ import fs from 'fs';
 import path from 'path';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
 import { ROUTER_API_PATH } from './constant';
-import {router as apiRouter} from './routers/api.router';
+import { router } from './routers/api.router';
 
 import emotionRouter from './router/emotionRouter';
 import { Topic } from './models/Topic';
@@ -48,9 +48,8 @@ async function startServer() {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')));
   }
 
-  app.use(ROUTER_API_PATH, express.json());
-  // app.use(ROOT_API_FORUM_PATH, forumApiRoutes);
-  app.use(ROUTER_API_PATH, apiRouter);
+  app.use(express.json());
+  app.use(ROUTER_API_PATH, router);
 
   app.use('*', async (req: Request, res: Response, next: NextFunction) => {
     const url = req.originalUrl;
