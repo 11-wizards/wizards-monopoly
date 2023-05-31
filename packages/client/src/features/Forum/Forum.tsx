@@ -1,11 +1,9 @@
 import { Button } from 'antd';
-import { ROUTES } from 'core/Router';
 import { CreateTopicModal } from 'features/Forum/CreateTopicModal';
 import { useCallback, useState } from 'react';
 import type { FC, MouseEventHandler } from 'react';
 import { useIntl } from 'react-intl';
 import Title from 'antd/lib/typography/Title';
-import { Link } from 'react-router-dom';
 import { PreviewTopics } from './PreviewTopics';
 import { messages } from './common';
 

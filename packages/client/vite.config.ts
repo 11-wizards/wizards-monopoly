@@ -9,7 +9,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@import 'styles/vars';`,
+          additionalData: `@import 'styles/vars'; @import 'styles/mixins';`,
         },
       },
     },

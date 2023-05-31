@@ -1,23 +1,13 @@
-.topic {
-  display: grid;
-  gap: 15px;
+.preview-topic {
   padding: $paddingL;
   background-color: $whiteColor;
-  border: 1px solid $lightGrayColor;
-  border-radius: 6px;
 
-  &__username.ant-typography {
-    margin-bottom: $paddingXS;
-    font-size: $fontSizeS;
-    font-weight: 400;
-    line-height: $fontSizeM;
-    letter-spacing: 0.05em;
-  }
+  @include space-border;
 
-  &__date {
-    font-size: 10px;
-    line-height: $fontSizeS;
-    color: $darkGrayColor;
+  &__wrapper {
+    display: grid;
+    gap: 15px;
+    text-decoration: none;
   }
 
   &__title {

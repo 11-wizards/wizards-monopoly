@@ -1,0 +1,6 @@
+.replies {
+  display: grid;
+  gap: 15px;
+
+  @include reset-list;
+}

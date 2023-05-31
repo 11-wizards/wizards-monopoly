@@ -1,1 +1,1 @@
-export { CreateTopicModal } from 'features/Forum/CreateTopicModal/CreateTopicModal.tsx';
+export { CreateTopicModal } from './CreateTopicModal';

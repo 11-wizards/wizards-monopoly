@@ -1,0 +1,10 @@
+.reply {
+  &__space {
+    @include space-border;
+    @include discussionSpace;
+
+    width: 95%;
+    margin-left: 5%;
+    border-left: 1px solid $primaryColor;
+  }
+}

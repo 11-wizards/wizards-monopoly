@@ -1,4 +1,4 @@
-import { Button, Col, Form, Input, Modal, Row, Space } from 'antd';
+import { Button, Form, Input, Modal, Space } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { useCreateTopicMutation } from 'api/forum.api';
 import type { RootState } from 'app/store';
@@ -8,11 +8,10 @@ import type { FC, MouseEventHandler } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
+import { DEFAULT_TEXTAREA_ROWS } from 'constants/forum';
 import { messages } from './common';
 
 import 'features/Forum/CreateTopicModal/CreateTopicModal.scss';
-
-const DEFAULT_TEXTAREA_ROWS = 5;
 
 type TopicValues = {
   content?: string;

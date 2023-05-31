@@ -50,13 +50,8 @@ export type CreateTopicDTO = {
   title: string;
 };
 
-export type PreviewTopic = {
-  commentsCount?: number;
-  desc: string;
-} & Omit<Topic, 'body' | 'comments'>;
-
-export type RepliesDTO = {
-  author: Author;
+export type ReplyDTO = {
+  author: AuthorDTO;
   body: string;
   comment_id: number;
   date: Date;
@@ -64,7 +59,7 @@ export type RepliesDTO = {
   topic_id: number;
 };
 
-export type Replies = {
+export type Reply = {
   author: Author;
   body: string;
   commentId: number;

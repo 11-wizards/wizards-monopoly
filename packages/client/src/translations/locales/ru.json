@@ -17,8 +17,13 @@
   "client.error.message": "Извините, страница, которую вы посетили, не существует.",
   "client.error.message.button-text": "На главную",
 
+  "comment.newCommentName": "Добавить новый комментарий",
+
+  "forum.comment.repliesBtnCount": "Показать ответы",
+  "forum.comment.repliesBtn": "Ответить",
   "forum.new-topic.name": "Название темы",
   "forum.new-topic.content": "Контент",
+  "forum.reply.replyBtn": "Ответить",
 
   "end-game.title": "ИГРА ОКОНЧЕНА",
   "end-game.winner": "Победитель",

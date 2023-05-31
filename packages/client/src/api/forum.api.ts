@@ -7,6 +7,8 @@ import type {
   Topic,
   TopicDTO,
   CreateTopicDTO,
+  Reply,
+  ReplyDTO,
 } from 'models/forum.model';
 
 const authorNormalizr = (author: AuthorDTO): Author => ({
@@ -32,15 +34,28 @@ const topicNormalizr = (topic: TopicDTO): Topic => ({
   topicId: topic.topic_id,
 });
 
+const repliesNormalizr = (replies: ReplyDTO): Reply => ({
+  author: authorNormalizr(replies.author),
+  body: replies.body,
+  commentId: replies.comment_id,
+  date: replies.date,
+  repliesId: replies.replies_id,
+  topicId: replies.topic_id,
+});
+
 export const forumApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getTopics: build.query<Topic[], void>({
+    getAllTopics: build.query<Topic[], void>({
       query: () => ({
         url: `/topics`,
       }),
-      // providesTags: [WISHLIST_TAG],
       transformResponse: (response: TopicDTO[]) => response.map(topicNormalizr),
-      // transformResponse: (response: WishlistDto) => mapWishlist(response),
+    }),
+    getTopic: build.query<Topic, number>({
+      query: (id) => ({
+        url: `/topics/${id}`,
+      }),
+      transformResponse: (response: TopicDTO) => topicNormalizr(response),
     }),
     createTopic: build.mutation<void, CreateTopicDTO>({
       query: ({ title, author, body }: CreateTopicDTO) => ({
@@ -53,7 +68,48 @@ export const forumApi = baseApi.injectEndpoints({
         },
       }),
     }),
+    getAllComments: build.query<Comment[], void>({
+      query: () => ({
+        url: '/comments',
+      }),
+      transformResponse: (response: CommentDTO[]) => response.map(commentNormalizr),
+      providesTags: ['COMMENT'],
+    }),
+    createComment: build.mutation<void, Comment & { id: number }>({
+      query: (id) => ({
+        url: 'comments',
+        method: 'POST',
+        body: {
+          id,
+          author: {
+            author_id: 3,
+            author_name: 'User 3',
+          },
+          body: 'comment 1 user 3',
+          comment_id: id,
+          count_replies: 3,
+          date: '31.05.23',
+          topic_id: 12,
+        },
+      }),
+      invalidatesTags: ['COMMENT'],
+    }),
+    getReplies: build.query<Reply[], void>({
+      query: () => ({
+        // TODO: подогнать под бэк
+        // url: `/topics/${topicId}/comments/${commentId}/replies`,
+        url: `/replies`,
+      }),
+      transformResponse: (response: ReplyDTO[]) => response.map(repliesNormalizr),
+    }),
   }),
 });
 
-export const { useGetTopicsQuery, useCreateTopicMutation } = forumApi;
+export const {
+  useGetAllTopicsQuery,
+  useGetTopicQuery,
+  useGetAllCommentsQuery,
+  useGetRepliesQuery,
+  useCreateTopicMutation,
+  useCreateCommentMutation,
+} = forumApi;

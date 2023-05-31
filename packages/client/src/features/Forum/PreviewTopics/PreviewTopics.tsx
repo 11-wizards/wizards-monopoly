@@ -1,6 +1,6 @@
-import { useGetTopicsQuery } from 'api/forum.api';
+import { useGetAllTopicsQuery } from 'api/forum.api';
 import classNames from 'classnames';
-import { PreviewTopic } from 'features/Forum/PreviewTopic/PreviewTopic';
+import { PreviewTopic } from 'features/Forum/PreviewTopic';
 import React from 'react';
 
 import 'features/Forum/PreviewTopics/PreviewTopics.scss';
@@ -10,7 +10,7 @@ type PreviewTopicsProps = {
 };
 
 export const PreviewTopics: React.FC<PreviewTopicsProps> = ({ className = '' }) => {
-  const { data: topics = [] } = useGetTopicsQuery();
+  const { data: topics = [] } = useGetAllTopicsQuery();
 
   return (
     <ul className={classNames(className, 'topics')}>

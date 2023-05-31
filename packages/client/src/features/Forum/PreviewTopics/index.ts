@@ -1,1 +1,1 @@
-export { PreviewTopics } from 'features/Forum/PreviewTopics/PreviewTopics';
+export { PreviewTopics } from './PreviewTopics';
