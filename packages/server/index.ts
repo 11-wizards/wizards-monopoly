@@ -92,7 +92,6 @@ async function startServer() {
   await Topic.hasMany(Emotion, { foreignKey: 'topic_id' });
 
   await Emotion.sync();
-  await Emotion.sync();
 
   app.listen(PORT, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${PORT}`);
