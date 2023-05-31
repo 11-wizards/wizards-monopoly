@@ -3,16 +3,16 @@ import { useGetTopicQuery } from 'api/forum.api';
 import { TopicUserInfo } from 'components/TopicUserInfo/TopicUserInfo';
 import { Comments } from 'features/Forum/Comments';
 import { NewComment } from 'features/Forum/NewComment';
+import type { Topic } from 'models/forum.model';
 import type { FC } from 'react';
 import { useParams } from 'react-router-dom';
 
 import './TopicPage.scss';
 
 export const TopicPage: FC = () => {
-  const { topicId = 100 } = useParams();
-  console.log('911.', topicId);
+  const { topicId } = useParams();
   const { data: topic = {} } = useGetTopicQuery(topicId);
-  const { title, date, body, author } = topic || {};
+  const { title, date, body, author } = topic as Topic;
 
   return (
     <div className="topic-page page">

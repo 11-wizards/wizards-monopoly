@@ -5,7 +5,6 @@ import type { Topic } from 'models/forum.model';
 import React from 'react';
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { createTopicUrl } from './common';
 
 import './PreviewTopic.scss';
 
@@ -13,14 +12,14 @@ type TopicProps = Omit<Topic, 'topicId'> & {
   id: number;
 };
 export const PreviewTopic: FC<TopicProps> = ({ id, date, title, body, commentsCount, author }) => {
-  const { authorName } = author || {};
-  const resDate = new Date(date);
+  const { authorName } = author;
 
+  // TODO: взять path для ссылки из бэкенда
   return (
-    <li key={id} className="preview-topic">
-      <Link className="preview-topic__wrapper" to={createTopicUrl(id)}>
+    <li className="preview-topic">
+      <Link className="preview-topic__wrapper" to={`/forum/topic/${id}`}>
         <header className="preview-topic__header">
-          <TopicUserInfo date={resDate} authorName={authorName} />
+          <TopicUserInfo date={date} authorName={authorName} />
         </header>
         <div className="preview-topic__content">
           <Typography.Title level={3} className="preview-topic__title">

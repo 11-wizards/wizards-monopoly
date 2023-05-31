@@ -11,14 +11,7 @@ type ReplyProps = TReply & {
   className?: string;
 };
 
-export const Reply: FC<ReplyProps> = ({
-  className = '',
-  author,
-  body,
-  date,
-  topicId,
-  commentId,
-}) => {
+export const Reply: FC<ReplyProps> = ({ className = '', author, body }) => {
   const { authorName } = author;
   const { formatMessage: fm } = useIntl();
 
@@ -28,7 +21,7 @@ export const Reply: FC<ReplyProps> = ({
         <div className="reply__content">{body}</div>
         <footer className="reply__footer">
           by {authorName}
-          <Button type="ghost">{fm(messages.replyBtn)}</Button>
+          <Button>{fm(messages.replyBtn)}</Button>
         </footer>
       </Space>
     </li>

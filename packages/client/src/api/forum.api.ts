@@ -43,6 +43,7 @@ const repliesNormalizr = (replies: ReplyDTO): Reply => ({
   topicId: replies.topic_id,
 });
 
+// TODO: поменять пути на backend api
 export const forumApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getAllTopics: build.query<Topic[], void>({
@@ -75,29 +76,24 @@ export const forumApi = baseApi.injectEndpoints({
       transformResponse: (response: CommentDTO[]) => response.map(commentNormalizr),
       providesTags: ['COMMENT'],
     }),
-    createComment: build.mutation<void, Comment & { id: number }>({
-      query: (id) => ({
+    createComment: build.mutation<void, Omit<Comment, 'repliesCount'> & { id: number }>({
+      query: ({ id, author, body, commentId, date, topicId }) => ({
         url: 'comments',
         method: 'POST',
         body: {
           id,
-          author: {
-            author_id: 3,
-            author_name: 'User 3',
-          },
-          body: 'comment 1 user 3',
-          comment_id: id,
-          count_replies: 3,
-          date: '31.05.23',
-          topic_id: 12,
+          author,
+          body,
+          comment_id: commentId,
+          count_replies: 0,
+          date,
+          topic_id: topicId,
         },
       }),
       invalidatesTags: ['COMMENT'],
     }),
     getReplies: build.query<Reply[], void>({
       query: () => ({
-        // TODO: подогнать под бэк
-        // url: `/topics/${topicId}/comments/${commentId}/replies`,
         url: `/replies`,
       }),
       transformResponse: (response: ReplyDTO[]) => response.map(repliesNormalizr),

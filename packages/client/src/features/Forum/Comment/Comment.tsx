@@ -11,7 +11,7 @@ import './Comment.scss';
 
 type CommentProps = TComment;
 
-export const Comment: FC<CommentProps> = ({ author, body, date, repliesCount }) => {
+export const Comment: FC<CommentProps> = ({ author, body, date, repliesCount = 0 }) => {
   const { authorName } = author;
   const { formatMessage: fm } = useIntl();
 
@@ -29,10 +29,14 @@ export const Comment: FC<CommentProps> = ({ author, body, date, repliesCount }) 
         </header>
         <div className="comment__content">{body}</div>
         <footer className="comment__footer">
-          <Button className="comment__btn-replies" type="ghost" onClick={onBtnRepliesClick}>
-            {`${fm(messages.repliesBtnCount)} ${repliesCount}`}
-          </Button>
-          <Button type="ghost">{fm(messages.repliesBtn)}</Button>
+          {repliesCount ? (
+            <Button className="comment__btn-replies" onClick={onBtnRepliesClick}>
+              {`${fm(messages.repliesBtnCount)} (${repliesCount})`}
+            </Button>
+          ) : (
+            <div />
+          )}
+          <Button>{fm(messages.repliesBtn)}</Button>
         </footer>
       </Space>
       <Replies className="comment__replies" skipFetch={!showReplies} />

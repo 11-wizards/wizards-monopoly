@@ -11,7 +11,7 @@ import { useIntl } from 'react-intl';
 import { DEFAULT_TEXTAREA_ROWS } from 'constants/forum';
 import { messages } from './common';
 
-import 'features/Forum/CreateTopicModal/CreateTopicModal.scss';
+import './CreateTopicModal.scss';
 
 type TopicValues = {
   content?: string;
@@ -30,10 +30,11 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({ isOpen, onModalClo
   const [createTopic] = useCreateTopicMutation();
   const user: CurrentUser = useAppSelector((state: RootState) => state.user.currentUser);
 
+  // TODO: Добавить Валидацию
   const {
     handleSubmit,
     control,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<TopicValues>({
     defaultValues: {
       content: '',

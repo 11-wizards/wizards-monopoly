@@ -8,11 +8,7 @@ import { useIntl } from 'react-intl';
 
 import './NewComment.scss';
 
-type NewCommentProps = {
-  className?: string;
-};
-
-export const NewComment: FC<NewCommentProps> = ({ className }) => {
+export const NewComment: FC = () => {
   const { formatMessage: fm } = useIntl();
 
   const [createComment] = useCreateCommentMutation();

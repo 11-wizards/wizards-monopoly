@@ -16,7 +16,7 @@ export const Replies: FC<RepliesProps> = ({ className = '', skipFetch }) => {
   return (
     <ul className={classNames('replies', className)}>
       {replies.map(({ replyId, ...props }) => (
-        <Reply key={replyId} {...props} />
+        <Reply key={replyId as number} {...props} />
       ))}
     </ul>
   );

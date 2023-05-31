@@ -7,4 +7,9 @@
     margin-left: 5%;
     border-left: 1px solid $primaryColor;
   }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+  }
 }
