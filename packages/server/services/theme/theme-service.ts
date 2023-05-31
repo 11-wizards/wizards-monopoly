@@ -1,3 +1,4 @@
+import { SiteTheme } from '../../types/theme';
 import { UserTheme } from '../../models/UserTheme';
 
 interface GetUserThemeOptions {
@@ -5,9 +6,14 @@ interface GetUserThemeOptions {
   device?: string;
 }
 
+interface SetUserThemeOptions {
+  device?: string;
+  theme: SiteTheme;
+  userId: number;
+}
 interface IThemeService {
   getUserTheme(options: GetUserThemeOptions): Promise<unknown>;
-  setUserTheme(id: string, theme: string): Promise<string>;
+  setUserTheme(option: SetUserThemeOptions): Promise<unknown>;
 }
 
 class ThemeService implements IThemeService {
@@ -27,8 +33,27 @@ class ThemeService implements IThemeService {
     return { device, theme };
   }
 
-  async setUserTheme(id: string, theme: string): Promise<string> {
-    return Promise.resolve(`${id} ${theme}`);
+  async setUserTheme({
+    device: deviceIn,
+    theme: themeIn,
+    userId,
+  }: SetUserThemeOptions): Promise<unknown> {
+    const updatedUserTheme = await UserTheme.update(
+      {
+        device: deviceIn,
+        theme: themeIn,
+      },
+      {
+        where: {
+          ownerId: userId,
+        },
+        returning: true,
+      },
+    );
+
+    const { device, theme } = updatedUserTheme[1][0].dataValues;
+
+    return { device, theme };
   }
 }
 

@@ -9,6 +9,7 @@ import { DEFAULT_THEME, SITE_THEMES } from 'constants/theme';
 import { handleServerError } from 'helpers/handleServerError';
 import type { CurrentUser, CurrentUserDto } from 'models/auth.model';
 import type { ProfileInput } from 'models/profile.model';
+import { type CurrentUserTheme, type ChangeUserThemeInput } from 'models/theme.model';
 import type { RootState } from '../store';
 
 type UserState = {
@@ -78,6 +79,21 @@ export const changeProfileInfo = createAsyncThunk(
   async (values: ProfileInput) => {
     try {
       const response = await profileApi.changeProfileInfo(values);
+
+      if (response.status === 200) {
+        return { ...response.data };
+      }
+    } catch (err) {
+      await handleServerError(err as ServerError);
+    }
+  },
+);
+
+export const changeUserTheme = createAsyncThunk(
+  'theme/changeUserTheme',
+  async (values: ChangeUserThemeInput) => {
+    try {
+      const response = await themeApi.setCurrentUserTheme(values);
 
       if (response.status === 200) {
         return { ...response.data };
@@ -206,6 +222,21 @@ export const userSlice = createSlice({
         };
       })
       .addCase(changeProfileInfo.rejected, (state) => {
+        state.isLoading = false;
+      });
+    // change user theme
+    builder
+      .addCase(changeUserTheme.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(changeUserTheme.fulfilled, (state, action) => {
+        const { device, theme } = action.payload as CurrentUserTheme;
+        state.isLoading = false;
+        state.currentUser!.theme = { device, theme };
+
+        document.querySelector('html')?.setAttribute('theme', theme);
+      })
+      .addCase(changeUserTheme.rejected, (state) => {
         state.isLoading = false;
       });
     // sign out

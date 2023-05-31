@@ -5,4 +5,4 @@ import { userThemeController } from '../controllers/user-theme';
 export const themeRouter = Router();
 
 themeRouter.post('/user-theme/', userThemeController.getUserTheme);
-// themeRouter.post('/user-theme', );
+themeRouter.post('/set-user-theme', userThemeController.setUserTheme);
