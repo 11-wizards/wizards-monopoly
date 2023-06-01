@@ -1,8 +1,10 @@
-let outputFilesList, currentCachesVersion;
+/* eslint no-restricted-globals: ["error", "event"] */
+let outputFilesList;
+let currentCachesVersion;
 
-const filelist: string[] = ['/', '/index.html', '/no-cache-no-network.html'];
+const filelist: string[] = ['/', '/index-ssr.html', '/no-cache-no-network.html'];
 
-let cacheCurrentName: string = 'monopolyChacheV-';
+let cacheCurrentName = 'monopolyChacheV-';
 
 if (typeof outputFilesList !== 'undefined' && Array.isArray(outputFilesList)) {
   const newFile = [...outputFilesList] ?? [];
@@ -10,15 +12,34 @@ if (typeof outputFilesList !== 'undefined' && Array.isArray(outputFilesList)) {
 }
 
 if (typeof currentCachesVersion === 'number') {
-  cacheCurrentName = 'monopolyChacheV-' + currentCachesVersion;
+  cacheCurrentName = `monopolyChacheV-${String(currentCachesVersion)}`;
+}
+
+async function cacheFirst(request: Request): Promise<Cache | Response> {
+  const cache: Cache = await caches.open(cacheCurrentName);
+  const cached: Response = await cache.match(request);
+  if (cached) {
+    return cached;
+  }
+
+  try {
+    const response: Response = await fetch(request);
+    await cache.put(request, response.clone());
+
+    return response;
+  } catch (error) {
+    if (request.mode === 'navigate' && request.url.includes(location.origin)) {
+      return cache.match('/');
+    }
+  }
+
+  return cache.match('/no-chache-no-network.html');
 }
 
 self.addEventListener('install', (event: Event) => {
   const extendableEvent = event as ExtendableEvent;
   extendableEvent.waitUntil(
-    caches.open(cacheCurrentName).then((cache: Cache) => {
-      return cache.addAll(filelist);
-    }),
+    caches.open(cacheCurrentName).then((cache: Cache) => cache.addAll(filelist)),
   );
 });
 
@@ -42,20 +63,3 @@ self.addEventListener('activate', (event: Event) => {
       ),
   );
 });
-
-async function cacheFirst(request: Request): Promise<Cache | Response> {
-  const cache: Cache = await caches.open(cacheCurrentName);
-  try {
-    const response: Response = await fetch(request);
-    await cache.put(request, response.clone());
-    return response;
-  } catch (error) {
-    const cached: Response = await cache.match(request);
-    if (cached) {
-      return cached;
-    } else if (request.mode === 'navigate' && request.url.includes(location.origin)) {
-      return cache.match('/');
-    }
-  }
-  return cache.match('/no-chache-no-network.html');
-}

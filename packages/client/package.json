@@ -5,9 +5,10 @@
   "scripts": {
     "dev": "vite",
     "build:client": "rimraf ./dist && tsc && vite build --config vite.config.ts",
-    "build:sw": "rimraf ./dist && tsc && vite build --config vite.config.ts && tsc --project tsconfig.sw.json && node serviceWorker/sw-build.js && vite preview",
     "build:ssr": "rimraf ./dist-ssr && tsc && vite build --config vite.config.ts --ssr index-ssr.html",
     "build": "yarn build:ssr && yarn build:client",
+    "build:sw": "yarn build && tsc --project tsconfig.sw.json && node src/serviceworker/sw-build.js && vite preview",
+    "serviceworker": "tsc --project tsconfig.sw.json && node src/serviceworker/sw-build.js",
     "preview": "vite preview",
     "eslint": "eslint ./src --ext .ts,.tsx",
     "eslint:fix": "eslint ./src --fix --ext .ts,.tsx",
