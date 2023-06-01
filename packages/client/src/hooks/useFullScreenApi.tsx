@@ -9,9 +9,19 @@ export const useFullScreenApi = (element: RefObject<Nullable<HTMLDivElement>>): 
   const setFullscreen = (): void => {
     if (element === null) return;
     if (element.current == null) return;
-    if (document.fullscreenElement) {
-      document
-        .exitFullscreen()
+    if (typeof window !== 'undefined') {
+      if (document.fullscreenElement) {
+        document
+          .exitFullscreen()
+          .then(() => {
+            setIsFullscreen(document.fullscreenElement != null);
+          })
+          .catch(() => {
+            setIsFullscreen(false);
+          });
+      }
+      element.current
+        .requestFullscreen()
         .then(() => {
           setIsFullscreen(document.fullscreenElement != null);
         })
@@ -19,14 +29,6 @@ export const useFullScreenApi = (element: RefObject<Nullable<HTMLDivElement>>): 
           setIsFullscreen(false);
         });
     }
-    element.current
-      .requestFullscreen()
-      .then(() => {
-        setIsFullscreen(document.fullscreenElement != null);
-      })
-      .catch(() => {
-        setIsFullscreen(false);
-      });
   };
 
   useLayoutEffect(() => {
@@ -34,7 +36,11 @@ export const useFullScreenApi = (element: RefObject<Nullable<HTMLDivElement>>): 
     if (element.current == null) return;
     const el = element.current as HTMLElement;
 
-    const onSetIsFullScreen = (): void => setIsFullscreen(document.fullscreenElement != null);
+    const onSetIsFullScreen = (): void => {
+      if (typeof window !== 'undefined') {
+        setIsFullscreen(document.fullscreenElement != null);
+      }
+    };
 
     el.onfullscreenchange = onSetIsFullScreen;
 

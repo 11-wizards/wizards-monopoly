@@ -1,11 +1,11 @@
 /* eslint no-underscore-dangle: 0 */
 
 import { createStore, type RootState } from 'app/store';
-import { App } from 'core/App';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { App } from 'core/App';
 
 const initialStateString = window.__PRELOADED_STATE__;
 
