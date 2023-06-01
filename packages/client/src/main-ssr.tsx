@@ -12,7 +12,7 @@ const initialStateString = window.__PRELOADED_STATE__;
 delete window.__PRELOADED_STATE__;
 
 if (initialStateString) {
-  const initialState = JSON.parse(initialStateString) as RootState;
+  const initialState = (JSON.parse(initialStateString) as RootState) || {};
   ReactDOM.hydrateRoot(
     document.querySelector('#root') as HTMLElement,
     <React.StrictMode>

@@ -200,6 +200,11 @@ export const userSlice = createSlice({
   },
 });
 
+export const selectCurrentUser = createSelector(
+  (state: RootState) => state.user.currentUser,
+  (currentUser: CurrentUser) => currentUser,
+);
+
 export const selectIsAuth = createSelector(
   (state: RootState) => state.user.isAuth,
   (isAuth: boolean) => isAuth,

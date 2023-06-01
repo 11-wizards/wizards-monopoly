@@ -10,7 +10,7 @@ export const ForumPage: FC = () => {
   const userIsAuth = useAppSelector(selectIsAuth);
   const navigate = useNavigate();
 
-  if (userIsAuth) {
+  if (!userIsAuth) {
     return navigate('/login');
   }
 

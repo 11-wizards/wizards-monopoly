@@ -1,98 +1,28 @@
 {
   "topics": [
     {
-      "id": 1,
-      "topic_id": 1,
+      "id": 31584,
       "author": {
-        "author_id": 1,
-        "author_name": "User 1"
+        "author_id": 303528,
+        "author_name": "JohhnSmithdsa32dad3d"
       },
-      "date": "2019-01-01T00:00:00.000Z",
-      "title": "Topic 1",
-      "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam",
-      "counts_comments": 2
-    },
-    {
-      "topic_id": 2,
-      "author": {
-        "author_id": 2,
-        "author_name": "User 2"
-      },
-      "date": "2019-01-01T00:00:00.000Z",
-      "title": "Topic 2",
-      "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam",
-      "counts_comments": 1
+      "title": "123",
+      "body": "Hello",
+      "topic_id": 31584
     }
   ],
   "comments": [
     {
+      "id": 95764,
       "author": {
-        "author_id": 3,
-        "author_name": "User 3"
+        "author_id": 303528,
+        "author_name": "JohhnSmithdsa32dad3d"
       },
-      "body": "comment 1 user 3",
-      "comment_id": 10,
-      "count_replies": 0,
-      "date": "30.05.23",
-      "topic_id": 12
-    },
-    {
-      "author": {
-        "author_id": 3,
-        "author_name": "User 3"
-      },
-      "body": "comment 2 user 3",
-      "comment_id": 12,
-      "count_replies": 1,
-      "date": "28.05.23",
-      "topic_id": 12
-    },
-    {
-      "author": {
-        "author_id": 2,
-        "author_name": "User 2"
-      },
-      "body": "comment 1 user 2",
-      "comment_id": 129054,
-      "count_replies": 5,
-      "date": "29.05.23",
-      "topic_id": 12
-    },
-    {
-      "id": 1,
-      "author": {
-        "author_id": 3,
-        "author_name": "User 3"
-      },
-      "body": "comment 1 user 3",
-      "comment_id": 13452,
-      "count_replies": 3,
-      "date": "30.05.23",
-      "topic_id": 12
-    },
-    {
-      "id": 29408,
-      "author": {
-        "author_id": 3,
-        "author_name": "User 3"
-      },
-      "body": "comment 1 user 3",
-      "comment_id": 29408,
-      "count_replies": 3,
-      "date": "31.05.23",
-      "topic_id": 12
-    },
-    {
-      "id": 97314,
-      "author": {
-        "author_id": 3,
-        "author_name": "User 3"
-      },
-      "body": "comment 1 user 3",
-      "comment_id": 97314,
-      "count_replies": 3,
-      "date": "31.05.23",
-      "topic_id": 12
+      "body": "23",
+      "topic_id": 97785,
+      "date": "Thu Jun 01 2023",
+      "comment_id": 47352,
+      "count_replies": 3
     }
   ],
   "replies": [

@@ -7,6 +7,8 @@ import './Comments.scss';
 export const Comments: FC = () => {
   const { data: comments = [] } = useGetAllCommentsQuery();
 
+  console.log('911.', comments);
+
   return (
     <ul className="comments">
       {comments.map(({ commentId, ...props }) => (

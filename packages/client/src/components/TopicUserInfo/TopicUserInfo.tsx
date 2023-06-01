@@ -8,6 +8,7 @@ type TopicUserInfoProps = {
   authorName?: string;
   date: Date;
 };
+
 export const TopicUserInfo: FC<TopicUserInfoProps> = ({ authorName, date }) => {
   const resDate = new Date(date).toDateString();
 

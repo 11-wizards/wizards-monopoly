@@ -8,16 +8,29 @@ import { Link } from 'react-router-dom';
 
 import './PreviewTopic.scss';
 
-type TopicProps = Omit<Topic, 'topicId'> & {
-  id: number;
-};
-export const PreviewTopic: FC<TopicProps> = ({ id, date, title, body, commentsCount, author }) => {
+type TopicProps = Topic;
+export const PreviewTopic: FC<TopicProps> = ({
+  topicId,
+  date,
+  title,
+  body,
+  commentsCount,
+  author,
+}) => {
   const { authorName } = author;
+
+  const cutBody = (str: string) => {
+    if (str.length > 100) {
+      return `${str.substring(0, 100)}...`;
+    }
+
+    return str;
+  };
 
   // TODO: взять path для ссылки из бэкенда
   return (
     <li className="preview-topic">
-      <Link className="preview-topic__wrapper" to={`/forum/topic/${id}`}>
+      <Link className="preview-topic__wrapper" to={`/forum/topic/${topicId}`}>
         <header className="preview-topic__header">
           <TopicUserInfo date={date} authorName={authorName} />
         </header>
@@ -25,7 +38,7 @@ export const PreviewTopic: FC<TopicProps> = ({ id, date, title, body, commentsCo
           <Typography.Title level={3} className="preview-topic__title">
             {title}
           </Typography.Title>
-          <Typography.Text>{`${body.substring(0, 100)}...`}</Typography.Text>
+          <Typography.Text>{cutBody(body)}</Typography.Text>
         </div>
         <footer className="preview-topic__footer">
           {commentsCount && (

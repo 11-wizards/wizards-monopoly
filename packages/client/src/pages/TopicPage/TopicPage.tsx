@@ -11,8 +11,10 @@ import './TopicPage.scss';
 
 export const TopicPage: FC = () => {
   const { topicId } = useParams();
-  const { data: topic = {} } = useGetTopicQuery(topicId);
-  const { title, date, body, author } = topic as Topic;
+  // TODO: Разобраться почему не приходит описываемый тип в хуке rtk query
+  const { data: topic = {} as Topic } = useGetTopicQuery(topicId);
+
+  const { title, date, body, author } = topic;
 
   return (
     <div className="topic-page page">
@@ -24,8 +26,8 @@ export const TopicPage: FC = () => {
           </header>
           <Typography.Paragraph>{body}</Typography.Paragraph>
         </Space>
-        <NewComment />
-        <Comments className="topic-page__comments" />
+        <NewComment topicId={topicId} />
+        <Comments />
       </div>
     </div>
   );

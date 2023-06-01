@@ -1,6 +1,7 @@
 import { useGetAllTopicsQuery } from 'api/forum.api';
 import classNames from 'classnames';
 import { PreviewTopic } from 'features/Forum/PreviewTopic';
+import type { Topic } from 'models/forum.model';
 import React from 'react';
 
 import './PreviewTopics.scss';
@@ -10,20 +11,12 @@ type PreviewTopicsProps = {
 };
 
 export const PreviewTopics: React.FC<PreviewTopicsProps> = ({ className = '' }) => {
-  const { data: topics = [] } = useGetAllTopicsQuery();
+  const { data: topics = [] as Topic[] } = useGetAllTopicsQuery();
 
   return (
     <ul className={classNames(className, 'topics')}>
-      {topics.map(({ topicId, title, body, date, commentsCount, author }) => (
-        <PreviewTopic
-          key={topicId}
-          id={topicId}
-          title={title}
-          body={body}
-          date={date}
-          commentsCount={commentsCount}
-          author={author}
-        />
+      {topics.map(({ topicId, ...rest }) => (
+        <PreviewTopic key={topicId} topicId={topicId} {...rest} />
       ))}
     </ul>
   );

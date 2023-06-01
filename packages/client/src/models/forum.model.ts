@@ -44,12 +44,6 @@ export type Topic = {
   topicId: number;
 };
 
-export type CreateTopicDTO = {
-  author: Author;
-  body: string;
-  title: string;
-};
-
 export type ReplyDTO = {
   author: AuthorDTO;
   body: string;
@@ -84,3 +78,52 @@ export type ResponseApiError = {
 };
 
 export type ResponseApi<T> = ResponseApiSuccess<T> | ResponseApiError;
+
+export type NewTopicResponse = {
+  author: AuthorDTO;
+  body: string;
+  title: string;
+  topic_id: number;
+};
+
+export type NewCommentResponse = {
+  author: AuthorDTO;
+  body: string;
+  topic_id: number;
+};
+
+export type NewReplyResponse = {
+  author: AuthorDTO;
+  body: string;
+  comment_id: number;
+  topic_id: number;
+};
+
+const authorNormalizr = (author: AuthorDTO): Author => ({
+  authorId: author.author_id,
+  authorName: author.author_name,
+});
+export const commentNormalizr = (comment: CommentDTO): Comment => ({
+  author: authorNormalizr(comment.author),
+  body: comment.body,
+  commentId: comment.comment_id,
+  repliesCount: comment.count_replies,
+  topicId: comment.topic_id,
+  date: comment.date,
+});
+export const topicNormalizr = (topic: TopicDTO): Topic => ({
+  author: authorNormalizr(topic.author),
+  body: topic.body,
+  commentsCount: topic?.counts_comments,
+  date: topic.date,
+  title: topic.title,
+  topicId: topic.topic_id,
+});
+export const repliesNormalizr = (replies: ReplyDTO): Reply => ({
+  author: authorNormalizr(replies.author),
+  body: replies.body,
+  commentId: replies.comment_id,
+  date: replies.date,
+  repliesId: replies.replies_id,
+  topicId: replies.topic_id,
+});

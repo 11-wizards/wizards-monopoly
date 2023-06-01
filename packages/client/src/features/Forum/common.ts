@@ -9,3 +9,4 @@ export const messages = defineMessages({
   authorLabel: { id: 'forum.topics.author', defaultMessage: 'Author:' },
   responsePost: { id: 'forum.posts.response', defaultMessage: 'Reply in the theme' },
 });
+export const randomize = () => Math.floor(Math.random() * 100000);
