@@ -1,7 +1,7 @@
 import { Button, Form, Space, Typography } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { useCreateCommentMutation } from 'api/forum.api';
-import { selectCurrentUser } from 'app/slices/userSlice';
+import type { RootState } from 'app/store';
 import { DEFAULT_TEXTAREA_ROWS } from 'constants/forum';
 import { randomize } from 'features/Forum/common';
 import { useAppSelector } from 'hooks';
@@ -25,7 +25,7 @@ export const NewComment: FC<NewCommentProps> = ({ topicId }) => {
 
   const { handleSubmit, control } = useForm<FormValues>();
 
-  const user = useAppSelector(selectCurrentUser);
+  const user = useAppSelector((state: RootState) => state.user.currentUser);
 
   const [createComment] = useCreateCommentMutation();
 
