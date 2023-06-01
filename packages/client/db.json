@@ -19,6 +19,16 @@
       "title": "123",
       "body": "Lsd",
       "topic_id": 32616
+    },
+    {
+      "id": 16778,
+      "author": {
+        "author_id": 303528,
+        "author_name": "JohhnSmithdsa32dad3d"
+      },
+      "title": "kk",
+      "body": "oplqwe",
+      "topic_id": 16778
     }
   ],
   "comments": [
@@ -44,6 +54,17 @@
       "topic_id": 32616,
       "date": "Thu Jun 01 2023",
       "comment_id": 74905
+    },
+    {
+      "id": 75119,
+      "author": {
+        "author_id": 303528,
+        "author_name": "JohhnSmithdsa32dad3d"
+      },
+      "body": "Jfdl23",
+      "topic_id": 31584,
+      "date": "Thu Jun 01 2023",
+      "comment_id": 39035
     }
   ],
   "replies": [

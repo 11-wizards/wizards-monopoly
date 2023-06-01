@@ -66,7 +66,7 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({ isOpen, onModalClo
 
     if (!isError) {
       reset();
-      // onModalClose();
+      onModalClose();
     }
   };
 

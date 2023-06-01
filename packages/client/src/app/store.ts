@@ -18,7 +18,7 @@ const store = configureStore({ reducer });
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export function createStore(initialState: RootState) {
+export function createStore(initialState?: RootState) {
   return configureStore({
     reducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware),
