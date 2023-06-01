@@ -51,7 +51,10 @@ export const forumApi = baseApi.injectEndpoints({
       providesTags: ['COMMENTS'],
     }),
 
-    createComment: build.mutation<void, Omit<CommentDTO, 'repliesCount'> & { id: number }>({
+    createComment: build.mutation<
+      void,
+      Omit<CommentDTO, 'count_replies' | 'date'> & { id: number }
+    >({
       query: ({ id, author, body, topic_id, comment_id }) => ({
         url: ForumApiHandlers.Comments,
         method: 'POST',
@@ -81,7 +84,7 @@ export const forumApi = baseApi.injectEndpoints({
     //   invalidatesTags: ['COMMENTS'],
     // }),
 
-    getReplies: build.query<Reply[], void>({
+    getReplies: build.query<Reply[], null>({
       query: () => ({
         url: ForumApiHandlers.Replies,
       }),

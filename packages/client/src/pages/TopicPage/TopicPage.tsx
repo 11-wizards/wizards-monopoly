@@ -12,7 +12,7 @@ import './TopicPage.scss';
 export const TopicPage: FC = () => {
   const { topicId } = useParams();
   // TODO: Разобраться почему не приходит описываемый тип в хуке rtk query
-  const { data: topic = {} as Topic } = useGetTopicQuery(topicId);
+  const { data: topic = {} as Topic } = useGetTopicQuery(topicId as string);
 
   const { title, date, body, author } = topic;
 

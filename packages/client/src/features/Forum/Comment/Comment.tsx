@@ -9,7 +9,7 @@ import { messages } from './common';
 
 import './Comment.scss';
 
-type CommentProps = TComment;
+type CommentProps = Omit<TComment, 'commentId'>;
 
 export const Comment: FC<CommentProps> = ({ author, body, date, repliesCount = 0 }) => {
   const { authorName } = author;

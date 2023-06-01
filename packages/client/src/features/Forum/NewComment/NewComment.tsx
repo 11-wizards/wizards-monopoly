@@ -30,12 +30,16 @@ export const NewComment: FC<NewCommentProps> = ({ topicId }) => {
   const [createComment] = useCreateCommentMutation();
 
   const submitHandler = async (data: FormValues) => {
+    if (user === null) {
+      return;
+    }
+
     // FIXME: удалить после интеграции с бэкендом
     await createComment({
       id: randomize(),
       author: {
         author_id: user.id,
-        author_name: user.displayName,
+        author_name: user.displayName || 'Anonymous',
       },
       body: data.comment,
       topic_id: Number(topicId),

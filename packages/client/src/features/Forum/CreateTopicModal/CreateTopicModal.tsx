@@ -54,7 +54,7 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({ isOpen, onModalClo
     await createTopic({
       author: {
         author_id: user.id,
-        author_name: user.displayName,
+        author_name: user.displayName!,
       },
       body: data.content,
       title: data.title,
@@ -66,7 +66,7 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({ isOpen, onModalClo
 
     if (!isError) {
       reset();
-      onModalClose();
+      // onModalClose();
     }
   };
 

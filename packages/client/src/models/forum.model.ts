@@ -58,7 +58,7 @@ export type Reply = {
   body: string;
   commentId: number;
   date: Date;
-  repliesId: number;
+  replyId: number;
   topicId: number;
 };
 
@@ -124,6 +124,6 @@ export const repliesNormalizr = (replies: ReplyDTO): Reply => ({
   body: replies.body,
   commentId: replies.comment_id,
   date: replies.date,
-  repliesId: replies.replies_id,
+  replyId: replies.replies_id,
   topicId: replies.topic_id,
 });

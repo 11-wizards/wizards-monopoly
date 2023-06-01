@@ -1,3 +1,4 @@
+import type { RootState } from 'app/store';
 import { createStore } from 'app/store';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -8,7 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 ReactDOM.createRoot(document.querySelector('#root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider store={createStore()}>
+      <Provider store={createStore({} as RootState)}>
         <App />
       </Provider>
     </BrowserRouter>
