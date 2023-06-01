@@ -1,11 +1,3 @@
-import { DataTypes } from 'sequelize';
-import { client } from '../db';
+import { Model } from 'sequelize';
 
-const Emotion = client.define('Emotion', {
-  emotion: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-});
-
-export { Emotion };
+export class Emotion extends Model {}

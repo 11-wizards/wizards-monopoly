@@ -1,7 +1,5 @@
-import { DataTypes } from 'sequelize';
-import { client } from '../db';
-import { Author, TypeAuthor } from './Author';
-import { Topic } from './Topic';
+import { Model } from 'sequelize';
+import { TypeAuthor } from './Author';
 
 export type CreateCommentData = {
   author: TypeAuthor;
@@ -17,46 +15,4 @@ export type TypeComment = {
   count_replies: number;
 };
 
-const Comment = client.define(
-  'Comment',
-  {
-    comment_id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    topic_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    parent_comment_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    author_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    body: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-  },
-  {
-    timestamps: true,
-    createdAt: 'date',
-    updatedAt: false,
-  },
-);
-
-Comment.belongsTo(Author, {
-  foreignKey: 'author_id',
-  as: 'author',
-});
-
-Comment.belongsTo(Topic, {
-  foreignKey: 'topic_id',
-  as: 'topic',
-});
-
-export { Comment };
+export class Comment extends Model {}

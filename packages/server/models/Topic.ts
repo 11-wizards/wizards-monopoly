@@ -1,6 +1,5 @@
-import { DataTypes } from 'sequelize';
-import { client } from '../db';
-import { Author, TypeAuthor } from './Author';
+import { Model } from 'sequelize';
+import { TypeAuthor } from './Author';
 
 export type CreateTopicData = {
   author: TypeAuthor;
@@ -18,37 +17,4 @@ export type TypeTopic = {
   count_comments: number;
 };
 
-const Topic = client.define(
-  'Topic',
-  {
-    topic_id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    author_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    title: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    body: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-  },
-  {
-    timestamps: true,
-    createdAt: 'date',
-    updatedAt: false,
-  },
-);
-
-Topic.belongsTo(Author, {
-  foreignKey: 'author_id',
-  as: 'author',
-});
-
-export { Topic };
+export class Topic extends Model {}

@@ -1,6 +1,8 @@
 export const ROUTER_API_PATH = '/api';
 
 export const ROUTER_FORUM_PATH = '/forum';
+export const ROUTER_EMOTIONS_PATH = '/forum';
+export const ROUTER_THEME_PATH = '/theme';
 
 export const AUTH_API_FORUM_PATH = '/*';
 

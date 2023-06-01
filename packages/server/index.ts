@@ -5,14 +5,9 @@ import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
-import { router } from './routes';
-import { createClientAndConnect } from './db';
+import { createClientAndConnect, initDBModels } from './db';
 import { ROUTER_API_PATH } from './constant';
-import { router } from './routers/api.router';
-
-import emotionRouter from './router/emotionRouter';
-import { Topic } from './models/Topic';
-import { Emotion } from './models/Emotion';
+import { router } from './router';
 dotenv.config();
 
 const PORT = Number(process.env.SERVER_PORT) || 3001;
@@ -24,9 +19,10 @@ async function startServer() {
   app.use(cors());
   app.use(express.json());
 
-  await createClientAndConnect();
-
-  app.use('/api/forum', emotionRouter);
+  const client = await createClientAndConnect();
+  if (client !== null) {
+    await initDBModels(client);
+  }
 
   let vite: ViteDevServer | undefined;
 
@@ -51,11 +47,6 @@ async function startServer() {
   if (!IS_DEV) {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')));
   }
-
-  app.use('/api', router);
-  // app.post('/api/theme/user-theme', (req) => {
-  //   console.log({ req: req.body });
-  // });
 
   app.use(ROUTER_API_PATH, router);
 
@@ -96,14 +87,6 @@ async function startServer() {
       next(e);
     }
   });
-
-  await Emotion.belongsTo(Topic, {
-    foreignKey: 'topic_id',
-  });
-
-  await Topic.hasMany(Emotion, { foreignKey: 'topic_id' });
-
-  await Emotion.sync();
 
   app.listen(PORT, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${PORT}`);

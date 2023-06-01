@@ -1,10 +1,13 @@
 import dotenv from 'dotenv';
-import * as process from 'process';
-import { QueryTypes } from 'sequelize';
-import { Sequelize } from 'sequelize-typescript';
-// TODO: path aliases
+import { Author } from './models/Author';
+import { Comment } from './models/Comment';
+import { Topic } from './models/Topic';
+import { Emotion } from './models/Emotion';
 import { SiteTheme } from './models/SiteTheme';
 import { UserTheme } from './models/UserTheme';
+import * as process from 'process';
+import { DataTypes, QueryTypes } from 'sequelize';
+import { Sequelize } from 'sequelize-typescript';
 
 dotenv.config();
 
@@ -36,3 +39,123 @@ export const createClientAndConnect = async (): Promise<Sequelize | null> => {
 
   return null;
 };
+
+export async function initDBModels(sequelize: Sequelize) {
+  Emotion.init(
+    {
+      emotion: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+    },
+    {
+      sequelize,
+      modelName: 'Emotion',
+    },
+  );
+
+  Topic.init(
+    {
+      topic_id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      author_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      title: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      body: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+    },
+    {
+      sequelize,
+      modelName: 'Topic',
+      timestamps: true,
+      createdAt: 'date',
+      updatedAt: false,
+    },
+  );
+
+  Author.init(
+    {
+      author_id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    },
+    {
+      sequelize,
+      modelName: 'Author',
+      timestamps: false,
+      updatedAt: false,
+    },
+  );
+
+  Comment.init(
+    {
+      comment_id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      topic_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      parent_comment_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      author_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      body: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+    },
+    {
+      sequelize,
+      modelName: 'Comment',
+      timestamps: true,
+      createdAt: 'date',
+      updatedAt: false,
+    },
+  );
+
+  Emotion.belongsTo(Topic, {
+    foreignKey: 'topic_id',
+  });
+
+  Topic.hasMany(Emotion, { foreignKey: 'topic_id' });
+
+  Comment.belongsTo(Author, {
+    foreignKey: 'author_id',
+    as: 'author',
+  });
+
+  Comment.belongsTo(Topic, {
+    foreignKey: 'topic_id',
+    as: 'topic',
+  });
+
+  Topic.belongsTo(Author, {
+    foreignKey: 'author_id',
+    as: 'author',
+  });
+
+  await Emotion.sync();
+}
