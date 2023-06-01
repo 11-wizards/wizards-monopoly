@@ -45,9 +45,6 @@ async function startServer() {
   }
 
   app.use('/api', router);
-  // app.post('/api/theme/user-theme', (req) => {
-  //   console.log({ req: req.body });
-  // });
 
   app.use('*', async (req: Request, res: Response, next: NextFunction) => {
     const url = req.originalUrl;
