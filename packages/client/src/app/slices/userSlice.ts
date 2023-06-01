@@ -156,6 +156,8 @@ export const userSlice = createSlice({
           avatar,
           theme,
         };
+
+        document.querySelector('html')?.setAttribute('theme', theme?.theme || 'light');
       })
       .addCase(fetchCurrentUser.rejected, (state) => {
         state.isLoading = false;
