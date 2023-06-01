@@ -5,6 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { registerServiceWorker } from 'helpers';
 import { App } from 'core/App';
 
 const initialStateString = window.__PRELOADED_STATE__;
@@ -23,4 +24,5 @@ if (initialStateString) {
       </BrowserRouter>
     </React.StrictMode>,
   );
+  registerServiceWorker();
 }
