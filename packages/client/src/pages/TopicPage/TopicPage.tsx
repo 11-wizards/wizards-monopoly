@@ -13,9 +13,10 @@ type TopicParams = {
   topicId: string;
 };
 
+const { Title, Paragraph } = Typography;
+
 export const TopicPage: FC = () => {
   const { topicId } = useParams<TopicParams>();
-  // TODO: Разобраться почему не приходит описываемый тип в хуке rtk query
   const { data: topic = {} as Topic } = useGetTopicQuery(Number(topicId));
 
   const { title, date, body, author } = topic;
@@ -26,9 +27,9 @@ export const TopicPage: FC = () => {
         <Space className="topic-page__space">
           <header>
             <TopicUserInfo date={date} authorName={author?.authorName} />
-            <Typography.Title level={2}>{title}</Typography.Title>
+            <Title level={2}>{title}</Title>
           </header>
-          <Typography.Paragraph>{body}</Typography.Paragraph>
+          <Paragraph>{body}</Paragraph>
         </Space>
         <NewComment topicId={topicId} />
         <Comments />

@@ -9,8 +9,7 @@ export const ForumPage = (): JSX.Element | null => {
   const userIsAuth = useAppSelector(selectIsAuth);
   const navigate = useNavigate();
 
-  // FIXME: изменить условие
-  if (userIsAuth) {
+  if (!userIsAuth) {
     navigate('/login');
 
     return null;

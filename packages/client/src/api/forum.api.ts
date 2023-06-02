@@ -17,7 +17,7 @@ export const forumApi = baseApi.injectEndpoints({
       query: () => ({
         url: ForumApiHandlers.Topics,
       }),
-      transformResponse: (response: TopicDTO[]) => response.map(topicNormalizr),
+      transformResponse: (response: TopicDTO[]): Topic[] => response.map(topicNormalizr),
       providesTags: ['TOPICS'],
     }),
 
@@ -25,7 +25,7 @@ export const forumApi = baseApi.injectEndpoints({
       query: (id) => ({
         url: `${ForumApiHandlers.Topics}/${id}`,
       }),
-      transformResponse: (response: TopicDTO) => topicNormalizr(response),
+      transformResponse: (response: TopicDTO): Topic => topicNormalizr(response),
     }),
 
     createTopic: build.mutation<void, NewTopicResponse & { id: number }>({
@@ -47,7 +47,7 @@ export const forumApi = baseApi.injectEndpoints({
       query: () => ({
         url: ForumApiHandlers.Comments,
       }),
-      transformResponse: (response: CommentDTO[]) => response.map(commentNormalizr),
+      transformResponse: (response: CommentDTO[]): Comment[] => response.map(commentNormalizr),
       providesTags: ['COMMENTS'],
     }),
 
@@ -70,25 +70,11 @@ export const forumApi = baseApi.injectEndpoints({
       invalidatesTags: ['COMMENTS'],
     }),
 
-    // TODO: Интеграция с бэкендом
-    // createComment: build.mutation<void, NewCommentResponse>({
-    //   query: ({ author, body, topic_id }) => ({
-    //     url: '/comments',
-    //     method: 'POST',
-    //     body: {
-    //       author,
-    //       body,
-    //       topic_id,
-    //     },
-    //   }),
-    //   invalidatesTags: ['COMMENTS'],
-    // }),
-
     getReplies: build.query<Reply[], null>({
       query: () => ({
         url: ForumApiHandlers.Replies,
       }),
-      transformResponse: (response: ReplyDTO[]) => response.map(repliesNormalizr),
+      transformResponse: (response: ReplyDTO[]): Reply[] => response.map(repliesNormalizr),
     }),
   }),
 });

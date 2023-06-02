@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import './PreviewTopic.scss';
 
 type TopicProps = Topic;
+
+const { Title, Paragraph } = Typography;
 export const PreviewTopic: FC<TopicProps> = ({
   topicId,
   date,
@@ -27,7 +29,6 @@ export const PreviewTopic: FC<TopicProps> = ({
     return str;
   };
 
-  // TODO: взять path для ссылки из бэкенда
   return (
     <li className="preview-topic">
       <Link className="preview-topic__wrapper" to={`/forum/topic/${topicId}`}>
@@ -35,10 +36,10 @@ export const PreviewTopic: FC<TopicProps> = ({
           <TopicUserInfo date={date} authorName={authorName} />
         </header>
         <div className="preview-topic__content">
-          <Typography.Title level={3} className="preview-topic__title">
+          <Title level={3} className="preview-topic__title">
             {title}
-          </Typography.Title>
-          <Typography.Text>{cutBody(body)}</Typography.Text>
+          </Title>
+          <Paragraph>{cutBody(body)}</Paragraph>
         </div>
         <footer className="preview-topic__footer">
           {commentsCount && (

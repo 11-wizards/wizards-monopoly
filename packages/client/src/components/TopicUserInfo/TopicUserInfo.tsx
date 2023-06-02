@@ -9,15 +9,15 @@ type TopicUserInfoProps = {
   date: Date;
 };
 
+const { Paragraph, Text } = Typography;
+
 export const TopicUserInfo: FC<TopicUserInfoProps> = ({ authorName, date }) => {
   const resDate = new Date(date).toDateString();
 
   return (
     <>
-      <Typography.Paragraph className="topic-user-info__username">
-        @{authorName}
-      </Typography.Paragraph>
-      <Typography.Text className="topic-user-info__date">{resDate}</Typography.Text>
+      <Paragraph className="topic-user-info__username">@{authorName}</Paragraph>
+      <Text className="topic-user-info__date">{resDate}</Text>
     </>
   );
 };

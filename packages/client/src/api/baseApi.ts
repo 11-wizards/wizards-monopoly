@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { FORUM_BACKEND_API } from 'constants/forum';
 
-// TODO: Сменить baseUrl
 export const baseApi = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3001',
+    baseUrl: FORUM_BACKEND_API,
   }),
   tagTypes: ['COMMENTS', 'TOPICS'],
   endpoints: () => ({}),

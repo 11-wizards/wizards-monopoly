@@ -35,7 +35,6 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({
   const [createTopic, { isError }] = useCreateTopicMutation();
   const user = useAppSelector((state: RootState) => state.user.currentUser);
 
-  // TODO: Добавить Валидацию
   const { handleSubmit, control, reset } = useForm<TopicValues>({
     defaultValues: {
       content: '',
@@ -44,7 +43,6 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({
   });
 
   const onCreateTopicBtnClick: SubmitHandler<TopicValues> = async (data) => {
-    // TODO: доработать типы
     if (user === null) {
       return;
     }
@@ -59,7 +57,6 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({
       body: data.content,
       title: data.title,
       topic_id: topicId,
-      // TODO: Удалить, Нужно для json-server
       id: topicId,
     });
 

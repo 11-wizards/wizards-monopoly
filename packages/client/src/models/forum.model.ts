@@ -103,6 +103,7 @@ const authorNormalizr = (author: AuthorDTO): Author => ({
   authorId: author.author_id,
   authorName: author.author_name,
 });
+
 export const commentNormalizr = (comment: CommentDTO): Comment => ({
   author: authorNormalizr(comment.author),
   body: comment.body,
@@ -111,6 +112,7 @@ export const commentNormalizr = (comment: CommentDTO): Comment => ({
   topicId: comment.topic_id,
   date: comment.date,
 });
+
 export const topicNormalizr = (topic: TopicDTO): Topic => ({
   author: authorNormalizr(topic.author),
   body: topic.body,
@@ -119,6 +121,7 @@ export const topicNormalizr = (topic: TopicDTO): Topic => ({
   title: topic.title,
   topicId: topic.topic_id,
 });
+
 export const repliesNormalizr = (replies: ReplyDTO): Reply => ({
   author: authorNormalizr(replies.author),
   body: replies.body,

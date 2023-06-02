@@ -20,6 +20,8 @@ type NewCommentProps = {
   topicId?: string;
 };
 
+const { Title } = Typography;
+
 export const NewComment: FC<NewCommentProps> = ({ topicId }) => {
   const { formatMessage: fm } = useIntl();
 
@@ -34,7 +36,6 @@ export const NewComment: FC<NewCommentProps> = ({ topicId }) => {
       return;
     }
 
-    // FIXME: удалить после интеграции с бэкендом
     await createComment({
       id: randomize(),
       author: {
@@ -45,24 +46,14 @@ export const NewComment: FC<NewCommentProps> = ({ topicId }) => {
       topic_id: Number(topicId),
       comment_id: randomize(),
     });
-
-    // TODO: Интеграция с бэкендом
-    // await createComment({
-    //   author: {
-    //     author_id: user?.id,
-    //     authorName: user?.displayName,
-    //   },
-    //   body: data.body,
-    //   topic_id: topicId,
-    // });
   };
 
   return (
     <div className="new-comment">
       <Space className="new-comment__space" direction="vertical">
-        <Typography.Title className="new-comment__title" level={3}>
+        <Title className="new-comment__title" level={3}>
           {fm(messages.newCommentName)}
-        </Typography.Title>
+        </Title>
         <Form
           className="new-comment__form"
           layout="vertical"
