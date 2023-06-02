@@ -17,7 +17,7 @@ type FormValues = {
 };
 
 type NewCommentProps = {
-  topicId: string;
+  topicId?: string;
 };
 
 export const NewComment: FC<NewCommentProps> = ({ topicId }) => {

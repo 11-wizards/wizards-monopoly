@@ -7,7 +7,7 @@ import { messages } from './common';
 
 import './Reply.scss';
 
-type ReplyProps = TReply & {
+type ReplyProps = Omit<TReply, 'replyId'> & {
   className?: string;
 };
 

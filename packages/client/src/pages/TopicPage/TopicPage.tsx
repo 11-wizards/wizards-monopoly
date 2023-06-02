@@ -9,10 +9,14 @@ import { useParams } from 'react-router-dom';
 
 import './TopicPage.scss';
 
+type TopicParams = {
+  topicId: string;
+};
+
 export const TopicPage: FC = () => {
-  const { topicId } = useParams();
+  const { topicId } = useParams<TopicParams>();
   // TODO: Разобраться почему не приходит описываемый тип в хуке rtk query
-  const { data: topic = {} as Topic } = useGetTopicQuery(topicId as string);
+  const { data: topic = {} as Topic } = useGetTopicQuery(Number(topicId));
 
   const { title, date, body, author } = topic;
 

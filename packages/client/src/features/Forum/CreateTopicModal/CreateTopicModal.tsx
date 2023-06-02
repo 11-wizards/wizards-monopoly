@@ -20,30 +20,30 @@ type TopicValues = {
 
 type CreateTopicModalProps = {
   className?: string;
+  closeModal: (isOpen: boolean) => void;
   isOpen: boolean;
   onModalClose: MouseEventHandler<HTMLButtonElement>;
 };
 
-export const CreateTopicModal: FC<CreateTopicModalProps> = ({ isOpen, onModalClose }) => {
+export const CreateTopicModal: FC<CreateTopicModalProps> = ({
+  isOpen,
+  onModalClose,
+  closeModal,
+}) => {
   const { formatMessage: fm } = useIntl();
 
   const [createTopic, { isError }] = useCreateTopicMutation();
   const user = useAppSelector((state: RootState) => state.user.currentUser);
 
   // TODO: Добавить Валидацию
-  const {
-    handleSubmit,
-    control,
-    reset,
-    // formState: { errors },
-  } = useForm<TopicValues>({
+  const { handleSubmit, control, reset } = useForm<TopicValues>({
     defaultValues: {
       content: '',
       title: '',
     },
   });
 
-  const onSubmit: SubmitHandler<TopicValues> = async (data) => {
+  const onCreateTopicBtnClick: SubmitHandler<TopicValues> = async (data) => {
     // TODO: доработать типы
     if (user === null) {
       return;
@@ -59,14 +59,13 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({ isOpen, onModalClo
       body: data.content,
       title: data.title,
       topic_id: topicId,
-
       // TODO: Удалить, Нужно для json-server
       id: topicId,
     });
 
     if (!isError) {
       reset();
-      onModalClose();
+      closeModal(true);
     }
   };
 
@@ -77,7 +76,7 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({ isOpen, onModalClo
       onCancel={onModalClose}
       centered
       footer={[
-        <Button htmlType="button" onClick={handleSubmit(onSubmit)}>
+        <Button htmlType="button" onClick={handleSubmit(onCreateTopicBtnClick)}>
           {fm(messages.createTopicBtn)}
         </Button>,
       ]}

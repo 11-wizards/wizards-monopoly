@@ -23,7 +23,11 @@ export const Forum: FC = () => {
         <Title level={2} className="forum__title">
           {fm(messages.title)}
         </Title>
-        <CreateTopicModal isOpen={isModalOpen} onModalClose={handleModalClose} />
+        <CreateTopicModal
+          isOpen={isModalOpen}
+          onModalClose={handleModalClose}
+          closeModal={setModalOpen}
+        />
         <Button type="primary" className="forum__btn" onClick={handleBtnClick}>
           {fm(messages.createTopicBtn)}
         </Button>
