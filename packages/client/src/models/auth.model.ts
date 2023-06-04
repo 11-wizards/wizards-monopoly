@@ -3,6 +3,23 @@ export type LoginInput = {
   password: string;
 };
 
+export type OAuthServicePayload = {
+  redirectUri: string;
+};
+
+export type OAuthServiceDto = {
+  service_id: string;
+};
+
+export type OAuthServiceNormalize = {
+  serviceId: string;
+};
+
+export type OauthSignInPayload = {
+  code: string;
+  redirectUri: string;
+};
+
 export class LoginInputDto {
   login: string;
   password: string;

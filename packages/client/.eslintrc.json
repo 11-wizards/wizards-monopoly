@@ -78,6 +78,7 @@
         "exceptAfterSingleLine": true
       }
     ],
+    "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/unbound-method": "off",
     "@typescript-eslint/no-unused-expressions": [
@@ -114,6 +115,7 @@
         "map": [
           ["api", "./src/api"],
           ["app", "./src/app"],
+          ["assets", "./src/assets"],
           ["components", "./src/components"],
           ["constants", "./src/constants"],
           ["core", "./src/core"],

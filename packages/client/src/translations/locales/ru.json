@@ -1,6 +1,7 @@
 {
   "project.name": "Монополия",
   "auth.button.login": "Войти",
+  "auth.button.oauth": "Войти с Яндекс ID",
   "auth.button.register": "Зарегистрироваться",
   "auth.notification.register-success": "Вы были успешно зарегистрированы",
   "auth.placeholder.email": "Email",
@@ -12,7 +13,9 @@
   "auth.text.already-have-account": "Уже есть аккаунт?",
   "auth.text.no-account": "Нет аккаунта?",
   "auth.title.login": "Вход",
+  "auth.text.offer-to-register-via-oauth": "Вы можете войти в свой аккаунт, используя свои учетные данные Яндекса, либо же войти с помощью уже имеющейся у вас учетной записи в игре.",
   "auth.title.register": "Регистрация",
+  "auth.text.separator": "или",
 
   "client.error.message": "Извините, страница, которую вы посетили, не существует.",
   "client.error.message.button-text": "На главную",

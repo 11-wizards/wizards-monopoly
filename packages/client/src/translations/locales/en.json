@@ -1,6 +1,7 @@
 {
   "project.name": "Monopoly",
-  "auth.button.login": "Log in",
+  "auth.button.login": "Login",
+  "auth.button.oauth": "Login with Yandex ID",
   "auth.button.register": "Register",
   "auth.notification.register-success": "You have been registered successfully",
   "auth.placeholder.email": "Email",
@@ -12,7 +13,9 @@
   "auth.text.already-have-account": "Already have account?",
   "auth.text.no-account": "No account?",
   "auth.title.login": "Login",
+  "auth.text.offer-to-register-via-oauth": "You can login with your registered account or quick login with your Yandex account.",
   "auth.title.register": "Register",
+  "auth.text.separator": "or",
 
   "client.error.message": "Sorry, the page you visited does not exist.",
   "client.error.message.button-text": "Back home",
