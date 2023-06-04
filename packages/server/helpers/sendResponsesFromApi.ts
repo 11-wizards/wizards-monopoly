@@ -1,7 +1,10 @@
 import { Response } from 'express';
 import { ResponseApi } from '../models/Api';
 
-export const sendResponsesFromApi = async (res: Response, result: ResponseApi<unknown>): Promise<void> => {
+export const sendResponsesFromApi = async (
+  res: Response,
+  result: ResponseApi<unknown>,
+): Promise<void> => {
   try {
     if (result.status) {
       res.json(result);

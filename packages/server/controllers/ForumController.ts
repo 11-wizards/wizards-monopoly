@@ -75,7 +75,10 @@ class ForumController {
     const comment_id = Number(req.params.comment_id);
 
     if (!isNumbersArray([topic_id, comment_id])) {
-      return sendResponsesFromApi(res, createErrorResponse(400, 'Неверный номер топика или комментария'));
+      return sendResponsesFromApi(
+        res,
+        createErrorResponse(400, 'Неверный номер топика или комментария'),
+      );
     }
     try {
       const data: Array<TypeComment> = await getCommentsDb(topic_id, comment_id);
@@ -144,7 +147,10 @@ class ForumController {
     const topic_id = Number(req.params.topic_id);
     const comment_id = Number(req.params.comment_id);
     if (!isNumbersArray([topic_id, comment_id])) {
-      return sendResponsesFromApi(res, createErrorResponse(400, 'Неверный номер топика или комментария'));
+      return sendResponsesFromApi(
+        res,
+        createErrorResponse(400, 'Неверный номер топика или комментария'),
+      );
     }
     try {
       const commentData: CreateCommentData = req.body;

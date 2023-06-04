@@ -11,8 +11,6 @@ export const createErrorResponse = (code = 500, msg = 'Ошибка'): ResponseA
   };
 };
 
-
-
 export const createSuccessResponse = (data: any): ResponseApiSuccess<any> => {
   return {
     status: true,

@@ -1,7 +1,7 @@
 export type TypeErrorApi = {
-  statusCode: number,
-  message: string
-}
+  statusCode: number;
+  message: string;
+};
 
 export class ErrorApi extends Error {
   statusCode: number;
