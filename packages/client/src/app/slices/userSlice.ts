@@ -1,4 +1,4 @@
-import type { PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, isAnyOf } from '@reduxjs/toolkit';
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
 import type { UploadRequestOption } from 'rc-upload/lib/interface';
 import { authApi } from 'api/auth.api';
@@ -25,15 +25,13 @@ const initialState: UserState = {
 };
 
 export const fetchCurrentUser = createAsyncThunk('user/fetchCurrentUser', async () => {
-  const result: Partial<CurrentUser> = {};
+  const result: Partial<Record<string, unknown>> = {};
 
   try {
     const currentUserResponse = await authApi.getCurrentUser();
 
     if (currentUserResponse.status === 200) {
       Object.entries(currentUserResponse.data).forEach(([key, value]) => {
-        // TODO: написать типизацию для result
-        // @ts-ignore
         result[key] = value;
       });
     }
@@ -41,7 +39,7 @@ export const fetchCurrentUser = createAsyncThunk('user/fetchCurrentUser', async 
     if (result.id) {
       const currentUserThemeResponse = await themeApi.getCurrentUserTheme({
         device: 'default',
-        userId: result.id,
+        userId: Number(result.id),
       });
 
       // TODO: получать темы с бэка
@@ -50,7 +48,7 @@ export const fetchCurrentUser = createAsyncThunk('user/fetchCurrentUser', async 
         : DEFAULT_THEME;
     }
   } catch (err) {
-    await handleServerError(err as ServerError);
+    handleServerError(err as ServerError);
   }
 
   return result;
@@ -69,7 +67,7 @@ export const changeProfileAvatar = createAsyncThunk(
         return { ...response.data } as CurrentUserDto;
       }
     } catch (err) {
-      await handleServerError(err as ServerError);
+      handleServerError(err as ServerError);
     }
   },
 );
@@ -84,7 +82,7 @@ export const changeProfileInfo = createAsyncThunk(
         return { ...response.data };
       }
     } catch (err) {
-      await handleServerError(err as ServerError);
+      handleServerError(err as ServerError);
     }
   },
 );
@@ -99,7 +97,7 @@ export const changeUserTheme = createAsyncThunk(
         return { ...response.data };
       }
     } catch (err) {
-      await handleServerError(err as ServerError);
+      handleServerError(err as ServerError);
     }
   },
 );
@@ -112,7 +110,7 @@ export const signOut = createAsyncThunk('user/signOut', async () => {
       localStorage.removeItem(LOCAL_STORAGE_IS_AUTH_KEY);
     }
   } catch (err) {
-    await handleServerError(err as ServerError);
+    handleServerError(err as ServerError);
   }
 });
 
@@ -125,11 +123,7 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // fetch current user
     builder
-      .addCase(fetchCurrentUser.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
         const {
           id,
@@ -159,14 +153,6 @@ export const userSlice = createSlice({
 
         document.querySelector('html')?.setAttribute('theme', theme?.theme || 'light');
       })
-      .addCase(fetchCurrentUser.rejected, (state) => {
-        state.isLoading = false;
-      });
-    // change profile avatar
-    builder
-      .addCase(changeProfileAvatar.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(changeProfileAvatar.fulfilled, (state, action) => {
         const {
           id,
@@ -190,14 +176,6 @@ export const userSlice = createSlice({
           phone,
           avatar,
         };
-      })
-      .addCase(changeProfileAvatar.rejected, (state) => {
-        state.isLoading = false;
-      });
-    // change profile info
-    builder
-      .addCase(changeProfileInfo.pending, (state) => {
-        state.isLoading = true;
       })
       .addCase(changeProfileInfo.fulfilled, (state, action) => {
         const {
@@ -223,14 +201,6 @@ export const userSlice = createSlice({
           avatar,
         };
       })
-      .addCase(changeProfileInfo.rejected, (state) => {
-        state.isLoading = false;
-      });
-    // change user theme
-    builder
-      .addCase(changeUserTheme.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(changeUserTheme.fulfilled, (state, action) => {
         const { device, theme } = action.payload as CurrentUserTheme;
         state.isLoading = false;
@@ -238,22 +208,37 @@ export const userSlice = createSlice({
 
         document.querySelector('html')?.setAttribute('theme', theme);
       })
-      .addCase(changeUserTheme.rejected, (state) => {
-        state.isLoading = false;
-      });
-    // sign out
-    builder
-      .addCase(signOut.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(signOut.fulfilled, (state) => {
         state.isLoading = false;
         state.isAuth = false;
         state.currentUser = null;
-      })
-      .addCase(signOut.rejected, (state) => {
-        state.isLoading = false;
       });
+
+    builder
+      .addMatcher(
+        isAnyOf(
+          fetchCurrentUser.pending,
+          changeProfileAvatar.pending,
+          changeProfileInfo.pending,
+          changeUserTheme.pending,
+          signOut.pending,
+        ),
+        (state) => {
+          state.isLoading = true;
+        },
+      )
+      .addMatcher(
+        isAnyOf(
+          fetchCurrentUser.rejected,
+          changeProfileAvatar.rejected,
+          changeProfileInfo.rejected,
+          changeUserTheme.rejected,
+          signOut.rejected,
+        ),
+        (state) => {
+          state.isLoading = false;
+        },
+      );
   },
 });
 

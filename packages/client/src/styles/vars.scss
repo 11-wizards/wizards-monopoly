@@ -21,3 +21,13 @@ $fontSizeXL: 40px;
   top: 50%;
   left: $paddingM;
 }
+
+[theme='light'] {
+  --color-main-bg: #fff;
+  --color-main-text: #000;
+}
+
+[theme='dark'] {
+  --color-main-bg: #363636;
+  --color-main-text: #fff;
+}

@@ -1,4 +1,4 @@
-import { ownApi } from 'api';
+import { api } from 'api';
 import {
   type ChangeUserThemeInput,
   type CurrentUserTheme,
@@ -9,8 +9,8 @@ import {
 
 export const themeApi = {
   getCurrentUserTheme: (data: UserThemeInput) =>
-    ownApi.post<CurrentUserTheme>(`/theme/user-theme`, new UserThemeInputDto(data)),
+    api.post<CurrentUserTheme>(`/theme/user-theme`, new UserThemeInputDto(data)),
 
   setCurrentUserTheme: (data: ChangeUserThemeInput) =>
-    ownApi.post<CurrentUserTheme>('/theme/set-user-theme', new ChangeUserThemeInputDto(data)),
+    api.post<CurrentUserTheme>('/theme/set-user-theme', new ChangeUserThemeInputDto(data)),
 };

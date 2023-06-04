@@ -1,12 +1,5 @@
 import { AllowNull, Column, DataType, Model, Table } from 'sequelize-typescript';
 
-// interface IUserTheme {
-//   id: number;
-//   theme: string;
-//   device: string;
-//   ownerId: string;
-// }
-
 @Table({
   paranoid: true,
   tableName: 'user-theme',

@@ -43,7 +43,7 @@ export const ProfileChangePassword: FC = () => {
         navigate(ROUTES.PROFILE_PAGE.path);
       }
     } catch (err) {
-      await handleServerError(err as ServerError);
+      handleServerError(err as ServerError);
     }
 
     setIsSubmitting(false);

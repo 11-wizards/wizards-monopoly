@@ -2,9 +2,6 @@ import dotenv from 'dotenv';
 import * as process from 'process';
 import { QueryTypes } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
-// TODO: path aliases
-import { SiteTheme } from './models/SiteTheme';
-import { UserTheme } from './models/UserTheme';
 
 dotenv.config();
 
@@ -20,7 +17,7 @@ export const createClientAndConnect = async (): Promise<Sequelize | null> => {
     }
 
     const client = new Sequelize(connectionString, {
-      models: [SiteTheme, UserTheme],
+      models: [__dirname + '/models'],
     });
 
     await client.authenticate();

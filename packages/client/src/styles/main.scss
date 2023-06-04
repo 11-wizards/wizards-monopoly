@@ -1,9 +1,5 @@
 @import 'modern-normalize';
 
-html[theme='light'] {
-  background-color: #fff;
-}
-
-html[theme='dark'] {
-  background-color: #363636;
+html {
+  background-color: var(--color-main-bg);
 }

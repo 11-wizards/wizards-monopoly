@@ -5,8 +5,9 @@ import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
-import { router } from './routes';
+// TODO: path aliases
 import { createClientAndConnect } from './db';
+import { router } from './routes';
 dotenv.config();
 
 const PORT = Number(process.env.SERVER_PORT) || 3001;
