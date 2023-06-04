@@ -23,10 +23,8 @@
     margin: 0 0 $paddingM;
   }
 
-  &__login {
-    display: flex;
-    gap: 5px;
-    justify-content: center;
+  &__redirect {
+    @include redirect-box;
   }
 
   &__link {

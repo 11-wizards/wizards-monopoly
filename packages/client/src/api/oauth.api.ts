@@ -10,13 +10,15 @@ import type {
 export const oAuthApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getServiceId: builder.query<OAuthServiceNormalize, OAuthServicePayload>({
-      query: ({ redirectUri }) => ({
+      query: ({ redirectUri }: OAuthServicePayload) => ({
         url: '/oauth/yandex/service-id',
         params: {
           redirect_uri: redirectUri,
         },
       }),
-      transformResponse: (response: OAuthServiceDto) => ({ serviceId: response.service_id }),
+      transformResponse: (response: OAuthServiceDto) => ({
+        serviceId: response.service_id,
+      }),
     }),
     signInWithYandex: builder.mutation<Response, OauthSignInPayload>({
       query: ({ code, redirectUri }: OauthSignInPayload) => ({

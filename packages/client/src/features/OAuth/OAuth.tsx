@@ -11,17 +11,19 @@ type OAuthProps = {
   className?: string;
 };
 
-export const OAuth: FC<OAuthProps> = ({ className }) => {
+export const OAuth: FC<OAuthProps> = ({ className = '' }) => {
   const { formatMessage: fm } = useIntl();
   const { data, isLoading } = useGetServiceIdQuery({ redirectUri: OAUTH_REDIRECT_URI });
 
   const handleOauthClick = () => {
-    document.location.href = getOauthRedirectUri(data!.serviceId);
+    if (typeof window !== 'undefined') {
+      document.location.href = getOauthRedirectUri(data!.serviceId);
+    }
   };
 
   return (
     <button
-      className={`oauth__button ${className ?? ''}`}
+      className={`oauth__button ${className}`}
       type="button"
       onClick={handleOauthClick}
       disabled={isLoading || !data?.serviceId}

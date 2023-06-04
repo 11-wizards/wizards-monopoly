@@ -113,7 +113,7 @@ export const Login: FC = () => {
         </Button>
       </form>
 
-      <Typography.Paragraph className="form-login__sign-up">
+      <Typography.Paragraph className="form-login__redirect">
         {fm(messages.textNoAccount)}{' '}
         <Link to={ROUTES.REGISTER_PAGE.path} className="form-login__link">
           {fm(messages.buttonRegister)}
