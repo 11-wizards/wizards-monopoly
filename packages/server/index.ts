@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import cors from 'cors';
+import { createClientAndConnect } from './db';
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
@@ -17,9 +17,13 @@ async function startServer() {
 
   let vite: ViteDevServer | undefined;
 
-  const distPath = path.dirname(require.resolve('client/dist/index-ssr.html'));
-  const distSsrPath = require.resolve('client/dist-ssr/ssr.cjs');
-  const srcPath = path.dirname(require.resolve('client'));
+  const pathPrefix = IS_DEV ? '' : `${__dirname}/`;
+
+  const distPath = path.dirname(
+    require.resolve(path.join(pathPrefix, 'client/dist/index-ssr.html')),
+  );
+  const distSsrPath = require.resolve(path.join(pathPrefix, 'client/dist-ssr/ssr.cjs'));
+  const srcPath = path.dirname(IS_DEV ? require.resolve('client') : __dirname + '/client');
 
   if (IS_DEV) {
     vite = await createViteServer({
@@ -49,7 +53,8 @@ async function startServer() {
         template = await vite!.transformIndexHtml(url, template);
       }
 
-      let render: () => Promise<string>;
+      // вот тут костыль типа, ибо не получается адекватно импортировать RootState
+      let render: (url: string) => Promise<[any, string]>;
 
       if (!IS_DEV) {
         render = (await import(distSsrPath)).render;
@@ -57,9 +62,11 @@ async function startServer() {
         render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'src/ssr.tsx'))).render;
       }
 
-      const appHtml = await render();
+      const [initialState, appHtml] = await render(url);
 
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml);
+      const html = template
+        .replace('<!--ssr-outlet-->', appHtml)
+        .replace('<!--preloaded-state-->', JSON.stringify(initialState).replace(/</g, '\\u003c'));
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
@@ -69,7 +76,7 @@ async function startServer() {
       next(e);
     }
   });
-
+  await createClientAndConnect();
   app.listen(PORT, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${PORT}`);
   });

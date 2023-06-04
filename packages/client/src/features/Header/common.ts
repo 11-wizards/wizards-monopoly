@@ -1,5 +1,5 @@
 import { defineMessages } from 'react-intl';
-import { ROUTES } from 'core/Router/routes';
+import { ROUTES } from 'core/Router';
 
 export const messages = defineMessages({
   buttonRules: { id: 'header.navbar.rules', defaultMessage: 'Game rules' },

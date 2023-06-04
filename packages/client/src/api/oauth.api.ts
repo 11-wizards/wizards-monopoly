@@ -29,8 +29,11 @@ export const oAuthApi = baseApi.injectEndpoints({
           redirect_uri: redirectUri,
         },
       }),
-      transformErrorResponse: () =>
-        convertStringToServerError("Couldn't log in via OAuth, try again later."),
+      transformErrorResponse: (err: unknown) => {
+        console.log('911.', err);
+
+        return convertStringToServerError("Couldn't log in via OAuth, try again later.");
+      },
     }),
   }),
 });

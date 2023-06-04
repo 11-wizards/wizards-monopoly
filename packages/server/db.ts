@@ -1,22 +1,22 @@
-import { Client } from 'pg';
+import * as process from 'process';
+import { QueryTypes, Sequelize } from 'sequelize';
 
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } = process.env;
+const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, DATABASE_URL, NODE_ENV } =
+  process.env;
 
-export const createClientAndConnect = async (): Promise<Client | null> => {
+export const createClientAndConnect = async (): Promise<Sequelize | null> => {
   try {
-    const client = new Client({
-      user: POSTGRES_USER,
-      host: 'localhost',
-      database: POSTGRES_DB,
-      password: POSTGRES_PASSWORD,
-      port: Number(POSTGRES_PORT),
-    });
+    let connectionString = `postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_URL}:${POSTGRES_PORT}/${POSTGRES_DB}`;
+    if (NODE_ENV === 'development') {
+      connectionString = `postgres://postgres:postgres@localhost:5432/postgres`;
+    }
+    const client = new Sequelize(connectionString);
 
-    await client.connect();
+    await client.authenticate();
 
-    const res = await client.query('SELECT NOW()');
-    console.log('  ➜ 🎸 Connected to the database at:', res?.rows?.[0].now);
-    client.end();
+    const res: { now: string }[] = await client.query('SELECT NOW()', { type: QueryTypes.SELECT });
+
+    console.log('  ➜ 🎸 Connected to the database at:', res[0].now);
 
     return client;
   } catch (e) {

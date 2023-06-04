@@ -1,6 +1,6 @@
 import { type IntlFormatters, defineMessages } from 'react-intl';
 import { message } from 'antd';
-import type { RcFile } from 'antd/es/upload';
+import type { RcFile } from 'antd/lib/upload';
 
 export const messages = defineMessages({
   textUpload: { id: 'universal.upload', defaultMessage: 'Upload' },

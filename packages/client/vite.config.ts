@@ -72,6 +72,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
     } else {
       return {
         build: {
+          manifest: true,
           rollupOptions: {
             input: {
               main: './index-ssr.html',
