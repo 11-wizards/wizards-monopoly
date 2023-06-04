@@ -1,11 +1,11 @@
-import { isNumbers, isStrings } from '../helpers';
+import { isNumbersArray, isStringsArray } from '../helpers';
 import { Author, TypeAuthor } from '../models/Author';
 import { ErrorApi } from './api.error';
 
 export const getAuthorDb = async (author: TypeAuthor) => {
   const { author_id, name } = author;
   let isAuthor = [];
-  if (isNumbers(author_id)) {
+  if (isNumbersArray([author_id])) {
     isAuthor = await Author.findAll({ where: { author_id } });
   }
   if (isAuthor.length) {
@@ -16,7 +16,7 @@ export const getAuthorDb = async (author: TypeAuthor) => {
 };
 
 export const createAuthorDb = async (name: string): Promise<number> => {
-  if (!isStrings(name)) {
+  if (!isStringsArray([name])) {
     throw new ErrorApi(400, 'Полученные данные не соответствуют модели');
   }
   const { author_id } = (await Author.create({ name })) as unknown as TypeAuthor;

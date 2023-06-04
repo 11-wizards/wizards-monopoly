@@ -1,9 +1,9 @@
-import { isStrings } from '../helpers';
+import { isStringsArray } from '../helpers';
 import { Author } from '../models/Author';
 import { CreateTopicData, Topic, TypeTopic } from '../models/Topic';
 import { ErrorApi } from './api.error';
 import { getAuthorDb } from './author.service';
-import { isObjects } from '../helpers';
+import { isObjectsArray } from '../helpers';
 
 export const getTopicsDb = async (): Promise<Array<TypeTopic>> => {
   const data =
@@ -17,11 +17,7 @@ export const getTopicsDb = async (): Promise<Array<TypeTopic>> => {
         },
       ],
     })) as unknown as Array<TypeTopic>) ?? [];
-  if (data) {
-    return data;
-  } else {
-    throw new ErrorApi(500, 'Ошибка при запросе списка топиков');
-  }
+  return data;
 };
 
 export const getTopicDb = async (topic_id: number): Promise<TypeTopic> => {
@@ -47,7 +43,7 @@ export const getTopicDb = async (topic_id: number): Promise<TypeTopic> => {
 export const createTopicDb = async (topicData: CreateTopicData): Promise<number> => {
   const { author, title, body } = topicData ?? {};
 
-  if (!isObjects(author) || !isStrings(title, body)) {
+  if (!isObjectsArray([author]) || !isStringsArray([title, body])) {
     throw new ErrorApi(400, 'Полученные данные не соответствуют модели');
   }
 

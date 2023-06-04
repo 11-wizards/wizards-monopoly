@@ -1,4 +1,4 @@
-import { isObjects, isStrings } from '../helpers';
+import { isObjectsArray, isStringsArray } from '../helpers';
 import { Author } from '../models/Author';
 import { Comment, CreateCommentData, TypeComment } from '../models/Comment';
 import { getAuthorDb } from './author.service';
@@ -20,11 +20,7 @@ export const getCommentsDb = async (
         },
       ],
     })) as unknown as Array<TypeComment>) ?? [];
-  if (data) {
-    return data;
-  } else {
-    throw new ErrorApi(500, 'Ошибка при запросе комментариев');
-  }
+  return data;
 };
 
 export const createCommentDb = async (
@@ -34,7 +30,7 @@ export const createCommentDb = async (
 ): Promise<number> => {
   const { author, body } = commentData ?? {};
 
-  if (!isObjects(author) || !isStrings(body)) {
+  if (!isObjectsArray([author]) || !isStringsArray([body])) {
     throw new ErrorApi(400, 'Полученные данные не соответствуют модели');
   }
 
