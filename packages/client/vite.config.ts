@@ -3,21 +3,23 @@ import react from '@vitejs/plugin-react';
 import dotenv from 'dotenv';
 dotenv.config();
 import path from 'path';
+import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(({ command, mode, ssrBuild }) => {
   const baseConfig = {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@import 'styles/vars';`,
+          additionalData: `@import 'styles/vars'; @import 'styles/mixins';`,
         },
       },
     },
-    plugins: [react()],
+    plugins: [react(), svgr()],
     resolve: {
       alias: {
         api: path.join(__dirname, './src/api'),
         app: path.join(__dirname, './src/app'),
+        assets: path.join(__dirname, './src/assets'),
         components: path.join(__dirname, './src/components'),
         constants: path.join(__dirname, './src/constants'),
         core: path.join(__dirname, './src/core'),
