@@ -34,7 +34,7 @@ export const Register: FC = () => {
         });
       }
     } catch (err) {
-      await handleServerError(err as ServerError);
+      handleServerError(err as ServerError);
     }
   }
 

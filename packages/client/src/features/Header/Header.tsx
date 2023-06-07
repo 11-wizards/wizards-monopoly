@@ -2,8 +2,8 @@ import { type FC, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Button, Typography } from 'antd';
-import { GlobalOutlined } from '@ant-design/icons';
-import { signOut } from 'app/slices/userSlice';
+import { BgColorsOutlined, GlobalOutlined } from '@ant-design/icons';
+import { changeUserTheme, signOut } from 'app/slices/userSlice';
 import { ROUTES } from 'core/Router';
 import { GameRulesModal } from 'features/GameRulesModal';
 import { useAppDispatch, useAppSelector } from 'hooks';
@@ -17,6 +17,7 @@ export const Header: FC = () => {
   const [, toggleLocale] = useLocale();
 
   const dispatch = useAppDispatch();
+  const { currentUser } = useAppSelector((state) => state.user);
   const { isAuth } = useAppSelector((state) => state.user);
 
   const navigate = useNavigate();
@@ -26,6 +27,19 @@ export const Header: FC = () => {
 
   const toggleShowRules = () => {
     setGameRuleShown((prevState) => !prevState);
+  };
+
+  const toggleTheme = async () => {
+    if (currentUser?.id) {
+      await dispatch(
+        changeUserTheme({
+          // TODO: определять девайс
+          device: 'default',
+          theme: currentUser?.theme?.theme === 'light' ? 'dark' : 'light',
+          userId: currentUser?.id,
+        }),
+      );
+    }
   };
 
   const handleSignOut = async () => {
@@ -64,9 +78,12 @@ export const Header: FC = () => {
           )}
           <GlobalOutlined onClick={toggleLocale} className="header__button" />
           {isAuth && (
-            <Button onClick={handleSignOut} type="link" className="header__button">
-              {fm(messages.buttonSignOut)}
-            </Button>
+            <>
+              <BgColorsOutlined onClick={toggleTheme} className="header__button" />
+              <Button onClick={handleSignOut} type="link" className="header__button">
+                {fm(messages.buttonSignOut)}
+              </Button>
+            </>
           )}
         </nav>
       </header>
