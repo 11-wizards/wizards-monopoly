@@ -36,12 +36,12 @@ export const createCommentDb = async (
 
   const author_id = await getAuthorDb(author);
 
-  const { comment_id } = (await Comment.create({
+  const { comment_id } = await Comment.create({
     topic_id,
     author_id,
     parent_comment_id,
     body,
-  })) as unknown as TypeComment;
+  });
 
   if (comment_id) {
     return comment_id;

@@ -1,5 +1,17 @@
 import { DataTypes } from 'sequelize';
-import { client } from '../db';
+import {
+  Table,
+  Column,
+  Model,
+  PrimaryKey,
+  AutoIncrement,
+  AllowNull,
+  ForeignKey,
+  BelongsTo,
+} from 'sequelize-typescript';
+
+// import { client } from '../db';
+
 import { Author, TypeAuthor } from './Author';
 
 export type CreateTopicData = {
@@ -9,46 +21,70 @@ export type CreateTopicData = {
 };
 
 export type TypeTopic = {
-  length: any;
   topic_id: number;
   title: string;
   date: Date;
-  author: TypeAuthor;
   body: string;
-  count_comments: number;
+  author: TypeAuthor;
 };
 
-const Topic = client.define(
-  'Topic',
-  {
-    topic_id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    author_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    title: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    body: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-  },
-  {
-    timestamps: true,
-    createdAt: 'date',
-    updatedAt: false,
-  },
-);
+@Table({ timestamps: true, createdAt: 'date', updatedAt: false })
+export class Topic extends Model {
+  @PrimaryKey
+  @AutoIncrement
+  @Column
+  topic_id: number;
 
-Topic.belongsTo(Author, {
-  foreignKey: 'author_id',
-  as: 'author',
-});
+  @AllowNull(false)
+  @ForeignKey(() => Author)
+  @Column
+  author_id: number;
 
-export { Topic };
+  @AllowNull(false)
+  @Column({ type: DataTypes.TEXT })
+  @Column
+  title: string;
+
+  @AllowNull(false)
+  @Column({ type: DataTypes.TEXT })
+  @Column
+  body: string;
+
+  @BelongsTo(() => Author)
+  author: Author;
+}
+
+// const Topic1 = client.define(
+//   'Topic',
+//   {
+//     topic_id: {
+//       type: DataTypes.INTEGER,
+//       autoIncrement: true,
+//       primaryKey: true,
+//     },
+//     author_id: {
+//       type: DataTypes.INTEGER,
+//       allowNull: false,
+//     },
+//     title: {
+//       type: DataTypes.TEXT,
+//       allowNull: false,
+//     },
+//     body: {
+//       type: DataTypes.TEXT,
+//       allowNull: false,
+//     },
+//   },
+//   {
+//     timestamps: true,
+//     createdAt: 'date',
+//     updatedAt: false,
+//   },
+// );
+
+// Topic.belongsTo(Author, {
+//   foreignKey: 'author_id',
+//   as: 'author',
+// });
+
+// // export { Topic };

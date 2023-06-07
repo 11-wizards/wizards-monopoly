@@ -1,5 +1,17 @@
-import { ResponseApiError } from '../models/Api';
-import { ResponseApiSuccess } from '../models/Api';
+export type ApiError = {
+  code: number;
+  msg?: string;
+};
+
+export type ResponseApiError = {
+  status: false;
+  error: ApiError;
+};
+
+export type ResponseApiSuccess<T> = {
+  status: true;
+  data: T;
+};
 
 export const createErrorResponse = (code = 500, msg = 'Ошибка'): ResponseApiError => {
   return {

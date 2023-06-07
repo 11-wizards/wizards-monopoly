@@ -1,4 +1,5 @@
-import { Router as expressRouter } from 'express';
+import { Request, Response, NextFunction, Router as expressRouter } from 'express';
+
 import {
   AUTH_API_FORUM_PATH,
   COMMENTS_API_FORUM_PATH,
@@ -8,6 +9,13 @@ import {
 } from '../constant';
 import ForumController from '../controllers/ForumController';
 import { authMiddleware } from '../services/api.auth.middleware';
+import { ResponseApi } from '../helpers/sendResponsesFromApi';
+
+export type RoutesFunction<T> = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => Promise<ResponseApi<T>>;
 
 export const forumRouter = expressRouter();
 

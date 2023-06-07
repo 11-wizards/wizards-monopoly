@@ -1,5 +1,7 @@
 import { Response } from 'express';
-import { ResponseApi } from '../models/Api';
+import { ResponseApiError, ResponseApiSuccess } from './createResponse';
+
+export type ResponseApi<T> = ResponseApiSuccess<T> | ResponseApiError;
 
 export const sendResponsesFromApi = async (
   res: Response,

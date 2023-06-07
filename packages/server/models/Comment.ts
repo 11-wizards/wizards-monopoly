@@ -1,5 +1,16 @@
-import { DataTypes } from 'sequelize';
-import { client } from '../db';
+// import { DataTypes } from 'sequelize';
+// import { client } from '../db';
+import {
+  Table,
+  Column,
+  Model,
+  PrimaryKey,
+  AutoIncrement,
+  AllowNull,
+  ForeignKey,
+  DataType,
+  BelongsTo,
+} from 'sequelize-typescript';
 import { Author, TypeAuthor } from './Author';
 import { Topic } from './Topic';
 
@@ -11,52 +22,43 @@ export type CreateCommentData = {
 export type TypeComment = {
   topic_id: number;
   comment_id: number;
+  parent_comment_id: number | null;
   date: Date;
   author: TypeAuthor;
   body: string;
-  count_replies: number;
+  // count_replies: number;
 };
 
-const Comment = client.define(
-  'Comment',
-  {
-    comment_id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    topic_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    parent_comment_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    author_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    body: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-  },
-  {
-    timestamps: true,
-    createdAt: 'date',
-    updatedAt: false,
-  },
-);
+@Table({ timestamps: true, createdAt: 'date', updatedAt: false })
+export class Comment extends Model {
+  @PrimaryKey
+  @AutoIncrement
+  @Column
+  comment_id: number;
 
-Comment.belongsTo(Author, {
-  foreignKey: 'author_id',
-  as: 'author',
-});
+  @ForeignKey(() => Topic)
+  @AllowNull(false)
+  @Column(DataType.INTEGER)
+  topic_id: number;
 
-Comment.belongsTo(Topic, {
-  foreignKey: 'topic_id',
-  as: 'topic',
-});
+  @ForeignKey(() => Author)
+  @AllowNull(false)
+  @Column(DataType.INTEGER)
+  author_id: number;
 
-export { Comment };
+  @AllowNull(true)
+  @Column(DataType.INTEGER)
+  parent_comment_id: number;
+
+  @AllowNull(false)
+  @Column(DataType.TEXT)
+  body: string;
+
+  @BelongsTo(() => Author)
+  author: Author;
+
+  @BelongsTo(() => Topic)
+  topic: Topic;
+}
+
+// export { Comment };
