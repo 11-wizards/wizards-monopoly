@@ -5,9 +5,13 @@ import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
+import { ROUTER_API_PATH } from './constant';
+// import { router } from './routers/api.router';
+
 // TODO: path aliases
 import { createClientAndConnect } from './db';
 import { router } from './routes';
+
 dotenv.config();
 
 const PORT = Number(process.env.SERVER_PORT) || 3001;
@@ -45,7 +49,7 @@ async function startServer() {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')));
   }
 
-  app.use('/api', router);
+  app.use(ROUTER_API_PATH, router);
 
   app.use('*', async (req: Request, res: Response, next: NextFunction) => {
     const url = req.originalUrl;
