@@ -18,7 +18,7 @@ export type Comment = {
 
 export type AuthorDTO = {
   author_id: number;
-  author_name: string;
+  name: string;
 };
 
 export type Author = {
@@ -101,7 +101,7 @@ export type NewReplyResponse = {
 
 const authorNormalizr = (author: AuthorDTO): Author => ({
   authorId: author.author_id,
-  authorName: author.author_name,
+  authorName: author.name,
 });
 
 export const commentNormalizr = (comment: CommentDTO): Comment => ({

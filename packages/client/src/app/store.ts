@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { baseApi } from 'api/base.api';
+import { backendApi } from 'api/backend.api';
+import { yandexApi } from 'api/yandexApi';
 import leaderboardReducer from './slices/leaderboardSlice';
 import gameReducer from './slices/gameSlice';
 import localeReducer from './slices/localeSlice';
@@ -10,7 +11,8 @@ const reducer = {
   game: gameReducer,
   locale: localeReducer,
   user: userReducer,
-  [baseApi.reducerPath]: baseApi.reducer,
+  [yandexApi.reducerPath]: yandexApi.reducer,
+  [backendApi.reducerPath]: backendApi.reducer,
 };
 
 const store = configureStore({ reducer });
@@ -21,7 +23,8 @@ export type AppDispatch = typeof store.dispatch;
 export function createStore(initialState?: RootState) {
   return configureStore({
     reducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(yandexApi.middleware, backendApi.middleware),
     preloadedState: initialState,
   });
 }

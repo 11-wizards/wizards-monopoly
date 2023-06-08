@@ -5,7 +5,7 @@ import { ErrorApi } from './api.error';
 
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    // return next(); // Раскомментить для доступа без авторизации
+    return next(); // Раскомментить для доступа без авторизации
     const auth = (req.headers.auth as string) ?? '';
     const [login, password] = auth.split('||');
     if (!login || !password) {

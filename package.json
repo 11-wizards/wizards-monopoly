@@ -22,6 +22,8 @@
   },
   "devDependencies": {
     "@evilmartians/lefthook": "^1.1.1",
-    "lerna": "^5.4.3"
+    "lerna": "^5.4.3",
+    "stylelint-order": "6.0.3",
+    "stylelint-scss": "5.0.1"
   }
 }

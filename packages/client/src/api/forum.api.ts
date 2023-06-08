@@ -1,23 +1,25 @@
-import { baseApi } from 'api/baseApi';
+import { backendApi } from 'api/backend.api';
 import type {
   Comment,
   CommentDTO,
   NewTopicResponse,
   Reply,
   ReplyDTO,
+  ResponseApiSuccess,
   Topic,
   TopicDTO,
 } from 'models/forum.model';
 import { commentNormalizr, repliesNormalizr, topicNormalizr } from 'models/forum.model';
 import { ForumApiHandlers } from 'types/enums/forum';
 
-export const forumApi = baseApi.injectEndpoints({
+export const forumApi = backendApi.injectEndpoints({
   endpoints: (build) => ({
     getAllTopics: build.query<Topic[], void>({
       query: () => ({
-        url: ForumApiHandlers.Topics,
+        url: `${ForumApiHandlers.Forum}/${ForumApiHandlers.Topics}`,
       }),
-      transformResponse: (response: TopicDTO[]): Topic[] => response.map(topicNormalizr),
+      transformResponse: (response: ResponseApiSuccess<TopicDTO[]>): Topic[] =>
+        response.data.map(topicNormalizr),
       providesTags: ['TOPICS'],
     }),
 
@@ -25,7 +27,8 @@ export const forumApi = baseApi.injectEndpoints({
       query: (id) => ({
         url: `${ForumApiHandlers.Topics}/${id}`,
       }),
-      transformResponse: (response: TopicDTO): Topic => topicNormalizr(response),
+      transformResponse: (response: ResponseApiSuccess<TopicDTO>): Topic =>
+        topicNormalizr(response.data),
     }),
 
     createTopic: build.mutation<void, NewTopicResponse & { id: number }>({
@@ -47,7 +50,8 @@ export const forumApi = baseApi.injectEndpoints({
       query: () => ({
         url: ForumApiHandlers.Comments,
       }),
-      transformResponse: (response: CommentDTO[]): Comment[] => response.map(commentNormalizr),
+      transformResponse: (response: ResponseApiSuccess<CommentDTO[]>): Comment[] =>
+        response.data.map(commentNormalizr),
       providesTags: ['COMMENTS'],
     }),
 
@@ -74,7 +78,8 @@ export const forumApi = baseApi.injectEndpoints({
       query: () => ({
         url: ForumApiHandlers.Replies,
       }),
-      transformResponse: (response: ReplyDTO[]): Reply[] => response.map(repliesNormalizr),
+      transformResponse: (response: ResponseApiSuccess<ReplyDTO[]>): Reply[] =>
+        response.data.map(repliesNormalizr),
     }),
   }),
 });

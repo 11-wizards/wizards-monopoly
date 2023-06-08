@@ -1,5 +1,4 @@
 import { Button, Form, Input, Modal, Space } from 'antd';
-import TextArea from 'antd/es/input/TextArea';
 import { useCreateTopicMutation } from 'api/forum.api';
 import type { RootState } from 'app/store';
 import { randomize } from 'features/Forum/common';
@@ -24,6 +23,8 @@ type CreateTopicModalProps = {
   isOpen: boolean;
   onModalClose: MouseEventHandler<HTMLButtonElement>;
 };
+
+const { TextArea } = Input;
 
 export const CreateTopicModal: FC<CreateTopicModalProps> = ({
   isOpen,

@@ -1,5 +1,4 @@
-import { Button, Form, Space, Typography } from 'antd';
-import TextArea from 'antd/es/input/TextArea';
+import { Button, Form, Space, Typography, Input } from 'antd';
 import { useCreateCommentMutation } from 'api/forum.api';
 import type { RootState } from 'app/store';
 import { DEFAULT_TEXTAREA_ROWS } from 'constants/forum';
@@ -20,6 +19,7 @@ type NewCommentProps = {
   topicId?: string;
 };
 
+const { TextArea } = Input;
 const { Title } = Typography;
 
 export const NewComment: FC<NewCommentProps> = ({ topicId }) => {

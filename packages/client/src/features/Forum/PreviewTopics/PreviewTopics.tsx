@@ -15,9 +15,10 @@ export const PreviewTopics: React.FC<PreviewTopicsProps> = ({ className = '' }) 
 
   return (
     <ul className={classNames(className, 'topics')}>
-      {topics.map(({ topicId, ...rest }) => (
-        <PreviewTopic key={topicId} topicId={topicId} {...rest} />
-      ))}
+      {topics.length > 0 &&
+        topics.map(({ topicId, ...rest }) => (
+          <PreviewTopic key={topicId} topicId={topicId} {...rest} />
+        ))}
     </ul>
   );
 };
