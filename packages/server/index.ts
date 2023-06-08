@@ -1,12 +1,16 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import cors from 'cors';
-import { createClientAndConnect } from './db';
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
 import { ROUTER_API_PATH } from './constant';
-import { router } from './routers/api.router';
+// import { router } from './routers/api.router';
+
+// TODO: path aliases
+import { createClientAndConnect } from './db';
+import { router } from './routes';
 
 dotenv.config();
 
@@ -17,6 +21,9 @@ const IS_DEV = process.env.NODE_ENV === 'development';
 async function startServer() {
   const app = express();
   app.use(cors());
+  app.use(express.json());
+
+  await createClientAndConnect();
 
   let vite: ViteDevServer | undefined;
 
@@ -42,7 +49,6 @@ async function startServer() {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')));
   }
 
-  app.use(express.json());
   app.use(ROUTER_API_PATH, router);
 
   app.use('*', async (req: Request, res: Response, next: NextFunction) => {
@@ -60,7 +66,7 @@ async function startServer() {
       }
 
       // вот тут костыль типа, ибо не получается адекватно импортировать RootState
-      let render: (url: string) => Promise<[any, string]>;
+      let render: (url: string) => Promise<[unknown, string]>;
 
       if (!IS_DEV) {
         render = (await import(distSsrPath)).render;
@@ -82,7 +88,6 @@ async function startServer() {
       next(e);
     }
   });
-  await createClientAndConnect();
 
   app.listen(PORT, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${PORT}`);

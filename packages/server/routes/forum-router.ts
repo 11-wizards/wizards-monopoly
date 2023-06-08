@@ -7,7 +7,7 @@ import {
   TOPICS_API_FORUM_PATH,
   TOPIC_API_FORUM_PATH,
 } from '../constant';
-import ForumController from '../controllers/ForumController';
+import ForumController from '../controllers/forum';
 import { authMiddleware } from '../services/api.auth.middleware';
 import { ResponseApi } from '../helpers/sendResponsesFromApi';
 

@@ -37,7 +37,7 @@ export const Login: FC = () => {
         navigate(ROUTES.ROOT.path);
       }
     } catch (err) {
-      await handleServerError(err as ServerError);
+      handleServerError(err as ServerError);
     }
   }
 
