@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { baseApi } from 'api/baseApi';
+import { baseApi } from 'api/base.api';
 import leaderboardReducer from './slices/leaderboardSlice';
 import gameReducer from './slices/gameSlice';
 import localeReducer from './slices/localeSlice';

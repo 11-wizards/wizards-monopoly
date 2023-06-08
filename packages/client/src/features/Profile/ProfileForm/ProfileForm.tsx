@@ -76,7 +76,9 @@ export const ProfileForm: FC = () => {
   return (
     <>
       <div className="form-profile">
-        <Typography.Title>{fm(messages.titleMain)}</Typography.Title>
+        <Typography.Title className="form-profile__title">
+          {fm(messages.titleMain)}
+        </Typography.Title>
         {currentUser && (
           <>
             <div className="form-profile__avatarContainer">

@@ -13,15 +13,21 @@ RUN yarn install --frozen-lockfile
 COPY . .
 
 RUN yarn lerna bootstrap
-RUN rm -rf /app/packages/server/dist/ && yarn build --scope=server
+RUN yarn build
 
 
 FROM node:$NODE_VERSION-buster-slim as production
+RUN apt update && apt install -y netcat
 WORKDIR /app
 
+COPY --from=builder /app/wait-for ./wait-for
 COPY --from=builder /app/packages/server/dist/ /app/
+COPY --from=builder /app/packages/client/dist/ /app/client/dist/
+COPY --from=builder /app/packages/client/dist-ssr/ /app/client/dist-ssr/
 COPY --from=builder /app/packages/server/package.json /app/package.json
-RUN yarn install --production=true
+COPY --from=builder /app/packages/client/package.json /app/client/package.json
+
+RUN chmod +x ./wait-for
+RUN yarn install && cd client && yarn install
 
 EXPOSE $SERVER_PORT
-CMD [ "node", "/app/index.js" ]

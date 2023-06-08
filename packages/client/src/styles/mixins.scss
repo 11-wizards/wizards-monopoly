@@ -17,3 +17,9 @@
   padding: $paddingM;
   border-radius: 0 4px 4px 0;
 }
+
+@mixin redirect-box {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
