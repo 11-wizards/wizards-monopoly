@@ -1,4 +1,4 @@
-import { api } from 'api';
+import { yandexApi } from 'api';
 import {
   type CurrentUserDto,
   type LoginInput,
@@ -8,9 +8,9 @@ import {
 } from 'models/auth.model';
 
 export const authApi = {
-  getCurrentUser: () => api.get<CurrentUserDto>('/auth/user'),
-  logIn: (data: LoginInput) => api.post('/auth/signin', new LoginInputDto(data)),
-  logOut: () => api.post('/auth/logout'),
+  getCurrentUser: () => yandexApi.get<CurrentUserDto>('/auth/user'),
+  logIn: (data: LoginInput) => yandexApi.post('/auth/signin', new LoginInputDto(data)),
+  logOut: () => yandexApi.post('/auth/logout'),
   register: (data: RegisterInput) =>
-    api.post<{ id: string }>('/auth/signup', new RegisterInputDto(data)),
+    yandexApi.post<{ id: string }>('/auth/signup', new RegisterInputDto(data)),
 };

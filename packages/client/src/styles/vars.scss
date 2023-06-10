@@ -11,10 +11,23 @@ $paddingL: 24px;
 
 $headerHeight: 50px;
 
+$fontSizeS: 14px;
+$fontSizeM: 16px;
 $fontSizeL: 24px;
+$fontSizeXL: 40px;
 
 .go-back-button {
   position: absolute;
   top: 50%;
   left: $paddingM;
+}
+
+[theme='light'] {
+  --color-main-bg: #fff;
+  --color-main-text: #000;
+}
+
+[theme='dark'] {
+  --color-main-bg: #363636;
+  --color-main-text: #fff;
 }

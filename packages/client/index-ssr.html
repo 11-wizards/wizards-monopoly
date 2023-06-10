@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" theme="light">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -8,6 +8,9 @@
   </head>
   <body>
     <div id="root"><!--ssr-outlet--></div>
+    <script>
+      window.__PRELOADED_STATE__ = '<!--preloaded-state-->';
+    </script>
     <script type="module" src="./src/main-ssr.tsx"></script>
   </body>
 </html>

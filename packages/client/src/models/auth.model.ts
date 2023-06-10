@@ -1,6 +1,25 @@
+import { type CurrentUserTheme } from './theme.model';
+
 export type LoginInput = {
   login: string;
   password: string;
+};
+
+export type OAuthServicePayload = {
+  redirectUri: string;
+};
+
+export type OAuthServiceDto = {
+  service_id: string;
+};
+
+export type OAuthServiceNormalize = {
+  serviceId: string;
+};
+
+export type OauthSignInPayload = {
+  code: string;
+  redirectUri: string;
 };
 
 export class LoginInputDto {
@@ -49,6 +68,7 @@ export type CurrentUserDto = {
   login: string;
   phone: string;
   second_name: string;
+  theme?: CurrentUserTheme;
 };
 
 export class CurrentUser {
@@ -60,6 +80,7 @@ export class CurrentUser {
   email: string;
   phone: string;
   avatar: string;
+  theme?: CurrentUserTheme;
 
   constructor(dto: CurrentUserDto) {
     this.id = dto.id;
@@ -70,5 +91,6 @@ export class CurrentUser {
     this.email = dto.email;
     this.phone = dto.phone;
     this.avatar = dto.avatar;
+    this.theme = dto.theme;
   }
 }

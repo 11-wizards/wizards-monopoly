@@ -1,3 +1,4 @@
+import { OAuth } from 'features/OAuth/OAuth';
 import type { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
@@ -36,13 +37,16 @@ export const Login: FC = () => {
         navigate(ROUTES.ROOT.path);
       }
     } catch (err) {
-      await handleServerError(err as ServerError);
+      handleServerError(err as ServerError);
     }
   }
 
   return (
     <div className="form-login">
-      <Typography.Title>{fm(messages.titleMain)}</Typography.Title>
+      <Typography.Title className="form-login__title">{fm(messages.titleMain)}</Typography.Title>
+      <Typography.Paragraph>{fm(messages.offerToRegisterViaOauth)}</Typography.Paragraph>
+      <OAuth />
+      <div className="form-login__separator">{fm(messages.separatorText)}</div>
       <form onSubmit={handleSubmit(onSubmit)} className="form-login__form">
         <div className="form-login__input">
           <Controller
@@ -109,14 +113,12 @@ export const Login: FC = () => {
         </Button>
       </form>
 
-      <div>
-        <Typography.Text>{fm(messages.textNoAccount)} </Typography.Text>
+      <Typography.Paragraph className="form-login__redirect">
+        {fm(messages.textNoAccount)}{' '}
         <Link to={ROUTES.REGISTER_PAGE.path} className="form-login__link">
-          <Typography.Text className="form-login__linkText">
-            {fm(messages.buttonRegister)}
-          </Typography.Text>
+          {fm(messages.buttonRegister)}
         </Link>
-      </div>
+      </Typography.Paragraph>
     </div>
   );
 };

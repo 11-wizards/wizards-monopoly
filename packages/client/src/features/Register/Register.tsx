@@ -34,7 +34,7 @@ export const Register: FC = () => {
         });
       }
     } catch (err) {
-      await handleServerError(err as ServerError);
+      handleServerError(err as ServerError);
     }
   }
 
@@ -192,14 +192,12 @@ export const Register: FC = () => {
         </Button>
       </form>
 
-      <div>
-        <Typography.Text>{fm(messages.textAlreadyHaveAccount)} </Typography.Text>
+      <Typography.Paragraph className="form-register__redirect">
+        {fm(messages.textAlreadyHaveAccount)}
         <Link to={ROUTES.LOGIN_PAGE.path} className="form-register__link">
-          <Typography.Text className="form-register__linkText">
-            {fm(messages.buttonLogin)}
-          </Typography.Text>
+          {fm(messages.buttonLogin)}
         </Link>
-      </div>
+      </Typography.Paragraph>
     </div>
   );
 };
