@@ -5,13 +5,17 @@ import type { FC } from 'react';
 
 import './Comments.scss';
 
-export const Comments: FC = () => {
-  const { data: comments = [] as TComment[] } = useGetAllCommentsQuery();
+type CommentsProps = {
+  topicId: string;
+};
+
+export const Comments: FC<CommentsProps> = ({ topicId }) => {
+  const { data: comments = [] as TComment[] } = useGetAllCommentsQuery(topicId);
 
   return (
     <ul className="comments">
       {comments.map(({ commentId, ...props }) => (
-        <Comment key={commentId} {...props} />
+        <Comment key={commentId} topicId={topicId} {...props} />
       ))}
     </ul>
   );

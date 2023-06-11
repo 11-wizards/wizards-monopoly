@@ -32,7 +32,7 @@ export const TopicPage: FC = () => {
           <Paragraph>{body}</Paragraph>
         </Space>
         <NewComment topicId={topicId} />
-        <Comments />
+        <Comments topicId={topicId} />
       </div>
     </div>
   );

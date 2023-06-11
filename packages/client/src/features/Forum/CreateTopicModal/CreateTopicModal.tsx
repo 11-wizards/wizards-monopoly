@@ -19,21 +19,17 @@ type TopicValues = {
 
 type CreateTopicModalProps = {
   className?: string;
-  closeModal: (isOpen: boolean) => void;
   isOpen: boolean;
   onModalClose: MouseEventHandler<HTMLButtonElement>;
 };
 
 const { TextArea } = Input;
 
-export const CreateTopicModal: FC<CreateTopicModalProps> = ({
-  isOpen,
-  onModalClose,
-  closeModal,
-}) => {
+export const CreateTopicModal: FC<CreateTopicModalProps> = ({ isOpen, onModalClose }) => {
   const { formatMessage: fm } = useIntl();
 
-  const [createTopic, { isError }] = useCreateTopicMutation();
+  const [createTopic] = useCreateTopicMutation();
+
   const user = useAppSelector((state: RootState) => state.user.currentUser);
 
   const { handleSubmit, control, reset } = useForm<TopicValues>({
@@ -53,18 +49,15 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({
     await createTopic({
       author: {
         author_id: user.id,
-        author_name: user.displayName!,
+        name: user.displayName!,
       },
       body: data.content,
       title: data.title,
       topic_id: topicId,
-      id: topicId,
-    });
-
-    if (!isError) {
+    }).then(() => {
       reset();
-      closeModal(true);
-    }
+      onModalClose();
+    });
   };
 
   return (

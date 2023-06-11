@@ -4,7 +4,7 @@ export type CommentDTO = {
   comment_id: number;
   count_replies: number;
   date: Date;
-  topic_id: number;
+  topic_id: string;
 };
 
 export type Comment = {
@@ -13,7 +13,7 @@ export type Comment = {
   commentId: number;
   date: Date;
   repliesCount?: number;
-  topicId: number;
+  topicId: string;
 };
 
 export type AuthorDTO = {
@@ -98,35 +98,3 @@ export type NewReplyResponse = {
   comment_id: number;
   topic_id: number;
 };
-
-const authorNormalizr = (author: AuthorDTO): Author => ({
-  authorId: author.author_id,
-  authorName: author.name,
-});
-
-export const commentNormalizr = (comment: CommentDTO): Comment => ({
-  author: authorNormalizr(comment.author),
-  body: comment.body,
-  commentId: comment.comment_id,
-  repliesCount: comment.count_replies,
-  topicId: comment.topic_id,
-  date: comment.date,
-});
-
-export const topicNormalizr = (topic: TopicDTO): Topic => ({
-  author: authorNormalizr(topic.author),
-  body: topic.body,
-  commentsCount: topic?.counts_comments,
-  date: topic.date,
-  title: topic.title,
-  topicId: topic.topic_id,
-});
-
-export const repliesNormalizr = (replies: ReplyDTO): Reply => ({
-  author: authorNormalizr(replies.author),
-  body: replies.body,
-  commentId: replies.comment_id,
-  date: replies.date,
-  replyId: replies.replies_id,
-  topicId: replies.topic_id,
-});

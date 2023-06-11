@@ -9,9 +9,16 @@ import { messages } from './common';
 
 import './Comment.scss';
 
-type CommentProps = Omit<TComment, 'commentId'>;
+type CommentProps = TComment;
 
-export const Comment: FC<CommentProps> = ({ author, body, date, repliesCount = 0 }) => {
+export const Comment: FC<CommentProps> = ({
+  author,
+  body,
+  date,
+  repliesCount = 0,
+  commentId,
+  topicId,
+}) => {
   const { authorName } = author;
   const { formatMessage: fm } = useIntl();
 
@@ -39,7 +46,12 @@ export const Comment: FC<CommentProps> = ({ author, body, date, repliesCount = 0
           <Button>{fm(messages.repliesBtn)}</Button>
         </footer>
       </Space>
-      <Replies className="comment__replies" skipFetch={!showReplies} />
+      <Replies
+        className="comment__replies"
+        commentId={commentId}
+        topicId={topicId}
+        skipFetch={!showReplies}
+      />
     </li>
   );
 };

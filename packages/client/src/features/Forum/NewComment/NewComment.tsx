@@ -2,7 +2,6 @@ import { Button, Form, Space, Typography, Input } from 'antd';
 import { useCreateCommentMutation } from 'api/forum.api';
 import type { RootState } from 'app/store';
 import { DEFAULT_TEXTAREA_ROWS } from 'constants/forum';
-import { randomize } from 'features/Forum/common';
 import { useAppSelector } from 'hooks';
 import { messages } from 'pages/TopicPage/common';
 import type { FC } from 'react';
@@ -24,28 +23,21 @@ const { Title } = Typography;
 
 export const NewComment: FC<NewCommentProps> = ({ topicId }) => {
   const { formatMessage: fm } = useIntl();
-
-  const { handleSubmit, control } = useForm<FormValues>();
-
+  const { handleSubmit, control, reset } = useForm<FormValues>();
   const user = useAppSelector((state: RootState) => state.user.currentUser);
-
   const [createComment] = useCreateCommentMutation();
 
-  const submitHandler = async (data: FormValues) => {
-    if (user === null) {
-      return;
-    }
+  console.log('911.', control);
 
+  const submitHandler = async (data: FormValues) => {
     await createComment({
-      id: randomize(),
       author: {
         author_id: user.id,
-        author_name: user.displayName || 'Anonymous',
+        name: user.displayName || 'Anonymous',
       },
       body: data.comment,
       topic_id: Number(topicId),
-      comment_id: randomize(),
-    });
+    }).then(() => reset());
   };
 
   return (

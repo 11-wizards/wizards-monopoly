@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { backendApi } from 'api/backend.api';
 import { yandexApi } from 'api/yandexApi';
+import { forumApiMacroErrorHandler } from 'app/middlewares/forumApiMacroErrorHandler';
 import leaderboardReducer from './slices/leaderboardSlice';
 import gameReducer from './slices/gameSlice';
 import localeReducer from './slices/localeSlice';
@@ -24,7 +25,11 @@ export function createStore(initialState?: RootState) {
   return configureStore({
     reducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(yandexApi.middleware, backendApi.middleware),
+      getDefaultMiddleware().concat(
+        yandexApi.middleware,
+        backendApi.middleware,
+        forumApiMacroErrorHandler,
+      ),
     preloadedState: initialState,
   });
 }
