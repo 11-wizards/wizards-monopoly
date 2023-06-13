@@ -20,14 +20,6 @@
   "client.error.message": "Извините, страница, которую вы посетили, не существует.",
   "client.error.message.button-text": "На главную",
 
-  "comment.newCommentName": "Добавить комментарий",
-
-  "forum.comment.repliesBtnCount": "Показать ответы",
-  "forum.comment.repliesBtn": "Ответить",
-  "forum.new-topic.name": "Название темы",
-  "forum.new-topic.content": "Контент",
-  "forum.reply.replyBtn": "Ответить",
-
   "end-game.title": "ИГРА ОКОНЧЕНА",
   "end-game.winner": "Победитель",
   "end-game.finish-game": "Завершить игру",
@@ -42,6 +34,14 @@
   "forum.topics.topic": "Тема:",
   "forum.posts.response": "ответ пользователя",
   "forum.title": "Форум пользователей игры Монополия",
+
+  "forum.comment.newComment": "Добавить комментарий",
+  "forum.comment.sendBtn": "Отправить",
+  "forum.comment.repliesBtnCount": "Показать ответы",
+  "forum.comment.repliesBtn": "Ответить",
+  "forum.new-topic.name": "Название темы",
+  "forum.new-topic.content": "Контент",
+  "forum.reply.replyBtn": "Ответить",
 
   "header.navbar.forum": "Форум",
   "header.navbar.leaderboard": "Лидеры",

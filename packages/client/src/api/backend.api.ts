@@ -5,7 +5,7 @@ import { API_URL } from 'constants/main';
 export const backendApi = createApi({
   reducerPath: 'backendApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${API_URL}/forum`,
+    baseUrl: API_URL,
   }),
   tagTypes: [API_TAGS.TOPICS, API_TAGS.COMMENTS],
   endpoints: () => ({}),

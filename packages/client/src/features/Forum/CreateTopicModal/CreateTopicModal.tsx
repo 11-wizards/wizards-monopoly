@@ -21,11 +21,16 @@ type CreateTopicModalProps = {
   className?: string;
   isOpen: boolean;
   onModalClose: MouseEventHandler<HTMLButtonElement>;
+  setModalOpen: (isOpen: boolean) => void;
 };
 
 const { TextArea } = Input;
 
-export const CreateTopicModal: FC<CreateTopicModalProps> = ({ isOpen, onModalClose }) => {
+export const CreateTopicModal: FC<CreateTopicModalProps> = ({
+  isOpen,
+  onModalClose,
+  setModalOpen,
+}) => {
   const { formatMessage: fm } = useIntl();
 
   const [createTopic] = useCreateTopicMutation();
@@ -54,11 +59,15 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({ isOpen, onModalClo
       body: data.content,
       title: data.title,
       topic_id: topicId,
-    }).then(() => {
-      reset();
-      onModalClose();
+    }).then((res) => {
+      if (!('error' in res)) {
+        reset();
+        setModalOpen(false);
+      }
     });
   };
+
+  const handleAfterClose = () => reset();
 
   return (
     <Modal
@@ -66,6 +75,7 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({ isOpen, onModalClo
       open={isOpen}
       onCancel={onModalClose}
       centered
+      afterClose={handleAfterClose}
       footer={[
         <Button htmlType="button" onClick={handleSubmit(onCreateTopicBtnClick)}>
           {fm(messages.createTopicBtn)}

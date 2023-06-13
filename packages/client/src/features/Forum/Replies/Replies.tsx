@@ -8,16 +8,21 @@ import './Replies.scss';
 
 type RepliesProps = {
   className?: string;
+  commentId: number;
   skipFetch: boolean;
+  topicId: string;
 };
 
-export const Replies: FC<RepliesProps> = ({ className = '', skipFetch }) => {
-  const { data: replies = [] as ReplyType[] } = useGetRepliesQuery(null, { skip: skipFetch });
+export const Replies: FC<RepliesProps> = ({ className = '', skipFetch, commentId, topicId }) => {
+  const { data: replies = [] as ReplyType[] } = useGetRepliesQuery(
+    { commentId, topicId },
+    { skip: skipFetch },
+  );
 
   return (
     <ul className={classNames('replies', className)}>
       {replies.map(({ replyId, ...props }) => (
-        <Reply key={replyId} {...props} />
+        <Reply key={replyId} {...props} commentId={commentId} topicId={Number(topicId)} />
       ))}
     </ul>
   );

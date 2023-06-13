@@ -14,11 +14,13 @@ import type {
 import { commentNormalizr, repliesNormalizr, topicNormalizr } from 'features/Forum/common';
 import { ForumApiHandlers } from 'types/enums/forum';
 
+const concatForumUrl = (str: string) => `/forum/${str}`;
+
 export const forumApi = backendApi.injectEndpoints({
   endpoints: (build) => ({
     getAllTopics: build.query<Topic[], void>({
       query: () => ({
-        url: ForumApiHandlers.Topics,
+        url: concatForumUrl(ForumApiHandlers.Topics),
       }),
       transformResponse: (response: ResponseApiSuccess<TopicDTO[]>): Topic[] =>
         response.data.map(topicNormalizr),
@@ -27,7 +29,7 @@ export const forumApi = backendApi.injectEndpoints({
 
     getTopic: build.query<Topic, number>({
       query: (topicId) => ({
-        url: `${ForumApiHandlers.Topics}/${topicId}`,
+        url: concatForumUrl(`${ForumApiHandlers.Topics}/${topicId}`),
       }),
       transformResponse: (response: ResponseApiSuccess<TopicDTO>): Topic =>
         topicNormalizr(response.data),
@@ -35,7 +37,7 @@ export const forumApi = backendApi.injectEndpoints({
 
     createTopic: build.mutation<void, NewTopicResponse>({
       query: ({ title, author, body, topic_id }: NewTopicResponse) => ({
-        url: ForumApiHandlers.Topics,
+        url: concatForumUrl(ForumApiHandlers.Topics),
         method: 'POST',
         body: {
           author,
@@ -49,7 +51,7 @@ export const forumApi = backendApi.injectEndpoints({
 
     getAllComments: build.query<Comment[], string>({
       query: (topicId) => ({
-        url: `${ForumApiHandlers.Topics}/${topicId}/${ForumApiHandlers.Comments}`,
+        url: concatForumUrl(`${ForumApiHandlers.Topics}/${topicId}/${ForumApiHandlers.Comments}`),
       }),
       transformResponse: (response: ResponseApiSuccess<CommentDTO[]>): Comment[] =>
         response.data.map(commentNormalizr),
@@ -58,7 +60,7 @@ export const forumApi = backendApi.injectEndpoints({
 
     createComment: build.mutation<void, NewCommentResponse>({
       query: ({ author, body, topic_id: topicId }: NewCommentResponse) => ({
-        url: `/sd23/s${ForumApiHandlers.Topics}/${topicId}/${ForumApiHandlers.Comments}`,
+        url: concatForumUrl(`${ForumApiHandlers.Topics}/${topicId}/${ForumApiHandlers.Comments}`),
         method: 'POST',
         body: {
           author,
@@ -69,9 +71,11 @@ export const forumApi = backendApi.injectEndpoints({
       invalidatesTags: [API_TAGS.COMMENTS],
     }),
 
-    getReplies: build.query<Reply[], { commentId: string; topicId: string }>({
+    getReplies: build.query<Reply[], { commentId: number; topicId: string }>({
       query: ({ commentId, topicId }) => ({
-        url: `${ForumApiHandlers.Topics}/${topicId}/${ForumApiHandlers.Comments}/${commentId}/${ForumApiHandlers.Replies}`,
+        url: concatForumUrl(
+          `${ForumApiHandlers.Topics}/${topicId}/${ForumApiHandlers.Comments}/${commentId}/${ForumApiHandlers.Replies}`,
+        ),
       }),
       transformResponse: (response: ResponseApiSuccess<ReplyDTO[]>): Reply[] =>
         response.data.map(repliesNormalizr),

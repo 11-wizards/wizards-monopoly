@@ -15,7 +15,7 @@ export const Comments: FC<CommentsProps> = ({ topicId }) => {
   return (
     <ul className="comments">
       {comments.map(({ commentId, ...props }) => (
-        <Comment key={commentId} topicId={topicId} {...props} />
+        <Comment key={commentId} commentId={commentId} {...props} />
       ))}
     </ul>
   );

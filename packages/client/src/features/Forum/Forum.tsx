@@ -11,11 +11,14 @@ import './Forum.scss';
 
 export const Forum: FC = () => {
   const { formatMessage: fm } = useIntl();
-  const [isModalOpen, toggleModal] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
 
-  const handleBtnClick = useCallback(() => toggleModal(true), []);
+  const handleBtnClick = () => setModalOpen(true);
 
-  const handleModalClose = useCallback<MouseEventHandler>(() => toggleModal(false), []);
+  const handleModalClose = useCallback<MouseEventHandler<HTMLButtonElement>>(
+    () => setModalOpen(false),
+    [],
+  );
 
   return (
     <div className="forum">
@@ -26,7 +29,7 @@ export const Forum: FC = () => {
         <CreateTopicModal
           isOpen={isModalOpen}
           onModalClose={handleModalClose}
-          closeModal={toggleModal}
+          setModalOpen={setModalOpen}
         />
         <Button type="primary" className="forum__btn" onClick={handleBtnClick}>
           {fm(messages.createTopicBtn)}

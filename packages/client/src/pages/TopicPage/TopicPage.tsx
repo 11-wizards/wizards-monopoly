@@ -16,7 +16,7 @@ type TopicParams = {
 const { Title, Paragraph } = Typography;
 
 export const TopicPage: FC = () => {
-  const { topicId } = useParams<TopicParams>();
+  const { topicId = '' } = useParams<TopicParams>();
   const { data: topic = {} as Topic } = useGetTopicQuery(Number(topicId));
 
   const { title, date, body, author } = topic;

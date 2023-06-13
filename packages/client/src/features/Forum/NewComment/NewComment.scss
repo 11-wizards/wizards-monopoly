@@ -16,8 +16,19 @@
     gap: 10px;
   }
 
+  &__footer {
+    display: flex;
+  }
+
   &__submit {
-    align-self: flex-end;
-    width: max-content;
+    margin-left: auto;
+  }
+}
+
+.symbol-counter__dynamic-digit {
+  color: $darkGrayColor;
+
+  &_invalid {
+    color: $redColor;
   }
 }

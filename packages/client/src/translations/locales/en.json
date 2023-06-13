@@ -17,14 +17,6 @@
   "auth.title.register": "Register",
   "auth.text.separator": "or",
 
-  "comment.newCommentName": "Add new comment",
-
-  "forum.comment.repliesBtnCount": "Show all replies",
-  "forum.comment.repliesBtn": "Reply",
-  "forum.new-topic.name": "Theme",
-  "forum.new-topic.content": "Content",
-  "forum.reply.replyBtn": "Reply",
-
   "client.error.message": "Sorry, the page you visited does not exist.",
   "client.error.message.button-text": "Back home",
 
@@ -42,6 +34,14 @@
   "forum.topics.topic": "Theme:",
   "forum.posts.response": "user response",
   "forum.title": "Monopoly Game User Forum",
+
+  "forum.comment.newComment": "New Comment",
+  "forum.comment.sendBtn": "Send",
+  "forum.comment.repliesBtnCount": "Show all replies",
+  "forum.comment.repliesBtn": "Reply",
+  "forum.new-topic.name": "Theme",
+  "forum.new-topic.content": "Content",
+  "forum.reply.replyBtn": "Reply",
 
   "header.navbar.forum": "Forum",
   "header.navbar.leaderboard": "Leaderboard",
