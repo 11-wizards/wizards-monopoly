@@ -1,5 +1,5 @@
-import { PayloadAction, isAnyOf } from '@reduxjs/toolkit';
-import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { isAnyOf, createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
 import type { UploadRequestOption } from 'rc-upload/lib/interface';
 import { authApi } from 'api/auth.api';
 import { profileApi } from 'api/profile.api';

@@ -1,4 +1,4 @@
-import { baseApi } from 'api/base.api';
+import { yandexApi } from 'api/yandexApi';
 import { convertStringToServerError } from 'helpers/convertStringToServerError';
 import type {
   OAuthServicePayload,
@@ -7,7 +7,7 @@ import type {
   OAuthServiceNormalize,
 } from 'models/auth.model';
 
-export const oAuthApi = baseApi.injectEndpoints({
+export const oAuthApi = yandexApi.injectEndpoints({
   endpoints: (builder) => ({
     getServiceId: builder.query<OAuthServiceNormalize, OAuthServicePayload>({
       query: ({ redirectUri }: OAuthServicePayload) => ({

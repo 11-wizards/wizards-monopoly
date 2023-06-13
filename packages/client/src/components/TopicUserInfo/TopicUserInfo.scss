@@ -1,0 +1,15 @@
+.topic-user-info {
+  &__username.ant-typography {
+    margin-bottom: $paddingXS;
+    font-size: $fontSizeS;
+    font-weight: 400;
+    line-height: $fontSizeM;
+    letter-spacing: 0.05em;
+  }
+
+  &__date {
+    font-size: 10px;
+    line-height: $fontSizeS;
+    color: $darkGrayColor;
+  }
+}

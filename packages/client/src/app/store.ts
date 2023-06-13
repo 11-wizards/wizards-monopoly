@@ -1,19 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { baseApi } from 'api/base.api';
-import { oAuthApi } from 'api/oauth.api';
-import forumReducer from './slices/forumSlice';
+import { backendApi } from 'api/backend.api';
+import { yandexApi } from 'api/yandexApi';
+import { forumApiMacroErrorHandler } from 'app/middlewares/forumApiMacroErrorHandler';
 import leaderboardReducer from './slices/leaderboardSlice';
 import gameReducer from './slices/gameSlice';
 import localeReducer from './slices/localeSlice';
 import userReducer from './slices/userSlice';
 
 const reducer = {
-  forum: forumReducer,
   leaderboard: leaderboardReducer,
   game: gameReducer,
   locale: localeReducer,
   user: userReducer,
-  [baseApi.reducerPath]: baseApi.reducer,
+  [yandexApi.reducerPath]: yandexApi.reducer,
+  [backendApi.reducerPath]: backendApi.reducer,
 };
 
 const store = configureStore({ reducer });
@@ -24,8 +24,12 @@ export type AppDispatch = typeof store.dispatch;
 export function createStore(initialState?: RootState) {
   return configureStore({
     reducer,
-    preloadedState: initialState,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(baseApi.middleware, oAuthApi.middleware),
+      getDefaultMiddleware().concat(
+        yandexApi.middleware,
+        backendApi.middleware,
+        forumApiMacroErrorHandler,
+      ),
+    preloadedState: initialState,
   });
 }
