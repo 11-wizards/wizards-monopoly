@@ -23,7 +23,7 @@ export function convertFormPlayersToPlayersObject(formPlayers: GameSetupFormData
 
   const players: Player[] = [];
 
-  for (let i = 1; i <= playersCount; i += 1) {
+  for (let i = 0; i < playersCount; i += 1) {
     const { name, color } = playersObject[i];
     const id = i;
     players.push({

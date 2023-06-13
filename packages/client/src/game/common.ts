@@ -24,8 +24,9 @@ export const players = [
     id: 0,
     name: 'Red',
     color: RED,
-    balance: START_PLAYER_BALANCE,
+    balance: 500,
     currentCardId: START_PLAYER_CARD_ID,
+    leave: false,
   },
   {
     id: 1,
@@ -33,33 +34,41 @@ export const players = [
     color: GREEN,
     balance: START_PLAYER_BALANCE,
     currentCardId: START_PLAYER_CARD_ID,
+    leave: false,
   },
   {
     id: 2,
     name: 'Blue',
     color: BLUE,
-    balance: START_PLAYER_BALANCE,
+    balance: 500,
     currentCardId: START_PLAYER_CARD_ID,
+    leave: false,
   },
-  {
-    id: 3,
-    name: 'Purple',
-    color: PURPLE,
-    balance: START_PLAYER_BALANCE,
-    currentCardId: START_PLAYER_CARD_ID,
-  },
-  {
-    id: 4,
-    name: 'Cyan',
-    color: CYAN,
-    balance: START_PLAYER_BALANCE,
-    currentCardId: START_PLAYER_CARD_ID,
-  },
-  {
-    id: 5,
-    name: 'Yellow',
-    color: YELLOW,
-    balance: START_PLAYER_BALANCE,
-    currentCardId: START_PLAYER_CARD_ID,
-  },
+  // {
+  //   id: 3,
+  //   name: 'Purple',
+  //   color: PURPLE,
+  //   balance: START_PLAYER_BALANCE,
+  //   currentCardId: START_PLAYER_CARD_ID,
+  // leave: true
+
+  // },
+  // {
+  //   id: 4,
+  //   name: 'Cyan',
+  //   color: CYAN,
+  //   balance: START_PLAYER_BALANCE,
+  //   currentCardId: START_PLAYER_CARD_ID,
+  // leave: false
+
+  // },
+  // {
+  //   id: 5,
+  //   name: 'Yellow',
+  //   color: YELLOW,
+  //   balance: START_PLAYER_BALANCE,
+  //   currentCardId: START_PLAYER_CARD_ID,
+  // leave: false
+
+  // },
 ];

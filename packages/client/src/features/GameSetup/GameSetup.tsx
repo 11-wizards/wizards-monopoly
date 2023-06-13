@@ -56,7 +56,7 @@ export const GameSetup: FC = () => {
       {players.map(({ id }, i) => (
         <Row key={`${id}-row`} gutter={16} wrap={false}>
           <Col span={12}>
-            <InputPlayerName formErrors={errors} control={control} index={i + 1} />
+            <InputPlayerName formErrors={errors} control={control} index={i} />
           </Col>
           <Col span={12}>
             <InputPlayerColor
@@ -64,7 +64,7 @@ export const GameSetup: FC = () => {
               clearErrors={clearErrors}
               formErrors={errors}
               control={control}
-              index={i + 1}
+              index={i}
             />
           </Col>
         </Row>

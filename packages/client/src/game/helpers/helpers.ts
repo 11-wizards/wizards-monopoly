@@ -66,13 +66,13 @@ export const drawCard = (
   mapSize: number,
   card: Card,
   cardsData: {
-    img: CanvasImageSource | null;
     priceView: string | undefined;
     title: string | undefined;
   },
+  img: CanvasImageSource | null,
 ): void => {
   const { x, y, w, h } = card;
-  const { img, priceView, title } = cardsData;
+  const { priceView, title } = cardsData;
   if (img) {
     let imgSizes = [x, y, w, h];
     if (w === h) {
@@ -252,3 +252,6 @@ export const rollDices = (): Array<number> => [
 ];
 
 export const resetDices = () => Math.random() + 1;
+
+export const randomInt = (max: number, min: number = 0) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;

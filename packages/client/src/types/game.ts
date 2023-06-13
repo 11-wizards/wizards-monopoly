@@ -3,7 +3,6 @@ import type { MapDirectons, PlayerColor } from './enums/main';
 export type MapData = Record<string, number>;
 
 export type NewTargetPlayer = Nullable<{
-  dicesNumber: number[];
   id: number;
   target: number;
 }>;
@@ -28,14 +27,25 @@ export type PlayerPositionTarget = number[];
 export type Player = {
   balance: number;
   readonly color: PlayerColor;
-  currentCardId: string;
+  currentCardId: number;
   readonly id: number;
   readonly name: string;
+  leave: boolean;
 };
 
 export type Players = Player[];
 
 export type PlayerId = Player['id'];
+
+export enum StepsMove {
+  INITIAL = 0,
+  DIECES = 1,
+  MOVE = 2,
+  ACTION = 3,
+  RENDER = 4,
+}
+
+export const { INITIAL, DIECES, MOVE, ACTION, RENDER } = StepsMove;
 
 export type MoneyTransfer = {
   amount: number;
@@ -46,6 +56,11 @@ export type MoneyTransfer = {
 export type BankTransaction = {
   amount: number;
   playerId: PlayerId;
+};
+
+export type changePositionPlayerPayload = {
+  currentCardId: number;
+  id: PlayerId;
 };
 
 export type BuyPropertyCardPayload = {

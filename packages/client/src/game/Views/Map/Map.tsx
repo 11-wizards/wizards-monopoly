@@ -1,7 +1,8 @@
 import type { FC } from 'react';
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
 import { CornersCardsID, MapDirectons } from 'types/enums/main';
-import type { PlayerTarget, PlayersPositions, Players, Card } from 'types/game';
+import type { PlayerTarget, PlayersPositions, Players, Card, StepsMove } from 'types/game';
+import { RENDER, MOVE } from 'types/game';
 import { calcPlayerParkingSpotCard, drawCard, playerMove } from 'game/helpers/helpers';
 import type { CardData } from 'types/cards';
 
@@ -11,11 +12,13 @@ const { RIGHT: startDirection } = MapDirectons;
 const { CARD_TOP_LEFT: startCardId }: { CARD_TOP_LEFT: number } = CornersCardsID;
 
 type MapProps = {
+  currentStep: StepsMove;
   mapData: {
     NUMBER_CARDS: number;
     SIZE_CORNER_CARDS: number;
     cards: Array<Card>;
     cardsData: Array<CardData>;
+    cardsImages: Record<number, CanvasImageSource | null>;
     interfaceSize: number;
     mapSize: number;
     playerSize: number;
@@ -23,17 +26,24 @@ type MapProps = {
   };
   playerTarget: PlayerTarget;
   players: Players;
-  setAnimationEnd: () => React.Dispatch<React.SetStateAction<boolean>> | void;
+  setAnimationEnd: (nextStep?: StepsMove | undefined) => void;
 };
 
-export const Map: FC<MapProps> = ({ mapData, players, playerTarget, setAnimationEnd }) => {
-  const { mapSize, cardsData, speed, playerSize, cards } = mapData;
+export const Map: FC<MapProps> = ({
+  mapData,
+  players,
+  playerTarget,
+  currentStep,
+  setAnimationEnd,
+}) => {
+  const { mapSize, cardsData, speed, playerSize, cards, cardsImages } = mapData;
 
   const startPlayersPosition: PlayersPositions | [] = [];
 
   players?.forEach((item, key) => {
-    const { id, color } = item;
-    const [x, y] = calcPlayerParkingSpotCard(id, cards[startCardId], playerSize);
+    const { id, color, currentCardId, leave } = item;
+    if (leave) return;
+    const [x, y] = calcPlayerParkingSpotCard(id, cards[currentCardId], playerSize);
     startPlayersPosition[key] = { id, color, x, y, direction: startDirection };
   });
 
@@ -46,10 +56,11 @@ export const Map: FC<MapProps> = ({ mapData, players, playerTarget, setAnimation
   const [playersPositions, setPlayersPositions] = useState(startPlayersPosition);
 
   useEffect(() => {
+    if (currentStep !== RENDER && currentStep !== MOVE) return;
     if (playerTarget) {
       setAnimationStop(false);
     }
-  }, [playerTarget]);
+  }, [playerTarget, cardsData, currentStep]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -63,11 +74,12 @@ export const Map: FC<MapProps> = ({ mapData, players, playerTarget, setAnimation
 
     context.clearRect(0, 0, mapSize, mapSize);
 
-    cards.forEach((item, key: number) => drawCard(context, mapSize, item, cardsData[key]));
+    cards.forEach((item, key: number) =>
+      drawCard(context, mapSize, item, cardsData[key], cardsImages[key]),
+    );
 
     if (playerTarget) {
       const { id, target } = playerTarget;
-
       const targetPosition = calcPlayerParkingSpotCard(id, cards[target], playerSize);
 
       playersPositions.forEach((player, key: number) => {
@@ -89,7 +101,8 @@ export const Map: FC<MapProps> = ({ mapData, players, playerTarget, setAnimation
       });
     }
 
-    playersPositions.forEach(({ color, x, y }) => {
+    playersPositions.forEach(({ id, color, x, y }) => {
+      if (players[id].leave) return;
       context.fillStyle = String(color);
       context.fillRect(Number(x), Number(y), playerSize, playerSize);
     });
