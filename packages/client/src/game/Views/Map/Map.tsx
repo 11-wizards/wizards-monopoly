@@ -1,12 +1,12 @@
 import type { FC } from 'react';
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
-import { CornersCardsID, MapDirectons } from 'types/enums/main';
-import type { PlayerTarget, PlayersPositions, Players, Card, StepsMove } from 'types/game';
-import { RENDER, MOVE } from 'types/game';
+import type { PlayerTarget, PlayersPositions, Players, Card, StepsMove } from 'game/types/game';
+import { RENDER, MOVE } from 'game/types/game';
 import { calcPlayerParkingSpotCard, drawCard, playerMove } from 'game/helpers/helpers';
-import type { CardData } from 'types/cards';
+import type { CardData } from 'game/types/cards';
 
 import './Map.scss';
+import { MapDirectons, CornersCardsID } from 'game/types/map';
 
 const { RIGHT: startDirection } = MapDirectons;
 const { CARD_TOP_LEFT: startCardId }: { CARD_TOP_LEFT: number } = CornersCardsID;

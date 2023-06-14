@@ -1,7 +1,7 @@
 import { MAP_SIZES_PRECENT } from 'game/common';
 import { initCardsPositions } from 'game/helpers/helpers';
 import { useEffect, useState } from 'react';
-import type { Card } from 'types/game';
+import type { Card } from 'game/types/game';
 
 export type TypeUseGameViewsCalc = {
   NUMBER_CARDS: number;

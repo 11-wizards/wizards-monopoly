@@ -1,4 +1,5 @@
-import type { MapDirectons, PlayerColor } from './enums/main';
+import type { PlayerColor } from 'types/enums/main';
+import { MapDirectons } from 'game/types/map';
 
 export type MapData = Record<string, number>;
 

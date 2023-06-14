@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import type { FC } from 'react';
-import type { Player, StepsMove } from 'types/game';
+import type { Player, StepsMove } from 'game/types/game';
 import { useFullScreenApi } from 'hooks/useFullScreenApi';
 
 import './PlayerInterface.scss';
@@ -30,12 +30,15 @@ export const PlayerInterface: FC<PlayerInterfaceProps> = ({
       </div>
       <div className={`players-state players-state_${players.length}`}>
         {players &&
-          players.map(({ id, currentCardId, balance, name, color }) => (
+          players.map(({ id, currentCardId, leave, balance, name, color }) => (
             <div
               key={`player-${id}`}
-              className={`player player-${id}`}
+              className={`player player-${id} ${leave ? 'player_leave' : ''}`}
               style={{ borderColor: color }}
             >
+              {
+               !leave ? <div className="player__leave-flag">БАНКРОТ</div> : ''
+              }
               <div className="player__name-wrap" style={{ backgroundColor: color }}>
                 <span className="player__name-label"> Игрок:</span>
                 <span className="player__name"> {name}</span>

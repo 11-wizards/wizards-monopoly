@@ -1,5 +1,5 @@
 import type { PlayerColor } from 'types/enums/main';
-import type { Player } from 'types/game';
+import type { Player } from 'game/types/game';
 import { START_PLAYER_BALANCE, START_PLAYER_CARD_ID } from 'constants/main';
 import type { GameSetupFormData } from 'features/GameSetup/types';
 

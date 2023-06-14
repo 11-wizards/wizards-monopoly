@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 import type { RootState } from 'app/store';
-import type { PlayerId, PropertyCardId } from 'types/game';
+import type { PlayerId, PropertyCardId } from 'game/types/game';
 
 export const selectPropertyCards = (state: RootState) => state.game.propertyCards;
 

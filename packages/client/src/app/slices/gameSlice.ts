@@ -2,11 +2,11 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { convertFormPlayersToPlayersObject } from 'app/slices/utils';
 import type { RootState } from 'app/store';
-import { randomCards } from 'data/cards';
+import { randomCards } from 'game/data/cards';
 import type { GameSetupFormData } from 'features/GameSetup/types';
 import { players } from 'game/common';
 import { useEffect } from 'react';
-import type { CardData, RandomCard } from 'types/cards';
+import type { CardData, RandomCard } from 'game/types/cards';
 import { PlayerColor } from 'types/enums/main';
 import type {
   BankTransaction,
@@ -17,7 +17,7 @@ import type {
   PropertyCardId,
   PropertyCards,
   changePositionPlayerPayload,
-} from 'types/game';
+} from 'game/types/game';
 
 type GameState = {
   cardsData: Record<number, CardData> | null;

@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import { resetDices } from 'game/helpers/helpers';
 import { useEffect, useState } from 'react';
-import type { StepsMove } from 'types/game';
-import { DIECES } from 'types/game';
+import type { StepsMove } from 'game/types/game';
+import { DIECES } from 'game/types/game';
 import { Dice } from './Dice';
 
 type DicesProps = {

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import type { NewTargetPlayer, StepsMove } from 'types/game';
-import { DIECES, MOVE, INITIAL, RENDER, ACTION } from 'types/game';
+import type { NewTargetPlayer, StepsMove } from 'game/types/game';
+import { DIECES, MOVE, INITIAL, RENDER, ACTION } from 'game/types/game';
 import { useAppDispatch, useAppSelector, useCardsDataLoad, useGameViewsCalc } from 'hooks';
 import {
   changeCardData,
@@ -17,7 +17,7 @@ import { rollDices } from './helpers/helpers';
 import { PlayerInterface } from './Views/PlayerInterface';
 import { Dices } from './Views/Dices/Dices';
 import { Map } from './Views/Map';
-import { RANDOM, TAX } from 'types/cards';
+import { RANDOM, TAX } from 'game/types/cards';
 import { WithBankProps, withBank } from './Bank/withBank';
 
 const GameRoot = ({ randomCardAction, taxCardAction, checkSolvency }: WithBankProps) => {

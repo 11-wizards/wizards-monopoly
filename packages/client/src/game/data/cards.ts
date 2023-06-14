@@ -18,21 +18,21 @@ import {
   STREET_8,
   TAX,
   ZERO,
-} from 'types/cards';
-import start from '../assets/game/mapCard/start.svg';
-import greyArrow from '../assets/game/mapCard/greyArrow.svg';
-import redArrow from '../assets/game/mapCard/redArrow.svg';
-import treasury from '../assets/game/mapCard/treasury.svg';
-import money from '../assets/game/mapCard/money.svg';
-import railway from '../assets/game/mapCard/railway.svg';
-import dice from '../assets/game/mapCard/dice.svg';
-import prison from '../assets/game/mapCard/prison.svg';
-import yellowArrow from '../assets/game/mapCard/yellowArrow.svg';
-import powerLines from '../assets/game/mapCard/powerLines.svg';
-import waterPipes from '../assets/game/mapCard/waterPipes.svg';
-import greenArrow from '../assets/game/mapCard/greenArrow.svg';
-import parking from '../assets/game/mapCard/parking.svg';
-import arrest from '../assets/game/mapCard/arrest.svg';
+} from 'game/types/cards';
+import start from 'assets/game/mapCard/start.svg';
+import greyArrow from 'assets/game/mapCard/greyArrow.svg';
+import redArrow from 'assets/game/mapCard/redArrow.svg';
+import treasury from 'assets/game/mapCard/treasury.svg';
+import money from 'assets/game/mapCard/money.svg';
+import railway from 'assets/game/mapCard/railway.svg';
+import dice from 'assets/game/mapCard/dice.svg';
+import prison from 'assets/game/mapCard/prison.svg';
+import yellowArrow from 'assets/game/mapCard/yellowArrow.svg';
+import powerLines from 'assets/game/mapCard/powerLines.svg';
+import waterPipes from 'assets/game/mapCard/waterPipes.svg';
+import greenArrow from 'assets/game/mapCard/greenArrow.svg';
+import parking from 'assets/game/mapCard/parking.svg';
+import arrest from 'assets/game/mapCard/arrest.svg';
 
 export const cardsData: CardsData[] = [
   {

@@ -8,21 +8,21 @@ import {
   selectRandomCards,
   transferMoneyBetweenPlayers,
 } from 'app/slices/gameSlice';
-import { randomCards } from 'data/cards';
+import { randomCards } from 'game/data/cards';
 import { randomInt } from 'game/helpers/helpers';
 import { modalInfo, modalRandomCard, modalTaxCard, useModal } from 'game/helpers/modal';
 import { useAppSelector } from 'hooks';
 
 import { useAppDispatch } from 'hooks/redux';
 import type { ComponentType } from 'react';
-import { CardData, RANDOM } from 'types/cards';
+import { CardData, RANDOM } from 'game/types/cards';
 
 import type {
   MoneyTransfer,
   BankTransaction,
   BuyPropertyCardPayload,
   PropertyCardId,
-} from 'types/game';
+} from 'game/types/game';
 
 export type WithBankProps = {
   randomCardAction: (playerId: number, card: CardData, next: Function) => void;

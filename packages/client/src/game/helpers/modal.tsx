@@ -1,5 +1,5 @@
 import { Modal } from 'antd';
-import { CardTypes, RandomCard } from 'types/cards';
+import { CardTypes, RandomCard } from 'game/types/cards';
 
 const modal = Modal;
 

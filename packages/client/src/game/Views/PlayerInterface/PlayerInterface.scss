@@ -23,25 +23,45 @@
 
     grid-gap: 10px;
     .player {
+      &__leave-flag {
+         font-size: 18px;
+         color: white;
+         background-color: red;
+         padding: 10px;
+         text-align: center;
+         font-weight: 900;
+         width: 324%;
+         position: absolute;
+         left: 0;
+         transform: rotate(295deg) scale(1) translateY(-185px) translateX(-80px);
+         bottom: 0;
+         right: 0;
+         top: 0;
+         margin: auto;
+         height: fit-content;
+      }
+   
       // overflow: auto;
       // max-height:40%;
       // overflow: hidden;
       border: 1px solid black;
       padding: 10px;
       display: flex;
+      overflow: hidden;
+      position: relative;
       flex-direction: column;
       gap: 5px;
       &__name-wrap {
-        padding: 3px;
-        text-align: center;
+         padding: 3px;
+         text-align: center;
       }
       &__property {
-        font-size: 10px;
+         font-size: 10px;
       }
       &__balance-wrap {
-        // max-height: 100%;
-        // overflow: auto;
+         // max-height: 100%;
+         // overflow: auto;
       }
-    }
+     }
   }
 }
