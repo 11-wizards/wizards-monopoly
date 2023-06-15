@@ -44,31 +44,31 @@ export const players = [
     currentCardId: START_PLAYER_CARD_ID,
     leave: false,
   },
-  // {
-  //   id: 3,
-  //   name: 'Purple',
-  //   color: PURPLE,
-  //   balance: START_PLAYER_BALANCE,
-  //   currentCardId: START_PLAYER_CARD_ID,
-  // leave: true
+  {
+    id: 3,
+    name: 'Purple',
+    color: PURPLE,
+    balance: START_PLAYER_BALANCE,
+    currentCardId: START_PLAYER_CARD_ID,
+  leave: false
 
-  // },
-  // {
-  //   id: 4,
-  //   name: 'Cyan',
-  //   color: CYAN,
-  //   balance: START_PLAYER_BALANCE,
-  //   currentCardId: START_PLAYER_CARD_ID,
-  // leave: false
+  },
+  {
+    id: 4,
+    name: 'Cyan',
+    color: CYAN,
+    balance: START_PLAYER_BALANCE,
+    currentCardId: START_PLAYER_CARD_ID,
+  leave: false
 
-  // },
-  // {
-  //   id: 5,
-  //   name: 'Yellow',
-  //   color: YELLOW,
-  //   balance: START_PLAYER_BALANCE,
-  //   currentCardId: START_PLAYER_CARD_ID,
-  // leave: false
+  },
+  {
+    id: 5,
+    name: 'Yellow',
+    color: YELLOW,
+    balance: START_PLAYER_BALANCE,
+    currentCardId: START_PLAYER_CARD_ID,
+  leave: false
 
-  // },
+  },
 ];

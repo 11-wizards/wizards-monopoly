@@ -70,7 +70,7 @@ export const drawCard = (
     priceView: string | undefined;
     title: string | undefined;
     type: CardTypes;
-    family: CardFamily
+    family: CardFamily;
   },
   img: CanvasImageSource | null,
 ): void => {
@@ -115,7 +115,10 @@ export const drawCard = (
   }
 
   context.strokeRect(x, y, w, h);
-  drawCardUpgrade(context, 5, card);
+
+  if (type === STREET) {
+    drawCardUpgrade(context, 0, card, family);
+  }
 };
 
 // player move
@@ -123,7 +126,8 @@ export const drawCard = (
 const drawCardUpgrade = (
   context: CanvasRenderingContext2D,
   level: number,
-  card: Card
+  card: Card,
+  color: string
 ) => {
   const { x, y, w, h } = card;
   const baseSize = w > h ? h : w;
@@ -131,15 +135,23 @@ const drawCardUpgrade = (
   let homeW = baseSize / 100 * 16;
   let homeH = baseSize / 100 * 13;
   let roofW = baseSize / 100 * 16;
-  const homeY = y + ((h - homeH) / 1.6);
+  let homeY = y + ((h - homeH) / 1.9);
   let homeX = x;
 
   let roofH = baseSize / 100 * 8;
+
   if (level === 5) {
     roofW *= 2;
     roofH *= 2;
     homeW *= 2;
     homeH *= 2;
+    homeX = x + ((w - homeW) / 2);
+  }
+  if (!level) {
+    roofW *= 1.5;
+    roofH *= 1.5;
+    homeW *= 1.5;
+    homeH *= 1.5;
     homeX = x + ((w - homeW) / 2);
   }
 
@@ -150,10 +162,10 @@ const drawCardUpgrade = (
   // const roofRX = homeX + homeW + baseSize / 100 * 3;
   // const roofRY = homeY;
 
-  context.strokeStyle = 'red';
-  context.fillStyle = 'red';
+  context.strokeStyle = color;
+  context.fillStyle = color;
 
-  if (level === 5) {
+  if (level === 5 || !level) {
     const roofLX = homeX - baseSize / 100 * 3;
     const roofLY = homeY;
     const roofCX = homeX + roofW / 2;
@@ -162,12 +174,23 @@ const drawCardUpgrade = (
     const roofRY = homeY;
     drawHome(context, { homeX, homeY, homeW, homeH, roofLX, roofLY, roofCX, roofCY, roofRX, roofRY });
   } else {
-    console.log(w);
-    console.log(homeW);
 
-    for (let i = 0; i < level; i++) {
 
-      homeX = x + (w / level * i) + homeW / 2 + (baseSize / 100 * 3);
+    for (let i = 1; i <= level; i++) {
+      if (i === 1) {
+        homeX = x + (w / 4) * 1 - homeW / 2;
+        homeY = y + (h / 4) * 1 + homeH;
+      }
+      if (i === 2) {
+        homeX = x + (w / 3) * 2;
+      }
+      if (i === 3) {
+        homeX = x + (w / 4) * 1 - homeW / 2;
+        homeY = y + (h / 2) * 1 + homeH;
+      }
+      if (i === 4) {
+        homeX = x + (w / 3) * 2;
+      }
       console.log(homeX);
       const roofLX = homeX - baseSize / 100 * 3;
       const roofLY = homeY;
