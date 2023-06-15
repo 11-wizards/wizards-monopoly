@@ -115,12 +115,12 @@ export const drawCard = (
   }
 
   context.strokeRect(x, y, w, h);
-  drawHome(context, 1, card);
+  drawCardUpgrade(context, 5, card);
 };
 
 // player move
 
-const drawHome = (
+const drawCardUpgrade = (
   context: CanvasRenderingContext2D,
   level: number,
   card: Card
@@ -141,17 +141,52 @@ const drawHome = (
     homeW *= 2;
     homeH *= 2;
     homeX = x + ((w - homeW) / 2);
-
   }
-  const roofLX = homeX - baseSize / 100 * 3;
-  const roofLY = homeY;
-  const roofCX = homeX + roofW / 2;
-  const roofCY = homeY - roofH;
-  const roofRX = homeX + homeW + baseSize / 100 * 3;
-  const roofRY = homeY;
+
+  // const roofLX = homeX - baseSize / 100 * 3;
+  // const roofLY = homeY;
+  // const roofCX = homeX + roofW / 2;
+  // const roofCY = homeY - roofH;
+  // const roofRX = homeX + homeW + baseSize / 100 * 3;
+  // const roofRY = homeY;
 
   context.strokeStyle = 'red';
   context.fillStyle = 'red';
+
+  if (level === 5) {
+    const roofLX = homeX - baseSize / 100 * 3;
+    const roofLY = homeY;
+    const roofCX = homeX + roofW / 2;
+    const roofCY = homeY - roofH;
+    const roofRX = homeX + homeW + baseSize / 100 * 3;
+    const roofRY = homeY;
+    drawHome(context, { homeX, homeY, homeW, homeH, roofLX, roofLY, roofCX, roofCY, roofRX, roofRY });
+  } else {
+    console.log(w);
+    console.log(homeW);
+
+    for (let i = 0; i < level; i++) {
+
+      homeX = x + (w / level * i) + homeW / 2 + (baseSize / 100 * 3);
+      console.log(homeX);
+      const roofLX = homeX - baseSize / 100 * 3;
+      const roofLY = homeY;
+      const roofCX = homeX + roofW / 2;
+      const roofCY = homeY - roofH;
+      const roofRX = homeX + homeW + baseSize / 100 * 3;
+      const roofRY = homeY;
+      drawHome(context, { homeX, homeY, homeW, homeH, roofLX, roofLY, roofCX, roofCY, roofRX, roofRY });
+    }
+  }
+
+
+}
+
+const drawHome = (
+  context: CanvasRenderingContext2D,
+  { homeX, homeY, homeW, homeH, roofLX, roofLY, roofCX, roofCY, roofRX, roofRY }: Record<string, number>) => {
+  // context.strokeStyle = 'red';
+  // context.fillStyle = 'red';
   context.beginPath();
   context.fillRect(homeX, homeY, homeW, homeH);
   context.stroke();
@@ -163,10 +198,6 @@ const drawHome = (
   context.closePath();
   context.stroke();
   context.fill();
-
-
-
-
 }
 
 const arrayNumberRound = (array: Array<number>): Array<number> =>
