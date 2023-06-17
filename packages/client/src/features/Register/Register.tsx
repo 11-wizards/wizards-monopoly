@@ -6,6 +6,7 @@ import { Button, Input, Typography, message } from 'antd';
 import { authApi } from 'api/auth.api';
 import { ROUTES } from 'core/Router';
 import { handleServerError } from 'helpers/handleServerError';
+import { sanitizeObject } from 'helpers';
 import type { RegisterInput } from 'models/auth.model';
 import { messages } from './common';
 
@@ -23,8 +24,10 @@ export const Register: FC = () => {
   } = useForm<RegisterInput>();
 
   async function onSubmit(values: RegisterInput) {
+    const sanitizedValues = sanitizeObject(values);
+
     try {
-      const response = await authApi.register(values);
+      const response = await authApi.register(sanitizedValues);
 
       if (response.status === 200) {
         navigate(ROUTES.ROOT.path);

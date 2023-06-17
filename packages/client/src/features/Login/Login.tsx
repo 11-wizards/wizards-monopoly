@@ -1,4 +1,5 @@
 import { OAuth } from 'features/OAuth/OAuth';
+import { sanitizeObject } from 'helpers';
 import type { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
@@ -28,8 +29,10 @@ export const Login: FC = () => {
   } = useForm<LoginInput>();
 
   async function onSubmit(values: LoginInput) {
+    const sanitizedValues = sanitizeObject(values);
+
     try {
-      const response = await authApi.logIn(values);
+      const response = await authApi.logIn(sanitizedValues);
 
       if (response.status === 200) {
         localStorage.setItem(LOCAL_STORAGE_IS_AUTH_KEY, 'true');

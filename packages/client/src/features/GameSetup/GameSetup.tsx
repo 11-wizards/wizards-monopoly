@@ -1,3 +1,4 @@
+import { sanitizeObject } from 'helpers';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { Button, Col, Form, InputNumber, Row } from 'antd';
@@ -38,7 +39,8 @@ export const GameSetup: FC = () => {
   };
 
   const submitHandler = (formData: GameSetupFormData) => {
-    dispatch(definePlayers(formData));
+    const sanitizedValues = sanitizeObject(formData);
+    dispatch(definePlayers(sanitizedValues));
     reset();
     navigate(ROUTES.GAME_PAGE.path);
   };

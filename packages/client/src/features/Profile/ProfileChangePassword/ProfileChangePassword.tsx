@@ -1,3 +1,4 @@
+import { sanitizeObject } from 'helpers';
 import { useState, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
@@ -33,9 +34,10 @@ export const ProfileChangePassword: FC = () => {
 
   async function onSubmit(values: ProfileChangePasswordInput) {
     setIsSubmitting(true);
+    const sanitizedValues = sanitizeObject(values);
 
     try {
-      const response = await profileApi.changePassword(values);
+      const response = await profileApi.changePassword(sanitizedValues);
 
       if (response.status === 200) {
         reset();
@@ -53,75 +55,76 @@ export const ProfileChangePassword: FC = () => {
     Object.values(touchedFields).length === 0 || Object.values(errors).length > 0;
 
   return (
-    <div className="form-change-password">
-      <Typography.Title>{fm(messages.titleMain)}</Typography.Title>
-      <form onSubmit={handleSubmit(onSubmit)} className="form-change-password__form">
-        {/* TODO: добавить повторную проверку пароля */}
-        <div className="form-change-password__input">
-          <Controller
-            name="oldPassword"
-            control={control}
-            rules={{
-              required: fm(messages.validationRequiredField),
-            }}
-            render={({ field }) => (
-              <Input.Password
-                placeholder={fm(messages.placeholderOldPassword)}
-                status={errors.oldPassword && 'error'}
-                {...field}
-              />
+    <div className="wrapper_profilePage">
+      <div className="form-change-password">
+        <Typography.Title>{fm(messages.titleMain)}</Typography.Title>
+        <form onSubmit={handleSubmit(onSubmit)} className="form-change-password__form">
+          <div className="form-change-password__input">
+            <Controller
+              name="oldPassword"
+              control={control}
+              rules={{
+                required: fm(messages.validationRequiredField),
+              }}
+              render={({ field }) => (
+                <Input.Password
+                  placeholder={fm(messages.placeholderOldPassword)}
+                  status={errors.oldPassword && 'error'}
+                  {...field}
+                />
+              )}
+            />
+            {errors.oldPassword && (
+              <Typography.Text className="form-change-password__inputError">
+                {errors.oldPassword?.message}
+              </Typography.Text>
             )}
-          />
-          {errors.oldPassword && (
-            <Typography.Text className="form-change-password__inputError">
-              {errors.oldPassword?.message}
-            </Typography.Text>
-          )}
-        </div>
+          </div>
 
-        <div className="form-change-password__input">
-          <Controller
-            name="newPassword"
-            control={control}
-            rules={{
-              required: fm(messages.validationRequiredField),
-            }}
-            render={({ field }) => (
-              <Input.Password
-                placeholder={fm(messages.placeholderNewPassword)}
-                status={errors.newPassword && 'error'}
-                {...field}
-              />
+          <div className="form-change-password__input">
+            <Controller
+              name="newPassword"
+              control={control}
+              rules={{
+                required: fm(messages.validationRequiredField),
+              }}
+              render={({ field }) => (
+                <Input.Password
+                  placeholder={fm(messages.placeholderNewPassword)}
+                  status={errors.newPassword && 'error'}
+                  {...field}
+                />
+              )}
+            />
+            {errors.newPassword && (
+              <Typography.Text className="form-change-password__inputError">
+                {errors.newPassword.message}
+              </Typography.Text>
             )}
-          />
-          {errors.newPassword && (
-            <Typography.Text className="form-change-password__inputError">
-              {errors.newPassword.message}
-            </Typography.Text>
-          )}
-        </div>
+          </div>
 
-        <div className="form-change-password__buttons">
-          <Button
-            type="primary"
-            danger
-            onClick={handleCancelChangePassword}
-            disabled={isButtonsDisabled}
-            className="form-change-password__button"
-          >
-            {fm(messages.buttonCancel)}
-          </Button>
-          <Button
-            htmlType="submit"
-            type="primary"
-            disabled={isButtonsDisabled || isSubmitting}
-            loading={isSubmitting}
-            className="form-change-password__button"
-          >
-            {fm(messages.buttonSave)}
-          </Button>
-        </div>
-      </form>
+          <div className="form-change-password__buttons">
+            <Button
+              type="primary"
+              danger
+              onClick={handleCancelChangePassword}
+              disabled={isButtonsDisabled}
+              className="form-change-password__button"
+            >
+              {fm(messages.buttonCancel)}
+            </Button>
+            <Button
+              htmlType="submit"
+              type="primary"
+              disabled={isButtonsDisabled || isSubmitting}
+              loading={isSubmitting}
+              className="form-change-password__button"
+            >
+              {fm(messages.buttonSave)}
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

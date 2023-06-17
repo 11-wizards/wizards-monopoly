@@ -1,3 +1,4 @@
+import { sanitizeObject } from 'helpers';
 import { type FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
@@ -65,7 +66,8 @@ export const ProfileForm: FC = () => {
   };
 
   async function onSubmit(values: ProfileInput) {
-    await dispatch(changeProfileInfo(values));
+    const sanitizedValues = sanitizeObject(values);
+    await dispatch(changeProfileInfo(sanitizedValues));
 
     setIsEditing(false);
   }

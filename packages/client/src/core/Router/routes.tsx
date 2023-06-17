@@ -1,3 +1,4 @@
+import { ProfileChangePassword } from 'features/Profile';
 import {
   ClientErrorPage,
   EndGamePage,
@@ -56,7 +57,7 @@ export const ROUTES = {
   },
   PROFILE_CHANGE_PASSWORD_PAGE: {
     path: '/profile/change-password',
-    element: <ProfilePage />,
+    element: <ProfileChangePassword />,
   },
   NOT_FOUND: {
     path: '*',
