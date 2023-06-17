@@ -1,8 +1,12 @@
 import DOMPurify from 'dompurify';
 
-export const sanitizeObject = (data: Record<string, string>) =>
-  Object.entries(data).reduce((acc, [key, value]) => {
-    acc[key] = DOMPurify.sanitize(value);
+type SanitizedValues<T> = {
+  [key in keyof T]: string;
+};
+
+export const sanitizeObject = <T extends Record<string, string>>(data: T): SanitizedValues<T> =>
+  Object.entries(data).reduce<SanitizedValues<T>>((acc, [key, value]) => {
+    acc[key as keyof T] = DOMPurify.sanitize(value);
 
     return acc;
-  }, {});
+  }, {} as SanitizedValues<T>);

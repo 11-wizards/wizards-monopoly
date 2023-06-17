@@ -29,7 +29,7 @@ export const Login: FC = () => {
   } = useForm<LoginInput>();
 
   async function onSubmit(values: LoginInput) {
-    const sanitizedValues = sanitizeObject(values);
+    const sanitizedValues = sanitizeObject<LoginInput>(values);
 
     try {
       const response = await authApi.logIn(sanitizedValues);

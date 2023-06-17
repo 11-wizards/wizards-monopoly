@@ -52,7 +52,7 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({
 
     const topicId = randomize();
 
-    const sanitizedData: TopicValues = sanitizeObject(data);
+    const sanitizedData = sanitizeObject<TopicValues>(data);
 
     const { content, title } = sanitizedData;
 

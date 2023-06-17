@@ -66,7 +66,7 @@ export const ProfileForm: FC = () => {
   };
 
   async function onSubmit(values: ProfileInput) {
-    const sanitizedValues = sanitizeObject(values);
+    const sanitizedValues = sanitizeObject<ProfileInput>(values);
     await dispatch(changeProfileInfo(sanitizedValues));
 
     setIsEditing(false);

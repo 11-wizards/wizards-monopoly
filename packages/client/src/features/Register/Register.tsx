@@ -24,7 +24,7 @@ export const Register: FC = () => {
   } = useForm<RegisterInput>();
 
   async function onSubmit(values: RegisterInput) {
-    const sanitizedValues = sanitizeObject(values);
+    const sanitizedValues = sanitizeObject<RegisterInput>(values);
 
     try {
       const response = await authApi.register(sanitizedValues);

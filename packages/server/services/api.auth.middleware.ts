@@ -24,6 +24,7 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
     // } else {
     //   return sendResponsesFromApi(res, createErrorResponse(403, 'Клиент не авторизован'));
     // }
+    console.log(req);
   } catch (error: unknown) {
     let statusCode = 500;
     let mgs = 'Произошла ошибка';
