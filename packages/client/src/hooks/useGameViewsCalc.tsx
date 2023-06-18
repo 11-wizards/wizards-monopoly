@@ -4,10 +4,10 @@ import { MAP_SIZE, PLAYER_SIZE, SIZE_CORNER_CARDS, NUMBER_CARDS } from 'game/con
 
 export type TypeUseGameViewsCalc = {
   cards: Array<{
-    x:number,
-    y:number,
-    w:number,
-    h:number,
+    h: number;
+    w: number;
+    x: number;
+    y: number;
   }>;
   interfaceSize: number;
   mapSize: number;
@@ -15,7 +15,6 @@ export type TypeUseGameViewsCalc = {
 } | null;
 
 export const useGameViewsCalc = (): TypeUseGameViewsCalc => {
-
   const [mapData, setMapData] = useState<TypeUseGameViewsCalc>(null);
 
   const calcMapData = () => {

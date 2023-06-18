@@ -1,6 +1,6 @@
+import type { CardData } from 'game/types/cards';
 import {
   ARREST,
-  CardData,
   CardLevel,
   INFRASTRUCTURE,
   NONE,
@@ -203,7 +203,7 @@ export const cardsData: CardData[] = [
     property: {
       ownerId: 2,
       color: PlayerColor.BLUE,
-      level: CardLevel.LEVEL_5
+      level: CardLevel.LEVEL_5,
     },
     family: STREET_3,
   },
@@ -215,7 +215,7 @@ export const cardsData: CardData[] = [
     property: {
       ownerId: 2,
       color: PlayerColor.BLUE,
-      level: CardLevel.LEVEL_0
+      level: CardLevel.LEVEL_0,
     },
     family: RESOURCES,
   },
@@ -240,7 +240,7 @@ export const cardsData: CardData[] = [
     property: {
       ownerId: 0,
       color: PlayerColor.RED,
-      level: CardLevel.LEVEL_0
+      level: CardLevel.LEVEL_0,
     },
     family: STREET_3,
   },
@@ -369,7 +369,7 @@ export const cardsData: CardData[] = [
     property: {
       ownerId: 0,
       color: PlayerColor.RED,
-      level: CardLevel.LEVEL_4
+      level: CardLevel.LEVEL_4,
     },
     family: STREET_5,
   },

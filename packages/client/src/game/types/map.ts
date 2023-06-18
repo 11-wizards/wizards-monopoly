@@ -1,6 +1,5 @@
-import { PlayerColor } from "types/enums/main";
-import { CardFamily, CardLevel, CardTypes } from "./cards";
-import { CardType } from "antd/es/card/Card";
+import type { PlayerColor } from 'types/enums/main';
+import type { CardFamily, CardLevel, CardTypes } from './cards';
 
 export enum MapDirectons {
   UP,
@@ -18,36 +17,35 @@ export enum CornersCardsID {
 }
 
 export type TypeMapData = {
+  cards: Array<TypeMapCardsData>;
   mapSize: number;
   playerSize: number;
-  cards: Array<TypeMapCardsData>;
   players: Array<TypePlayerData>;
-}
+};
 export type TypePlayerData = {
-  readonly id: number;
-  readonly name: string;
-  readonly color: PlayerColor;
   balance: number;
+  readonly color: PlayerColor;
   currentCardId: number;
+  readonly id: number;
   leave: boolean;
+  readonly name: string;
 };
 
 export type TypeMapCardsData = {
+  colorBg: PlayerColor | null;
+  colorLabel: CardFamily | null;
   h: number;
+  img: CanvasImageSource | null;
+  level: CardLevel | null;
+  price: number | null;
+  title: string | null;
+  type: CardTypes;
   w: number;
   x: number;
   y: number;
-  img: CanvasImageSource | null;
-  price: number | null;
-  colorLabel: CardFamily | null;
-  title: string | null;
-  level: CardLevel | null;
-  colorBg: PlayerColor | null;
-  type: CardTypes;
-}
+};
 
 //
-
 
 export type PlayersPositions = Array<{
   color: string;
@@ -57,33 +55,27 @@ export type PlayersPositions = Array<{
   y: number;
 }>;
 
-
 export type TypeStaticDataMap = {
-  map: { size: number };
   cards: Array<{
+    colorLabel: string | null;
     id: number;
-    position: [number, number, number, number];
     img: string | null;
     label: string | null;
-    colorLabel: string | null;
+    position: [number, number, number, number];
     price: number | null;
   }>;
+  map: { size: number };
   players: { size: number };
-}
-
-
-
+};
 
 export type TypeDynamicDataMap = {
   cards: Array<{
+    colorLevel: string | null;
     id: number;
     level: number | null;
-    colorLevel: string | null;
-  }>
+  }>;
   players: Array<{
-    id: number;
     cardId: number;
-  }>
-}
-
-
+    id: number;
+  }>;
+};

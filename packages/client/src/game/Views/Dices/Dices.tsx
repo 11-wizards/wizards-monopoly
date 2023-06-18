@@ -1,8 +1,6 @@
 import type { FC } from 'react';
 import { resetDices } from 'game/helpers/helpers';
 import { useEffect, useState } from 'react';
-import type { StepsMove } from 'game/types/game';
-import { DIECES } from 'game/types/game';
 import { Dice } from './Dice';
 
 type DicesProps = {
@@ -10,7 +8,7 @@ type DicesProps = {
   render: boolean;
   stopRender: () => void;
 };
-type Dice = {
+type TypeDice = {
   number: number;
   offset: number;
   resetKey: number;
@@ -21,13 +19,13 @@ export const Dices: FC<DicesProps> = ({ dicesNumbers, stopRender, render }) => {
   const [animateOneDice, setAnimateOneDice] = useState<boolean>(true);
   const [animateTwoDice, setAnimateTwoDice] = useState<boolean>(true);
 
-  const [diceOne, setDiceOne] = useState<Dice>({
+  const [diceOne, setDiceOne] = useState<TypeDice>({
     offset: 150,
     number: 0,
     resetKey: 0,
     speed: 2,
   });
-  const [diceTwo, setDiceTwo] = useState<Dice>({
+  const [diceTwo, setDiceTwo] = useState<TypeDice>({
     offset: -130,
     number: 0,
     resetKey: 0,
@@ -37,12 +35,12 @@ export const Dices: FC<DicesProps> = ({ dicesNumbers, stopRender, render }) => {
   const stopAnimateOneDice = (): void => setAnimateOneDice(false);
   const stopAnimateTwoDice = (): void => setAnimateTwoDice(false);
 
-  const startAnimateDices = (dicesNumbers: Array<number>): void => {
-    if (!dicesNumbers.length) return;
+  const startAnimateDices = (dicesNumbersArr: Array<number>): void => {
+    if (!dicesNumbersArr.length) return;
     setAnimateOneDice(true);
     setAnimateTwoDice(true);
-    setDiceOne((prev) => ({ ...prev, number: dicesNumbers[0], resetKey: resetDices() }));
-    setDiceTwo((prev) => ({ ...prev, number: dicesNumbers[1], resetKey: resetDices() }));
+    setDiceOne((prev) => ({ ...prev, number: dicesNumbersArr[0], resetKey: resetDices() }));
+    setDiceTwo((prev) => ({ ...prev, number: dicesNumbersArr[1], resetKey: resetDices() }));
   };
 
   useEffect(() => {

@@ -1,13 +1,13 @@
 import { STREET_HOME_SIZE_H, STREET_HOME_SIZE_W } from 'game/constants';
-import { CardFamily, CardLevel, CardTypes, STREET } from 'game/types/cards';
-import type { Card, PlayerPosition, PlayerPositionTarget } from 'game/types/game';
+import { CardLevel, STREET } from 'game/types/cards';
+import type { PlayerPosition, PlayerPositionTarget } from 'game/types/game';
+import type { TypeMapCardsData } from 'game/types/map';
 import { CornersCardsID, MapDirectons } from 'game/types/map';
 
 const { UP, DOWN, LEFT, RIGHT } = MapDirectons;
 const { CARD_TOP_LEFT, CARD_TOP_RIGHT, CARD_BOTTOM_LEFT, CARD_BOTTOM_RIGHT } = CornersCardsID;
 
 // render map
-
 
 function calcCardSize(
   id: number,
@@ -31,7 +31,7 @@ export const initCardsPositions = (
   count: number,
   cardWidth: number,
   cardHeight: number,
-): Array<Card> => {
+): Array<Record<string, number> | { img: null }> => {
   const cards = [];
   let stepX = 0;
   let stepY = 0;
@@ -63,84 +63,52 @@ export const initCardsPositions = (
 
   return cards;
 };
-
-export const drawCard = (
+const drawHome = (
   context: CanvasRenderingContext2D,
-  mapSize: number,
-  card: Card,
-): void => {
-  const { x, y, w, h, img, colorLabel, colorBg, level, type, title, price
-  } = card;
+  {
+    homeX,
+    homeY,
+    homeW,
+    homeH,
+    roofLX,
+    roofLY,
+    roofCX,
+    roofCY,
+    roofRX,
+    roofRY,
+  }: Record<string, number>,
+) => {
+  // context.strokeStyle = 'red';
+  // context.fillStyle = 'red';
+  context.beginPath();
+  context.fillRect(homeX, homeY, homeW, homeH);
+  context.stroke();
 
-  context.fillStyle = colorBg ?? 'white';
-  context.fillRect(x, y, w, h);
-
-  if (img && type !== STREET) {
-    let imgSizes = [x, y, w, h];
-    if (w === h) {
-      imgSizes = [x, y, w, h];
-    } else if (w > h) {
-      imgSizes = [x + w / 1.8 - h / 2 / 2, y + h / 1.5 - h / 2 / 2, h / 3, h / 3];
-    } else {
-      imgSizes = [x + w / 1.8 - w / 2 / 2, y + h / 1.8 - w / 2 / 2, w / 3, w / 3];
-    }
-    context.drawImage(img, imgSizes[0], imgSizes[1], imgSizes[2], imgSizes[3]);
-  }
-
-
-  // eslint-disable-next-line no-param-reassign
-  context.font = `${(mapSize / 100) * 1.7}px Georgia`;
-  // eslint-disable-next-line no-param-reassign
-
-  if (colorLabel) {
-    context.fillStyle = colorLabel;
-    context.fillRect(x, y, w, h / 100 * 30);
-    context.fillStyle = 'white';
-  } else {
-    context.fillStyle = 'black';
-  }
-
-  const maxWidthText = w - 5;
-  if (title) {
-    const titleTextWidth =
-      context.measureText(title).width > maxWidthText
-        ? maxWidthText
-        : context.measureText(title).width;
-    context.fillText(title, x + (w / 2 - titleTextWidth / 2), y + 15, maxWidthText);
-  }
-  if (price) {
-    context.fillStyle = 'black';
-    const priceTextWidth = context.measureText(price + '$').width;
-    context.fillText(price + '$', x + (w / 2 - priceTextWidth / 2), y + h - 5, maxWidthText);
-  }
-
-  if (type === STREET && level !== CardLevel.LEVEL_0) {
-    drawCardLevel(context, level, card, colorBg ? 'white' : colorLabel);
-  }
-
-
-  context.strokeStyle = 'black';
-  context.strokeRect(x, y, w, h);
+  context.beginPath();
+  context.moveTo(roofLX, roofLY);
+  context.lineTo(roofCX, roofCY);
+  context.lineTo(roofRX, roofRY);
+  context.closePath();
+  context.stroke();
+  context.fill();
 };
-
-// player move
 
 const drawCardLevel = (
   context: CanvasRenderingContext2D,
-  level: number,
-  card: Card,
-  color: string
+  level: number | null,
+  card: TypeMapCardsData,
+  color: string,
 ) => {
   const { x, y, w, h } = card;
   const baseSize = w > h ? h : w;
 
-  let homeW = baseSize / 100 * STREET_HOME_SIZE_W;
-  let homeH = baseSize / 100 * STREET_HOME_SIZE_H;
-  let roofW = baseSize / 100 * STREET_HOME_SIZE_W;
-  let homeY = y + ((h - homeH) / 1.9);
+  let homeW = (baseSize / 100) * STREET_HOME_SIZE_W;
+  let homeH = (baseSize / 100) * STREET_HOME_SIZE_H;
+  let roofW = (baseSize / 100) * STREET_HOME_SIZE_W;
+  let homeY = y + (h - homeH) / 1.9;
   let homeX = x;
 
-  let roofH = baseSize / 100 * 8;
+  let roofH = (baseSize / 100) * 8;
 
   // if (!level || level === 5) {
   //   roofW *= 2;
@@ -154,7 +122,7 @@ const drawCardLevel = (
     roofH *= 1.5;
     homeW *= 1.5;
     homeH *= 1.5;
-    homeX = x + ((w - homeW) / 2);
+    homeX = x + (w - homeW) / 2;
   }
 
   // const roofLX = homeX - baseSize / 100 * 3;
@@ -163,20 +131,32 @@ const drawCardLevel = (
   // const roofCY = homeY - roofH;
   // const roofRX = homeX + homeW + baseSize / 100 * 3;
   // const roofRY = homeY;
-
+  // eslint-disable-next-line no-param-reassign
   context.strokeStyle = color;
+  // eslint-disable-next-line no-param-reassign
   context.fillStyle = color;
 
   if (level === 5 || !level) {
-    const roofLX = homeX - baseSize / 100 * 3;
+    const roofLX = homeX - (baseSize / 100) * 3;
     const roofLY = homeY;
     const roofCX = homeX + roofW / 2;
     const roofCY = homeY - roofH;
-    const roofRX = homeX + homeW + baseSize / 100 * 3;
+    const roofRX = homeX + homeW + (baseSize / 100) * 3;
     const roofRY = homeY;
-    drawHome(context, { homeX, homeY, homeW, homeH, roofLX, roofLY, roofCX, roofCY, roofRX, roofRY });
+    drawHome(context, {
+      homeX,
+      homeY,
+      homeW,
+      homeH,
+      roofLX,
+      roofLY,
+      roofCX,
+      roofCY,
+      roofRX,
+      roofRY,
+    });
   } else {
-
+    // eslint-disable-next-line
     for (let i = 1; i <= level; i++) {
       if (i === 1) {
         homeX = x + (w / 4) * 1 - homeW / 2;
@@ -193,43 +173,105 @@ const drawCardLevel = (
         homeX = x + (w / 3) * 2;
       }
 
-      const roofLX = homeX - baseSize / 100 * 3;
+      const roofLX = homeX - (baseSize / 100) * 3;
       const roofLY = homeY;
       const roofCX = homeX + roofW / 2;
       const roofCY = homeY - roofH;
-      const roofRX = homeX + homeW + baseSize / 100 * 3;
+      const roofRX = homeX + homeW + (baseSize / 100) * 3;
       const roofRY = homeY;
-      drawHome(context, { homeX, homeY, homeW, homeH, roofLX, roofLY, roofCX, roofCY, roofRX, roofRY });
+      drawHome(context, {
+        homeX,
+        homeY,
+        homeW,
+        homeH,
+        roofLX,
+        roofLY,
+        roofCX,
+        roofCY,
+        roofRX,
+        roofRY,
+      });
     }
   }
+};
 
-
-}
-
-const drawHome = (
+export const drawCard = (
   context: CanvasRenderingContext2D,
-  { homeX, homeY, homeW, homeH, roofLX, roofLY, roofCX, roofCY, roofRX, roofRY }: Record<string, number>) => {
-  // context.strokeStyle = 'red';
-  // context.fillStyle = 'red';
-  context.beginPath();
-  context.fillRect(homeX, homeY, homeW, homeH);
-  context.stroke();
+  mapSize: number,
+  card: TypeMapCardsData,
+): void => {
+  const { x, y, w, h, img, colorLabel, colorBg, level, type, title, price } = card;
+  const bgColor = colorBg ?? 'white';
+  // eslint-disable-next-line no-param-reassign
+  context.fillStyle = bgColor;
+  // eslint-disable-next-line no-param-reassign
+  context.fillRect(x, y, w, h);
 
-  context.beginPath();
-  context.moveTo(roofLX, roofLY);
-  context.lineTo(roofCX, roofCY);
-  context.lineTo(roofRX, roofRY);
-  context.closePath();
-  context.stroke();
-  context.fill();
-}
+  if (img && type !== STREET) {
+    let imgSizes = [x, y, w, h];
+    if (w === h) {
+      imgSizes = [x, y, w, h];
+    } else if (w > h) {
+      imgSizes = [x + w / 1.8 - h / 2 / 2, y + h / 1.5 - h / 2 / 2, h / 3, h / 3];
+    } else {
+      imgSizes = [x + w / 1.8 - w / 2 / 2, y + h / 1.8 - w / 2 / 2, w / 3, w / 3];
+    }
+    context.drawImage(img, imgSizes[0], imgSizes[1], imgSizes[2], imgSizes[3]);
+  }
+
+  // eslint-disable-next-line no-param-reassign
+  context.font = `${(mapSize / 100) * 1.7}px Georgia`;
+  // eslint-disable-next-line no-param-reassign
+
+  if (colorLabel && typeof colorLabel === 'string') {
+    // eslint-disable-next-line no-param-reassign
+    context.fillStyle = colorLabel;
+    // eslint-disable-next-line no-param-reassign
+    context.fillRect(x, y, w, (h / 100) * 30);
+    // eslint-disable-next-line no-param-reassign
+    context.fillStyle = 'white';
+  } else {
+    // eslint-disable-next-line no-param-reassign
+    context.fillStyle = 'black';
+  }
+
+  const maxWidthText = w - 5;
+  if (title) {
+    const titleTextWidth =
+      // eslint-disable-next-line no-param-reassign
+      context.measureText(title).width > maxWidthText
+        ? maxWidthText
+        : // eslint-disable-next-line no-param-reassign
+          context.measureText(title).width;
+    // eslint-disable-next-line no-param-reassign
+    context.fillText(title, x + (w / 2 - titleTextWidth / 2), y + 15, maxWidthText);
+  }
+  if (price) {
+    // eslint-disable-next-line no-param-reassign
+    context.fillStyle = 'black';
+    // eslint-disable-next-line no-param-reassign
+    const priceTextWidth = context.measureText(`${price}$`).width;
+    // eslint-disable-next-line no-param-reassign
+    context.fillText(`${price}$`, x + (w / 2 - priceTextWidth / 2), y + h - 5, maxWidthText);
+  }
+
+  if (type === STREET && level !== CardLevel.LEVEL_0 && typeof colorLabel === 'string') {
+    drawCardLevel(context, level, card, colorBg ? 'white' : colorLabel);
+  }
+  // eslint-disable-next-line no-param-reassign
+  context.strokeStyle = 'black';
+  // eslint-disable-next-line no-param-reassign
+  context.strokeRect(x, y, w, h);
+};
+
+// player move
 
 const arrayNumberRound = (array: Array<number>): Array<number> =>
   array.map((item) => Math.round(item));
 
 export const calcPlayerParkingSpotCard = (
   id: number,
-  card: Card,
+  card: TypeMapCardsData,
   playerSize: number,
 ): Array<number> => {
   const { x, y, w, h } = card;
@@ -372,5 +414,5 @@ export const rollDices = (): Array<number> => [
 
 export const resetDices = () => Math.random() + 1;
 
-export const randomInt = (max: number, min: number = 0) =>
+export const randomInt = (max: number, min = 0) =>
   Math.floor(Math.random() * (max - min + 1)) + min;

@@ -1,4 +1,4 @@
-import { PlayerColor } from "types/enums/main";
+import type { PlayerColor } from 'types/enums/main';
 
 export enum CardTypes {
   ZERO,
@@ -48,40 +48,38 @@ export const {
 
 export const { ZERO, STREET, PRISON, ARREST, INFRASTRUCTURE, TAX, RANDOM } = CardTypes;
 
-
 export type CardData = {
+  collateralCost?: number;
+  family: CardFamily;
   imgSrc: string;
+  price?: number;
+  property?: Nullable<PropertyCard>;
+  rent?: RentCard;
   title: string;
   type: CardTypes;
-  family: CardFamily;
-  price?: number;
-  collateralCost?: number;
   upgradeCost?: {
-    home: number,
-    hotel: number,
+    home: number;
+    hotel: number;
   };
-  rent?: RentCard;
-  property?: Nullable<PropertyCard>;
 };
 
 export type RentCard = {
-  level_0: number,
-  level_1: number,
-  level_2: number,
-  level_3: number,
-  level_4: number,
-  level_5: number,
+  level_0: number;
+  level_1: number;
+  level_2: number;
+  level_3: number;
+  level_4: number;
+  level_5: number;
 };
 
 export type PropertyCard = {
-  level: CardLevel;
   color: PlayerColor;
+  level: CardLevel;
   ownerId: Nullable<number>;
 };
 
-
 export type RandomCard = {
-  desc: string;
   credit?: number;
   debt?: number;
+  desc: string;
 };

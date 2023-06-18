@@ -2,35 +2,28 @@ import type { FC } from 'react';
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
 import type { StepsMove } from 'game/types/game';
 import { calcPlayerParkingSpotCard, drawCard, playerMove } from 'game/helpers/helpers';
-
-import './Map.scss';
-import { MapDirectons, CornersCardsID, PlayersPositions, TypeMapData } from 'game/types/map';
-import { PlayerTarget } from 'game/types/player';
+import type { PlayersPositions, TypeMapData } from 'game/types/map';
+import { MapDirectons } from 'game/types/map';
 import { PLAYER_SPEED } from 'game/constants';
 
+import './Map.scss';
+
 const { RIGHT: startDirection } = MapDirectons;
-const { CARD_TOP_LEFT: startCardId }: { CARD_TOP_LEFT: number } = CornersCardsID;
 
 type MapProps = {
-  render: boolean;
   mapData: TypeMapData;
-  playerTarget: PlayerTarget;
+  playerTarget: Nullable<{ id: number; target: number }>;
+  render: boolean;
   stopRender: (nextStep?: StepsMove) => void;
 };
 
-export const Map: FC<MapProps> = ({
-  mapData,
-  playerTarget,
-  render,
-  stopRender,
-}) => {
-
+export const Map: FC<MapProps> = ({ mapData, playerTarget, render, stopRender }) => {
   const { mapSize, playerSize, cards, players } = mapData;
 
   const startPlayersPosition: PlayersPositions | [] = [];
 
   players?.forEach((item, key) => {
-    const { id, color, currentCardId, leave } = item;
+    const { id, color, currentCardId } = item;
     const [x, y] = calcPlayerParkingSpotCard(id, cards[currentCardId], playerSize);
     startPlayersPosition[key] = { id, color, x, y, direction: startDirection };
   });
@@ -64,15 +57,19 @@ export const Map: FC<MapProps> = ({
 
     cards.forEach((item) => drawCard(context, mapSize, item));
 
-
     if (playerTarget) {
       const { id, target } = playerTarget;
       const targetPosition = calcPlayerParkingSpotCard(id, cards[target], playerSize);
 
       playersPositions.forEach((player, key: number) => {
-        
         if (player.id === id) {
-          const newPlayerPostion = playerMove(player, targetPosition, PLAYER_SPEED, mapSize, playerSize);
+          const newPlayerPostion = playerMove(
+            player,
+            targetPosition,
+            PLAYER_SPEED,
+            mapSize,
+            playerSize,
+          );
           if (!newPlayerPostion) {
             setAnimationStop(true);
 
@@ -111,5 +108,6 @@ export const Map: FC<MapProps> = ({
 
     return undefined;
   }, [animationStop]);
+
   return <canvas ref={canvasRef} />;
 };

@@ -4,31 +4,33 @@ import { convertFormPlayersToPlayersObject, setGameDataLocalStorage } from 'app/
 import type { RootState } from 'app/store';
 import { cardsData, randomCards } from 'game/data/cards';
 import type { GameSetupFormData } from 'features/GameSetup/types';
-import { players } from 'game/common';
-import { useEffect } from 'react';
-import { CardLevel, type CardData, type RandomCard, STREET, INFRASTRUCTURE } from 'game/types/cards';
-import { PlayerColor } from 'types/enums/main';
+import {
+  CardLevel,
+  type CardData,
+  type RandomCard,
+  STREET,
+  INFRASTRUCTURE,
+} from 'game/types/cards';
 import type {
   BankTransaction,
   BuyPropertyCardPayload,
   MoneyTransfer,
-  Players,
-  PropertyCardId,
+  Player,
   changePositionPlayerPayload,
 } from 'game/types/game';
 
 export type GameState = {
   cardsData: Array<CardData>;
-  players: Players;
-  randomCards: RandomCard[];
   currentPlayer: Nullable<number>;
+  players: Array<Player>;
+  randomCards: RandomCard[];
 };
 
 const initialState: GameState = {
   currentPlayer: null,
   players: [],
-  cardsData: cardsData,
-  randomCards: randomCards,
+  cardsData,
+  randomCards,
 };
 
 export const gameSlice = createSlice({
@@ -45,10 +47,10 @@ export const gameSlice = createSlice({
         return { payload: players };
       },
     },
-    defineCards: (state, action: PayloadAction<Record<number, CardData>>) => {
-      const cardsData = action.payload;
-      state.cardsData = cardsData;
-    },
+    // defineCards: (state, action: PayloadAction<Record<number, CardData>>) => {
+    //   const cardsData = action.payload;
+    //   state.cardsData = cardsData;
+    // },
 
     changeCurrentPlayer: (state, action: PayloadAction<number>) => {
       const playerId = action.payload;
@@ -59,39 +61,23 @@ export const gameSlice = createSlice({
     loadSavesGame: {
       reducer: (state, action: PayloadAction<GameState>) => {
         const loadState = action.payload;
-        Object.keys(state).map(key => {
-          state[key] = loadState[key];
-        })
-
-        // state.players = loadState.players;
+        // Object.keys(state).map((key: keyof GameState) => {
+        //   state[key] = loadState[key];
+        // });
+        state.currentPlayer = loadState.currentPlayer;
+        state.cardsData = loadState.cardsData;
+        state.players = loadState.players;
+        state.randomCards = loadState.randomCards;
       },
-      prepare: (loadState: any) => {
-        // const players = convertFormPlayersToPlayersObject(formPlayers);
-
-        return { payload: loadState };
-      },
+      prepare: (loadState: GameState) => ({ payload: loadState }),
     },
 
-
-    loadSavesGame1: (state, action: PayloadAction<GameState>) => {
-
-      const loadState = action.payload;
-      state.players = loadState.players;
-      // Object.keys(state).map(key => { 
-
-      //   console.log(state[key]);
-      //   console.log(loadState[key]);
-
-      // })
-
-    },
-
-    changeCardData: (state, action) => {
-      const { card, title } = action.payload;
-      if (!state.cardsData) return;
-      const renameCard = { ...state.cardsData[card], title: 'КУПЛЕНО!' };
-      state.cardsData = { ...state.cardsData, [card]: renameCard };
-    },
+    // changeCardData: (state, action) => {
+    //   const { card, title } = action.payload;
+    //   if (!state.cardsData) return;
+    //   const renameCard = { ...state.cardsData[card], title: 'КУПЛЕНО!' };
+    //   state.cardsData = { ...state.cardsData, [card]: renameCard };
+    // },
 
     changePositionPlayer: (state, action: PayloadAction<changePositionPlayerPayload>) => {
       const { id, currentCardId } = action.payload;
@@ -125,18 +111,21 @@ export const gameSlice = createSlice({
       state.players.find((player) => player.id === playerId)!.balance -= amount;
     },
 
-
     // СОБСТВЕННОСТЬ
 
     transferPropertyCard: (state, action: PayloadAction<BuyPropertyCardPayload>) => {
       const { cardId, playerId } = action.payload;
-      if (state.cardsData && (state.cardsData[cardId].type === STREET || state.cardsData[cardId].type === INFRASTRUCTURE)) {
+      if (
+        state.cardsData &&
+        (state.cardsData[cardId].type === STREET || state.cardsData[cardId].type === INFRASTRUCTURE)
+      ) {
         const property = {
           ownerId: playerId,
           color: state.players.find((player) => player.id === playerId)!.color,
-          level: CardLevel.LEVEL_0
+          level: CardLevel.LEVEL_0,
         };
         if (state.cardsData && state.cardsData[cardId].property === null) {
+          console.log(123);
         } else if (state.cardsData && state.cardsData[cardId].property) {
           const level = state.cardsData[cardId].property?.level;
           if (level) property.level = level;
@@ -157,13 +146,13 @@ export const gameSlice = createSlice({
       const { payload: playerId } = action;
       const playerProperty: Array<number> = [];
       if (state.cardsData) {
-        Object.entries(state.cardsData).map(([key, { property }]) => property?.ownerId === playerId ? playerProperty.push(Number(key)) : '');
-        playerProperty.forEach(item => {
-          if (state.cardsData)
-            state.cardsData[item].property = null
+        Object.entries(state.cardsData).map(([key, { property }]) =>
+          property?.ownerId === playerId ? playerProperty.push(Number(key)) : '',
+        );
+        playerProperty.forEach((item) => {
+          if (state.cardsData) state.cardsData[item].property = null;
         });
       }
-
     },
     upgradeLevelCard: (state, action: PayloadAction<number>) => {
       const { payload: cardId } = action;
@@ -185,8 +174,6 @@ export const gameSlice = createSlice({
         }
       }
     },
-
-
   },
 });
 
@@ -198,7 +185,7 @@ export const selectRandomCards = (rootState: RootState) => rootState.game.random
 
 export const {
   definePlayers,
-  defineCards,
+  // defineCards,
   changeCardData,
   changePositionPlayer,
   leavePlayer,
@@ -208,11 +195,10 @@ export const {
   deductMoneyFromPlayer,
   transferPropertyCard,
   deprivePropertyPlayer,
-  withdrawPropertyCard, changeCurrentPlayer,
+  withdrawPropertyCard,
+  changeCurrentPlayer,
   upgradeLevelCard,
-  downgradeLevelCard
+  downgradeLevelCard,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;
-
-

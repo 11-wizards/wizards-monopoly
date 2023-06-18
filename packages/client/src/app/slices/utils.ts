@@ -1,11 +1,11 @@
 import type { PlayerColor } from 'types/enums/main';
 import { START_PLAYER_BALANCE, START_PLAYER_CARD_ID } from 'constants/main';
 import type { GameSetupFormData } from 'features/GameSetup/types';
-import { GameState } from './gameSlice';
 import { isArray } from 'helpers';
+import type { Player } from 'game/types/game';
+import type { GameState } from './gameSlice';
 
 export function convertFormPlayersToPlayersObject(formPlayers: GameSetupFormData): Player[] {
-
   const keys = Object.keys(formPlayers);
   const playersCount = keys.filter((key) => key.includes('name')).length;
   const playersObject: Record<number, { color: PlayerColor; name: string }> = {};
@@ -23,7 +23,7 @@ export function convertFormPlayersToPlayersObject(formPlayers: GameSetupFormData
     }
   });
 
-  const players: any[] = [];
+  const players: Player[] = [];
 
   for (let i = 0; i < playersCount; i += 1) {
     const { name, color } = playersObject[i];
@@ -35,19 +35,30 @@ export function convertFormPlayersToPlayersObject(formPlayers: GameSetupFormData
       currentCardId: START_PLAYER_CARD_ID,
       balance: START_PLAYER_BALANCE,
       leave: false,
-
     });
   }
 
   return players;
 }
 
-export const setGameDataLocalStorage = (data: GameState) => localStorage.game = JSON.stringify(data);
+export const setGameDataLocalStorage = (data: GameState) => {
+  localStorage.game = JSON.stringify(data);
+};
 export const getGameDataLocalStorage = (): GameState | null => {
-  const data: GameState = JSON.parse(localStorage.game ?? null);
-  if (!data) return null;
-  const { cardsData, players, randomCards, currentPlayer } = data;
-  if (isArray(cardsData) && isArray(players) && isArray(players) && typeof currentPlayer === 'number') return data;
+  const data: string = localStorage.getItem('game') as string;
+  if (!data || typeof data !== 'string') return null;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const parsedData: GameState = JSON.parse(data);
+
+  const { cardsData, players, randomCards, currentPlayer } = parsedData;
+  if (
+    isArray(cardsData) &&
+    isArray(players) &&
+    isArray(randomCards) &&
+    typeof currentPlayer === 'number'
+  )
+    return parsedData;
+
   return null;
-}
-export const clearGameDataLocalStorage = ():void =>  localStorage.removeItem('game');
+};
+export const clearGameDataLocalStorage = (): void => localStorage.removeItem('game');

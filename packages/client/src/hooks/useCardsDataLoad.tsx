@@ -1,5 +1,5 @@
 import { cardsData } from 'game/data/cards';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { CardData } from 'game/types/cards';
 
 export const useCardsDataLoad = (): [

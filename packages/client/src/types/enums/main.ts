@@ -6,4 +6,3 @@ export enum PlayerColor {
   RED = '#f5222d',
   YELLOW = '#fadb14',
 }
-

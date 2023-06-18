@@ -1,10 +1,8 @@
-import { MapDirectons } from 'game/types/map';
-import { PropertyCard } from './cards';
-import { Player } from './player';
+import type { MapDirectons } from 'game/types/map';
+import type { PlayerColor } from 'types/enums/main';
+import type { PropertyCard } from './cards';
 
 export type MapData = Record<string, number>;
-
-
 
 export enum StepsMove {
   INITIAL,
@@ -16,65 +14,41 @@ export enum StepsMove {
 
 export const { INITIAL, DIECES, MOVE, ACTION, RENDER } = StepsMove;
 
-
-
-
-
-
-
-//OLD TYPES
+export type Player = {
+  balance: number;
+  color: PlayerColor;
+  currentCardId: number;
+  id: number;
+  leave: boolean;
+  name: string;
+};
+// OLD TYPES
 
 export type PlayerPosition = { direction: MapDirectons; x: number; y: number };
 
 export type PlayerPositionTarget = number[];
 
-
-
-export type Players = Player[];
-
-export type PlayerId = Player['id'];
-
-
-
-
 export type MoneyTransfer = {
   amount: number;
-  recipientId: PlayerId;
-  senderId: PlayerId;
+  recipientId: number;
+  senderId: number;
 };
 
 export type BankTransaction = {
   amount: number;
-  playerId: PlayerId;
+  playerId: number;
 };
 
 export type changePositionPlayerPayload = {
   currentCardId: number;
-  id: PlayerId;
+  id: number;
 };
 
 export type BuyPropertyCardPayload = {
-  playerId: PlayerId;
   cardId: number;
+  playerId: number;
 };
-
 
 export type PropertyCards = Record<string, PropertyCard>;
 
 export type PropertyCardId = keyof PropertyCards;
-
-// export type Card = {
-//   h: number;
-//   w: number;
-//   x: number;
-//   y: number;
-// };
-
-// export type CardImg = {
-//   imgElem: CanvasImageSource | null;
-//   imgH: number;
-//   imgSrc: string;
-//   imgW: number;
-//   imgX: number;
-//   imgY: number;
-// };
