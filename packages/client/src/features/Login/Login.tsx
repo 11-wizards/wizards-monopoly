@@ -29,10 +29,8 @@ export const Login: FC = () => {
   } = useForm<LoginInput>();
 
   async function onSubmit(values: LoginInput) {
-    const sanitizedValues = sanitizeObject<LoginInput>(values);
-
     try {
-      const response = await authApi.logIn(sanitizedValues);
+      const response = await authApi.logIn(sanitizeObject<LoginInput>(values));
 
       if (response.status === 200) {
         localStorage.setItem(LOCAL_STORAGE_IS_AUTH_KEY, 'true');

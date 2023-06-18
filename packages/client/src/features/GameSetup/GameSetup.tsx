@@ -39,8 +39,7 @@ export const GameSetup: FC = () => {
   };
 
   const submitHandler = (formData: GameSetupFormData) => {
-    const sanitizedValues = sanitizeObject<GameSetupFormData>(formData);
-    dispatch(definePlayers(sanitizedValues));
+    dispatch(definePlayers(sanitizeObject<GameSetupFormData>(formData)));
     reset();
     navigate(ROUTES.GAME_PAGE.path);
   };

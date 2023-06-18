@@ -52,9 +52,7 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({
 
     const topicId = randomize();
 
-    const sanitizedData = sanitizeObject<TopicValues>(data);
-
-    const { content, title } = sanitizedData;
+    const { content, title } = sanitizeObject<TopicValues>(data);
 
     await createTopic({
       author: {

@@ -24,10 +24,8 @@ export const Register: FC = () => {
   } = useForm<RegisterInput>();
 
   async function onSubmit(values: RegisterInput) {
-    const sanitizedValues = sanitizeObject<RegisterInput>(values);
-
     try {
-      const response = await authApi.register(sanitizedValues);
+      const response = await authApi.register(sanitizeObject<RegisterInput>(values));
 
       if (response.status === 200) {
         navigate(ROUTES.ROOT.path);

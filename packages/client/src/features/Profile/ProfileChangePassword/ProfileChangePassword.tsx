@@ -34,10 +34,11 @@ export const ProfileChangePassword: FC = () => {
 
   async function onSubmit(values: ProfileChangePasswordInput) {
     setIsSubmitting(true);
-    const sanitizedValues = sanitizeObject<ProfileChangePasswordInput>(values);
 
     try {
-      const response = await profileApi.changePassword(sanitizedValues);
+      const response = await profileApi.changePassword(
+        sanitizeObject<ProfileChangePasswordInput>(values),
+      );
 
       if (response.status === 200) {
         reset();
