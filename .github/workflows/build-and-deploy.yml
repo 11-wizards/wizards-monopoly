@@ -17,3 +17,4 @@ jobs:
         run: docker-compose -f docker-compose.cloud.yml down
       - name: Start containers
         run: docker-compose -f docker-compose.cloud.yml up -d --build
+
