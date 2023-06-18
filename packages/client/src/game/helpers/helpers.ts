@@ -31,14 +31,19 @@ export const initCardsPositions = (
   count: number,
   cardWidth: number,
   cardHeight: number,
-): Array<Record<string, number> | { img: null }> => {
+): Array<{
+  h: number;
+  w: number;
+  x: number;
+  y: number;
+}> => {
   const cards = [];
   let stepX = 0;
   let stepY = 0;
 
   for (let i = 0; i < count; i += 1) {
     const { width, height } = calcCardSize(i, cardWidth, cardHeight);
-    const card = { x: stepX, y: stepY, w: width, h: height, img: null };
+    const card = { x: stepX, y: stepY, w: width, h: height };
     if (i === CARD_TOP_LEFT) {
       stepX = width;
     } else if (i === CARD_TOP_RIGHT) {
@@ -242,7 +247,7 @@ export const drawCard = (
       context.measureText(title).width > maxWidthText
         ? maxWidthText
         : // eslint-disable-next-line no-param-reassign
-          context.measureText(title).width;
+        context.measureText(title).width;
     // eslint-disable-next-line no-param-reassign
     context.fillText(title, x + (w / 2 - titleTextWidth / 2), y + 15, maxWidthText);
   }

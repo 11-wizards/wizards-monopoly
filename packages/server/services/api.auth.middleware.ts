@@ -3,7 +3,7 @@ import { sendResponsesFromApi } from '../helpers';
 import { createErrorResponse } from '../helpers';
 import { ErrorApi } from './api.error';
 
-export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware = async (_req: Request, res: Response, next: NextFunction) => {
   try {
     return next();
     // FIXME: Раскомментить для доступа c авторизацией

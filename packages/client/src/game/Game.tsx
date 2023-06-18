@@ -3,13 +3,9 @@ import type { StepsMove } from 'game/types/game';
 import { DIECES, MOVE, INITIAL, RENDER, ACTION } from 'game/types/game';
 import { useAppDispatch, useAppSelector, useCardsDataLoad, useGameViewsCalc } from 'hooks';
 import {
-  // changeCardData,
   changeCurrentPlayer,
   changePositionPlayer,
-  // defineCards,
-  // definePlayers,
   deprivePropertyPlayer,
-  // leavePlayer,
   selectCardsData,
   selectCurrentPlayer,
   selectPlayers,
@@ -17,9 +13,7 @@ import {
 } from 'app/slices/gameSlice';
 import type { TypeUseGameViewsCalc } from 'hooks/useGameViewsCalc';
 import {
-  // RANDOM,
   STREET,
-  // TAX
 } from 'game/types/cards';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
@@ -30,7 +24,6 @@ import { Dices } from './Views/Dices/Dices';
 import { Map } from './Views/Map';
 import type { TypeMapCardsData, TypeMapData } from './types/map';
 import { NUMBER_CARDS } from './constants';
-// import { explample_players } from './common';
 
 const GameRoot = () => {
   const dispatch = useAppDispatch();
@@ -50,7 +43,6 @@ const GameRoot = () => {
   const mapParams: TypeUseGameViewsCalc = useGameViewsCalc();
 
   const currentPlayerStep = useAppSelector(selectCurrentPlayer);
-  // const [currentPlayerStep, setCurrentPlayerStep] = useState<number | null>(null);
 
   const [moveStep, setMoveStep] = useState<StepsMove>(RENDER);
 
@@ -83,7 +75,6 @@ const GameRoot = () => {
       changePlayer(nextPlayer);
     } else {
       dispatch(changeCurrentPlayer(nextPlayer));
-      // setCurrentPlayerStep(nextPlayer);
     }
 
     return true;
@@ -106,13 +97,11 @@ const GameRoot = () => {
     const dicesNumber = rollDices();
     nextMoveSteps(DIECES);
     setDicesNumbers(dicesNumber);
-    // setDicesNumbers([3, 1]);
   };
 
   useEffect(() => {
     if (players.length) return;
     navigate(ROUTES.START_GAME_PAGE.path);
-    // dispatch(definePlayers(explample_players));
   }, []);
 
   useEffect(() => {
@@ -121,13 +110,8 @@ const GameRoot = () => {
     if (newTargetPlayer) {
       changePlayer();
       const { id, target: currentCardId } = newTargetPlayer;
-      // console.log(
-      //   id,
-      //   checkSolvency(id)
-      // );
 
       dispatch(changePositionPlayer({ id, currentCardId }));
-      // setCurrentPlayerStep((prevId) => (prevId + 1) % players.length);
     } else if (currentPlayerStep === null) {
       dispatch(changeCurrentPlayer(0));
     }
@@ -149,60 +133,8 @@ const GameRoot = () => {
     if (moveStep !== ACTION) return;
     console.log('ACTION');
     if (!newTargetPlayer || !cardsData) return;
-    // const { target } = newTargetPlayer;
-    // const card = cardsData[target];
-    // dispatch(changeCardData({ card: target, title: 'Куплено!' }));
-
-    // switch (card.type) {
-    //   case RANDOM:
-    //     {
-    //       // randomCardAction(currentPlayerStep, card, nextMoveSteps);
-    //     }
-    //     break;
-    //   case TAX:
-    //     {
-    //       // taxCardAction(currentPlayerStep, card, nextMoveSteps);
-    //     }
-    //     break;
-    //     // case RANDOM: randomCardAction(card, nextMoveSteps);
-    //     break;
-    //   default:
-    //     break;
-    // }
     nextMoveSteps(INITIAL);
-
-    // nextMoveSteps(RENDER);
-
-    // const steps = dicesNumbers[0] + dicesNumbers[1];
-    // const id = currentPlayerStep;
-
-    // console.log(`Выпало:  ${dicesNumbers.join(', ')} у игрока ${id}`);
-
-    // const target = calcNewTarget(id, steps);
-    // setNewTargetPlayer({ id, target });
   }, [moveStep]);
-
-  // useEffect(() => {
-  //   // if (moveStep !== RENDER) return;
-  //   // console.log('RENDER');
-  //   // if (!newTargetPlayer || !cardsData) return;
-  //   // const { target } = newTargetPlayer;
-  //   // const card = cardsData[target];
-
-  //   // nextMoveSteps(RENDER);
-  //   // dispatch(changeCardData({ card: target, title: 'Куплено!' }));
-  //   // setCardsData(prev => {
-  //   //   const renameCard = { ...prev[target], title: 'КУПЛЕНО!' };
-  //   //   return { ...prev, [target]: renameCard };
-  //   // });
-  //   // const steps = dicesNumbers[0] + dicesNumbers[1];
-  //   // const id = currentPlayerStep;
-
-  //   // console.log(`Выпало:  ${dicesNumbers.join(', ')} у игрока ${id}`);
-
-  //   // const target = calcNewTarget(id, steps);
-  //   // setNewTargetPlayer({ id, target });
-  // }, [moveStep]);
 
   if (!mapParams || !cardsData || !cardsImages) return <>ЗАГРУЗКА КАРТЫ!</>;
   const { mapSize, playerSize, cards, interfaceSize } = mapParams;
@@ -226,20 +158,6 @@ const GameRoot = () => {
 
   const CardsDataInterface = Object.values(cardsData).filter(({ property }) => property);
 
-  const test = () => {
-    // dispatch(addMoneyForPlayer({ playerId: 1, amount: 9909999 }));
-    // dispatch(deductMoneyFromPlayer({ playerId: 3, amount: 9909999 }));
-    dispatch(deprivePropertyPlayer(2));
-    nextMoveSteps(RENDER);
-    //   dispatch(transferPropertyCard({ cardId: 19, playerId: 0 }));
-    //   dispatch(transferPropertyCard({ cardId: 2, playerId: 0 }));
-    //   dispatch(transferPropertyCard({ cardId: 4, playerId: 0 }));
-    //   dispatch(transferPropertyCard({ cardId: 5, playerId: 0 }));
-    //   dispatch(transferPropertyCard({ cardId: 10, playerId: 0 }));
-    //   dispatch(transferPropertyCard({ cardId: 11, playerId: 0 }));
-    //   // dispatch(withdrawPropertyCard(11));
-    //   dispatch(upgradeLevelCard(19));
-  };
 
   return (
     <div className="game-views" ref={gameViewsBlock} style={{ height: mapSize, width: mapSize }}>
@@ -258,7 +176,6 @@ const GameRoot = () => {
           nextMoveSteps(moveStep === MOVE ? ACTION : moveStep === RENDER ? INITIAL : moveStep)
         }
       />
-      <Button onClick={test}>Click</Button>
       <PlayerInterface
         currentStep={moveStep}
         blockRef={gameViewsBlock}
@@ -271,8 +188,6 @@ const GameRoot = () => {
   );
 };
 
-// const Component = ({ payRent, claimCircleBonus }: WithBankProps) => {
-//   // ...
-// }
+
 
 export const Game = GameRoot;

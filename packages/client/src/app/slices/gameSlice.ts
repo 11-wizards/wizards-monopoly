@@ -186,7 +186,7 @@ export const selectRandomCards = (rootState: RootState) => rootState.game.random
 export const {
   definePlayers,
   // defineCards,
-  changeCardData,
+  // changeCardData,
   changePositionPlayer,
   leavePlayer,
   transferMoneyBetweenPlayers,

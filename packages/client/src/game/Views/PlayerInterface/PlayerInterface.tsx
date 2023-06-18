@@ -27,12 +27,10 @@ export const PlayerInterface: FC<PlayerInterfaceProps> = ({
 
   const fullScreenToggle = useFullScreenApi(blockRef);
 
-  // return <div className="player-interface">ЗАГРУЗКА КАРТЫ!</div>;
   return (
     <div className="player-interface" style={{ width: size, height: size }}>
       <div className="controls">
         <Button onClick={clickStartPlayerTurn}>Новый ход игрока</Button>
-        <Button onClick={clickStartPlayerTurn}>Завершить ход</Button>
         {fullScreenToggle}
       </div>
       <div className={`players-state players-state_${players.length}`}>
