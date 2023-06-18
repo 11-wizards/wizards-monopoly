@@ -15,8 +15,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
+      - name: Install yarn
+        run: npm i -g yarn
       - name: Install dependencies
-        run: yarn
+        run: yarn install
       - name: Stop containers
         run: docker-compose -f docker-compose.cloud.yml down
       - name: Start containers
