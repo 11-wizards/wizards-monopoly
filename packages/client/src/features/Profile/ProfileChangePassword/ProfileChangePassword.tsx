@@ -56,76 +56,74 @@ export const ProfileChangePassword: FC = () => {
     Object.values(touchedFields).length === 0 || Object.values(errors).length > 0;
 
   return (
-    <div className="wrapper_profilePage">
-      <div className="form-change-password">
-        <Typography.Title>{fm(messages.titleMain)}</Typography.Title>
-        <form onSubmit={handleSubmit(onSubmit)} className="form-change-password__form">
-          <div className="form-change-password__input">
-            <Controller
-              name="oldPassword"
-              control={control}
-              rules={{
-                required: fm(messages.validationRequiredField),
-              }}
-              render={({ field }) => (
-                <Input.Password
-                  placeholder={fm(messages.placeholderOldPassword)}
-                  status={errors.oldPassword && 'error'}
-                  {...field}
-                />
-              )}
-            />
-            {errors.oldPassword && (
-              <Typography.Text className="form-change-password__inputError">
-                {errors.oldPassword?.message}
-              </Typography.Text>
+    <div className="form-change-password">
+      <Typography.Title>{fm(messages.titleMain)}</Typography.Title>
+      <form onSubmit={handleSubmit(onSubmit)} className="form-change-password__form">
+        <div className="form-change-password__input">
+          <Controller
+            name="oldPassword"
+            control={control}
+            rules={{
+              required: fm(messages.validationRequiredField),
+            }}
+            render={({ field }) => (
+              <Input.Password
+                placeholder={fm(messages.placeholderOldPassword)}
+                status={errors.oldPassword && 'error'}
+                {...field}
+              />
             )}
-          </div>
+          />
+          {errors.oldPassword && (
+            <Typography.Text className="form-change-password__inputError">
+              {errors.oldPassword?.message}
+            </Typography.Text>
+          )}
+        </div>
 
-          <div className="form-change-password__input">
-            <Controller
-              name="newPassword"
-              control={control}
-              rules={{
-                required: fm(messages.validationRequiredField),
-              }}
-              render={({ field }) => (
-                <Input.Password
-                  placeholder={fm(messages.placeholderNewPassword)}
-                  status={errors.newPassword && 'error'}
-                  {...field}
-                />
-              )}
-            />
-            {errors.newPassword && (
-              <Typography.Text className="form-change-password__inputError">
-                {errors.newPassword.message}
-              </Typography.Text>
+        <div className="form-change-password__input">
+          <Controller
+            name="newPassword"
+            control={control}
+            rules={{
+              required: fm(messages.validationRequiredField),
+            }}
+            render={({ field }) => (
+              <Input.Password
+                placeholder={fm(messages.placeholderNewPassword)}
+                status={errors.newPassword && 'error'}
+                {...field}
+              />
             )}
-          </div>
+          />
+          {errors.newPassword && (
+            <Typography.Text className="form-change-password__inputError">
+              {errors.newPassword.message}
+            </Typography.Text>
+          )}
+        </div>
 
-          <div className="form-change-password__buttons">
-            <Button
-              type="primary"
-              danger
-              onClick={handleCancelChangePassword}
-              disabled={isButtonsDisabled}
-              className="form-change-password__button"
-            >
-              {fm(messages.buttonCancel)}
-            </Button>
-            <Button
-              htmlType="submit"
-              type="primary"
-              disabled={isButtonsDisabled || isSubmitting}
-              loading={isSubmitting}
-              className="form-change-password__button"
-            >
-              {fm(messages.buttonSave)}
-            </Button>
-          </div>
-        </form>
-      </div>
+        <div className="form-change-password__buttons">
+          <Button
+            type="primary"
+            danger
+            onClick={handleCancelChangePassword}
+            disabled={isButtonsDisabled}
+            className="form-change-password__button"
+          >
+            {fm(messages.buttonCancel)}
+          </Button>
+          <Button
+            htmlType="submit"
+            type="primary"
+            disabled={isButtonsDisabled || isSubmitting}
+            loading={isSubmitting}
+            className="form-change-password__button"
+          >
+            {fm(messages.buttonSave)}
+          </Button>
+        </div>
+      </form>
     </div>
   );
 };
