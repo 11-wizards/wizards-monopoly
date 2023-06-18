@@ -1,9 +1,11 @@
 import type { PlayerColor } from 'types/enums/main';
-import type { Player } from 'game/types/game';
 import { START_PLAYER_BALANCE, START_PLAYER_CARD_ID } from 'constants/main';
 import type { GameSetupFormData } from 'features/GameSetup/types';
+import { GameState } from './gameSlice';
+import { isArray } from 'helpers';
 
 export function convertFormPlayersToPlayersObject(formPlayers: GameSetupFormData): Player[] {
+
   const keys = Object.keys(formPlayers);
   const playersCount = keys.filter((key) => key.includes('name')).length;
   const playersObject: Record<number, { color: PlayerColor; name: string }> = {};
@@ -21,7 +23,7 @@ export function convertFormPlayersToPlayersObject(formPlayers: GameSetupFormData
     }
   });
 
-  const players: Player[] = [];
+  const players: any[] = [];
 
   for (let i = 0; i < playersCount; i += 1) {
     const { name, color } = playersObject[i];
@@ -32,8 +34,20 @@ export function convertFormPlayersToPlayersObject(formPlayers: GameSetupFormData
       color,
       currentCardId: START_PLAYER_CARD_ID,
       balance: START_PLAYER_BALANCE,
+      leave: false,
+
     });
   }
 
   return players;
 }
+
+export const setGameDataLocalStorage = (data: GameState) => localStorage.game = JSON.stringify(data);
+export const getGameDataLocalStorage = (): GameState | null => {
+  const data: GameState = JSON.parse(localStorage.game ?? null);
+  if (!data) return null;
+  const { cardsData, players, randomCards, currentPlayer } = data;
+  if (isArray(cardsData) && isArray(players) && isArray(players) && typeof currentPlayer === 'number') return data;
+  return null;
+}
+export const clearGameDataLocalStorage = ():void =>  localStorage.removeItem('game');

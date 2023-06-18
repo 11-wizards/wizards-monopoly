@@ -1,36 +1,34 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { convertFormPlayersToPlayersObject } from 'app/slices/utils';
+import { convertFormPlayersToPlayersObject, setGameDataLocalStorage } from 'app/slices/utils';
 import type { RootState } from 'app/store';
-import { randomCards } from 'game/data/cards';
+import { cardsData, randomCards } from 'game/data/cards';
 import type { GameSetupFormData } from 'features/GameSetup/types';
 import { players } from 'game/common';
 import { useEffect } from 'react';
-import type { CardData, RandomCard } from 'game/types/cards';
+import { CardLevel, type CardData, type RandomCard, STREET, INFRASTRUCTURE } from 'game/types/cards';
 import { PlayerColor } from 'types/enums/main';
 import type {
   BankTransaction,
   BuyPropertyCardPayload,
   MoneyTransfer,
-  Player,
   Players,
   PropertyCardId,
-  PropertyCards,
   changePositionPlayerPayload,
 } from 'game/types/game';
 
-type GameState = {
-  cardsData: Record<number, CardData> | null;
+export type GameState = {
+  cardsData: Array<CardData>;
   players: Players;
   randomCards: RandomCard[];
-  propertyCards: PropertyCards;
+  currentPlayer: Nullable<number>;
 };
 
 const initialState: GameState = {
-  players: [...players],
-  cardsData: null,
+  currentPlayer: null,
+  players: [],
+  cardsData: cardsData,
   randomCards: randomCards,
-  propertyCards: {},
 };
 
 export const gameSlice = createSlice({
@@ -52,12 +50,49 @@ export const gameSlice = createSlice({
       state.cardsData = cardsData;
     },
 
+    changeCurrentPlayer: (state, action: PayloadAction<number>) => {
+      const playerId = action.payload;
+      state.currentPlayer = playerId;
+      setGameDataLocalStorage(state);
+    },
+
+    loadSavesGame: {
+      reducer: (state, action: PayloadAction<GameState>) => {
+        const loadState = action.payload;
+        Object.keys(state).map(key => {
+          state[key] = loadState[key];
+        })
+
+        // state.players = loadState.players;
+      },
+      prepare: (loadState: any) => {
+        // const players = convertFormPlayersToPlayersObject(formPlayers);
+
+        return { payload: loadState };
+      },
+    },
+
+
+    loadSavesGame1: (state, action: PayloadAction<GameState>) => {
+
+      const loadState = action.payload;
+      state.players = loadState.players;
+      // Object.keys(state).map(key => { 
+
+      //   console.log(state[key]);
+      //   console.log(loadState[key]);
+
+      // })
+
+    },
+
     changeCardData: (state, action) => {
       const { card, title } = action.payload;
       if (!state.cardsData) return;
       const renameCard = { ...state.cardsData[card], title: 'КУПЛЕНО!' };
       state.cardsData = { ...state.cardsData, [card]: renameCard };
     },
+
     changePositionPlayer: (state, action: PayloadAction<changePositionPlayerPayload>) => {
       const { id, currentCardId } = action.payload;
       const newState = [...state.players];
@@ -71,18 +106,7 @@ export const gameSlice = createSlice({
       newState[id] = { ...newState[id], leave: true };
       state.players = newState;
     },
-
-    purchasePropertyCard: (state, action: PayloadAction<BuyPropertyCardPayload>) => {
-      const { propertyCardId, playerId } = action.payload;
-
-      state.propertyCards[propertyCardId].ownerId = playerId;
-    },
-
-    withdrawPropertyCard: (state, action: PayloadAction<PropertyCardId>) => {
-      const { payload } = action;
-
-      state.propertyCards[payload].ownerId = null;
-    },
+    // ДЕНЬГИ ИГРОКА
 
     addMoneyForPlayer: (state, action: PayloadAction<BankTransaction>) => {
       const { amount, playerId } = action.payload;
@@ -90,23 +114,85 @@ export const gameSlice = createSlice({
       state.players.find((player) => player.id === playerId)!.balance += amount;
     },
 
-    deductMoneyFromPlayer: (state, action: PayloadAction<BankTransaction>) => {
-      const { amount, playerId } = action.payload;
-
-      state.players.find((player) => player.id === playerId)!.balance -= amount;
-      console.log(state);
-    },
-
     transferMoneyBetweenPlayers: (state, action: PayloadAction<MoneyTransfer>) => {
       const { senderId, recipientId, amount } = action.payload;
-
       state.players.find((player) => player.id === senderId)!.balance += amount;
       state.players.find((player) => player.id === recipientId)!.balance -= amount;
     },
+
+    deductMoneyFromPlayer: (state, action: PayloadAction<BankTransaction>) => {
+      const { amount, playerId } = action.payload;
+      state.players.find((player) => player.id === playerId)!.balance -= amount;
+    },
+
+
+    // СОБСТВЕННОСТЬ
+
+    transferPropertyCard: (state, action: PayloadAction<BuyPropertyCardPayload>) => {
+      const { cardId, playerId } = action.payload;
+      if (state.cardsData && (state.cardsData[cardId].type === STREET || state.cardsData[cardId].type === INFRASTRUCTURE)) {
+        const property = {
+          ownerId: playerId,
+          color: state.players.find((player) => player.id === playerId)!.color,
+          level: CardLevel.LEVEL_0
+        };
+        if (state.cardsData && state.cardsData[cardId].property === null) {
+        } else if (state.cardsData && state.cardsData[cardId].property) {
+          const level = state.cardsData[cardId].property?.level;
+          if (level) property.level = level;
+        }
+        state.cardsData[cardId].property = property;
+      }
+    },
+
+    withdrawPropertyCard: (state, action: PayloadAction<number>) => {
+      const { payload: cardId } = action;
+
+      if (state.cardsData && state.cardsData[cardId].property !== undefined) {
+        state.cardsData[cardId].property = null;
+      }
+    },
+
+    deprivePropertyPlayer: (state, action: PayloadAction<number>) => {
+      const { payload: playerId } = action;
+      const playerProperty: Array<number> = [];
+      if (state.cardsData) {
+        Object.entries(state.cardsData).map(([key, { property }]) => property?.ownerId === playerId ? playerProperty.push(Number(key)) : '');
+        playerProperty.forEach(item => {
+          if (state.cardsData)
+            state.cardsData[item].property = null
+        });
+      }
+
+    },
+    upgradeLevelCard: (state, action: PayloadAction<number>) => {
+      const { payload: cardId } = action;
+      if (state.cardsData && state.cardsData[cardId]) {
+        const { type, property } = state.cardsData[cardId];
+        const level = property?.level ?? CardLevel.LEVEL_0;
+        if (type === STREET && level < CardLevel.LEVEL_5 && property) {
+          state.cardsData[cardId].property = { ...property, level: level + 1 };
+        }
+      }
+    },
+    downgradeLevelCard: (state, action: PayloadAction<number>) => {
+      const { payload: cardId } = action;
+      if (state.cardsData && state.cardsData[cardId]) {
+        const { type, property } = state.cardsData[cardId];
+        const level = property?.level ?? CardLevel.LEVEL_0;
+        if (type === STREET && level > CardLevel.LEVEL_0 && property) {
+          state.cardsData[cardId].property = { ...property, level: level - 1 };
+        }
+      }
+    },
+
+
   },
 });
 
+export const selectRoot = (rootState: RootState) => rootState.game;
 export const selectPlayers = (rootState: RootState) => rootState.game.players;
+export const selectCurrentPlayer = (rootState: RootState) => rootState.game.currentPlayer;
 export const selectCardsData = (rootState: RootState) => rootState.game.cardsData;
 export const selectRandomCards = (rootState: RootState) => rootState.game.randomCards;
 
@@ -117,10 +203,16 @@ export const {
   changePositionPlayer,
   leavePlayer,
   transferMoneyBetweenPlayers,
+  loadSavesGame,
   addMoneyForPlayer,
   deductMoneyFromPlayer,
-  purchasePropertyCard,
-  withdrawPropertyCard,
+  transferPropertyCard,
+  deprivePropertyPlayer,
+  withdrawPropertyCard, changeCurrentPlayer,
+  upgradeLevelCard,
+  downgradeLevelCard
 } = gameSlice.actions;
 
 export default gameSlice.reducer;
+
+

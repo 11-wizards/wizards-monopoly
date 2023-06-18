@@ -1,4 +1,5 @@
-import { CardFamily, CardTypes, STREET } from 'game/types/cards';
+import { STREET_HOME_SIZE_H, STREET_HOME_SIZE_W } from 'game/constants';
+import { CardFamily, CardLevel, CardTypes, STREET } from 'game/types/cards';
 import type { Card, PlayerPosition, PlayerPositionTarget } from 'game/types/game';
 import { CornersCardsID, MapDirectons } from 'game/types/map';
 
@@ -6,6 +7,7 @@ const { UP, DOWN, LEFT, RIGHT } = MapDirectons;
 const { CARD_TOP_LEFT, CARD_TOP_RIGHT, CARD_BOTTOM_LEFT, CARD_BOTTOM_RIGHT } = CornersCardsID;
 
 // render map
+
 
 function calcCardSize(
   id: number,
@@ -66,16 +68,13 @@ export const drawCard = (
   context: CanvasRenderingContext2D,
   mapSize: number,
   card: Card,
-  cardsData: {
-    priceView: string | undefined;
-    title: string | undefined;
-    type: CardTypes;
-    family: CardFamily;
-  },
-  img: CanvasImageSource | null,
 ): void => {
-  const { x, y, w, h } = card;
-  const { priceView, title, type, family } = cardsData;
+  const { x, y, w, h, img, colorLabel, colorBg, level, type, title, price
+  } = card;
+
+  context.fillStyle = colorBg ?? 'white';
+  context.fillRect(x, y, w, h);
+
   if (img && type !== STREET) {
     let imgSizes = [x, y, w, h];
     if (w === h) {
@@ -85,22 +84,23 @@ export const drawCard = (
     } else {
       imgSizes = [x + w / 1.8 - w / 2 / 2, y + h / 1.8 - w / 2 / 2, w / 3, w / 3];
     }
-
     context.drawImage(img, imgSizes[0], imgSizes[1], imgSizes[2], imgSizes[3]);
   }
+
+
   // eslint-disable-next-line no-param-reassign
-  context.font = `${(mapSize / 100) * 1.5}px Georgia`;
+  context.font = `${(mapSize / 100) * 1.7}px Georgia`;
   // eslint-disable-next-line no-param-reassign
 
-  if (type === STREET) {
-    context.fillStyle = family;
+  if (colorLabel) {
+    context.fillStyle = colorLabel;
     context.fillRect(x, y, w, h / 100 * 30);
     context.fillStyle = 'white';
-
   } else {
     context.fillStyle = 'black';
   }
-  const maxWidthText = w - 10;
+
+  const maxWidthText = w - 5;
   if (title) {
     const titleTextWidth =
       context.measureText(title).width > maxWidthText
@@ -108,22 +108,24 @@ export const drawCard = (
         : context.measureText(title).width;
     context.fillText(title, x + (w / 2 - titleTextWidth / 2), y + 15, maxWidthText);
   }
-  if (priceView) {
+  if (price) {
     context.fillStyle = 'black';
-    const priceViewTextWidth = context.measureText(priceView).width;
-    context.fillText(priceView, x + (w / 2 - priceViewTextWidth / 2), y + h - 5, maxWidthText);
+    const priceTextWidth = context.measureText(price + '$').width;
+    context.fillText(price + '$', x + (w / 2 - priceTextWidth / 2), y + h - 5, maxWidthText);
   }
 
+  if (type === STREET && level !== CardLevel.LEVEL_0) {
+    drawCardLevel(context, level, card, colorBg ? 'white' : colorLabel);
+  }
+
+
+  context.strokeStyle = 'black';
   context.strokeRect(x, y, w, h);
-
-  if (type === STREET) {
-    drawCardUpgrade(context, 0, card, family);
-  }
 };
 
 // player move
 
-const drawCardUpgrade = (
+const drawCardLevel = (
   context: CanvasRenderingContext2D,
   level: number,
   card: Card,
@@ -132,22 +134,22 @@ const drawCardUpgrade = (
   const { x, y, w, h } = card;
   const baseSize = w > h ? h : w;
 
-  let homeW = baseSize / 100 * 16;
-  let homeH = baseSize / 100 * 13;
-  let roofW = baseSize / 100 * 16;
+  let homeW = baseSize / 100 * STREET_HOME_SIZE_W;
+  let homeH = baseSize / 100 * STREET_HOME_SIZE_H;
+  let roofW = baseSize / 100 * STREET_HOME_SIZE_W;
   let homeY = y + ((h - homeH) / 1.9);
   let homeX = x;
 
   let roofH = baseSize / 100 * 8;
 
-  if (level === 5) {
-    roofW *= 2;
-    roofH *= 2;
-    homeW *= 2;
-    homeH *= 2;
-    homeX = x + ((w - homeW) / 2);
-  }
-  if (!level) {
+  // if (!level || level === 5) {
+  //   roofW *= 2;
+  //   roofH *= 2;
+  //   homeW *= 2;
+  //   homeH *= 2;
+  //   homeX = x + ((w - homeW) / 2);
+  // }
+  if (!level || level === 5) {
     roofW *= 1.5;
     roofH *= 1.5;
     homeW *= 1.5;
@@ -175,23 +177,22 @@ const drawCardUpgrade = (
     drawHome(context, { homeX, homeY, homeW, homeH, roofLX, roofLY, roofCX, roofCY, roofRX, roofRY });
   } else {
 
-
     for (let i = 1; i <= level; i++) {
       if (i === 1) {
         homeX = x + (w / 4) * 1 - homeW / 2;
-        homeY = y + (h / 4) * 1 + homeH;
+        homeY = y + (h / 4) * 1.2 + homeH;
       }
       if (i === 2) {
         homeX = x + (w / 3) * 2;
       }
       if (i === 3) {
         homeX = x + (w / 4) * 1 - homeW / 2;
-        homeY = y + (h / 2) * 1 + homeH;
+        homeY = y + (h / 2) * 1.2 + homeH;
       }
       if (i === 4) {
         homeX = x + (w / 3) * 2;
       }
-      console.log(homeX);
+
       const roofLX = homeX - baseSize / 100 * 3;
       const roofLY = homeY;
       const roofCX = homeX + roofW / 2;

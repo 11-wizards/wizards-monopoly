@@ -28,3 +28,8 @@ export const modalTaxCard = ({ title, amount, next }): any => {
   };
   modal.info(modalData);
 };
+
+
+export const modalPlayerProperty = () => { 
+  
+}

@@ -14,10 +14,10 @@ export const useCardsDataLoad = (): [
   };
 
   useEffect(() => {
-    cardsData.forEach(({ title, priceView, price = undefined, type, family, imgSrc }, key) => {
+    cardsData.forEach((card, key) => {
       const cardImage = new Image();
-      cardImage.src = imgSrc;
-      const cardData = { title, priceView, price, type, family, imgSrc };
+      cardImage.src = card.imgSrc;
+      const cardData = { ...card };
 
       setData((prev) => ({ ...prev, [key]: cardData }));
       cardImage.onload = () => onLoadImg({ [key]: cardImage });

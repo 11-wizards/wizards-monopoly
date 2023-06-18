@@ -7,8 +7,8 @@ import { Dice } from './Dice';
 
 type DicesProps = {
   dicesNumbers: Array<number>;
-  moveStep: StepsMove;
-  nextStep: () => void;
+  render: boolean;
+  stopRender: () => void;
 };
 type Dice = {
   number: number;
@@ -17,7 +17,7 @@ type Dice = {
   speed: number;
 };
 
-export const Dices: FC<DicesProps> = ({ dicesNumbers, nextStep, moveStep }) => {
+export const Dices: FC<DicesProps> = ({ dicesNumbers, stopRender, render }) => {
   const [animateOneDice, setAnimateOneDice] = useState<boolean>(true);
   const [animateTwoDice, setAnimateTwoDice] = useState<boolean>(true);
 
@@ -46,14 +46,14 @@ export const Dices: FC<DicesProps> = ({ dicesNumbers, nextStep, moveStep }) => {
   };
 
   useEffect(() => {
-    if (moveStep !== DIECES) return;
+    if (!render) return;
     if (!Array.isArray(dicesNumbers)) return;
     startAnimateDices(dicesNumbers);
   }, [dicesNumbers]);
 
   useEffect(() => {
     if (animateOneDice || animateTwoDice) return;
-    nextStep();
+    stopRender();
   }, [animateOneDice, animateTwoDice]);
 
   return (

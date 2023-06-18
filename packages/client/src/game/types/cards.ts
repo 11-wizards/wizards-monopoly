@@ -1,15 +1,19 @@
+import { PlayerColor } from "types/enums/main";
+
 export enum CardTypes {
-  ZERO = 0,
-  STREET = 'STREET',
-  PRISON = 'PRISON',
-  ARREST = 'ARREST',
-  INFRASTRUCTURE = 'INFRASTRUCTURE',
-  TAX = 'TAX',
-  RANDOM = 'RANDOM',
+  ZERO,
+  STREET,
+  PRISON,
+  ARREST,
+  INFRASTRUCTURE,
+  TAX,
+  RANDOM,
 }
 
 export enum CardFamily {
-  NONE = 'NONE',
+  NONE,
+  RAILWAY,
+  RESOURCES,
   STREET_1 = '#933f3f',
   STREET_2 = '#91caff',
   STREET_3 = '#cc00ff',
@@ -18,8 +22,15 @@ export enum CardFamily {
   STREET_6 = '#ffe000',
   STREET_7 = '#22811c',
   STREET_8 = '#1b2d89',
-  RAILWAY = 'RAILWAY',
-  RESOURCES = 'RESOURCES',
+}
+
+export enum CardLevel {
+  LEVEL_0,
+  LEVEL_1,
+  LEVEL_2,
+  LEVEL_3,
+  LEVEL_4,
+  LEVEL_5,
 }
 export const {
   NONE,
@@ -37,23 +48,37 @@ export const {
 
 export const { ZERO, STREET, PRISON, ARREST, INFRASTRUCTURE, TAX, RANDOM } = CardTypes;
 
-export type CardsData = {
-  imgSrc: string;
-  price?: number;
-  priceView: string;
-  title: string;
-  type: CardTypes;
-  family: CardFamily;
-};
 
 export type CardData = {
   imgSrc: string;
-  price?: number;
-  priceView: string;
   title: string;
   type: CardTypes;
   family: CardFamily;
+  price?: number;
+  collateralCost?: number;
+  upgradeCost?: {
+    home: number,
+    hotel: number,
+  };
+  rent?: RentCard;
+  property?: Nullable<PropertyCard>;
 };
+
+export type RentCard = {
+  level_0: number,
+  level_1: number,
+  level_2: number,
+  level_3: number,
+  level_4: number,
+  level_5: number,
+};
+
+export type PropertyCard = {
+  level: CardLevel;
+  color: PlayerColor;
+  ownerId: Nullable<number>;
+};
+
 
 export type RandomCard = {
   desc: string;
