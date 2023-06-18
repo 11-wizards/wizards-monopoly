@@ -10,3 +10,4 @@ export { ProfileChangePasswordPage } from './ProfileChangePasswordPage';
 export { RegisterPage } from './RegisterPage';
 export { ServerErrorPage } from './ServerErrorPage';
 export { StartGamePage } from './StartGamePage';
+export { TopicPage } from './TopicPage';

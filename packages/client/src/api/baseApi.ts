@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { API_URL } from 'constants/main';
+import { FORUM_BACKEND_API } from 'constants/forum';
 
 export const baseApi = createApi({
-  reducerPath: 'oauthApi',
+  reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: API_URL,
+    baseUrl: FORUM_BACKEND_API,
   }),
+  tagTypes: ['COMMENTS', 'TOPICS'],
   endpoints: () => ({}),
 });

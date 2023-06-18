@@ -5,24 +5,25 @@ import { ErrorApi } from './api.error';
 
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    // return next(); // Раскомментить для доступа без авторизации
-    const auth = (req.headers.auth as string) ?? '';
-    const [login, password] = auth.split('||');
-    if (!login || !password) {
-      return sendResponsesFromApi(res, createErrorResponse(403, 'Клиент не авторизован'));
-    }
-    const response = await fetch('https://ya-praktikum.tech/api/v2/auth/signin', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ login, password }),
-    });
-
-    if (response.status === 200) {
-      next();
-      return;
-    } else {
-      return sendResponsesFromApi(res, createErrorResponse(403, 'Клиент не авторизован'));
-    }
+    return next();
+    // FIXME: Раскомментить для доступа c авторизацией
+    // const auth = (req.headers.auth as string) ?? '';
+    // const [login, password] = auth.split('||');
+    // if (!login || !password) {
+    //   return sendResponsesFromApi(res, createErrorResponse(403, 'Клиент не авторизован'));
+    // }
+    // const response = await fetch('https://ya-praktikum.tech/api/v2/auth/signin', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ login, password }),
+    // });
+    //
+    // if (response.status === 200) {
+    //   next();
+    //   return;
+    // } else {
+    //   return sendResponsesFromApi(res, createErrorResponse(403, 'Клиент не авторизован'));
+    // }
   } catch (error: unknown) {
     let statusCode = 500;
     let mgs = 'Произошла ошибка';

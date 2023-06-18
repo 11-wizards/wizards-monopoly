@@ -35,6 +35,14 @@
   "forum.posts.response": "user response",
   "forum.title": "Monopoly Game User Forum",
 
+  "forum.comment.newComment": "New Comment",
+  "forum.comment.sendBtn": "Send",
+  "forum.comment.repliesBtnCount": "Show all replies",
+  "forum.comment.repliesBtn": "Reply",
+  "forum.new-topic.name": "Theme",
+  "forum.new-topic.content": "Content",
+  "forum.reply.replyBtn": "Reply",
+
   "header.navbar.forum": "Forum",
   "header.navbar.leaderboard": "Leaderboard",
   "header.navbar.profile": "Profile",

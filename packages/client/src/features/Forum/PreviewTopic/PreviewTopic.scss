@@ -1,0 +1,33 @@
+.preview-topic {
+  padding: $paddingL;
+  background-color: $whiteColor;
+
+  @include space-border;
+
+  &__wrapper {
+    display: grid;
+    gap: 15px;
+    text-decoration: none;
+  }
+
+  &__title {
+    margin-top: 0;
+    margin-bottom: $paddingXS;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__comments {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-size: $fontSizeS;
+    font-weight: 400;
+    line-height: $fontSizeM;
+    color: $darkGrayColor;
+    letter-spacing: 0.03em;
+  }
+}

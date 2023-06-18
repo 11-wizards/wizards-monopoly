@@ -1,3 +1,23 @@
+@mixin reset-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+@mixin space {
+  padding: $paddingL;
+}
+
+@mixin space-border {
+  border: 1px solid $lightGrayColor;
+  border-radius: 6px;
+}
+
+@mixin discussionSpace {
+  padding: $paddingM;
+  border-radius: 0 4px 4px 0;
+}
+
 @mixin redirect-box {
   display: flex;
   gap: 5px;

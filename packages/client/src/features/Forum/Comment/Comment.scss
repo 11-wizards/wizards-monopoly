@@ -1,0 +1,22 @@
+.comment {
+  &__replies {
+    margin-top: 15px;
+  }
+
+  &__space {
+    @include space-border;
+    @include discussionSpace;
+
+    width: 100%;
+    border-left: 1px solid $orangeColor;
+  }
+
+  &__btn-replies {
+    align-self: flex-end;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+  }
+}
