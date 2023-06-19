@@ -1,7 +1,9 @@
 import type { PlayerColor } from 'types/enums/main';
-import type { Player } from 'types/game';
 import { START_PLAYER_BALANCE, START_PLAYER_CARD_ID } from 'constants/main';
 import type { GameSetupFormData } from 'features/GameSetup/types';
+import { isArray } from 'helpers';
+import type { Player } from 'game/types/game';
+import type { GameState } from './gameSlice';
 
 export function convertFormPlayersToPlayersObject(formPlayers: GameSetupFormData): Player[] {
   const keys = Object.keys(formPlayers);
@@ -23,7 +25,7 @@ export function convertFormPlayersToPlayersObject(formPlayers: GameSetupFormData
 
   const players: Player[] = [];
 
-  for (let i = 1; i <= playersCount; i += 1) {
+  for (let i = 0; i < playersCount; i += 1) {
     const { name, color } = playersObject[i];
     const id = i;
     players.push({
@@ -32,8 +34,40 @@ export function convertFormPlayersToPlayersObject(formPlayers: GameSetupFormData
       color,
       currentCardId: START_PLAYER_CARD_ID,
       balance: START_PLAYER_BALANCE,
+      leave: false,
     });
   }
 
   return players;
 }
+
+export const setGameDataLocalStorage = (data: GameState) => {
+  if (typeof window !== 'undefined') {
+    localStorage.game = JSON.stringify(data);
+  }
+};
+export const getGameDataLocalStorage = (): GameState | null => {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+  const data: string = localStorage.getItem('game') as string;
+  if (!data || typeof data !== 'string') return null;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const parsedData: GameState = JSON.parse(data);
+
+  const { cardsData, players, randomCards, currentPlayer } = parsedData;
+  if (
+    isArray(cardsData) &&
+    isArray(players) &&
+    isArray(randomCards) &&
+    typeof currentPlayer === 'number'
+  )
+    return parsedData;
+
+  return null;
+};
+export const clearGameDataLocalStorage = (): void => {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('game');
+  }
+};

@@ -1,15 +1,13 @@
-import { useOAuthSignIn } from 'hooks/useOAuthSignIn';
+// import { useOAuthSignIn } from 'hooks/useOAuthSignIn';
 import type { FC } from 'react';
 import { Landing } from 'features/Landing';
 
 import './MainPage.scss';
 
-export const MainPage: FC = () => {
-  useOAuthSignIn();
+export const MainPage: FC = () => (
+  // useOAuthSignIn();
 
-  return (
-    <div className="wrapper_mainPage">
-      <Landing />
-    </div>
-  );
-};
+  <div className="wrapper_mainPage">
+    <Landing />
+  </div>
+);

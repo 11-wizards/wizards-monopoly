@@ -13,6 +13,7 @@ type OAuthProps = {
 
 export const OAuth: FC<OAuthProps> = ({ className = '' }) => {
   const { formatMessage: fm } = useIntl();
+
   const { data, isLoading } = useGetServiceIdQuery({ redirectUri: OAUTH_REDIRECT_URI });
 
   const handleOauthClick = () => {

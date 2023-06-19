@@ -27,7 +27,7 @@ export const InputPlayerColor: FC<InputPlayerColorProps> = ({
   const inputName = `player_color_${index}`;
 
   return (
-    <Form.Item label={fm(messages.playerColor, { num: index })} wrapperCol={{ span: 24 }}>
+    <Form.Item label={fm(messages.playerColor, { num: index + 1 })} wrapperCol={{ span: 24 }}>
       <Controller
         name={inputName}
         control={control}
