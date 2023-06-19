@@ -16,6 +16,11 @@ services:
       - app-net
     environment:
       SERVER_PORT: 3001
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PORT: 5432
+      DATABASE_URL: postgres
     command: sh -c "./wait-for postgres:5432 -- node ./index.js"
     depends_on:
       - postgres
