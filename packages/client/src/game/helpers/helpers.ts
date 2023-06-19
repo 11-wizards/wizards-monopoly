@@ -136,9 +136,9 @@ const drawCardLevel = (
   // const roofCY = homeY - roofH;
   // const roofRX = homeX + homeW + baseSize / 100 * 3;
   // const roofRY = homeY;
-  // eslint-disable-next-line no-param-reassign
+
   context.strokeStyle = color;
-  // eslint-disable-next-line no-param-reassign
+
   context.fillStyle = color;
 
   if (level === 5 || !level) {
@@ -207,9 +207,9 @@ export const drawCard = (
 ): void => {
   const { x, y, w, h, img, colorLabel, colorBg, level, type, title, price } = card;
   const bgColor = colorBg ?? 'white';
-  // eslint-disable-next-line no-param-reassign
+
   context.fillStyle = bgColor;
-  // eslint-disable-next-line no-param-reassign
+
   context.fillRect(x, y, w, h);
 
   if (img && type !== STREET) {
@@ -224,48 +224,41 @@ export const drawCard = (
     context.drawImage(img, imgSizes[0], imgSizes[1], imgSizes[2], imgSizes[3]);
   }
 
-  // eslint-disable-next-line no-param-reassign
   context.font = `${(mapSize / 100) * 1.7}px Georgia`;
-  // eslint-disable-next-line no-param-reassign
 
   if (colorLabel && typeof colorLabel === 'string') {
-    // eslint-disable-next-line no-param-reassign
     context.fillStyle = colorLabel;
-    // eslint-disable-next-line no-param-reassign
+
     context.fillRect(x, y, w, (h / 100) * 30);
-    // eslint-disable-next-line no-param-reassign
+
     context.fillStyle = 'white';
   } else {
-    // eslint-disable-next-line no-param-reassign
     context.fillStyle = 'black';
   }
 
   const maxWidthText = w - 5;
   if (title) {
     const titleTextWidth =
-      // eslint-disable-next-line no-param-reassign
       context.measureText(title).width > maxWidthText
         ? maxWidthText
-        : // eslint-disable-next-line no-param-reassign
-        context.measureText(title).width;
-    // eslint-disable-next-line no-param-reassign
+        : context.measureText(title).width;
+
     context.fillText(title, x + (w / 2 - titleTextWidth / 2), y + 15, maxWidthText);
   }
   if (price) {
-    // eslint-disable-next-line no-param-reassign
     context.fillStyle = 'black';
-    // eslint-disable-next-line no-param-reassign
+
     const priceTextWidth = context.measureText(`${price}$`).width;
-    // eslint-disable-next-line no-param-reassign
+
     context.fillText(`${price}$`, x + (w / 2 - priceTextWidth / 2), y + h - 5, maxWidthText);
   }
 
   if (type === STREET && level !== CardLevel.LEVEL_0 && typeof colorLabel === 'string') {
     drawCardLevel(context, level, card, colorBg ? 'white' : colorLabel);
   }
-  // eslint-disable-next-line no-param-reassign
+
   context.strokeStyle = 'black';
-  // eslint-disable-next-line no-param-reassign
+
   context.strokeRect(x, y, w, h);
 };
 

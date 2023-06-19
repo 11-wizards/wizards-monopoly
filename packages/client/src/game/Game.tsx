@@ -5,19 +5,16 @@ import { useAppDispatch, useAppSelector, useCardsDataLoad, useGameViewsCalc } fr
 import {
   changeCurrentPlayer,
   changePositionPlayer,
-  deprivePropertyPlayer,
   selectCardsData,
   selectCurrentPlayer,
   selectPlayers,
   selectRoot,
 } from 'app/slices/gameSlice';
 import type { TypeUseGameViewsCalc } from 'hooks/useGameViewsCalc';
-import {
-  STREET,
-} from 'game/types/cards';
-import { Button } from 'antd';
+import { STREET } from 'game/types/cards';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'core/Router';
+import { setGameDataLocalStorage } from 'app/slices/utils';
 import { rollDices } from './helpers/helpers';
 import { PlayerInterface } from './Views/PlayerInterface';
 import { Dices } from './Views/Dices/Dices';
@@ -33,8 +30,6 @@ const GameRoot = () => {
 
   const players = useAppSelector(selectPlayers);
   const root = useAppSelector(selectRoot);
-
-  console.log(root);
 
   const cardsData = useAppSelector(selectCardsData);
 
@@ -84,8 +79,6 @@ const GameRoot = () => {
     const oldTarget = players[id].currentCardId ?? 0;
     const target = steps + oldTarget;
     if (target > NUMBER_CARDS - 1) {
-      console.log(`круг пройден:${target}`);
-
       return target - NUMBER_CARDS;
     }
 
@@ -98,6 +91,11 @@ const GameRoot = () => {
     nextMoveSteps(DIECES);
     setDicesNumbers(dicesNumber);
   };
+
+  useEffect(() => {
+    if (!players.length) return;
+    setGameDataLocalStorage(root);
+  }, [currentPlayerStep]);
 
   useEffect(() => {
     if (players.length) return;
@@ -158,7 +156,6 @@ const GameRoot = () => {
 
   const CardsDataInterface = Object.values(cardsData).filter(({ property }) => property);
 
-
   return (
     <div className="game-views" ref={gameViewsBlock} style={{ height: mapSize, width: mapSize }}>
       <Dices
@@ -187,7 +184,5 @@ const GameRoot = () => {
     </div>
   );
 };
-
-
 
 export const Game = GameRoot;

@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { convertFormPlayersToPlayersObject, setGameDataLocalStorage } from 'app/slices/utils';
+import { convertFormPlayersToPlayersObject } from 'app/slices/utils';
 import type { RootState } from 'app/store';
 import { cardsData, randomCards } from 'game/data/cards';
 import type { GameSetupFormData } from 'features/GameSetup/types';
@@ -55,7 +55,6 @@ export const gameSlice = createSlice({
     changeCurrentPlayer: (state, action: PayloadAction<number>) => {
       const playerId = action.payload;
       state.currentPlayer = playerId;
-      setGameDataLocalStorage(state);
     },
 
     loadSavesGame: {
@@ -124,9 +123,7 @@ export const gameSlice = createSlice({
           color: state.players.find((player) => player.id === playerId)!.color,
           level: CardLevel.LEVEL_0,
         };
-        if (state.cardsData && state.cardsData[cardId].property === null) {
-          console.log(123);
-        } else if (state.cardsData && state.cardsData[cardId].property) {
+        if (state.cardsData && state.cardsData[cardId].property) {
           const level = state.cardsData[cardId].property?.level;
           if (level) property.level = level;
         }

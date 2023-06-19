@@ -42,9 +42,14 @@ export function convertFormPlayersToPlayersObject(formPlayers: GameSetupFormData
 }
 
 export const setGameDataLocalStorage = (data: GameState) => {
-  localStorage.game = JSON.stringify(data);
+  if (typeof window !== 'undefined') {
+    localStorage.game = JSON.stringify(data);
+  }
 };
 export const getGameDataLocalStorage = (): GameState | null => {
+  if (typeof window === 'undefined') {
+    return null;
+  }
   const data: string = localStorage.getItem('game') as string;
   if (!data || typeof data !== 'string') return null;
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -61,4 +66,8 @@ export const getGameDataLocalStorage = (): GameState | null => {
 
   return null;
 };
-export const clearGameDataLocalStorage = (): void => localStorage.removeItem('game');
+export const clearGameDataLocalStorage = (): void => {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('game');
+  }
+};
