@@ -6,13 +6,15 @@ import { useAppDispatch, useAppSelector, useCardsDataLoad, useGameViewsCalc } fr
 import {
   // для тестов
   // addMoneyForPlayer,
-  // leavePlayer,
+  // transferPropertyCard,
+  leavePlayer,
   changeCurrentPlayer,
   changePositionPlayer,
   selectCardsData,
   selectCurrentPlayer,
   selectPlayers,
   selectRoot,
+  writeResults,
 } from 'app/slices/gameSlice';
 import type { TypeUseGameViewsCalc } from 'hooks/useGameViewsCalc';
 import { STREET } from 'game/types/cards';
@@ -34,6 +36,8 @@ const GameRoot = () => {
 
   const players = useAppSelector(selectPlayers);
   const root = useAppSelector(selectRoot);
+
+  console.log(root);
 
   const cardsData = useAppSelector(selectCardsData);
 
@@ -59,16 +63,20 @@ const GameRoot = () => {
     });
   };
 
+  // CURRENT CARD ID не совпадает с canvas
   const changePlayer = (player?: number): boolean => {
     const winner = players.filter(({ leave }) => !leave);
     if (winner.length < 2) {
       alert(`Победитель: ${winner[0].name}`);
+      dispatch(writeResults(winner[0].id));
+      navigate(ROUTES.END_GAME_PAGE.path);
 
       return false;
     }
-    const currentPlayer = player || currentPlayerStep;
+    const currentPlayer = player !== undefined ? player : currentPlayerStep;
 
     const nextPlayer = currentPlayer === null ? 0 : (currentPlayer + 1) % players.length;
+    console.log(player);
 
     if (players[nextPlayer].leave) {
       changePlayer(nextPlayer);
@@ -93,6 +101,7 @@ const GameRoot = () => {
     if (moveStep !== INITIAL) return;
     const dicesNumber = rollDices();
     nextMoveSteps(DIECES);
+    // setDicesNumbers([1, 1]);
     setDicesNumbers(dicesNumber);
   };
 
@@ -160,11 +169,49 @@ const GameRoot = () => {
     players,
   };
   // для тестов
-  // const testBtn = () => {
-  //   dispatch(leavePlayer(1));
-  //   //
-  //   // dispatch(addMoneyForPlayer({ amount: 1000, playerId: 1 }));
-  // }
+  const testBtn0 = () => {
+    console.log(123123);
+    // dispatch(transferPropertyCard({ cardId: 1, playerId: 0 }));
+    // dispatch(transferPropertyCard({ cardId: 3, playerId: 0 }));
+    // dispatch(transferPropertyCard({ cardId: 5, playerId: 0 }));
+    dispatch(leavePlayer(0));
+    dispatch(writeResults(0));
+    // dispatch(addMoneyForPlayer({ amount: 3000, playerId: 0 }));
+  };
+  const testBtn1 = () => {
+    // dispatch(transferPropertyCard({ cardId: 6, playerId: 1 }));
+    // dispatch(transferPropertyCard({ cardId: 8, playerId: 1 }));
+    // dispatch(transferPropertyCard({ cardId: 9, playerId: 1 }));
+    dispatch(leavePlayer(1));
+    dispatch(writeResults(1));
+    // dispatch(addMoneyForPlayer({ amount: 100, playerId: 1 }));
+  };
+  const testBtn2 = () => {
+    // dispatch(transferPropertyCard({ cardId: 39, playerId: 2 }));
+    // dispatch(transferPropertyCard({ cardId: 37, playerId: 2 }));
+    dispatch(leavePlayer(2));
+    dispatch(writeResults(2));
+    // dispatch(addMoneyForPlayer({ amount: 500, playerId: 2 }));
+  };
+  const testBtn3 = () => {
+    // dispatch(transferPropertyCard({ cardId: 14, playerId: 3 }));
+    // dispatch(transferPropertyCard({ cardId: 15, playerId: 3 }));
+    dispatch(leavePlayer(3));
+    dispatch(writeResults(3));
+    // dispatch(addMoneyForPlayer({ amount: 500, playerId: 3 }));
+  };
+  const testBtn4 = () => {
+    // dispatch(transferPropertyCard({ cardId: 21, playerId: 4 }));
+    dispatch(leavePlayer(4));
+    dispatch(writeResults(4));
+    // dispatch(addMoneyForPlayer({ amount: 500, playerId: 4 }));
+  };
+  const testBtn5 = () => {
+    // dispatch(transferPropertyCard({ cardId: 23, playerId: 5 }));
+    dispatch(leavePlayer(5));
+    dispatch(writeResults(5));
+    // dispatch(addMoneyForPlayer({ amount: 200, playerId:5 }));
+  };
 
   const CardsDataInterface = Object.values(cardsData).filter(({ property }) => property);
 
@@ -176,7 +223,26 @@ const GameRoot = () => {
         render={moveStep === DIECES}
       />
       {/* для тестов */}
-      {/* <button onClick={testBtn}>TEST</button> */}
+      <div style={{ position: 'absolute', zIndex: 10 }}>
+        <button onClick={testBtn0} type="button">
+          TEST0
+        </button>
+        <button onClick={testBtn1} type="button">
+          TEST1
+        </button>
+        <button onClick={testBtn2} type="button">
+          TEST2
+        </button>
+        <button onClick={testBtn3} type="button">
+          TEST3
+        </button>
+        <button onClick={testBtn4} type="button">
+          TEST4
+        </button>
+        <button onClick={testBtn5} type="button">
+          TEST5
+        </button>
+      </div>
       <Map
         mapData={mapData}
         playerTarget={newTargetPlayer}

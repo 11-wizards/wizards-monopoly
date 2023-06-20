@@ -26,7 +26,7 @@ export type GameState = {
   gameTimeStamp: number;
   players: Array<Player>;
   randomCards: RandomCard[];
-  results: Array<GamePlayerResult> | null;
+  results: Nullable<Array<GamePlayerResult>>;
 };
 
 const initialState: GameState = {
@@ -97,13 +97,40 @@ export const gameSlice = createSlice({
       const newState = [...state.players];
       newState[id] = { ...newState[id], leave: true };
       state.players = newState;
-      if (state.results) {
-        const lostPlayers = state.players.filter((player) => !player.leave).length;
-        console.log(lostPlayers, state.players.length);
-        state.results.find((result) => result.key === id)!.gameTime = calcGameTime(
-          new Date(state.gameTimeStamp),
-          new Date(),
-        );
+      // if (state.results) {
+      //   const newResults = [...state.results];
+      //   const resultPlayer = newResults.find((result) => result.key === id);
+      //   if (resultPlayer) {
+      //     const place = state.players.filter((player) => !player.leave).length + 1;
+      //     const gameTime = calcGameTime(
+      //       new Date(state.gameTimeStamp),
+      //       new Date(),
+      //     );
+      //     resultPlayer.gameTime = gameTime;
+      //     resultPlayer.place = place;
+      //     if (place === 2) {
+      //       const winner = state.players.filter((player) => !player.leave)
+      //     }
+
+      //   }
+
+      // }
+    },
+
+    writeResults: (state, action: PayloadAction<number>) => {
+      const id = action.payload;
+      if (!state.results) return;
+      const resultPlayer = {
+        ...state.results.find((result) => result.key === id),
+      } as GamePlayerResult;
+
+      if (resultPlayer) {
+        const playersNoLeave = state.players.filter((player) => !player.leave).length;
+        const place = playersNoLeave > 1 ? playersNoLeave + 1 : playersNoLeave;
+        const gameTime = calcGameTime(new Date(state.gameTimeStamp), new Date());
+        const newState = [...state.results];
+        newState[id] = { ...resultPlayer, place, gameTime };
+        state.results = newState;
       }
     },
     // ДЕНЬГИ ИГРОКА
@@ -117,6 +144,7 @@ export const gameSlice = createSlice({
     },
 
     transferMoneyBetweenPlayers: (state, action: PayloadAction<MoneyTransfer>) => {
+      // +ПРОВЕРКУ НА ПОВТОРНОЕ ДОБАВЛЕНИЕ
       const { senderId, recipientId, amount } = action.payload;
       state.players.find((player) => player.id === senderId)!.balance += amount;
       state.players.find((player) => player.id === recipientId)!.balance -= amount;
@@ -199,6 +227,7 @@ export const gameSlice = createSlice({
 
 export const selectRoot = (rootState: RootState) => rootState.game;
 export const selectPlayers = (rootState: RootState) => rootState.game.players;
+export const selectResults = (rootState: RootState) => rootState.game.results;
 export const selectCurrentPlayer = (rootState: RootState) => rootState.game.currentPlayer;
 export const selectCardsData = (rootState: RootState) => rootState.game.cardsData;
 export const selectRandomCards = (rootState: RootState) => rootState.game.randomCards;
@@ -206,6 +235,7 @@ export const selectRandomCards = (rootState: RootState) => rootState.game.random
 export const {
   definePlayers,
   changePositionPlayer,
+  writeResults,
   leavePlayer,
   transferMoneyBetweenPlayers,
   loadSavesGame,
