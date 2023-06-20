@@ -83,8 +83,6 @@ const drawHome = (
     roofRY,
   }: Record<string, number>,
 ) => {
-  // context.strokeStyle = 'red';
-  // context.fillStyle = 'red';
   context.beginPath();
   context.fillRect(homeX, homeY, homeW, homeH);
   context.stroke();
@@ -115,13 +113,6 @@ const drawCardLevel = (
 
   let roofH = (baseSize / 100) * 8;
 
-  // if (!level || level === 5) {
-  //   roofW *= 2;
-  //   roofH *= 2;
-  //   homeW *= 2;
-  //   homeH *= 2;
-  //   homeX = x + ((w - homeW) / 2);
-  // }
   if (!level || level === 5) {
     roofW *= 1.5;
     roofH *= 1.5;
@@ -129,13 +120,6 @@ const drawCardLevel = (
     homeH *= 1.5;
     homeX = x + (w - homeW) / 2;
   }
-
-  // const roofLX = homeX - baseSize / 100 * 3;
-  // const roofLY = homeY;
-  // const roofCX = homeX + roofW / 2;
-  // const roofCY = homeY - roofH;
-  // const roofRX = homeX + homeW + baseSize / 100 * 3;
-  // const roofRY = homeY;
 
   context.strokeStyle = color;
 
@@ -161,8 +145,7 @@ const drawCardLevel = (
       roofRY,
     });
   } else {
-    // eslint-disable-next-line
-    for (let i = 1; i <= level; i++) {
+    for (let i = 1; i <= level; i += 1) {
       if (i === 1) {
         homeX = x + (w / 4) * 1 - homeW / 2;
         homeY = y + (h / 4) * 1.2 + homeH;

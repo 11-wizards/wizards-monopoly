@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
+
 import type { StepsMove } from 'game/types/game';
 import { DIECES, MOVE, INITIAL, RENDER, ACTION } from 'game/types/game';
 import { useAppDispatch, useAppSelector, useCardsDataLoad, useGameViewsCalc } from 'hooks';
 import {
+  // для тестов
+  // addMoneyForPlayer,
+  // leavePlayer,
   changeCurrentPlayer,
   changePositionPlayer,
   selectCardsData,
@@ -33,7 +37,7 @@ const GameRoot = () => {
 
   const cardsData = useAppSelector(selectCardsData);
 
-  const [_cardsDataLoads, cardsImages] = useCardsDataLoad();
+  const [_cardsDataLoads, cardsImages] = useCardsDataLoad(cardsData);
 
   const mapParams: TypeUseGameViewsCalc = useGameViewsCalc();
 
@@ -94,8 +98,10 @@ const GameRoot = () => {
 
   useEffect(() => {
     if (!players.length) return;
+    console.log(root);
+
     setGameDataLocalStorage(root);
-  }, [currentPlayerStep]);
+  }, [root]);
 
   useEffect(() => {
     if (players.length) return;
@@ -153,6 +159,12 @@ const GameRoot = () => {
     cards: mapCardsData,
     players,
   };
+  // для тестов
+  // const testBtn = () => {
+  //   dispatch(leavePlayer(1));
+  //   //
+  //   // dispatch(addMoneyForPlayer({ amount: 1000, playerId: 1 }));
+  // }
 
   const CardsDataInterface = Object.values(cardsData).filter(({ property }) => property);
 
@@ -163,7 +175,8 @@ const GameRoot = () => {
         stopRender={() => nextMoveSteps(MOVE)}
         render={moveStep === DIECES}
       />
-
+      {/* для тестов */}
+      {/* <button onClick={testBtn}>TEST</button> */}
       <Map
         mapData={mapData}
         playerTarget={newTargetPlayer}
@@ -174,7 +187,6 @@ const GameRoot = () => {
         }
       />
       <PlayerInterface
-        currentStep={moveStep}
         blockRef={gameViewsBlock}
         players={players}
         cards={CardsDataInterface}

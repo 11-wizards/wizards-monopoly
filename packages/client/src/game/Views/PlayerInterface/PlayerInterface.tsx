@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import type { FC } from 'react';
-import type { Player, StepsMove } from 'game/types/game';
+import type { Player } from 'game/types/game';
 import { useFullScreenApi } from 'hooks/useFullScreenApi';
 import type { CardData } from 'game/types/cards';
 
@@ -10,21 +10,17 @@ type PlayerInterfaceProps = {
   blockRef: React.MutableRefObject<HTMLDivElement>;
   cards: Array<CardData>;
   clickStartPlayerTurn: () => void;
-  currentStep: StepsMove;
   players: Array<Player>;
   size: number;
 };
 
 export const PlayerInterface: FC<PlayerInterfaceProps> = ({
-  currentStep,
   blockRef,
   cards,
   size,
   clickStartPlayerTurn,
   players,
 }) => {
-  console.log(currentStep);
-
   const fullScreenToggle = useFullScreenApi(blockRef);
 
   return (

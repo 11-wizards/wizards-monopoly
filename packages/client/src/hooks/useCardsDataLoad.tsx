@@ -1,11 +1,9 @@
-import { cardsData } from 'game/data/cards';
 import { useEffect, useState } from 'react';
 import type { CardData } from 'game/types/cards';
 
-export const useCardsDataLoad = (): [
-  Record<number, CardData> | null,
-  Record<number, CanvasImageSource | null> | null,
-] => {
+export const useCardsDataLoad = (
+  cardsData: CardData[],
+): [Nullable<Record<number, CardData>>, Nullable<Record<number, Nullable<CanvasImageSource>>>] => {
   const [data, setData] = useState<Record<number, CardData>>({});
   const [images, setImages] = useState<Record<number, CanvasImageSource | null>>({});
 

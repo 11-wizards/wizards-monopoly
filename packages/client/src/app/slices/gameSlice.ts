@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { convertFormPlayersToPlayersObject } from 'app/slices/utils';
+import { calcGameTime, convertFormPlayersToPlayersObject } from 'app/slices/utils';
 import type { RootState } from 'app/store';
 import { cardsData, randomCards } from 'game/data/cards';
 import type { GameSetupFormData } from 'features/GameSetup/types';
@@ -14,6 +14,7 @@ import {
 import type {
   BankTransaction,
   BuyPropertyCardPayload,
+  GamePlayerResult,
   MoneyTransfer,
   Player,
   changePositionPlayerPayload,
@@ -22,15 +23,19 @@ import type {
 export type GameState = {
   cardsData: Array<CardData>;
   currentPlayer: Nullable<number>;
+  gameTimeStamp: number;
   players: Array<Player>;
   randomCards: RandomCard[];
+  results: Array<GamePlayerResult> | null;
 };
 
 const initialState: GameState = {
+  gameTimeStamp: new Date().getTime(),
   currentPlayer: null,
   players: [],
   cardsData,
   randomCards,
+  results: null,
 };
 
 export const gameSlice = createSlice({
@@ -38,19 +43,28 @@ export const gameSlice = createSlice({
   initialState,
   reducers: {
     definePlayers: {
-      reducer: (state, action: PayloadAction<Player[]>) => {
-        state.players = action.payload;
+      reducer: (
+        state,
+        action: PayloadAction<{ players: Player[]; results: Array<GamePlayerResult> }>,
+      ) => {
+        const { players, results } = action.payload;
+        state.players = players;
+        state.results = results;
       },
       prepare: (formPlayers: GameSetupFormData) => {
         const players = convertFormPlayersToPlayersObject(formPlayers);
+        const results = players.map(({ id, name }) => ({
+          key: id,
+          name,
+          profit: 0,
+          property: 0,
+          gameTime: null,
+          place: null,
+        }));
 
-        return { payload: players };
+        return { payload: { players, results } };
       },
     },
-    // defineCards: (state, action: PayloadAction<Record<number, CardData>>) => {
-    //   const cardsData = action.payload;
-    //   state.cardsData = cardsData;
-    // },
 
     changeCurrentPlayer: (state, action: PayloadAction<number>) => {
       const playerId = action.payload;
@@ -60,23 +74,16 @@ export const gameSlice = createSlice({
     loadSavesGame: {
       reducer: (state, action: PayloadAction<GameState>) => {
         const loadState = action.payload;
-        // Object.keys(state).map((key: keyof GameState) => {
-        //   state[key] = loadState[key];
-        // });
+
+        state.gameTimeStamp = loadState.gameTimeStamp;
         state.currentPlayer = loadState.currentPlayer;
         state.cardsData = loadState.cardsData;
         state.players = loadState.players;
         state.randomCards = loadState.randomCards;
+        state.results = loadState.results;
       },
       prepare: (loadState: GameState) => ({ payload: loadState }),
     },
-
-    // changeCardData: (state, action) => {
-    //   const { card, title } = action.payload;
-    //   if (!state.cardsData) return;
-    //   const renameCard = { ...state.cardsData[card], title: 'КУПЛЕНО!' };
-    //   state.cardsData = { ...state.cardsData, [card]: renameCard };
-    // },
 
     changePositionPlayer: (state, action: PayloadAction<changePositionPlayerPayload>) => {
       const { id, currentCardId } = action.payload;
@@ -90,19 +97,32 @@ export const gameSlice = createSlice({
       const newState = [...state.players];
       newState[id] = { ...newState[id], leave: true };
       state.players = newState;
+      if (state.results) {
+        const lostPlayers = state.players.filter((player) => !player.leave).length;
+        console.log(lostPlayers, state.players.length);
+        state.results.find((result) => result.key === id)!.gameTime = calcGameTime(
+          new Date(state.gameTimeStamp),
+          new Date(),
+        );
+      }
     },
     // ДЕНЬГИ ИГРОКА
 
     addMoneyForPlayer: (state, action: PayloadAction<BankTransaction>) => {
       const { amount, playerId } = action.payload;
-
       state.players.find((player) => player.id === playerId)!.balance += amount;
+      if (state.results) {
+        state.results.find((result) => result.key === playerId)!.profit += amount;
+      }
     },
 
     transferMoneyBetweenPlayers: (state, action: PayloadAction<MoneyTransfer>) => {
       const { senderId, recipientId, amount } = action.payload;
       state.players.find((player) => player.id === senderId)!.balance += amount;
       state.players.find((player) => player.id === recipientId)!.balance -= amount;
+      if (state.results) {
+        state.results.find((result) => result.key === senderId)!.profit += amount;
+      }
     },
 
     deductMoneyFromPlayer: (state, action: PayloadAction<BankTransaction>) => {
@@ -128,6 +148,9 @@ export const gameSlice = createSlice({
           if (level) property.level = level;
         }
         state.cardsData[cardId].property = property;
+        if (state.results) {
+          state.results.find((result) => result.key === playerId)!.property += 1;
+        }
       }
     },
 
@@ -182,8 +205,6 @@ export const selectRandomCards = (rootState: RootState) => rootState.game.random
 
 export const {
   definePlayers,
-  // defineCards,
-  // changeCardData,
   changePositionPlayer,
   leavePlayer,
   transferMoneyBetweenPlayers,

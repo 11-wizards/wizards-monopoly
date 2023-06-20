@@ -51,7 +51,10 @@
       }
     ],
     "newline-before-return": "error",
-    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state","context"] }],
+    "no-param-reassign": [
+      "error",
+      { "props": true, "ignorePropertyModificationsFor": ["state", "context"] }
+    ],
     "prettier/prettier": "error",
     "react/function-component-definition": [
       "error",

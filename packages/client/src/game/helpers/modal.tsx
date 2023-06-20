@@ -1,3 +1,5 @@
+// Заготовки модальных окон для действий по карточке
+
 // import { Modal } from 'antd';
 // import { CardTypes, RandomCard } from 'game/types/cards';
 

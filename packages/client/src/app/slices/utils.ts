@@ -55,12 +55,14 @@ export const getGameDataLocalStorage = (): GameState | null => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const parsedData: GameState = JSON.parse(data);
 
-  const { cardsData, players, randomCards, currentPlayer } = parsedData;
+  const { cardsData, results, players, randomCards, currentPlayer, gameTimeStamp } = parsedData;
   if (
     isArray(cardsData) &&
+    isArray(results) &&
     isArray(players) &&
     isArray(randomCards) &&
-    typeof currentPlayer === 'number'
+    typeof currentPlayer === 'number' &&
+    typeof gameTimeStamp === 'number'
   )
     return parsedData;
 
@@ -70,4 +72,13 @@ export const clearGameDataLocalStorage = (): void => {
   if (typeof window !== 'undefined') {
     localStorage.removeItem('game');
   }
+};
+
+export const calcGameTime = (start: Date, end: Date): string => {
+  const msDiff = Math.abs(end.getTime() - start.getTime());
+  const hoursDiff = Math.floor(msDiff / 1000 / 60 / 60);
+  const minutesDiff = Math.floor((msDiff / 1000 / 60) % 60);
+  console.log(`${hoursDiff} часов ${minutesDiff} минут`);
+
+  return `${hoursDiff}:${minutesDiff}`;
 };

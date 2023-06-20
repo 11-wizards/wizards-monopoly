@@ -32,13 +32,13 @@ export type TypePlayerData = {
 };
 
 export type TypeMapCardsData = {
-  colorBg: PlayerColor | null;
-  colorLabel: CardFamily | null;
+  colorBg: Nullable<PlayerColor>;
+  colorLabel: Nullable<CardFamily>;
   h: number;
-  img: CanvasImageSource | null;
-  level: CardLevel | null;
-  price: number | null;
-  title: string | null;
+  img: Nullable<CanvasImageSource>;
+  level: Nullable<CardLevel>;
+  price: Nullable<number>;
+  title: Nullable<string>;
   type: CardTypes;
   w: number;
   x: number;
@@ -54,28 +54,3 @@ export type PlayersPositions = Array<{
   x: number;
   y: number;
 }>;
-
-export type TypeStaticDataMap = {
-  cards: Array<{
-    colorLabel: string | null;
-    id: number;
-    img: string | null;
-    label: string | null;
-    position: [number, number, number, number];
-    price: number | null;
-  }>;
-  map: { size: number };
-  players: { size: number };
-};
-
-export type TypeDynamicDataMap = {
-  cards: Array<{
-    colorLevel: string | null;
-    id: number;
-    level: number | null;
-  }>;
-  players: Array<{
-    cardId: number;
-    id: number;
-  }>;
-};

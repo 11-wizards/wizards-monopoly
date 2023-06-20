@@ -22,6 +22,16 @@ export type Player = {
   leave: boolean;
   name: string;
 };
+
+export type GamePlayerResult = {
+  gameTime: string | null;
+  key: number;
+  name: string;
+  place: number | null;
+  profit: number;
+  property: number;
+};
+
 // OLD TYPES
 
 export type PlayerPosition = { direction: MapDirectons; x: number; y: number };

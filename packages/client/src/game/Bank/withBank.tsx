@@ -1,3 +1,4 @@
+// Заготовки методов покупки/продажи карточек
 // // import { Modal } from 'antd';
 // import {
 //   addMoneyForPlayer,

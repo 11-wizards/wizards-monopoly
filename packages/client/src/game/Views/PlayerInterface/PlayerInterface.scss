@@ -1,12 +1,12 @@
 .player-interface {
   position: absolute;
   inset: 0;
-  // background-color: wheat;
   z-index: 1;
   display: grid;
   grid-template-rows: 20% 1fr;
   gap: 20px;
   margin: auto;
+
   .controls {
     display: flex;
     justify-content: space-between;
@@ -15,59 +15,54 @@
   .players-state {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
-
     grid-gap: 10px;
+
     .player {
       &__leave-flag {
-        font-size: 18px;
-        color: white;
-        background-color: red;
-        padding: 10px;
-        text-align: center;
-        font-weight: 900;
-        width: 324%;
         position: absolute;
-        left: 0;
-        transform: rotate(295deg) scale(1) translateY(-185px) translateX(-80px);
-        bottom: 0;
-        right: 0;
-        top: 0;
-        margin: auto;
+        inset: 0;
+        width: 324%;
         height: fit-content;
+        padding: 10px;
+        margin: auto;
+        font-size: 18px;
+        font-weight: 900;
+        color: white;
+        text-align: center;
+        background-color: red;
+        transform: rotate(295deg) scale(1) translateY(-185px) translateX(-80px);
       }
 
-      // overflow: auto;
-      // max-height:40%;
-      // overflow: hidden;
-      border: 1px solid black;
-      padding: 10px;
-      display: flex;
-      overflow: hidden;
       position: relative;
+      display: flex;
       flex-direction: column;
       gap: 5px;
+      padding: 10px;
+      overflow: hidden;
+      border: 1px solid black;
+
       &__name-wrap {
         padding: 3px;
         text-align: center;
       }
+
       &__property-label {
         &::after {
-          content: '';
+          display: inline-block;
           width: 15px;
           height: 15px;
-          display: inline-block;
-          background: url(./../../../assets/game/edit.png) no-repeat center;
-          background-size: 100%;
           margin-left: 10px;
+          content: '';
+          background: url('./../../../assets/game/edit.png') no-repeat center;
+          background-size: 100%;
         }
       }
+
       &__property {
         font-size: 10px;
       }
-      &__balance-wrap {
-        // max-height: 100%;
-        // overflow: auto;
-      }
+
+    
     }
   }
 }
