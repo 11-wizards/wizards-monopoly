@@ -2,6 +2,7 @@ import { Button, Form, Input, Modal, Space } from 'antd';
 import { useCreateTopicMutation } from 'api/forum.api';
 import type { RootState } from 'app/store';
 import { randomize } from 'features/Forum/common';
+import { sanitizeObject } from 'helpers';
 import { useAppSelector } from 'hooks';
 import type { FC, MouseEventHandler } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
@@ -51,13 +52,15 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({
 
     const topicId = randomize();
 
+    const { content, title } = sanitizeObject<TopicValues>(data);
+
     await createTopic({
       author: {
         author_id: user.id,
         name: user.displayName!,
       },
-      body: data.content,
-      title: data.title,
+      body: content,
+      title,
       topic_id: topicId,
     }).then((res) => {
       if (!('error' in res)) {
