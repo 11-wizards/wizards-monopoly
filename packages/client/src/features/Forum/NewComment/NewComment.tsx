@@ -46,7 +46,7 @@ export const NewComment: FC<NewCommentProps> = ({ topicId }) => {
     await createComment({
       author: {
         author_id: user.id,
-        name: user.displayName || 'Anonymous',
+        name: user.login || 'Anonymous',
       },
       body: DOMPurify.sanitize(comment),
       topic_id: Number(topicId),
