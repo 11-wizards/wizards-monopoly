@@ -43,7 +43,7 @@ export const Comment: FC<CommentProps> = ({
           ) : (
             <div />
           )}
-          <Button>{fm(messages.repliesBtn)}</Button>
+          {/* <Button>{fm(messages.repliesBtn)}</Button> */}
         </footer>
       </Space>
       <Replies
