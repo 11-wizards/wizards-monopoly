@@ -2,7 +2,7 @@ import type { PlayerColor } from 'types/enums/main';
 import { START_PLAYER_BALANCE, START_PLAYER_CARD_ID } from 'constants/main';
 import type { GameSetupFormData } from 'features/GameSetup/types';
 import { isArray } from 'helpers';
-import type { Player } from 'game/types/game';
+import type { GamePlayerResult, Player } from 'game/types/game';
 import type { GameState } from './gameSlice';
 
 export function convertFormPlayersToPlayersObject(formPlayers: GameSetupFormData): Player[] {
@@ -74,11 +74,21 @@ export const clearGameDataLocalStorage = (): void => {
   }
 };
 
-export const calcGameTime = (start: Date, end: Date): string => {
+export const calcGameTime = (gameTimeStamp: number): string => {
+  const start = new Date(gameTimeStamp);
+  const end = new Date();
   const msDiff = Math.abs(end.getTime() - start.getTime());
   const hoursDiff = Math.floor(msDiff / 1000 / 60 / 60);
   const minutesDiff = Math.floor((msDiff / 1000 / 60) % 60);
   console.log(`${hoursDiff} часов ${minutesDiff} минут`);
 
   return `${hoursDiff}:${minutesDiff}`;
+};
+
+export const resultsSort = (resultA: GamePlayerResult, resultB: GamePlayerResult): number => {
+  if (typeof resultA.place !== 'number' || typeof resultB.place !== 'number') {
+    return 0;
+  }
+
+  return resultA.place - resultB.place;
 };

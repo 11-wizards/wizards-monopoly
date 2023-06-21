@@ -24,6 +24,7 @@
   "end-game.winner": "Winner",
   "end-game.finish-game": "Finish the Game",
   "end-game.play-again": "Play again",
+  "end-game.view-leaderboard": "List of leaders",
 
   "error-boundary-text": "Oops, an unexpected error has occurred.",
 

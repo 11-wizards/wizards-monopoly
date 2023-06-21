@@ -5,8 +5,7 @@ import { Typography, Table } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
 import { useIntl } from 'react-intl';
 import { fetchNewLeader } from 'app/slices/leaderboardSlice';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { selectResults } from 'app/slices/gameSlice';
+import { useAppDispatch } from 'hooks';
 import type { GamePlayerResult } from 'game/types/game';
 import { messages } from './i18n';
 
@@ -14,14 +13,15 @@ import './ResultBoard.scss';
 
 const { Title } = Typography;
 
+type PropsResultBoard = {
+  results: Nullable<GamePlayerResult[]>;
+};
 // Mock data - will be removed on further sprints
 
-export const ResultBoard: FC = () => {
+export const ResultBoard: FC<PropsResultBoard> = ({ results }) => {
   const { formatMessage: fm } = useIntl();
 
   const dispatch = useAppDispatch();
-  const [resultsSort, setResultsSort] = useState<GamePlayerResult[]>([]);
-  const results = useAppSelector(selectResults);
 
   const columns: ColumnsType<GamePlayerResult> = [
     {
@@ -52,19 +52,9 @@ export const ResultBoard: FC = () => {
       key: 'gameTime',
     },
   ];
-
   useEffect(() => {
     if (!results?.length) return;
-    console.log(results);
-    const sortResults = [...results].sort((a, b) => {
-      if (typeof a.place !== 'number' || typeof b.place !== 'number') return 0;
-      console.log(a.place - b.place);
-
-      return a.place - b.place;
-    });
-    setResultsSort(sortResults);
-    const { gameTime, name, profit } = sortResults[0];
-
+    const { gameTime, name, profit } = results[0];
     dispatch(fetchNewLeader({ gameTime: gameTime ?? '', name, profit }));
   }, []);
 
@@ -75,7 +65,7 @@ export const ResultBoard: FC = () => {
       </Title>
       <Table
         columns={columns}
-        dataSource={resultsSort}
+        dataSource={results ?? []}
         pagination={false}
         className="resultboard-table"
       />

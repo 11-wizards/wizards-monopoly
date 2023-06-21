@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { calcGameTime, convertFormPlayersToPlayersObject } from 'app/slices/utils';
+import { calcGameTime, convertFormPlayersToPlayersObject, resultsSort } from 'app/slices/utils';
 import type { RootState } from 'app/store';
 import { cardsData, randomCards } from 'game/data/cards';
 import type { GameSetupFormData } from 'features/GameSetup/types';
@@ -123,13 +123,22 @@ export const gameSlice = createSlice({
       const resultPlayer = {
         ...state.results.find((result) => result.key === id),
       } as GamePlayerResult;
+      console.log(resultPlayer);
 
       if (resultPlayer) {
         const playersNoLeave = state.players.filter((player) => !player.leave).length;
-        const place = playersNoLeave > 1 ? playersNoLeave + 1 : playersNoLeave;
-        const gameTime = calcGameTime(new Date(state.gameTimeStamp), new Date());
+        const winner = state.results.filter(({ place }) => place === null).length === 1;
+        console.log(winner);
+
+        const place = winner ? 1 : playersNoLeave + 1;
+        console.log(place);
+
+        const gameTime = calcGameTime(state.gameTimeStamp);
         const newState = [...state.results];
         newState[id] = { ...resultPlayer, place, gameTime };
+        if (place === 1) {
+          newState.sort(resultsSort);
+        }
         state.results = newState;
       }
     },
