@@ -17,7 +17,6 @@ export const StartGamePage: FC = () => {
           <Space className="start-game-page__wrapper" direction="vertical">
             <Typography.Title>{fm(messages.titleWelcome)}</Typography.Title>
             <GameSetup />
-            <Typography.Text type="warning">{fm(messages.textNote)}</Typography.Text>
           </Space>
         </Col>
       </Row>
