@@ -12,6 +12,7 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
+RUN yarn install
 RUN yarn lerna bootstrap
 RUN yarn build
 
