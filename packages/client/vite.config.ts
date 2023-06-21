@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import path from 'path';
 import svgr from 'vite-plugin-svgr';
+import { nonceInjectPlugin } from './config/plugins/nonceInjectPlugin';
 
 export default defineConfig(({ command, mode, ssrBuild }) => {
   const baseConfig = {
@@ -14,7 +15,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         },
       },
     },
-    plugins: [react(), svgr()],
+    plugins: [react(), nonceInjectPlugin(), svgr()],
     resolve: {
       alias: {
         api: path.join(__dirname, './src/api'),
@@ -23,6 +24,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         components: path.join(__dirname, './src/components'),
         constants: path.join(__dirname, './src/constants'),
         core: path.join(__dirname, './src/core'),
+        data: path.join(__dirname, './src/data'),
         features: path.join(__dirname, './src/features'),
         game: path.join(__dirname, './src/game'),
         helpers: path.join(__dirname, './src/helpers'),
@@ -33,7 +35,6 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         styles: path.join(__dirname, './src/styles'),
         translations: path.join(__dirname, './src/translations'),
         types: path.join(__dirname, './src/types'),
-        data: path.join(__dirname, './src/data'),
       },
     },
   };

@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { isAnyOf, createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
+import { isAnyOf, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { UploadRequestOption } from 'rc-upload/lib/interface';
 import { authApi } from 'api/auth.api';
 import { profileApi } from 'api/profile.api';
@@ -10,7 +10,6 @@ import { handleServerError } from 'helpers/handleServerError';
 import type { CurrentUser, CurrentUserDto } from 'models/auth.model';
 import type { ProfileInput } from 'models/profile.model';
 import { type CurrentUserTheme, type ChangeUserThemeInput } from 'models/theme.model';
-import type { RootState } from '../store';
 
 type UserState = {
   currentUser: Nullable<CurrentUser>;
@@ -241,11 +240,6 @@ export const userSlice = createSlice({
       );
   },
 });
-
-export const selectIsAuth = createSelector(
-  (state: RootState) => state.user.isAuth,
-  (isAuth: boolean) => isAuth,
-);
 
 export const { setCurrentUser } = userSlice.actions;
 
