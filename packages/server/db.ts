@@ -26,6 +26,8 @@ export const createClientAndConnect = async (): Promise<Sequelize | null> => {
 
     console.log('  ➜ 🎸 Connected to the database at:', res[0].now);
 
+    client.sync();
+
     return client;
   } catch (e) {
     console.error(e);
