@@ -30,6 +30,8 @@ export const fetchCurrentUser = createAsyncThunk('user/fetchCurrentUser', async 
     const currentUserResponse = await authApi.getCurrentUser();
 
     if (currentUserResponse.status === 200) {
+      console.log(currentUserResponse.data);
+
       Object.entries(currentUserResponse.data).forEach(([key, value]) => {
         result[key] = value;
       });
