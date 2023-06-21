@@ -120,8 +120,10 @@
           ["app", "./src/app"],
           ["assets", "./src/assets"],
           ["components", "./src/components"],
+          ["config", "./config"],
           ["constants", "./src/constants"],
           ["core", "./src/core"],
+          ["data", "./src/data"],
           ["features", "./src/features"],
           ["game", "./src/game"],
           ["helpers", "./src/helpers"],
@@ -131,8 +133,7 @@
           ["pages", "./src/pages"],
           ["translations", "./src/translations"],
           ["types", "./src/types"],
-          ["styles", "./src/styles"],
-          ["data", "./src/data"]
+          ["styles", "./src/styles"]
         ],
         "extensions": [".ts", ".tsx"]
       }
