@@ -68,20 +68,19 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/conf/:/etc/nginx/conf.d/
-      - /var/certbot/www:/var/www/certbot/
-      - /var/certbot/conf:/etc/letsencrypt/
+      - ./nginx:/etc/nginx/conf.d
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
 
   certbot:
     image: certbot/certbot:latest
     container_name: certbot
     volumes:
-      - /var/certbot/www:/var/www/certbot/
-      - /var/certbot/conf:/etc/letsencrypt/
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     depends_on:
       - webserver
-    command: certonly --webroot --webroot-path=/var/www/certbot/ --email example@example.com --agree-tos --no-eff-email --staging -d wizards-monopoly.ya-praktikum.tech  -d www.wizards-monopoly.ya-praktikum.tech
+    command: certonly --webroot --webroot-path=/var/www/certbot/ --email p.bologan@yandex.ru --agree-tos --no-eff-email --staging -d wizards-monopoly.ya-praktikum.tech
 
 networks:
   app-net:
