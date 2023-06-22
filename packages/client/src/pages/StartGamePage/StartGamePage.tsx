@@ -15,7 +15,9 @@ export const StartGamePage: FC = () => {
       <Row justify="center">
         <Col span={8}>
           <Space className="start-game-page__wrapper" direction="vertical">
-            <Typography.Title>{fm(messages.titleWelcome)}</Typography.Title>
+            <Typography.Title style={{ textAlign: 'center' }}>
+              {fm(messages.titleWelcome)}
+            </Typography.Title>
             <GameSetup />
           </Space>
         </Col>

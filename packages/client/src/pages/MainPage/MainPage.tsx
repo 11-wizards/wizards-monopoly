@@ -9,9 +9,8 @@ export const MainPage: FC = () => {
   useOAuthSignIn();
   fetchCurrentUser();
 
-  return (
-    <div className="wrapper_mainPage">
-      <Landing />
-    </div>
-  );
+  return (<div className="wrapper_mainPage">
+    <Landing />
+  </div>
+  )
 };

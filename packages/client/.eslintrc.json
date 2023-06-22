@@ -53,7 +53,7 @@
     "newline-before-return": "error",
     "no-param-reassign": [
       "error",
-      { "props": true, "ignorePropertyModificationsFor": ["state", "acc"] }
+      { "props": true, "ignorePropertyModificationsFor": ["state", "acc","context"] }
     ],
     "prettier/prettier": "error",
     "react/function-component-definition": [

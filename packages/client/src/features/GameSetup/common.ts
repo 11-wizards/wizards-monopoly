@@ -3,6 +3,18 @@ import { defineMessages } from 'react-intl';
 export const messages = defineMessages({
   buttonStart: { id: 'start.button.start', defaultMessage: 'Start game' },
   textChoose: { id: 'start.text.choose', defaultMessage: 'Choose the number of players:' },
+  textOldGame: {
+    id: 'start.text.old-game',
+    defaultMessage: 'An incomplete game session was detected!',
+  },
+  restoreGame: {
+    id: 'start.text.restore-game',
+    defaultMessage: 'Restore Session',
+  },
+  deleteGame: {
+    id: 'start.text.delete-game',
+    defaultMessage: 'Delete a session',
+  },
   playerName: {
     id: 'start.player.name',
     defaultMessage: 'Choose the name of the {num, number}nd player:',

@@ -6,55 +6,24 @@ import type { ColumnsType } from 'antd/lib/table';
 import { useIntl } from 'react-intl';
 import { fetchNewLeader } from 'app/slices/leaderboardSlice';
 import { useAppDispatch } from 'hooks';
+import type { GamePlayerResult } from 'game/types/game';
 import { messages } from './i18n';
 
 import './ResultBoard.scss';
 
 const { Title } = Typography;
 
-type ResultBoardItem = {
-  gameTime: string;
-  key: number;
-  name: string;
-  place: number;
-  profit: number;
-  property: number;
+type PropsResultBoard = {
+  results: Nullable<GamePlayerResult[]>;
 };
-
 // Mock data - will be removed on further sprints
-const data: ResultBoardItem[] = [
-  {
-    key: 1,
-    name: 'Татьяна',
-    place: 1,
-    profit: 21000,
-    property: 25,
-    gameTime: '50:04',
-  },
-  {
-    key: 2,
-    name: 'Иван',
-    place: 2,
-    profit: 17000,
-    property: 25,
-    gameTime: '50:04',
-  },
-  {
-    key: 3,
-    name: 'Егор',
-    place: 3,
-    profit: 15000,
-    property: 20,
-    gameTime: '35:34',
-  },
-];
 
-export const ResultBoard: FC = () => {
+export const ResultBoard: FC<PropsResultBoard> = ({ results }) => {
   const { formatMessage: fm } = useIntl();
 
   const dispatch = useAppDispatch();
 
-  const columns: ColumnsType<ResultBoardItem> = [
+  const columns: ColumnsType<GamePlayerResult> = [
     {
       title: fm(messages.resultBoardPlace),
       dataIndex: 'place',
@@ -83,11 +52,10 @@ export const ResultBoard: FC = () => {
       key: 'gameTime',
     },
   ];
-
   useEffect(() => {
-    if (!data.length) return;
-    const { gameTime, name, profit } = data[0];
-    dispatch(fetchNewLeader({ gameTime, name, profit }));
+    if (!results?.length) return;
+    const { gameTime, name, profit } = results[0];
+    dispatch(fetchNewLeader({ gameTime: gameTime ?? '', name, profit }));
   }, []);
 
   return (
@@ -95,7 +63,12 @@ export const ResultBoard: FC = () => {
       <Title level={2} className="resultboard-title">
         {fm(messages.resultBoardTitle)}
       </Title>
-      <Table columns={columns} dataSource={data} pagination={false} className="resultboard-table" />
+      <Table
+        columns={columns}
+        dataSource={results ?? []}
+        pagination={false}
+        className="resultboard-table"
+      />
     </div>
   );
 };
