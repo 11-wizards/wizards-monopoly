@@ -17,7 +17,7 @@ export const InputPlayerName: FC<InputPlayerNameProps> = ({ formErrors, control,
   const inputName = `player_name_${index}`;
 
   return (
-    <Form.Item label={fm(messages.playerName, { num: index })} wrapperCol={{ span: 24 }}>
+    <Form.Item label={fm(messages.playerName, { num: index + 1 })} wrapperCol={{ span: 24 }}>
       <Controller
         name={inputName}
         control={control}
@@ -30,7 +30,7 @@ export const InputPlayerName: FC<InputPlayerNameProps> = ({ formErrors, control,
         }}
         render={({ field }) => (
           <Input
-            placeholder={`Player${index}`}
+            placeholder={`Player ${index + 1}`}
             status={formErrors?.[inputName] && 'error'}
             {...field}
           />

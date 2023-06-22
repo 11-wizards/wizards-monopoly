@@ -17,4 +17,8 @@ export const messages = defineMessages({
     id: 'end-game.play-again',
     defaultMessage: 'Play again',
   },
+  endGameViewLeaderBoard: {
+    id: 'end-game.view-leaderboard',
+    defaultMessage: 'List of leaders',
+  },
 });

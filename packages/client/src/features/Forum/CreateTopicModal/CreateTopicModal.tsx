@@ -57,7 +57,7 @@ export const CreateTopicModal: FC<CreateTopicModalProps> = ({
     await createTopic({
       author: {
         author_id: user.id,
-        name: user.displayName!,
+        name: user.login,
       },
       body: content,
       title,

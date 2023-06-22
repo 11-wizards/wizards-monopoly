@@ -1,9 +1,9 @@
+import type { RootState } from 'app/store';
 import type { FC } from 'react';
 import { Button, Layout, Typography } from 'antd';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'core/Router';
-import { selectIsAuth } from 'app/slices/userSlice';
 import { useAppSelector } from 'hooks/redux';
 import { messages } from './common';
 
@@ -14,7 +14,7 @@ const { Content } = Layout;
 export const Landing: FC = () => {
   const { formatMessage: fm } = useIntl();
   const navigate = useNavigate();
-  const isAuth = useAppSelector(selectIsAuth);
+  const isAuth = useAppSelector((state: RootState) => state.user.isAuth);
 
   const onPlayButtonClick = () => {
     if (isAuth) {
