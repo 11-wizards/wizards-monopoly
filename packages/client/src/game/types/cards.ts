@@ -19,7 +19,7 @@ export enum CardFamily {
   STREET_3 = '#cc00ff',
   STREET_4 = '#fb7400',
   STREET_5 = '#c50c0c',
-  STREET_6 = '#ffe000',
+  STREET_6 = '#817207',
   STREET_7 = '#22811c',
   STREET_8 = '#1b2d89',
 }

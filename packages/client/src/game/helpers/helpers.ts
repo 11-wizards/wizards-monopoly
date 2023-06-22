@@ -1,5 +1,5 @@
 import { STREET_HOME_SIZE_H, STREET_HOME_SIZE_W } from 'game/constants';
-import { CardLevel, STREET } from 'game/types/cards';
+import { STREET } from 'game/types/cards';
 import type { PlayerPosition, PlayerPositionTarget } from 'game/types/game';
 import type { TypeMapCardsData } from 'game/types/map';
 import { CornersCardsID, MapDirectons } from 'game/types/map';
@@ -235,8 +235,9 @@ export const drawCard = (
 
     context.fillText(`${price}$`, x + (w / 2 - priceTextWidth / 2), y + h - 5, maxWidthText);
   }
-
-  if (type === STREET && level !== CardLevel.LEVEL_0 && typeof colorLabel === 'string') {
+  // ДЛЯ ДЕМО
+  // if (type === STREET && level !== CardLevel.LEVEL_0 && typeof colorLabel === 'string') {
+  if (type === STREET && typeof colorLabel === 'string') {
     drawCardLevel(context, level, card, colorBg ? 'white' : colorLabel);
   }
 

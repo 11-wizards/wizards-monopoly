@@ -132,7 +132,7 @@ export const cardsData: CardData[] = [
     family: NONE,
   },
   {
-    title: 'Огарева',
+    title: 'ул. Огарева',
     imgSrc: redArrow,
     price: 100,
     upgradeCost: {
@@ -624,20 +624,12 @@ export const cardsData: CardData[] = [
 
 export const randomCards = [
   {
-    desc: 'Банк платит вам дивиденды в размере ',
-    debt: 50,
-  },
-  {
     desc: 'Наступил срок исполнения платежа по вашей ссуде на строительство ',
     debt: 150,
   },
   {
     desc: 'Штраф за превышение скорости ',
     debt: 150,
-  },
-  {
-    desc: 'Выигрыш в размере 200$',
-    debt: 200,
   },
   {
     desc: 'Коммунальный платеж 300$',

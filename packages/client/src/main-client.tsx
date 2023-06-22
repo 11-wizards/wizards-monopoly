@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from 'core/App';
 import { Provider } from 'react-redux';
-// import { registerServiceWorker } from 'helpers';
+import { registerServiceWorker } from 'helpers';
 import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.createRoot(document.querySelector('#root') as HTMLElement).render(
@@ -17,4 +17,4 @@ ReactDOM.createRoot(document.querySelector('#root') as HTMLElement).render(
   </React.StrictMode>,
 );
 
-// registerServiceWorker();
+registerServiceWorker();

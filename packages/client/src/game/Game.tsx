@@ -55,7 +55,6 @@ const GameRoot = () => {
   const mapParams: TypeUseGameViewsCalc = useGameViewsCalc();
 
   const currentPlayerStep = useAppSelector(selectCurrentPlayer);
-  // console.log(root.players[currentPlayerStep]);
 
   const [moveStep, setMoveStep] = useState<StepsMove>(RENDER);
 
@@ -84,8 +83,6 @@ const GameRoot = () => {
 
   // CURRENT CARD ID не совпадает с canvas
   const changePlayer = (player?: number): boolean => {
-    console.log(players);
-
     const winner = players.filter(({ leave }) => !leave);
     if (winner.length < 2) {
       dispatch(writeResultsWinner(winner[0].id));
@@ -163,7 +160,6 @@ const GameRoot = () => {
     const steps = dicesNumbers[0] + dicesNumbers[1];
     const id = currentPlayerStep;
     if (id === null) return;
-    // console.log(`Выпало:  ${dicesNumbers.join(', ')} у игрока ${id}`);
 
     const target = calcNewTarget(id, steps);
     dispatch(changePositionPlayer({ id, currentCardId: target }));
@@ -172,13 +168,10 @@ const GameRoot = () => {
 
   useEffect(() => {
     if (moveStep !== ACTION) return;
-    console.log('ACTION');
     if (!newTargetPlayer || !cardsData || currentPlayerStep === null) return;
 
     const cardId = players[currentPlayerStep].currentCardId;
     const currentCard = cardsData[cardId];
-    console.log(currentPlayerStep);
-    console.log(currentCard);
 
     switch (currentCard.type) {
       case ZERO: {
@@ -187,10 +180,8 @@ const GameRoot = () => {
         return;
       }
       case STREET: {
-        const { title, property, price = 0, rent } = currentCard;
+        const { title, property, price = 0 } = currentCard;
         if (property) {
-          console.log(rent?.level_0);
-
           nextMoveSteps(INITIAL);
 
           return;
@@ -204,8 +195,6 @@ const GameRoot = () => {
 
         if (checkSolvency(currentPlayerStep, price)) {
           modalPlayerPropertyConfirm({ title, price }, addProperyStreet, () => {
-            console.log(123123123123);
-
             nextMoveSteps(INITIAL);
           });
         } else {
