@@ -57,3 +57,7 @@ services:
       - /var/pgadmin:/var/lib/pgadmin
     depends_on:
       - postgres
+
+networks:
+  app-net:
+    driver: bridge
