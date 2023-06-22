@@ -1,5 +1,5 @@
 {
-  "name": "client-server-template-with-vite",
+  "name": "monopoly",
   "private": true,
   "scripts": {
     "bootstrap": "yarn && node init.js && lerna clean && yarn && lerna bootstrap",
@@ -10,7 +10,8 @@
     "test": "lerna run test",
     "lint": "lerna run lint",
     "format": "lerna run format",
-    "preview": "lerna run preview"
+    "preview": "lerna run preview",
+    "packages-link": "cd packages/client && yarn link && cd ../server && yarn link client && cd .."
   },
   "license": "MIT",
   "workspaces": [
@@ -21,6 +22,8 @@
   },
   "devDependencies": {
     "@evilmartians/lefthook": "^1.1.1",
-    "lerna": "^5.4.3"
+    "lerna": "^5.4.3",
+    "stylelint-order": "6.0.3",
+    "stylelint-scss": "5.0.1"
   }
 }

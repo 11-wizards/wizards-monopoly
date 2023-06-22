@@ -1,0 +1,20 @@
+.topic-page {
+  display: grid;
+  grid-template-columns: 25% 1fr 25%;
+  padding: $paddingXL;
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    grid-column: 2;
+    gap: 65px;
+  }
+
+  &__space {
+    display: grid;
+    gap: 20px;
+    padding: $paddingXL;
+
+    @include space-border;
+  }
+}

@@ -1,0 +1,35 @@
+.form-register {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  padding: $paddingL;
+  border-radius: 15px;
+
+  &__form {
+    width: 100%;
+  }
+
+  &__input {
+    width: 100%;
+    margin: 0 0 $paddingM;
+  }
+
+  &__inputError {
+    color: $redColor;
+  }
+
+  &__submitButton {
+    width: 100%;
+    margin: 0 0 $paddingM;
+  }
+
+  &__redirect {
+    @include redirect-box;
+  }
+
+  &__link {
+    font-size: $fontSizeS;
+    color: $primaryColor;
+    text-decoration: none;
+  }
+}

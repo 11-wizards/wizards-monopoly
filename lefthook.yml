@@ -1,6 +1,17 @@
 pre-commit:
   parallel: true
   commands:
-    lint:
-      glob: '*.{ts,tsx}'
-      run: yarn eslint {staged_files}
+    frontend-formatter:
+      root: "packages/client/"
+      run: yarn run format {staged_files}
+    frontend-eslint:
+      root: "packages/client/"
+      glob: "*.{ts,tsx}"
+      run: yarn run eslint {staged_files}
+    frontend-stylelint:
+      root: "packages/client/"
+      glob: "*.{scss,css}"
+      run: yarn run stylelint {staged_files}
+    backend-linter:
+        root: "packages/server/"
+        run: yarn run lint {staged_files}

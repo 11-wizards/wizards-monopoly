@@ -1,0 +1,142 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:typescript-sort-keys/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:import/recommended",
+    "plugin:jest/recommended",
+    "eslint-config-prettier",
+    "plugin:css-import-order/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "jest",
+    "typescript-sort-keys",
+    "css-import-order",
+    "prettier"
+  ],
+  "rules": {
+    "consistent-return": "off",
+    "import/no-cycle": "off",
+    "import/prefer-default-export": 0,
+    "jest/no-export": "off",
+    "max-classes-per-file": "off",
+    "max-len": [
+      "error",
+      {
+        "code": 110,
+        "ignoreComments": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    "newline-before-return": "error",
+    "no-param-reassign": [
+      "error",
+      { "props": true, "ignorePropertyModificationsFor": ["state", "acc","context"] }
+    ],
+    "prettier/prettier": "error",
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": 0,
+    "react/destructuring-assignment": [
+      "error",
+      "always",
+      {
+        "destructureInSignature": "always"
+      }
+    ],
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/lines-between-class-members": [
+      "error",
+      "always",
+      {
+        "exceptAfterSingleLine": true
+      }
+    ],
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/unbound-method": "off",
+    "@typescript-eslint/no-unused-expressions": [
+      "error",
+      {
+        "allowTernary": true
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_"
+      }
+    ],
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "variable",
+        "modifiers": ["destructured"],
+        "format": ["camelCase", "PascalCase", "UPPER_CASE"],
+        "leadingUnderscore": "allow"
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "packages/*/tsconfig.json"
+      },
+      "alias": {
+        "map": [
+          ["api", "./src/api"],
+          ["app", "./src/app"],
+          ["assets", "./src/assets"],
+          ["components", "./src/components"],
+          ["config", "./config"],
+          ["constants", "./src/constants"],
+          ["core", "./src/core"],
+          ["data", "./src/data"],
+          ["features", "./src/features"],
+          ["game", "./src/game"],
+          ["helpers", "./src/helpers"],
+          ["hooks", "./src/hooks"],
+          ["layouts", "./src/layouts"],
+          ["models", "./src/models"],
+          ["pages", "./src/pages"],
+          ["translations", "./src/translations"],
+          ["types", "./src/types"],
+          ["styles", "./src/styles"]
+        ],
+        "extensions": [".ts", ".tsx"]
+      }
+    }
+  }
+}
