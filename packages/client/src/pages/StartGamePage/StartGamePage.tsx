@@ -19,7 +19,6 @@ export const StartGamePage: FC = () => {
               {fm(messages.titleWelcome)}
             </Typography.Title>
             <GameSetup />
-            {/* <Typography.Text type="warning">{fm(messages.textNote)}</Typography.Text> */}
           </Space>
         </Col>
       </Row>

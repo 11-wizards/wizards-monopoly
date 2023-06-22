@@ -1,4 +1,4 @@
-import { selectIsAuth } from 'app/slices/userSlice';
+import type { RootState } from 'app/store';
 import { useAppSelector } from 'hooks';
 import { Forum } from 'features/Forum';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import './ForumPage.scss';
 
 export const ForumPage = (): JSX.Element | null => {
-  const userIsAuth = useAppSelector(selectIsAuth);
+  const userIsAuth = useAppSelector((state: RootState) => state.user.isAuth);
   const navigate = useNavigate();
 
   if (!userIsAuth) {

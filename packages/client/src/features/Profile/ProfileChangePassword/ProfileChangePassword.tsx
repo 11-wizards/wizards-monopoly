@@ -1,3 +1,4 @@
+import { sanitizeObject } from 'helpers';
 import { useState, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
@@ -35,7 +36,9 @@ export const ProfileChangePassword: FC = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await profileApi.changePassword(values);
+      const response = await profileApi.changePassword(
+        sanitizeObject<ProfileChangePasswordInput>(values),
+      );
 
       if (response.status === 200) {
         reset();
@@ -56,7 +59,6 @@ export const ProfileChangePassword: FC = () => {
     <div className="form-change-password">
       <Typography.Title>{fm(messages.titleMain)}</Typography.Title>
       <form onSubmit={handleSubmit(onSubmit)} className="form-change-password__form">
-        {/* TODO: добавить повторную проверку пароля */}
         <div className="form-change-password__input">
           <Controller
             name="oldPassword"

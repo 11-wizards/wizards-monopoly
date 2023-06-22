@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import cors from 'cors';
+import crypto from 'crypto';
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
+import helmet from 'helmet';
 import path from 'path';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
-import { ROUTER_API_PATH } from './constant';
-// import { router } from './routers/api.router';
-
 // TODO: path aliases
+import { ROUTER_API_PATH } from './constant';
 import { createClientAndConnect } from './db';
 import { router } from './routes';
 
@@ -22,6 +22,27 @@ async function startServer() {
   const app = express();
   app.use(cors());
   app.use(express.json());
+  app.use(express.urlencoded({ extended: false }));
+
+  app.use((_req: Request, res: Response, next: NextFunction) => {
+    res.locals.cspNonce = crypto.randomBytes(16).toString('hex');
+    next();
+  });
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          connectSrc: [
+            "'self'",
+            'ws://localhost:*',
+            'http://localhost:*',
+            'https://ya-praktikum.tech/',
+          ],
+          scriptSrc: ["'self'", (_req, res) => `'nonce-${(res as Response).locals.cspNonce}'`],
+        },
+      },
+    }),
+  );
 
   await createClientAndConnect();
 
@@ -78,6 +99,7 @@ async function startServer() {
 
       const html = template
         .replace('<!--ssr-outlet-->', appHtml)
+        .replace(/<!--nonce-outlet-->/gi, res.locals.cspNonce)
         .replace('<!--preloaded-state-->', JSON.stringify(initialState).replace(/</g, '\\u003c'));
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);

@@ -8,6 +8,7 @@ import type { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
+import DOMPurify from 'dompurify';
 import { newCommentSchema } from './types';
 import type { NewCommentSchema } from './types';
 import { messages } from './common';
@@ -45,9 +46,9 @@ export const NewComment: FC<NewCommentProps> = ({ topicId }) => {
     await createComment({
       author: {
         author_id: user.id,
-        name: user.displayName || 'Anonymous',
+        name: user.displayName || user.login,
       },
-      body: comment,
+      body: DOMPurify.sanitize(comment),
       topic_id: Number(topicId),
     }).then((res) => {
       if (!('error' in res)) {
