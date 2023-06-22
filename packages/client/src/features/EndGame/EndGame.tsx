@@ -1,11 +1,11 @@
-import type { FC } from 'react';
+import { useEffect, type FC } from 'react';
 import { Button, Layout, Typography } from 'antd';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'core/Router';
 import { ResultBoard } from 'features/Resultboard';
-import { selectResults } from 'app/slices/gameSlice';
-import { useAppSelector } from 'hooks';
+import { resetStore, selectResults } from 'app/slices/gameSlice';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import { messages } from './common';
 
 import './EndGame.scss';
@@ -17,18 +17,28 @@ export const EndGame: FC = () => {
   const navigate = useNavigate();
 
   const results = useAppSelector(selectResults);
+  const dispatch = useAppDispatch();
 
   const onFinishGameButtonClick = () => {
+    dispatch(resetStore());
     navigate(ROUTES.ROOT.path);
   };
 
   const onPlayAgainButtonClick = () => {
+    dispatch(resetStore());
     navigate(ROUTES.GAME_PAGE.path);
   };
 
   const onPlayViewLeaderBoardButtonClick = () => {
+    dispatch(resetStore());
     navigate(ROUTES.LEADERBOARD_PAGE.path);
   };
+
+  useEffect(() => {
+    if (!results) {
+      navigate(ROUTES.START_GAME_PAGE.path);
+    }
+  }, []);
 
   return (
     <Content className="end-game-content">

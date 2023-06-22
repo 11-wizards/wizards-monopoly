@@ -1,14 +1,16 @@
 import type { FC } from 'react';
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
 import type { StepsMove } from 'game/types/game';
-import { calcPlayerParkingSpotCard, drawCard, playerMove } from 'game/helpers/helpers';
+import {
+  calcPlayerParkingSpotCard,
+  drawCard,
+  getDirectionCard,
+  playerMove,
+} from 'game/helpers/helpers';
 import type { PlayersPositions, TypeMapData } from 'game/types/map';
-import { MapDirectons } from 'game/types/map';
 import { PLAYER_SPEED } from 'game/constants';
 
 import './Map.scss';
-
-const { RIGHT: startDirection } = MapDirectons;
 
 type MapProps = {
   mapData: TypeMapData;
@@ -25,7 +27,8 @@ export const Map: FC<MapProps> = ({ mapData, playerTarget, render, stopRender })
   players?.forEach((item, key) => {
     const { id, color, currentCardId } = item;
     const [x, y] = calcPlayerParkingSpotCard(id, cards[currentCardId], playerSize);
-    startPlayersPosition[key] = { id, color, x, y, direction: startDirection };
+    const direction = getDirectionCard(currentCardId);
+    startPlayersPosition[key] = { id, color, x, y, direction };
   });
 
   const canvasRef = useRef<HTMLCanvasElement>(null!);
@@ -35,6 +38,8 @@ export const Map: FC<MapProps> = ({ mapData, playerTarget, render, stopRender })
   const [animationCounter, setAnimationCounter] = useState<number>(0);
 
   const [playersPositions, setPlayersPositions] = useState(startPlayersPosition);
+
+  // console.log(playersPositions);
 
   useEffect(() => {
     if (!render) return;
@@ -59,7 +64,9 @@ export const Map: FC<MapProps> = ({ mapData, playerTarget, render, stopRender })
 
     if (playerTarget) {
       const { id, target } = playerTarget;
+      // console.log(playerTarget);
       const targetPosition = calcPlayerParkingSpotCard(id, cards[target], playerSize);
+      // console.log(playersPositions[id]);
 
       playersPositions.forEach((player, key: number) => {
         if (player.id === id) {
@@ -90,6 +97,8 @@ export const Map: FC<MapProps> = ({ mapData, playerTarget, render, stopRender })
       if (players[id].leave) return;
       context.fillStyle = String(color);
       context.fillRect(Number(x), Number(y), playerSize, playerSize);
+      context.strokeStyle = 'white';
+      context.strokeRect(Number(x), Number(y), playerSize + 1, playerSize + 1);
     });
   }, [animationCounter, mapSize]);
 

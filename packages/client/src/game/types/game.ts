@@ -12,6 +12,8 @@ export enum StepsMove {
   RENDER,
 }
 
+export type TypeNextStepFunc = (nextStep?: StepsMove | undefined) => void;
+
 export const { INITIAL, DIECES, MOVE, ACTION, RENDER } = StepsMove;
 
 export type Player = {

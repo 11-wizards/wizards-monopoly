@@ -93,6 +93,9 @@
 
   "start.title.welcome": "Добро пожаловать в Монополию!",
   "start.text.choose": "Выберите количество игроков:",
+  "start.text.old-game": "Обнаружен незавершенный сеанс игры !",
+  "start.text.restore-game": "Восстановить сеанс",
+  "start.text.delete-game": "Удалить сеанс",
   "start.button.start": "Начать игру",
   "start.player.name": "Введите имя {num, number}-го игрока:",
   "start.player.color": "Выберите цвет для {num, number}-го игрока:",

@@ -65,9 +65,15 @@ export const GameSetup: FC = () => {
     <div>
       {dataGameLS ? (
         <>
-          <Typography.Title level={3}>Обнаружена незавершенная игра</Typography.Title>
-          <Button onClick={restoreDataGameLS}>Восстановить сеанс</Button>
-          <Button onClick={clearDataGameLS}>Удалить сеанс</Button>
+          <Typography.Title level={3} style={{ textAlign: 'center' }}>
+            {fm(messages.textOldGame)}
+          </Typography.Title>
+          <Button onClick={restoreDataGameLS} style={{ width: '50%' }}>
+            {fm(messages.restoreGame)}
+          </Button>
+          <Button onClick={clearDataGameLS} style={{ width: '50%' }}>
+            {fm(messages.deleteGame)}
+          </Button>
         </>
       ) : (
         <Form layout="vertical" onSubmitCapture={handleSubmit(submitHandler)}>

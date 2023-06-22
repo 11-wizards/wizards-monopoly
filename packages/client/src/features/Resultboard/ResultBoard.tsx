@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import type { FC } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Typography, Table } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
 import { useIntl } from 'react-intl';

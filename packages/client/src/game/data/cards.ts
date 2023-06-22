@@ -1,7 +1,6 @@
 import type { CardData } from 'game/types/cards';
 import {
   ARREST,
-  CardLevel,
   INFRASTRUCTURE,
   NONE,
   PRISON,
@@ -34,7 +33,6 @@ import waterPipes from 'assets/game/mapCard/waterPipes.svg';
 import greenArrow from 'assets/game/mapCard/greenArrow.svg';
 import parking from 'assets/game/mapCard/parking.svg';
 import arrest from 'assets/game/mapCard/arrest.svg';
-import { PlayerColor } from 'types/enums/main';
 
 export const cardsData: CardData[] = [
   {
@@ -53,7 +51,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -80,7 +78,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -116,7 +114,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -143,7 +141,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -165,7 +163,7 @@ export const cardsData: CardData[] = [
 
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -192,7 +190,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -200,11 +198,7 @@ export const cardsData: CardData[] = [
       level_5: 555,
     },
     type: STREET,
-    property: {
-      ownerId: 2,
-      color: PlayerColor.BLUE,
-      level: CardLevel.LEVEL_5,
-    },
+    property: null,
     family: STREET_3,
   },
   {
@@ -212,11 +206,7 @@ export const cardsData: CardData[] = [
     imgSrc: powerLines,
     price: 150,
     type: INFRASTRUCTURE,
-    property: {
-      ownerId: 2,
-      color: PlayerColor.BLUE,
-      level: CardLevel.LEVEL_0,
-    },
+    property: null,
     family: RESOURCES,
   },
   {
@@ -229,7 +219,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -237,11 +227,7 @@ export const cardsData: CardData[] = [
       level_5: 555,
     },
     type: STREET,
-    property: {
-      ownerId: 0,
-      color: PlayerColor.RED,
-      level: CardLevel.LEVEL_0,
-    },
+    property: null,
     family: STREET_3,
   },
   {
@@ -254,7 +240,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -283,7 +269,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -310,7 +296,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -331,7 +317,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -358,7 +344,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -366,11 +352,7 @@ export const cardsData: CardData[] = [
       level_5: 555,
     },
     type: STREET,
-    property: {
-      ownerId: 0,
-      color: PlayerColor.RED,
-      level: CardLevel.LEVEL_4,
-    },
+    property: null,
     family: STREET_5,
   },
   {
@@ -389,7 +371,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -410,7 +392,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -439,7 +421,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -460,7 +442,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -489,7 +471,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -516,7 +498,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -537,7 +519,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -564,7 +546,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -599,7 +581,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -627,7 +609,7 @@ export const cardsData: CardData[] = [
     },
     collateralCost: 8888,
     rent: {
-      level_0: 0,
+      level_0: 100,
       level_1: 111,
       level_2: 222,
       level_3: 333,
@@ -643,14 +625,22 @@ export const cardsData: CardData[] = [
 export const randomCards = [
   {
     desc: 'Банк платит вам дивиденды в размере ',
-    credit: 50,
+    debt: 50,
   },
   {
     desc: 'Наступил срок исполнения платежа по вашей ссуде на строительство ',
-    credit: 150,
+    debt: 150,
   },
   {
     desc: 'Штраф за превышение скорости ',
     debt: 150,
+  },
+  {
+    desc: 'Выигрыш в размере 200$',
+    debt: 200,
+  },
+  {
+    desc: 'Коммунальный платеж 300$',
+    debt: 300,
   },
 ];

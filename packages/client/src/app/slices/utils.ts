@@ -1,5 +1,8 @@
 import type { PlayerColor } from 'types/enums/main';
-import { START_PLAYER_BALANCE, START_PLAYER_CARD_ID } from 'constants/main';
+import {
+  // START_PLAYER_BALANCE,
+  START_PLAYER_CARD_ID,
+} from 'constants/main';
 import type { GameSetupFormData } from 'features/GameSetup/types';
 import { isArray } from 'helpers';
 import type { GamePlayerResult, Player } from 'game/types/game';
@@ -33,7 +36,9 @@ export function convertFormPlayersToPlayersObject(formPlayers: GameSetupFormData
       name,
       color,
       currentCardId: START_PLAYER_CARD_ID,
-      balance: START_PLAYER_BALANCE,
+      // ДЛЯ ДЕМО
+      balance: !id ? 1000 : 0,
+      // balance: START_PLAYER_BALANCE,
       leave: false,
     });
   }

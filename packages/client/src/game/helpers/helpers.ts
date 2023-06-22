@@ -250,12 +250,22 @@ export const drawCard = (
 const arrayNumberRound = (array: Array<number>): Array<number> =>
   array.map((item) => Math.round(item));
 
+export const getDirectionCard = (id: number): MapDirectons => {
+  if (id >= 0 && id < 11) return UP;
+  if (id >= 11 && id < 20) return RIGHT;
+  if (id >= 20 && id < 31) return DOWN;
+  if (id >= 31 && id < 40) return LEFT;
+
+  return UP;
+};
+
 export const calcPlayerParkingSpotCard = (
   id: number,
   card: TypeMapCardsData,
   playerSize: number,
 ): Array<number> => {
   const { x, y, w, h } = card;
+
   const baseY = Number(Math.round(y + 10));
   const baseX = Number(Math.round(x + w / 2 - playerSize * 1.5));
   if (w > h) {
@@ -349,6 +359,7 @@ export const playerMove = (
   playerSize: number,
 ): PlayerPosition | false => {
   const { x, y, direction } = playerPosition;
+
   const [targetX, targetY] = tagetPosition;
 
   if (x === targetX && y === targetY) return false;
@@ -394,6 +405,3 @@ export const rollDices = (): Array<number> => [
 ];
 
 export const resetDices = () => Math.random() + 1;
-
-export const randomInt = (max: number, min = 0) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;

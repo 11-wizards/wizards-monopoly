@@ -93,6 +93,9 @@
 
   "start.title.welcome": "Welcome to Monopoly!",
   "start.text.choose": "Choose the number of players:",
+  "start.text.old-game": "An incomplete game session was detected!",
+  "start.text.restore-game": "Restore Session",
+  "start.text.delete-game": "Delete a session",
   "start.button.start": "Start game",
   "start.player.name": "Choose the name of the {num, number}nd player:",
   "start.player.color": "Choose the color of the {num, number}nd player:",

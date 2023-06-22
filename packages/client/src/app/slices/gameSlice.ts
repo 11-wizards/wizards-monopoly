@@ -65,6 +65,13 @@ export const gameSlice = createSlice({
         return { payload: { players, results } };
       },
     },
+    resetStore: (state) => {
+      state.results = null;
+      state.gameTimeStamp = new Date().getTime();
+      state.currentPlayer = null;
+      state.players = [];
+      state.results = null;
+    },
 
     changeCurrentPlayer: (state, action: PayloadAction<number>) => {
       const playerId = action.payload;
@@ -97,24 +104,6 @@ export const gameSlice = createSlice({
       const newState = [...state.players];
       newState[id] = { ...newState[id], leave: true };
       state.players = newState;
-      // if (state.results) {
-      //   const newResults = [...state.results];
-      //   const resultPlayer = newResults.find((result) => result.key === id);
-      //   if (resultPlayer) {
-      //     const place = state.players.filter((player) => !player.leave).length + 1;
-      //     const gameTime = calcGameTime(
-      //       new Date(state.gameTimeStamp),
-      //       new Date(),
-      //     );
-      //     resultPlayer.gameTime = gameTime;
-      //     resultPlayer.place = place;
-      //     if (place === 2) {
-      //       const winner = state.players.filter((player) => !player.leave)
-      //     }
-
-      //   }
-
-      // }
     },
 
     writeResults: (state, action: PayloadAction<number>) => {
@@ -127,10 +116,8 @@ export const gameSlice = createSlice({
 
       if (resultPlayer) {
         const playersNoLeave = state.players.filter((player) => !player.leave).length;
-        const winner = state.results.filter(({ place }) => place === null).length === 1;
-        console.log(winner);
 
-        const place = winner ? 1 : playersNoLeave + 1;
+        const place = playersNoLeave + 1;
         console.log(place);
 
         const gameTime = calcGameTime(state.gameTimeStamp);
@@ -139,6 +126,24 @@ export const gameSlice = createSlice({
         if (place === 1) {
           newState.sort(resultsSort);
         }
+        state.results = newState;
+      }
+    },
+
+    writeResultsWinner: (state, action: PayloadAction<number>) => {
+      const id = action.payload;
+      if (!state.results) return;
+      const resultPlayer = {
+        ...state.results.find((result) => result.key === id),
+      } as GamePlayerResult;
+
+      if (resultPlayer) {
+        const place = 1;
+
+        const gameTime = calcGameTime(state.gameTimeStamp);
+        const newState = [...state.results];
+        newState[id] = { ...resultPlayer, place, gameTime };
+        newState.sort(resultsSort);
         state.results = newState;
       }
     },
@@ -243,6 +248,8 @@ export const selectRandomCards = (rootState: RootState) => rootState.game.random
 
 export const {
   definePlayers,
+  writeResultsWinner,
+  resetStore,
   changePositionPlayer,
   writeResults,
   leavePlayer,
